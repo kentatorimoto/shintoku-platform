@@ -111,3 +111,4 @@ AGPL-3.0-or-later
 ---
 
 Made with ❤️ for 新得町
+
