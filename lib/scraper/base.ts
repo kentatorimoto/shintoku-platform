@@ -26,7 +26,7 @@ export class BaseScraper {
         timeout: this.config.timeout,
         headers: this.config.headers,
       });
-      return cheerio.load(response.data);
+      return cheerio.load(response.data) as unknown as cheerio.CheerioAPI;
     } catch (error) {
       console.error(`Failed to fetch ${url}:`, error);
       throw error;

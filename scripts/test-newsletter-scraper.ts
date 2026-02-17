@@ -5,10 +5,7 @@ import * as path from 'path';
 async function main() {
   console.log('広報しんとくPDFスクレイパー テスト開始...\n');
   
-  const scraper = new NewsletterScraper({
-    baseUrl: 'https://www.shintoku-town.jp',
-    userAgent: 'Shintoku Platform Bot/1.0'
-  });
+  const scraper = new NewsletterScraper();
   
   // 最新3年分のPDFを取得
   const newsletters = await scraper.scrapeLatestYears(3);

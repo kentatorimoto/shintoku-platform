@@ -27,7 +27,7 @@ export class AnnouncementScraper extends BaseScraper {
       
       // カテゴリを取得
       const $label = $el.find('.home-info-label');
-      const categoryText = $label.contents().filter(function() {
+      const categoryText = $label.contents().filter(function(this: { type: string }) {
         return this.type === 'text';
       }).text().trim();
       
