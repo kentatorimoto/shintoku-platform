@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import lastSync from '@/data/lastSync.json';
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
           </div>
           <div className="border border-green-400 p-4">
             <div className="text-green-600 text-sm mb-1">LAST SYNC</div>
-            <div className="text-2xl">2026.02.16</div>
+            <div className="text-2xl">{lastSync.date}</div>
           </div>
         </div>
 
