@@ -1,6 +1,6 @@
-# 新得町オープンプラットフォーム
+# Shintoku Atlas
 
-**OSPP - Open Shintoku Public Platform**
+**An unofficial public information dashboard**
 
 新得町の公開情報を検索しやすく、APIとして利用可能にする完全オープンソースのプラットフォーム
 

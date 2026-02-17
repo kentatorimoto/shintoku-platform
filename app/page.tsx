@@ -6,8 +6,8 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
         {/* ヘッダー */}
         <header className="mb-12 border-b border-green-400 pb-6">
-          <h1 className="text-4xl mb-2">新得町オープンプラットフォーム</h1>
-          <p className="text-2xl mb-2">OSPP - Open Shintoku Public Platform v0.1.0</p>
+          <h1 className="text-4xl mb-2">Shintoku Atlas</h1>
+          <p className="text-2xl mb-2">An unofficial public information dashboard</p>
           <p className="text-green-600 mt-2">
             新得町の公開情報を収集・再編集して見やすくした非公式プロトタイプ
           </p>
