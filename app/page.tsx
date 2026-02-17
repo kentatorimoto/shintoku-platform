@@ -52,6 +52,15 @@ export default function Home() {
               </div>
             </Link>
 
+            {/* 意思決定プロセス */}
+            <Link href="/process" className="border border-green-400 p-6 hover:bg-green-950 transition-colors">
+              <h3 className="text-xl mb-2">意思決定プロセス</h3>
+              <p className="text-green-600 mb-4">町の課題・議論・計画策定の流れを可視化</p>
+              <div className="text-sm">
+                → 一覧を見る　<span className="text-green-600">5カテゴリ</span>
+              </div>
+            </Link>
+
             {/* イベントカレンダー */}
             <div className="border border-green-400 p-6 opacity-50">
               <h3 className="text-xl mb-2">イベントカレンダー</h3>

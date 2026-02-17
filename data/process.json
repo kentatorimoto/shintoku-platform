@@ -1,0 +1,55 @@
+{
+  "priorities": [
+    {
+      "id": "agriculture",
+      "title": "Agriculture & Industry",
+      "bullets": [
+        "Maintaining 19.3B JPY agricultural output",
+        "Succession and workforce shortages",
+        "Climate adaptation and resilience",
+        "Smart agriculture / productivity"
+      ]
+    },
+    {
+      "id": "tourism",
+      "title": "Tourism",
+      "bullets": [
+        "Improve visitor satisfaction (reported low)",
+        "Shift from pass-through to stay-based tourism",
+        "Strengthen operating structure and collaboration"
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Health & Welfare",
+      "bullets": [
+        "Redefine \"health\" beyond physical metrics",
+        "Community-based prevention and support"
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Community & Participation",
+      "bullets": [
+        "Rethink neighborhood associations and local participation",
+        "Move beyond formal/box-check participation",
+        "Engage younger generations"
+      ]
+    },
+    {
+      "id": "finance",
+      "title": "Finance",
+      "bullets": [
+        "Maintain fiscal flexibility (\"policy room\")",
+        "Control debt while enabling investment",
+        "Long-term sustainability"
+      ]
+    }
+  ],
+  "timeline": [
+    { "date": "2024", "label": "Special committee established" },
+    { "date": "2024", "label": "Survey / public feedback phase" },
+    { "date": "2025", "label": "Drafting and review in progress" },
+    { "date": "2026", "label": "9th Comprehensive Plan starts" }
+  ]
+}
