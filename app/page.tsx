@@ -9,7 +9,7 @@ export default function Home() {
           <h1 className="text-4xl mb-2">Shintoku Atlas</h1>
           <p className="text-2xl mb-2">An unofficial public information dashboard</p>
           <p className="text-green-600 mt-2">
-            新得町の公開情報を収集・再編集して見やすくした非公式プロトタイプ
+            新得町の公開情報を整理・可視化し、理解を助ける独立プロジェクト。
           </p>
         </header>
 
