@@ -9,7 +9,7 @@ export default function Home() {
           <h1 className="text-4xl mb-2">新得町オープンプラットフォーム</h1>
           <p className="text-2xl mb-2">OSPP - Open Shintoku Public Platform v0.1.0</p>
           <p className="text-green-600 mt-2">
-            政党にも企業にもよらない、完全オープンな町政情報基盤
+            新得町の公開情報を収集・再編集して見やすくした非公式プロトタイプ
           </p>
         </header>
 
