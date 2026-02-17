@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync": "npx tsx scripts/sync-all.ts"
+    "sync": "npx tsx scripts/sync-all.ts",
+    "scrape:announcements": "npx tsx scripts/scrape-announcements.ts",
+    "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
