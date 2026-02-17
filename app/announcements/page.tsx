@@ -128,12 +128,6 @@ export default async function AnnouncementsPage() {
             </div>
           )}
         </section>
-
-        {/* フッター */}
-        <footer className="mt-12 border-t border-green-400 pt-6 text-sm text-green-600">
-          <p>データソース: https://www.shintoku-town.jp/oshirase/</p>
-          <p className="mt-2">最終更新: {new Date().toLocaleDateString('ja-JP')}</p>
-        </footer>
       </div>
     </main>
   );

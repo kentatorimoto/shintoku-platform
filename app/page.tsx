@@ -71,11 +71,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* フッター */}
-        <footer className="mt-12 pt-6 border-t border-green-400 text-green-600 text-sm">
-          <p>AGPL-3.0 License | Non-partisan | Non-commercial</p>
-        </footer>
       </div>
     </main>
   );

@@ -139,12 +139,6 @@ export default async function NewslettersPage() {
             ))}
           </div>
         )}
-
-        {/* フッター */}
-        <footer className="mt-12 border-t border-green-400 pt-6 text-sm text-green-600">
-          <p>データソース: https://www.shintoku-town.jp/kouhou/</p>
-          <p className="mt-2">最終更新: {new Date().toLocaleDateString('ja-JP')}</p>
-        </footer>
       </div>
     </main>
   );
