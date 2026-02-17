@@ -26,6 +26,17 @@ export default function ProcessPage() {
             </div>
           </Link>
 
+          <Link href="/process/issues" className="border border-green-400 p-6 hover:bg-green-950 transition-colors">
+            <h2 className="text-2xl mb-2 flex items-center">
+              <span className="text-green-600 mr-2">$</span>
+              KEY ISSUES
+            </h2>
+            <p className="text-green-600 mb-4">論点カード — 議論・判断・次の一手</p>
+            <div className="text-sm">
+              → View issues　<span className="text-green-600">10 issues</span>
+            </div>
+          </Link>
+
           <Link href="/process/timeline" className="border border-green-400 p-6 hover:bg-green-950 transition-colors">
             <h2 className="text-2xl mb-2 flex items-center">
               <span className="text-green-600 mr-2">$</span>

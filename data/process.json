@@ -46,6 +46,208 @@
       ]
     }
   ],
+  "issues": [
+    {
+      "id": "agri-conservative-target",
+      "theme": "agriculture",
+      "title": "Can agriculture sustain the town with only 1% growth?",
+      "issue": "10年で1%増（193億円目標）の設定は保守的すぎないか／農協外の生産額が含まれていないのでは？",
+      "context": "農業生産額の目標設定と、統計の取り方（算出可能な確実な数値を採用）に議論がある。",
+      "admin_view": "算出可能な確実な数値（農協取扱高）を採用。",
+      "next_step": "町として「農協外を含む推計の可否」や、補助指標（付加価値・所得・戸あたり生産性）を併記する。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 7
+        }
+      }
+    },
+    {
+      "id": "agri-fewer-farms",
+      "theme": "agriculture",
+      "title": "Can fewer farms keep total agricultural output stable?",
+      "issue": "農家戸数が減少する中で総額維持するには、1戸あたり生産性を約1割上げる必要がある。",
+      "context": "目標達成のボトルネックは総額ではなく生産性（労働・機械・技術・経営）。",
+      "admin_view": "",
+      "next_step": "生産性の分解（労働/面積/単収/単価）と、打ち手（省力化・高付加価値化）のロードマップ化。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 7
+        }
+      }
+    },
+    {
+      "id": "agri-climate",
+      "theme": "agriculture",
+      "title": "Will climate change force crop shifts in Shintoku?",
+      "issue": "温暖化で寒冷地作物（ビート・馬鈴薯）が難化し、新規作物の可能性探索が必要。",
+      "context": "気候変動を前提に、作付・品目・技術の転換が論点。",
+      "admin_view": "",
+      "next_step": "実証圃場・試験導入の枠（小さく試す→評価→拡大）を計画に明記する。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 8
+        }
+      }
+    },
+    {
+      "id": "agri-smart",
+      "theme": "agriculture",
+      "title": "Can technology solve the farm labor shortage?",
+      "issue": "労働力不足を補う技術導入（スマート農業）を加速すべき。",
+      "context": "担い手不足が構造問題化しており、技術で補う方向性が示されている。",
+      "admin_view": "",
+      "next_step": "重点技術（自動操舵/ドローン/センシング/遠隔）の優先順位と、導入支援スキームを整理。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 8
+        }
+      }
+    },
+    {
+      "id": "tourism-satisfaction",
+      "theme": "tourism",
+      "title": "Why are residents dissatisfied with tourism results?",
+      "issue": "観光振興の町民評価（満足度）が25%と低く、危機感を共有すべき。",
+      "context": "成果指標の低さが、体制・商品・情報発信などの見直し議論に繋がる。",
+      "admin_view": "危機感は共有しつつ、まずは現体制で「外からの誘客」強化と運用改善を優先。",
+      "next_step": "25%の要因分解（誰が/何に不満か）と、短期打ち手（誘客/回遊/満足）をセットで提示。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 9
+        }
+      }
+    },
+    {
+      "id": "tourism-org-reform",
+      "theme": "tourism",
+      "title": "Does Shintoku need a new tourism organization?",
+      "issue": "観光協会を解体し、役場内に若い力を結集した「観光課」新設案が出ている。",
+      "context": "組織改革を待つ余裕がない、という問題意識。",
+      "admin_view": "組織改編より運用改善を優先（ただし危機感は共有）。",
+      "next_step": "組織改編の是非を判断するための評価軸（成果/KPI/人材/連携）を先に作る。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 9
+        }
+      }
+    },
+    {
+      "id": "tourism-residents",
+      "theme": "tourism",
+      "title": "Why don't residents feel the town's tourism appeal?",
+      "issue": "町民自身が魅力を実感していない（内側の納得不足）が観光の課題として指摘。",
+      "context": "\"外向けの観光\"だけでなく、町民の実感・誇り・参加の設計が必要。",
+      "admin_view": "",
+      "next_step": "町民向けの体験・参加プログラム、情報発信の再設計（町民→来訪者へ波及）を検討。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 9
+        }
+      }
+    },
+    {
+      "id": "finance-post-project",
+      "theme": "finance",
+      "title": "How will the town manage debt after major projects?",
+      "issue": "大型公共事業の償還開始後、財政の「守り」と「平準化」が重要。",
+      "context": "償還期に入ると支出の山が立つため、基金・借入コントロールで平準化する必要。",
+      "admin_view": "財政調整基金と借入コントロールの重要性を示唆。",
+      "next_step": "償還ピークの見える化（年度別）と、基金取り崩し/積立のルールを明文化。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 11
+        }
+      }
+    },
+    {
+      "id": "finance-kpi",
+      "theme": "finance",
+      "title": "What financial limits keep the town sustainable?",
+      "issue": "経常収支比率84%以内／実質公債費比率12%以内を目安に健全性を維持。",
+      "context": "数値目標を\"安全運転ライン\"として運用する論点。",
+      "admin_view": "",
+      "next_step": "KPIの定義・算出頻度・逸脱時の対応（是正プラン）を運用ルールにする。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 11
+        }
+      }
+    },
+    {
+      "id": "finance-slack",
+      "theme": "finance",
+      "title": "How much financial buffer does the town need?",
+      "issue": "他自治体比較ではなく、災害時などに動ける「余力」をどう確保するかが重要。",
+      "context": "財政を\"平時の効率\"だけでなく\"有事の可動性\"で捉える視点。",
+      "admin_view": "",
+      "next_step": "余力を定義（基金残高/機動費/人員）し、指標化して定点観測する。",
+      "source": {
+        "primary": {
+          "townPage": { "title": "新得町公式：議会ライブ配信", "url": "https://www.shintoku-town.jp/gyousei/gikai/gikailive/" },
+          "youtube": { "title": "令和8年1月20日 新得町基本構想審査特別委員会（YouTube）", "url": "https://www.youtube.com/watch?v=14_23_jU3pc" }
+        },
+        "derived": {
+          "title": "Shintoku 10-Year Plan Reality Check",
+          "note": "Derived from the YouTube session above using NotebookLM (slides). / 上記YouTubeの内容をNotebookLMでスライド化した二次資料",
+          "page": 11
+        }
+      }
+    }
+  ],
   "timeline": [
     { "date": "2024", "label": "Special committee established" },
     { "date": "2024", "label": "Survey / public feedback phase" },

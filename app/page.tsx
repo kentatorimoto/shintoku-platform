@@ -57,7 +57,7 @@ export default function Home() {
               <h3 className="text-xl mb-2">意思決定プロセス</h3>
               <p className="text-green-600 mb-4">町の課題・議論・計画策定の流れを可視化</p>
               <div className="text-sm">
-                → 一覧を見る　<span className="text-green-600">5カテゴリ</span>
+                → 一覧を見る　<span className="text-green-600">5カテゴリ / 10論点</span>
               </div>
             </Link>
 
