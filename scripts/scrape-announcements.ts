@@ -1,5 +1,5 @@
-import axios from "axios"
 import * as cheerio from "cheerio"
+import { http } from "./lib/http"
 import fs from "fs"
 import path from "path"
 
@@ -21,7 +21,7 @@ function parseJapaneseDate(text: string): string {
 
 async function main() {
   console.log("Fetching:", URL)
-  const { data: html } = await axios.get<string>(URL)
+  const { data: html } = await http.get<string>(URL)
   const $ = cheerio.load(html)
 
   const announcements: Announcement[] = []

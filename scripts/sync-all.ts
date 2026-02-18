@@ -2,11 +2,17 @@ import { execSync } from "child_process"
 import fs from "fs"
 import path from "path"
 
-console.log("Running announcements scraper...")
-execSync("npm run scrape:announcements", { stdio: "inherit" })
+function runStep(name: string, cmd: string) {
+  try {
+    console.log(`Running ${name}...`)
+    execSync(cmd, { stdio: "inherit" })
+  } catch (e) {
+    console.error(`❌ ${name} failed but continuing`)
+  }
+}
 
-console.log("Running newsletters scraper...")
-execSync("npm run scrape:newsletters", { stdio: "inherit" })
+runStep("announcements", "npm run scrape:announcements")
+runStep("newsletters", "npm run scrape:newsletters")
 
 console.log("Updating last sync date...")
 const today = new Date()

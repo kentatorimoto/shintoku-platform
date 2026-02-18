@@ -1,5 +1,5 @@
-import axios from "axios"
 import * as cheerio from "cheerio"
+import { http } from "./lib/http"
 import fs from "fs"
 import path from "path"
 
@@ -49,7 +49,7 @@ function parseSizeBytes(text: string): number | undefined {
 
 async function fetchYearLinks(): Promise<string[]> {
   console.log("Fetching index:", INDEX_URL)
-  const { data: html } = await axios.get<string>(INDEX_URL)
+  const { data: html } = await http.get<string>(INDEX_URL)
   const $ = cheerio.load(html)
 
   const yearLinks: string[] = []
@@ -68,7 +68,7 @@ async function fetchYearLinks(): Promise<string[]> {
 
 async function fetchNewslettersFromYear(url: string): Promise<Newsletter[]> {
   console.log("Fetching year page:", url)
-  const { data: html } = await axios.get<string>(url)
+  const { data: html } = await http.get<string>(url)
   const $ = cheerio.load(html)
 
   const results: Newsletter[] = []
