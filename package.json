@@ -9,14 +9,17 @@
     "lint": "eslint",
     "sync": "npx tsx scripts/sync-all.ts",
     "scrape:announcements": "npx tsx scripts/scrape-announcements.ts",
-    "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts"
+    "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts",
+    "index:newsletters": "npx tsx scripts/index-newsletters.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
+    "@types/pdf-parse": "^1.1.5",
     "axios": "^1.13.5",
     "cheerio": "^1.2.0",
     "date-fns": "^4.1.0",
     "next": "16.1.6",
+    "pdf-parse": "^2.4.5",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },

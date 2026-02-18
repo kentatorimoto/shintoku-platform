@@ -13,6 +13,7 @@ function runStep(name: string, cmd: string) {
 
 runStep("announcements", "npm run scrape:announcements")
 runStep("newsletters", "npm run scrape:newsletters")
+runStep("index newsletters", "npm run index:newsletters")
 
 console.log("Updating last sync date...")
 const today = new Date()
