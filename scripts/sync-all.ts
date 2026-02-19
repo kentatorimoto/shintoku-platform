@@ -16,13 +16,18 @@ runStep("newsletters", "npm run scrape:newsletters")
 runStep("index newsletters", "npm run index:newsletters")
 
 console.log("Updating last sync date...")
-const today = new Date()
-const date =
-  today.getFullYear() + "." +
-  String(today.getMonth() + 1).padStart(2, "0") + "." +
-  String(today.getDate()).padStart(2, "0")
+function formatJstDate(d = new Date()) {
+  // JST = UTC+9 を固定で適用（GitHub ActionsのUTCでもズレない）
+  const jst = new Date(d.getTime() + 9 * 60 * 60 * 1000)
+  const y = jst.getUTCFullYear()
+  const m = String(jst.getUTCMonth() + 1).padStart(2, "0")
+  const day = String(jst.getUTCDate()).padStart(2, "0")
+  return `${y}.${m}.${day}`
+}
 
-const file = path.join(process.cwd(), "data", "lastSync.json")
-fs.writeFileSync(file, JSON.stringify({ date }, null, 2))
+const date = formatJstDate()
+
+const file = path.join(process.cwd(), "public", "data", "lastSync.json")
+fs.writeFileSync(file, JSON.stringify({ date }, null, 2) + "\n")
 
 console.log("Sync complete:", date)
