@@ -1,11 +1,16 @@
-import Link from 'next/link';
+import fs from "fs"
+import path from "path"
+import Link from "next/link"
+
 async function getLastSync() {
   try {
-    const res = await fetch("/data/lastSync.json", {
-      cache: "no-store"
-    })
-    return res.json()
-  } catch {
+    const filePath = path.join(process.cwd(), "public", "data", "lastSync.json")
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, "utf-8"))
+    }
+    return { date: "----.--.--" }
+  } catch (e) {
+    console.error("Failed to load lastSync:", e)
     return { date: "----.--.--" }
   }
 }
