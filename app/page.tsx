@@ -1,7 +1,17 @@
 import Link from 'next/link';
-import lastSync from '@/data/lastSync.json';
+async function getLastSync() {
+  try {
+    const res = await fetch("/data/lastSync.json", {
+      cache: "no-store"
+    })
+    return res.json()
+  } catch {
+    return { date: "----.--.--" }
+  }
+}
 
-export default function Home() {
+export default async function Home() {
+  const lastSync = await getLastSync()
   return (
     <main className="min-h-screen bg-black text-green-400 font-mono p-8">
       <div className="max-w-6xl mx-auto">
