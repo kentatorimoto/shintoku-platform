@@ -2,29 +2,79 @@ import Link from "next/link"
 
 const GITHUB_URL = "https://github.com/kentatorimoto/shintoku-platform"
 
+const SECTIONS = [
+  {
+    title: "見る",
+    links: [
+      { href: "/announcements", label: "町政ニュース", external: false },
+      { href: "/newsletters",   label: "広報誌検索",   external: false },
+      { href: "/gikai",         label: "議会",         external: false },
+    ],
+  },
+  {
+    title: "理解する",
+    links: [
+      { href: "/insights", label: "分析",             external: false },
+      { href: "/process",  label: "意思決定プロセス",   external: false },
+    ],
+  },
+  {
+    title: "プロジェクト",
+    links: [
+      { href: "/sources",  label: "Sources", external: false },
+      { href: GITHUB_URL,  label: "GitHub",  external: true  },
+    ],
+  },
+] as const
+
 export default function Footer() {
   return (
     <footer className="mt-16 md:mt-20 border-t border-line/30 bg-ink">
-      <div className="max-w-6xl mx-auto px-6 py-8 md:py-10">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <h3 className="text-textMain font-semibold">Shintoku Atlas</h3>
-
-          <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-textSub/90">
-            <Link href="/gikai" className="hover:text-accent transition">議会</Link>
-            <Link href="/sources" className="hover:text-accent transition">Sources</Link>
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-accent transition"
-            >
-              GitHub
-            </a>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-10 sm:gap-8">
+          {/* ブランド */}
+          <div className="sm:col-span-1">
+            <p className="text-textMain font-semibold mb-2">Shintoku Atlas</p>
+            <p className="text-xs text-textSub/60 leading-relaxed">
+              新得町の公開情報を<br />整理・可視化するプロジェクト
+            </p>
           </div>
+
+          {/* リンクセクション */}
+          {SECTIONS.map((section) => (
+            <div key={section.title}>
+              <p className="text-[10px] font-semibold tracking-widest text-textSub/50 uppercase mb-4">
+                {section.title}
+              </p>
+              <ul className="space-y-3">
+                {section.links.map((link) => (
+                  <li key={link.href}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-textMain hover:text-accent transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm font-medium text-textMain hover:text-accent transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="pt-6 mt-6 border-t border-line/20 text-xs text-textSub/60 text-left">
-          © {new Date().getFullYear()} Shintoku Atlas
+        <div className="pt-8 mt-8 border-t border-line/20 text-xs text-textSub/50">
+          © {new Date().getFullYear()} Shintoku Atlas — 非公式・個人プロジェクト
         </div>
       </div>
     </footer>

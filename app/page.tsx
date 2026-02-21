@@ -133,7 +133,21 @@ export default async function Home() {
       </div>
     </Link>
 
-    {/* 3. 町政ニュース */}
+    {/* 3. 分析（インサイト） */}
+    <Link
+      href="/insights"
+      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
+    >
+      <h3 className="text-xl font-semibold mb-2">分析（インサイト）</h3>
+      <p className="text-textSub mb-4">
+        議決 × テーマ・論点のクロス集計と可視化
+      </p>
+      <div className="text-sm text-accent font-medium">
+        → データを読む
+      </div>
+    </Link>
+
+    {/* 5. 町政ニュース */}
     <Link
       href="/announcements"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
@@ -147,7 +161,7 @@ export default async function Home() {
       </div>
     </Link>
 
-    {/* 4. 広報しんとくアーカイブ */}
+    {/* 6. 広報しんとくアーカイブ */}
     <Link
       href="/newsletters"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
