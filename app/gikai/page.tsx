@@ -33,6 +33,31 @@ interface FlatItem extends GiketsuItem {
   pdfUrl: string
 }
 
+type GikaiLinks = Record<string, string[]>
+
+// ─────────────────────────── Label maps ───────────────────────────
+
+const THEME_LABELS: Record<string, string> = {
+  agriculture: "農業・産業",
+  tourism: "観光",
+  health: "健康・福祉",
+  community: "地域・参加",
+  finance: "財政",
+}
+
+const ISSUE_LABELS: Record<string, string> = {
+  "agri-conservative-target": "農業は年1%成長で町を支え続けられるか？",
+  "agri-fewer-farms": "農家戸数が減っても農業総額を維持できるか？",
+  "agri-climate": "気候変動で作物転換は必要になるか？",
+  "agri-smart": "技術で農業の労働力不足は補えるか？",
+  "tourism-satisfaction": "なぜ町民は観光の成果に満足していないのか？",
+  "tourism-org-reform": "新得町に新しい観光組織は必要か？",
+  "tourism-residents": "なぜ町民は観光の魅力を実感できていないのか？",
+  "finance-post-project": "大型事業後の借金をどうコントロールするか？",
+  "finance-kpi": "財政の\u201c安全運転ライン\u201dは何か？",
+  "finance-slack": "財政の\u201c余力\u201dをどう確保するか？",
+}
+
 // ─────────────────────────── Helpers ──────────────────────────────
 
 function resultStyle(result: string): string {
@@ -89,6 +114,8 @@ function GikaiPageContent() {
   const year = searchParams.get("year") ?? ""
   const type = searchParams.get("type") ?? ""
   const result = searchParams.get("result") ?? ""
+  const theme = searchParams.get("theme") ?? ""
+  const issue = searchParams.get("issue") ?? ""
   const limit = Math.max(
     PAGE_SIZE,
     Number(searchParams.get("limit") || PAGE_SIZE)
@@ -105,6 +132,8 @@ function GikaiPageContent() {
   // ── データ取得 ───────────────────────────────────────────────
   const [sessions, setSessions] = useState<GiketsuSession[]>([])
   const [loading, setLoading] = useState(true)
+  const [links, setLinks] = useState<GikaiLinks>({})
+  const [linksLoaded, setLinksLoaded] = useState(false)
 
   useEffect(() => {
     fetch("/data/giketsu_index.json")
@@ -112,6 +141,14 @@ function GikaiPageContent() {
       .then((data: GiketsuSession[]) => setSessions(data))
       .catch(console.error)
       .finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
+    fetch("/data/gikai_links.json")
+      .then((r) => r.json())
+      .then((data: GikaiLinks) => setLinks(data))
+      .catch(() => {})
+      .finally(() => setLinksLoaded(true))
   }, [])
 
   // ── URL 更新ヘルパー ─────────────────────────────────────────
@@ -134,22 +171,30 @@ function GikaiPageContent() {
 
   // ── テキスト入力のデバウンス（400 ms）→ URL 更新 ───────────
   // ref に最新フィルタ値を持ち、stale closure を回避する
-  const latestRef = useRef({ year, type, result })
+  const latestRef = useRef({ year, type, result, theme, issue })
   useEffect(() => {
-    latestRef.current = { year, type, result }
+    latestRef.current = { year, type, result, theme, issue }
   })
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  /** q / year / type / result を URL に書き込む（limit はリセット） */
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current)
+    }
+  }, [])
+
+  /** q / year / type / result / theme / issue を URL に書き込む（limit はリセット） */
   function commitQuery(value: string) {
-    const { year, type, result } = latestRef.current
+    const { year, type, result, theme, issue } = latestRef.current
     const params = new URLSearchParams()
     if (value) params.set("q", value)
     if (year) params.set("year", year)
     if (type) params.set("type", type)
     if (result) params.set("result", result)
+    if (theme) params.set("theme", theme)
+    if (issue) params.set("issue", issue)
     const qs = params.toString()
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
   }
@@ -242,19 +287,25 @@ function GikaiPageContent() {
       } else if (result) {
         if (item.result !== result) return false
       }
+      if (theme || issue) {
+        const key = `${item.caseType}-${item.num}`
+        const refs = links[key] ?? []
+        if (theme && !refs.includes(`theme:${theme}`)) return false
+        if (issue && !refs.includes(`issue:${issue}`)) return false
+      }
       return true
     })
-  }, [flatItems, q, year, type, result])
+  }, [flatItems, q, year, type, result, theme, issue, links])
 
   const visibleItems = filteredItems.slice(0, limit)
   const hasMore = visibleItems.length < filteredItems.length
-  const hasFilter = !!(q || year || type || result)
+  const hasFilter = !!(q || year || type || result || theme || issue)
   const isPending = inputValue !== q
+  const waitingLinks = !!(theme || issue) && !linksLoaded
 
   // ── JSX ──────────────────────────────────────────────────────
- return (
-  <div className="pageWrap">
-    <div className="max-w-5xl mx-auto px-8 py-16 md:py-24 text-base md:text-lg">
+  return (
+    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-base md:text-lg">
       {/* ── ヘッダー ─────────────────────────────────────── */}
       <div className="mb-10">
         <Link
@@ -395,6 +446,30 @@ function GikaiPageContent() {
                 </button>
               </span>
             )}
+            {theme && (
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+                テーマ：{THEME_LABELS[theme] ?? theme}
+                <button
+                  onClick={() => pushParams({ theme: "", limit: "" })}
+                  aria-label="テーマフィルタを解除"
+                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {issue && (
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+                論点：{ISSUE_LABELS[issue] ?? issue}
+                <button
+                  onClick={() => pushParams({ issue: "", limit: "" })}
+                  aria-label="論点フィルタを解除"
+                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                >
+                  ×
+                </button>
+              </span>
+            )}
             <button
               onClick={resetFilters}
               className="text-textSub underline hover:text-textMain text-sm py-1.5 transition-colors"
@@ -464,11 +539,11 @@ function GikaiPageContent() {
 
       {/* ── 件数 ─────────────────────────────────────────── */}
       <p className="text-textSub text-sm mb-4">
-        {loading ? "読み込み中…" : `${filteredItems.length.toLocaleString()} 件`}
+        {loading || waitingLinks ? "読み込み中…" : `${filteredItems.length.toLocaleString()} 件`}
       </p>
 
       {/* ── リスト ───────────────────────────────────────── */}
-      {loading ? (
+      {loading || waitingLinks ? (
         <Skeleton />
       ) : filteredItems.length === 0 ? (
         <div className="text-center text-textSub py-20">
@@ -477,54 +552,86 @@ function GikaiPageContent() {
       ) : (
         <>
           <div className="space-y-2">
-            {visibleItems.map((item, i) => (
-              <a
-                key={i}
-                href={item.pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all group"
-              >
-                <div className="flex items-start gap-3">
-                  {/* 左：種別+番号 */}
-                  <div className="shrink-0 pt-0.5">
-                    <span className="inline-flex items-baseline gap-1 text-xs font-mono bg-line rounded px-2 py-1 text-textSub">
-                      {item.caseType}
-                      <span className="text-textMain font-semibold">
-                        {item.num}
-                      </span>
-                    </span>
-                  </div>
+            {visibleItems.map((item, i) => {
+              const caseKey = `${item.caseType}-${item.num}`
+              const refs = links[caseKey] ?? []
+              return (
+                <div key={i}>
+                  <a
+                    href={item.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all group"
+                  >
+                    <div className="flex items-start gap-3">
+                      {/* 左：種別+番号 */}
+                      <div className="shrink-0 pt-0.5">
+                        <span className="inline-flex items-baseline gap-1 text-xs font-mono bg-line rounded px-2 py-1 text-textSub">
+                          {item.caseType}
+                          <span className="text-textMain font-semibold">
+                            {item.num}
+                          </span>
+                        </span>
+                      </div>
 
-                  {/* 中：件名 + メタ */}
-                  <div className="flex-1 min-w-0">
-                    <p
-                      className={`text-base md:text-lg line-clamp-2 transition-colors ${
-                        item.title
-                          ? "text-textMain group-hover:text-accent/90"
-                          : "text-textSub italic"
-                      }`}
-                    >
-                      {item.title || "（件名なし）"}
-                    </p>
-                    <p className="text-textSub text-sm mt-1.5">
-                      {item.decisionDate}
-                      <span className="mx-1.5 opacity-40">·</span>
-                      {item.sessionName}
-                    </p>
-                  </div>
+                      {/* 中：件名 + メタ */}
+                      <div className="flex-1 min-w-0">
+                        <p
+                          className={`text-base md:text-lg line-clamp-2 transition-colors ${
+                            item.title
+                              ? "text-textMain group-hover:text-accent/90"
+                              : "text-textSub italic"
+                          }`}
+                        >
+                          {item.title || "（件名なし）"}
+                        </p>
+                        <p className="text-textSub text-sm mt-1.5">
+                          {item.decisionDate}
+                          <span className="mx-1.5 opacity-40">·</span>
+                          {item.sessionName}
+                        </p>
+                      </div>
 
-                  {/* 右：結果バッジ */}
-                  <div className="shrink-0">
-                    <span
-                      className={`inline-block text-xs font-medium rounded-md px-2 py-0.5 whitespace-nowrap ${resultStyle(item.result)}`}
-                    >
-                      {item.result || "—"}
-                    </span>
-                  </div>
+                      {/* 右：結果バッジ */}
+                      <div className="shrink-0">
+                        <span
+                          className={`inline-block text-xs font-medium rounded-md px-2 py-0.5 whitespace-nowrap ${resultStyle(item.result)}`}
+                        >
+                          {item.result || "—"}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                  {refs.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5 px-2 py-1.5">
+                      <span className="text-xs text-textSub shrink-0">関連：</span>
+                      {refs.map((ref) => {
+                        const sep = ref.indexOf(":")
+                        const kind = ref.slice(0, sep)
+                        const id = ref.slice(sep + 1)
+                        const label =
+                          kind === "theme"
+                            ? (THEME_LABELS[id] ?? id)
+                            : (ISSUE_LABELS[id] ?? id)
+                        const href =
+                          kind === "theme"
+                            ? `/process?theme=${id}`
+                            : `/process/issues?issue=${id}`
+                        return (
+                          <Link
+                            key={ref}
+                            href={href}
+                            className="inline-flex items-center text-xs border border-line bg-ink rounded px-2 py-0.5 text-textSub hover:text-accent hover:border-accent transition-colors"
+                          >
+                            {label}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
-              </a>
-            ))}
+              )
+            })}
           </div>
 
           {/* もっと見る */}
@@ -542,7 +649,6 @@ function GikaiPageContent() {
           )}
         </>
       )}
-    </div>
     </div>
   )
 }

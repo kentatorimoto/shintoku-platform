@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:links": "node tools/build-gikai-links.mjs",
+    "build": "npm run build:links && next build",
     "start": "next start",
     "lint": "eslint",
     "sync": "npx tsx scripts/sync-all.ts",

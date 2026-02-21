@@ -8,6 +8,8 @@ interface Priority {
   bullets: string[]
 }
 
+type GikaiLinks = Record<string, string[]>
+
 async function getPriorities(): Promise<Priority[]> {
   try {
     const filePath = path.join(process.cwd(), "data", "process.json")
@@ -19,8 +21,24 @@ async function getPriorities(): Promise<Priority[]> {
   }
 }
 
+async function getGikaiLinks(): Promise<GikaiLinks> {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "gikai_links.json")
+    return JSON.parse(fs.readFileSync(filePath, "utf-8"))
+  } catch {
+    return {}
+  }
+}
+
 export default async function PrioritiesPage() {
-  const priorities = await getPriorities()
+  const [priorities, links] = await Promise.all([getPriorities(), getGikaiLinks()])
+
+  const linkCounts = Object.fromEntries(
+    priorities.map((p) => [
+      p.id,
+      Object.values(links).filter((refs) => refs.includes(`theme:${p.id}`)).length,
+    ])
+  )
 
   return (
     <div className="pageWrap">
@@ -63,6 +81,14 @@ export default async function PrioritiesPage() {
                   </li>
                 ))}
               </ul>
+              {linkCounts[p.id] > 0 && (
+                <Link
+                  href={`/gikai?theme=${p.id}`}
+                  className="mt-4 inline-flex items-center gap-1 text-xs text-accent border border-line rounded px-3 py-1.5 hover:border-accent hover:bg-accent/5 transition-colors"
+                >
+                  関連議決: {linkCounts[p.id]}件 →
+                </Link>
+              )}
             </div>
           ))}
         </div>

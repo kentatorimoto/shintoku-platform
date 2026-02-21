@@ -1,0 +1,10 @@
+# 編集はこのCSVで行う。public/data/gikai_links.json はビルド生成物（git管理外）。
+# 生成コマンド: npm run build:links
+# フォーマット: caseType,num,ref
+#   caseType ... 議案 or 意見案
+#   num      ... 正の整数
+#   ref      ... theme:<priorityId> または issue:<issueId>
+# 行頭 # はコメント、空行は無視される。
+caseType,num,ref
+議案,2,theme:finance
+議案,2,issue:finance-kpi

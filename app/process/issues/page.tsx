@@ -25,6 +25,8 @@ interface Issue {
   source: IssueSource
 }
 
+type GikaiLinks = Record<string, string[]>
+
 const THEME_LABELS: Record<string, string> = {
   agriculture: "農業・産業",
   tourism: "観光",
@@ -50,16 +52,36 @@ async function getIssues(): Promise<Issue[]> {
   }
 }
 
+async function getGikaiLinks(): Promise<GikaiLinks> {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "gikai_links.json")
+    return JSON.parse(fs.readFileSync(filePath, "utf-8"))
+  } catch {
+    return {}
+  }
+}
+
 export default async function IssuesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ theme?: string }>
+  searchParams: Promise<{ theme?: string; issue?: string }>
 }) {
-  const issues = await getIssues()
-  const { theme: activeTheme } = await searchParams
+  const [issues, links] = await Promise.all([getIssues(), getGikaiLinks()])
+  const { theme: activeTheme, issue: activeIssue } = await searchParams
 
   const themes = [...new Set(issues.map((i) => i.theme))]
-  const filtered = activeTheme ? issues.filter((i) => i.theme === activeTheme) : issues
+  const filtered = issues.filter((i) => {
+    if (activeTheme && i.theme !== activeTheme) return false
+    if (activeIssue && i.id !== activeIssue) return false
+    return true
+  })
+
+  const linkCounts = Object.fromEntries(
+    issues.map((issue) => [
+      issue.id,
+      Object.values(links).filter((refs) => refs.includes(`issue:${issue.id}`)).length,
+    ])
+  )
 
   return (
     <div className="pageWrap">
@@ -94,7 +116,7 @@ export default async function IssuesPage({
       <div className="mt-6 flex flex-wrap gap-2">
         <Link
           href="/process/issues"
-          className={`chip ${!activeTheme ? "chipActive" : ""}`}
+          className={`chip ${!activeTheme && !activeIssue ? "chipActive" : ""}`}
         >
           すべて
         </Link>
@@ -108,7 +130,9 @@ export default async function IssuesPage({
           </Link>
         ))}
         <div className="w-full text-xs text-textSub mt-2">
-          フィルタ：{activeTheme ? (THEME_LABELS[activeTheme] || activeTheme) : "なし"}
+          {activeIssue
+            ? `論点フィルタ中（${activeIssue}）`
+            : `フィルタ：${activeTheme ? (THEME_LABELS[activeTheme] || activeTheme) : "なし"}`}
         </div>
       </div>
 
@@ -197,6 +221,15 @@ export default async function IssuesPage({
                   </div>
                 </div>
               </div>
+
+              {linkCounts[issue.id] > 0 && (
+                <Link
+                  href={`/gikai?issue=${issue.id}`}
+                  className="mt-4 inline-flex items-center gap-1 text-xs text-accent border border-line rounded px-3 py-1.5 hover:border-accent hover:bg-accent/5 transition-colors"
+                >
+                  関連議決: {linkCounts[issue.id]}件 →
+                </Link>
+              )}
             </div>
           ))}
         </div>
