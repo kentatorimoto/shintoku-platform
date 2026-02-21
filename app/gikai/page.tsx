@@ -252,8 +252,9 @@ function GikaiPageContent() {
   const isPending = inputValue !== q
 
   // ── JSX ──────────────────────────────────────────────────────
-  return (
-    <div className="max-w-3xl mx-auto px-4 py-10 md:py-14">
+ return (
+  <div className="pageWrap">
+    <div className="max-w-5xl mx-auto px-8 py-16 md:py-24 text-base md:text-lg">
       {/* ── ヘッダー ─────────────────────────────────────── */}
       <div className="mb-10">
         <Link
@@ -262,7 +263,7 @@ function GikaiPageContent() {
         >
           ← トップ
         </Link>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           議会（議決結果）
         </h1>
         <p className="text-textMain/70 text-lg">
@@ -273,9 +274,9 @@ function GikaiPageContent() {
       {/* ── 直近セッション（top 3） ───────────────────────── */}
       {!loading && activeSessions.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-xs font-semibold text-textSub uppercase tracking-widest mb-3">
-            最近の会議
-          </h2>
+          <h2 className="text-sm font-semibold text-textSub tracking-widest mb-3">
+  最近の会議
+</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {activeSessions.slice(0, 3).map((session) => (
               <button
@@ -292,15 +293,15 @@ function GikaiPageContent() {
                 <div className="text-accent text-xs font-semibold mb-0.5">
                   {session.eraLabel}
                 </div>
-                <div className="text-textMain font-semibold text-sm">
+                <div className="text-textMain font-semibold text-base">
                   {session.sessionLabel}
                 </div>
                 {session.sessionRange && (
-                  <div className="text-textSub text-xs mt-1">
+                  <div className="text-textSub text-sm mt-1">
                     {session.sessionRange}
                   </div>
                 )}
-                <div className="text-textSub text-xs mt-2">
+                <div className="text-textSub text-sm mt-2">
                   {session.items.length} 件
                 </div>
               </button>
@@ -498,7 +499,7 @@ function GikaiPageContent() {
                   {/* 中：件名 + メタ */}
                   <div className="flex-1 min-w-0">
                     <p
-                      className={`text-sm leading-snug line-clamp-2 transition-colors ${
+                      className={`text-base md:text-lg line-clamp-2 transition-colors ${
                         item.title
                           ? "text-textMain group-hover:text-accent/90"
                           : "text-textSub italic"
@@ -506,7 +507,7 @@ function GikaiPageContent() {
                     >
                       {item.title || "（件名なし）"}
                     </p>
-                    <p className="text-textSub text-xs mt-1.5">
+                    <p className="text-textSub text-sm mt-1.5">
                       {item.decisionDate}
                       <span className="mx-1.5 opacity-40">·</span>
                       {item.sessionName}
@@ -541,6 +542,7 @@ function GikaiPageContent() {
           )}
         </>
       )}
+    </div>
     </div>
   )
 }

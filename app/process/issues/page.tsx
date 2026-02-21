@@ -28,6 +28,8 @@ interface Issue {
 const THEME_LABELS: Record<string, string> = {
   agriculture: "農業・産業",
   tourism: "観光",
+  health: "健康・福祉",
+  community: "地域・参加",
   finance: "財政",
 }
 

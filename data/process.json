@@ -2,47 +2,47 @@
   "priorities": [
     {
       "id": "agriculture",
-      "title": "Agriculture & Industry",
+      "title": "農業・産業",
       "bullets": [
-        "Maintaining 19.3B JPY agricultural output",
-        "Succession and workforce shortages",
-        "Climate adaptation and resilience",
-        "Smart agriculture / productivity"
+        "農業産出額 193億円の維持",
+        "後継者・労働力不足",
+        "気候変動への適応・レジリエンス",
+        "スマート農業／生産性向上"
       ]
     },
     {
       "id": "tourism",
-      "title": "Tourism",
+      "title": "観光",
       "bullets": [
-        "Improve visitor satisfaction (reported low)",
-        "Shift from pass-through to stay-based tourism",
-        "Strengthen operating structure and collaboration"
+        "来訪者満足度の改善（低水準）",
+        "通過型から滞在型への転換",
+        "運営体制・連携の強化"
       ]
     },
     {
       "id": "health",
-      "title": "Health & Welfare",
+      "title": "健康・福祉",
       "bullets": [
-        "Redefine \"health\" beyond physical metrics",
-        "Community-based prevention and support"
+        "身体指標に限らない「健康」の再定義",
+        "地域に根ざした予防・支援"
       ]
     },
     {
       "id": "community",
-      "title": "Community & Participation",
+      "title": "地域・参加",
       "bullets": [
-        "Rethink neighborhood associations and local participation",
-        "Move beyond formal/box-check participation",
-        "Engage younger generations"
+        "町内会・地域参加の再設計",
+        "形式的／チェック型の参加を超える",
+        "若い世代の参画"
       ]
     },
     {
       "id": "finance",
-      "title": "Finance",
+      "title": "財政",
       "bullets": [
-        "Maintain fiscal flexibility (\"policy room\")",
-        "Control debt while enabling investment",
-        "Long-term sustainability"
+        "財政の柔軟性（政策の余地）の維持",
+        "投資を可能にしつつ債務を抑制",
+        "長期的な持続可能性"
       ]
     }
   ],
@@ -50,7 +50,7 @@
     {
       "id": "agri-conservative-target",
       "theme": "agriculture",
-      "title": "Can agriculture sustain the town with only 1% growth?",
+      "title": "農業は年1%成長で町を支え続けられるか？",
       "issue": "10年で1%増（193億円目標）の設定は保守的すぎないか／農協外の生産額が含まれていないのでは？",
       "context": "農業生産額の目標設定と、統計の取り方（算出可能な確実な数値を採用）に議論がある。",
       "admin_view": "算出可能な確実な数値（農協取扱高）を採用。",
@@ -70,7 +70,7 @@
     {
       "id": "agri-fewer-farms",
       "theme": "agriculture",
-      "title": "Can fewer farms keep total agricultural output stable?",
+      "title": "農家戸数が減っても農業総額を維持できるか？",
       "issue": "農家戸数が減少する中で総額維持するには、1戸あたり生産性を約1割上げる必要がある。",
       "context": "目標達成のボトルネックは総額ではなく生産性（労働・機械・技術・経営）。",
       "admin_view": "",
@@ -90,7 +90,7 @@
     {
       "id": "agri-climate",
       "theme": "agriculture",
-      "title": "Will climate change force crop shifts in Shintoku?",
+      "title": "気候変動で作物転換は必要になるか？",
       "issue": "温暖化で寒冷地作物（ビート・馬鈴薯）が難化し、新規作物の可能性探索が必要。",
       "context": "気候変動を前提に、作付・品目・技術の転換が論点。",
       "admin_view": "",
@@ -110,7 +110,7 @@
     {
       "id": "agri-smart",
       "theme": "agriculture",
-      "title": "Can technology solve the farm labor shortage?",
+      "title": "技術で農業の労働力不足は補えるか？",
       "issue": "労働力不足を補う技術導入（スマート農業）を加速すべき。",
       "context": "担い手不足が構造問題化しており、技術で補う方向性が示されている。",
       "admin_view": "",
@@ -130,7 +130,7 @@
     {
       "id": "tourism-satisfaction",
       "theme": "tourism",
-      "title": "Why are residents dissatisfied with tourism results?",
+      "title": "なぜ町民は観光の成果に満足していないのか？",
       "issue": "観光振興の町民評価（満足度）が25%と低く、危機感を共有すべき。",
       "context": "成果指標の低さが、体制・商品・情報発信などの見直し議論に繋がる。",
       "admin_view": "危機感は共有しつつ、まずは現体制で「外からの誘客」強化と運用改善を優先。",
@@ -150,7 +150,7 @@
     {
       "id": "tourism-org-reform",
       "theme": "tourism",
-      "title": "Does Shintoku need a new tourism organization?",
+      "title": "新得町に新しい観光組織は必要か？",
       "issue": "観光協会を解体し、役場内に若い力を結集した「観光課」新設案が出ている。",
       "context": "組織改革を待つ余裕がない、という問題意識。",
       "admin_view": "組織改編より運用改善を優先（ただし危機感は共有）。",
@@ -170,7 +170,7 @@
     {
       "id": "tourism-residents",
       "theme": "tourism",
-      "title": "Why don't residents feel the town's tourism appeal?",
+      "title": "なぜ町民は観光の魅力を実感できていないのか？",
       "issue": "町民自身が魅力を実感していない（内側の納得不足）が観光の課題として指摘。",
       "context": "\"外向けの観光\"だけでなく、町民の実感・誇り・参加の設計が必要。",
       "admin_view": "",
@@ -190,7 +190,7 @@
     {
       "id": "finance-post-project",
       "theme": "finance",
-      "title": "How will the town manage debt after major projects?",
+      "title": "大型事業後の借金をどうコントロールするか？",
       "issue": "大型公共事業の償還開始後、財政の「守り」と「平準化」が重要。",
       "context": "償還期に入ると支出の山が立つため、基金・借入コントロールで平準化する必要。",
       "admin_view": "財政調整基金と借入コントロールの重要性を示唆。",
@@ -210,7 +210,7 @@
     {
       "id": "finance-kpi",
       "theme": "finance",
-      "title": "What financial limits keep the town sustainable?",
+      "title": "財政の“安全運転ライン”は何か？",
       "issue": "経常収支比率84%以内／実質公債費比率12%以内を目安に健全性を維持。",
       "context": "数値目標を\"安全運転ライン\"として運用する論点。",
       "admin_view": "",
@@ -230,7 +230,7 @@
     {
       "id": "finance-slack",
       "theme": "finance",
-      "title": "How much financial buffer does the town need?",
+      "title": "財政の“余力”をどう確保するか？",
       "issue": "他自治体比較ではなく、災害時などに動ける「余力」をどう確保するかが重要。",
       "context": "財政を\"平時の効率\"だけでなく\"有事の可動性\"で捉える視点。",
       "admin_view": "",
@@ -249,9 +249,9 @@
     }
   ],
   "timeline": [
-    { "date": "2024", "label": "Special committee established" },
-    { "date": "2024", "label": "Survey / public feedback phase" },
-    { "date": "2025", "label": "Drafting and review in progress" },
-    { "date": "2026", "label": "9th Comprehensive Plan starts" }
+    { "date": "2024", "label": "特別委員会の設置" },
+    { "date": "2024", "label": "アンケート／パブリックコメント期間" },
+    { "date": "2025", "label": "素案作成・審議（レビュー）" },
+    { "date": "2026", "label": "第9次総合計画の開始" }
   ]
 }
