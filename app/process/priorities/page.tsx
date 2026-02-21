@@ -1,78 +1,83 @@
-import fs from 'fs';
-import path from 'path';
-import Link from 'next/link';
+import fs from "fs"
+import path from "path"
+import Link from "next/link"
 
 interface Priority {
-  id: string;
-  title: string;
-  bullets: string[];
+  id: string
+  title: string
+  bullets: string[]
 }
 
 async function getPriorities(): Promise<Priority[]> {
   try {
-    const filePath = path.join(process.cwd(), 'data', 'process.json');
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    return data.priorities;
+    const filePath = path.join(process.cwd(), "data", "process.json")
+    const data = JSON.parse(fs.readFileSync(filePath, "utf-8"))
+    return data.priorities ?? []
   } catch (error) {
-    console.error('Failed to load priorities:', error);
-    return [];
+    console.error("Failed to load priorities:", error)
+    return []
   }
 }
 
 export default async function PrioritiesPage() {
-  const priorities = await getPriorities();
+  const priorities = await getPriorities()
 
   return (
-    <main className="min-h-screen bg-black text-green-400 font-mono p-8">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-8">
-          <Link href="/process" className="text-green-600 hover:text-green-400 mb-4 inline-block">
-            ← Process Atlas
-          </Link>
-          <h1 className="text-4xl mb-2">Town Priorities</h1>
-          <p className="text-green-600">
-            Current policy discussions and focus areas
-          </p>
-        </header>
+    <div className="pageWrap">
+      <header className="pageHeader">
+        <Link href="/process" className="backLink">
+          ← 意思決定プロセスに戻る
+        </Link>
 
-        <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="border border-green-400 p-4">
-            <div className="text-green-600 text-sm mb-1">CATEGORIES</div>
-            <div className="text-2xl">{priorities.length}</div>
-          </div>
-          <div className="border border-green-400 p-4">
-            <div className="text-green-600 text-sm mb-1">STATUS</div>
-            <div className="text-2xl">Under review</div>
+        <h1 className="pageTitle">重点テーマ</h1>
+        <p className="pageDesc">町の政策議論の焦点・優先度を整理</p>
+      </header>
+
+      {/* Stats */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        <div className="card">
+          <div className="text-textSub text-sm">CATEGORIES</div>
+          <div className="mt-2 text-2xl font-semibold text-textMain">
+            {priorities.length}
           </div>
         </div>
-
-        <section>
-          <h2 className="text-2xl mb-6 flex items-center">
-            <span className="text-green-600 mr-2">$</span>
-            PRIORITIES
-          </h2>
-
-          <div className="space-y-4">
-            {priorities.map((priority) => (
-              <div key={priority.id} className="border border-green-400 p-6">
-                <h3 className="text-xl mb-3">{priority.title}</h3>
-                <ul className="space-y-1">
-                  {priority.bullets.map((bullet, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="text-green-600 mr-2 shrink-0">→</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <div className="card">
+          <div className="text-textSub text-sm">STATUS</div>
+          <div className="mt-2 text-2xl font-semibold text-textMain">
+            Under review
           </div>
-        </section>
-
-        <div className="mt-8 border border-green-400 p-4 text-sm text-green-600">
-          Sources: Internal document highlights (unofficial) / Public documents
+          <div className="mt-2 text-sm text-textSub">
+            ※表示は仮。後で「更新日」や「根拠資料」などに差し替え可
+          </div>
         </div>
-      </div>
-    </main>
-  );
+      </section>
+
+      {/* List */}
+      <section className="space-y-4 pb-16">
+        {priorities.map((priority) => (
+          <div key={priority.id} className="card">
+            <h2 className="text-xl font-semibold text-textMain">
+              {priority.title}
+            </h2>
+
+            <ul className="mt-4 space-y-2 text-textSub">
+              {priority.bullets.map((bullet, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-accent shrink-0 leading-6">→</span>
+                  <span className="leading-6">{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        {/* Source note */}
+        <div className="card">
+          <div className="text-textSub text-sm">
+            Sources: Internal document highlights (unofficial) / Public documents
+          </div>
+        </div>
+      </section>
+    </div>
+  )
 }

@@ -1,17 +1,20 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Footer from "@/components/Footer";
-import "./globals.css";
+import type { Metadata } from "next"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import { Inter, Noto_Sans_JP } from "next/font/google"
+import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
+  variable: "--font-inter",
+  display: "swap",
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-});
+  variable: "--font-noto",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Shintoku Atlas",
@@ -20,21 +23,18 @@ export const metadata: Metadata = {
     title: "Shintoku Atlas",
     description: "An unofficial public information dashboard.",
   },
-};
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
+      <body className="font-sans antialiased bg-base text-textMain min-h-screen flex flex-col">
+        <Header />
+        <main className="pt-16 flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
-  );
+  )
 }

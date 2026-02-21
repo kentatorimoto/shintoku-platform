@@ -1,54 +1,50 @@
-import Link from 'next/link';
+import Link from "next/link"
+
+const CARDS = [
+  {
+    href: "/process/priorities",
+    title: "重点テーマ",
+    desc: "町の政策議論の焦点・優先度を整理",
+    meta: "5カテゴリ",
+  },
+  {
+    href: "/process/issues",
+    title: "論点カード",
+    desc: "議論・判断・次の一手（論点の見える化）",
+    meta: "10件（仮）",
+  },
+  {
+    href: "/process/timeline",
+    title: "意思決定タイムライン",
+    desc: "計画策定の節目と意思決定の流れ",
+    meta: "4マイルストーン",
+  },
+] as const
 
 export default function ProcessPage() {
   return (
-    <main className="min-h-screen bg-black text-green-400 font-mono p-8">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-8">
-          <Link href="/" className="text-green-600 hover:text-green-400 mb-4 inline-block">
-            ← トップに戻る
-          </Link>
-          <h1 className="text-4xl mb-2">Process Atlas</h1>
-          <p className="text-green-600">
-            町の課題・議論・計画策定の流れを可視化
-          </p>
-        </header>
+    <div className="pageWrap">
+      <header className="pageHeader">
+        <Link href="/" className="backLink">
+          ← トップに戻る
+        </Link>
+        <h1 className="pageTitle">意思決定プロセス</h1>
+        <p className="pageDesc">町の課題・議論・計画策定の流れを可視化</p>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link href="/process/priorities" className="border border-green-400 p-6 hover:bg-green-950 transition-colors">
-            <h2 className="text-2xl mb-2 flex items-center">
-              <span className="text-green-600 mr-2">$</span>
-              TOWN PRIORITIES
-            </h2>
-            <p className="text-green-600 mb-4">Current policy discussions and focus areas</p>
-            <div className="text-sm">
-              → View priorities　<span className="text-green-600">5 categories</span>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-16">
+        {CARDS.map((c) => (
+          <Link key={c.href} href={c.href} className="card cardHover">
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <h2 className="text-xl font-semibold text-textMain">{c.title}</h2>
+                <p className="mt-2 text-textSub">{c.desc}</p>
+                <p className="mt-4 text-sm text-accent">→ 開く <span className="text-textSub">（{c.meta}）</span></p>
+              </div>
             </div>
           </Link>
-
-          <Link href="/process/issues" className="border border-green-400 p-6 hover:bg-green-950 transition-colors">
-            <h2 className="text-2xl mb-2 flex items-center">
-              <span className="text-green-600 mr-2">$</span>
-              KEY ISSUES
-            </h2>
-            <p className="text-green-600 mb-4">論点カード — 議論・判断・次の一手</p>
-            <div className="text-sm">
-              → View issues　<span className="text-green-600">10 issues</span>
-            </div>
-          </Link>
-
-          <Link href="/process/timeline" className="border border-green-400 p-6 hover:bg-green-950 transition-colors">
-            <h2 className="text-2xl mb-2 flex items-center">
-              <span className="text-green-600 mr-2">$</span>
-              DECISION TIMELINE
-            </h2>
-            <p className="text-green-600 mb-4">Key milestones in the planning process</p>
-            <div className="text-sm">
-              → View timeline　<span className="text-green-600">4 milestones</span>
-            </div>
-          </Link>
-        </div>
-      </div>
-    </main>
-  );
+        ))}
+      </section>
+    </div>
+  )
 }

@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-base: #0B0F14;
+  --color-ink: #0E141B;
+  --color-line: #1F2A36;
+  --color-accent: #2BD1A3;
+  --color-accentSoft: #1AA37E;
+  --color-textMain: #E6EEF7;
+  --color-textSub: #8FA3B8;
+
+  --font-sans: var(--font-noto), var(--font-inter), ui-sans-serif, system-ui;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    background: var(--color-base);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply font-sans text-textMain antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+
+  /* ===== Layout ===== */
+
+  .pageWrap {
+    @apply max-w-6xl mx-auto px-6;
+  }
+
+  .pageWrapNarrow {
+    @apply max-w-3xl mx-auto px-6;
+  }
+
+  .pageHeader {
+    @apply pt-10 md:pt-14 pb-8 md:pb-10;
+  }
+
+  .backLink {
+    @apply inline-flex items-center gap-2 text-sm text-textSub hover:text-textMain transition-colors;
+  }
+
+  .pageTitle {
+    @apply mt-4 text-3xl md:text-5xl font-bold tracking-tight text-textMain;
+  }
+
+  .pageDesc {
+    @apply mt-3 text-base md:text-lg text-textSub;
+  }
+
+  /* ===== Card ===== */
+
+  .card {
+    @apply bg-ink border border-line rounded-2xl p-6;
+  }
+
+  .cardHover {
+    @apply hover:border-accent transition-colors;
+  }
+
+  /* ===== Input ===== */
+
+  .input {
+    /* iOS zoom防止 */
+    @apply w-full bg-base/40 border border-line rounded-xl px-4 py-4 text-[16px] text-textMain placeholder:text-textSub/70 outline-none focus:border-accent transition-colors;
+  }
+
+  /* ===== Buttons ===== */
+
+  .btnPrimary {
+    @apply inline-flex items-center justify-center rounded-xl bg-accent px-5 py-3 font-semibold text-base hover:bg-accentSoft transition-colors;
+  }
+
+  .btnSecondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-line bg-transparent px-5 py-3 font-semibold text-base text-textMain hover:border-accent transition-colors;
+  }
+
+  /* ===== Chips ===== */
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line px-3 py-2 text-sm text-textSub hover:text-textMain hover:border-accent transition-colors;
+  }
+
+  .chipActive {
+    @apply bg-base/60 border-accent text-textMain;
+  }
 }

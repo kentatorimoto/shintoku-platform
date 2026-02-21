@@ -19,20 +19,16 @@ export default function Page() {
   const entries = loadIndex()
 
   return (
-    <main className="min-h-screen bg-black text-green-400 font-mono p-8">
-      <div className="max-w-5xl mx-auto">
-        <header className="mb-8">
-          <Link href="/" className="text-green-600 hover:text-green-400 mb-4 inline-block">
-            ← トップに戻る
-          </Link>
-          <h1 className="text-4xl mb-2">$ Newsletter Search</h1>
-          <p className="text-green-600">
-            広報しんとくPDF全文検索 | {entries.length}件インデックス済
-          </p>
-        </header>
+    <div className="pageWrap">
+      <header className="pageHeader">
+        <Link href="/" className="backLink">
+          ← トップに戻る
+        </Link>
+        <h1 className="pageTitle">広報誌検索</h1>
+        <p className="pageDesc">広報しんとくPDF全文検索（{entries.length}件インデックス済）</p>
+      </header>
 
-        <NewsletterSearch entries={entries} />
-      </div>
-    </main>
+      <NewsletterSearch entries={entries} />
+    </div>
   )
 }
