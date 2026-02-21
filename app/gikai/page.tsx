@@ -288,7 +288,7 @@ function GikaiPageContent() {
         if (item.result !== result) return false
       }
       if (theme || issue) {
-        const key = `${item.caseType}-${item.num}`
+        const key = `${item.eraLabel}-${item.caseType}-${item.num}`
         const refs = links[key] ?? []
         if (theme && !refs.includes(`theme:${theme}`)) return false
         if (issue && !refs.includes(`issue:${issue}`)) return false
@@ -553,7 +553,7 @@ function GikaiPageContent() {
         <>
           <div className="space-y-2">
             {visibleItems.map((item, i) => {
-              const caseKey = `${item.caseType}-${item.num}`
+              const caseKey = `${item.eraLabel}-${item.caseType}-${item.num}`
               const refs = links[caseKey] ?? []
               return (
                 <div key={i}>

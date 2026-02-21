@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build:links": "node tools/build-gikai-links.mjs",
+    "suggest:links": "node tools/suggest-gikai-links.mjs",
+    "merge:links": "node tools/merge-gikai-links.mjs",
     "build": "npm run build:links && next build",
     "start": "next start",
     "lint": "eslint",

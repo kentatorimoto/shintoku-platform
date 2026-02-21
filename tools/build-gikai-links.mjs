@@ -1,5 +1,9 @@
 // tools/build-gikai-links.mjs
 // CSV (data/gikai_links.csv) → JSON (public/data/gikai_links.json)
+//
+// CSVフォーマット（v2: 4列）:
+//   caseType,eraLabel,num,ref
+//   例: 議案,令和7年,26,theme:finance
 
 import { readFileSync, writeFileSync, mkdirSync } from "fs"
 import { join, dirname } from "path"
@@ -33,12 +37,14 @@ const [headerEntry, ...dataEntries] = effective
 const cols = headerEntry.text.split(",").map((c) => c.trim())
 
 const COL_CASE_TYPE = cols.indexOf("caseType")
+const COL_ERA_LABEL = cols.indexOf("eraLabel")
 const COL_NUM       = cols.indexOf("num")
 const COL_REF       = cols.indexOf("ref")
 
-if (COL_CASE_TYPE === -1 || COL_NUM === -1 || COL_REF === -1) {
-  console.error(`ERROR: line ${headerEntry.lineNum}: header must contain caseType, num, ref`)
+if (COL_CASE_TYPE === -1 || COL_ERA_LABEL === -1 || COL_NUM === -1 || COL_REF === -1) {
+  console.error(`ERROR: line ${headerEntry.lineNum}: header must contain caseType, eraLabel, num, ref (4 columns)`)
   console.error(`  Found: ${headerEntry.text}`)
+  console.error(`  旧フォーマット（3列）のCSVが混在していないか確認してください。`)
   process.exit(1)
 }
 
@@ -49,13 +55,20 @@ const VALID_REF = /^(theme|issue):.+$/
 function validateRow(fields, lineNum) {
   const errors = []
 
-  const caseType = (fields[COL_CASE_TYPE] ?? "").trim()
-  const numStr   = (fields[COL_NUM]       ?? "").trim()
-  const ref      = (fields[COL_REF]       ?? "").trim()
-
-  if (!caseType) {
-    errors.push("caseType is empty")
+  const maxRequired = Math.max(COL_CASE_TYPE, COL_ERA_LABEL, COL_NUM, COL_REF)
+  if (fields.length <= maxRequired) {
+    console.error(`ERROR: line ${lineNum}: expected at least ${maxRequired + 1} columns, got ${fields.length}`)
+    process.exit(1)
   }
+
+  const caseType = (fields[COL_CASE_TYPE] ?? "").trim()
+  const eraLabel = (fields[COL_ERA_LABEL] ?? "").trim()
+  const numStr   = (fields[COL_NUM]       ?? "").trim()
+  // ref 列はインラインコメントを除去する（"  # " 以降を捨てる）
+  const ref      = (fields[COL_REF]       ?? "").replace(/\s*#.*$/, "").trim()
+
+  if (!caseType)  errors.push("caseType is empty")
+  if (!eraLabel)  errors.push("eraLabel is empty")
 
   const num = Number(numStr)
   if (!numStr || !Number.isInteger(num) || num <= 0) {
@@ -71,7 +84,7 @@ function validateRow(fields, lineNum) {
     process.exit(1)
   }
 
-  return { caseType, num, ref }
+  return { caseType, eraLabel, num, ref }
 }
 
 // ── Build map ──────────────────────────────────────────────────────
@@ -81,9 +94,9 @@ const map = new Map()
 
 for (const { lineNum, text } of dataEntries) {
   const fields = text.split(",")
-  const { caseType, num, ref } = validateRow(fields, lineNum)
+  const { caseType, eraLabel, num, ref } = validateRow(fields, lineNum)
 
-  const key = `${caseType}-${num}`
+  const key = `${eraLabel}-${caseType}-${num}`
   if (!map.has(key)) map.set(key, new Set())
   map.get(key).add(ref)
 }
