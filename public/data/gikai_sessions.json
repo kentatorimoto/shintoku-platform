@@ -1,0 +1,108 @@
+[
+  {
+    "id": "r6-2024-09-regular-3",
+    "officialTitle": "令和６年定例第３回新得町議会（９月）",
+    "narrativeTitle": "ダム道路・PFAS・無縁墓——インフラ整備が問う新得の未来",
+    "date": "2024-09-02",
+    "summary": {
+      "issues":      "サホロダム再生に伴う道路付け替え工事（R7〜R12）とPFAS水質検査の緊急計上。一般質問では町営墓地の無縁化（使用者不明383区画）・防災体制・バイオガス転換が焦点",
+      "conflicts":   "墓じまい・合葬への公的支援を巡り、住民の8〜9割が合葬希望にもかかわらず、町は「私的財産・宗教的観点」から支援しない方針を堅持",
+      "nextActions":  "サホロダム工事中の観光・アウトドア事業へのアクセス確保状況、宿泊税導入検討委員会（R8目標）の進捗、バイオガスLBM転換の実現可能性確認"
+    },
+    "parts": [
+      {
+        "label":     "初日（9/2）",
+        "youtube":   "https://www.youtube.com/watch?v=8NEaqwBcBeU",
+        "pdf":       "r6-2024-09-regular-3_day1.pdf",
+        "slidesDir": "day1"
+      },
+      {
+        "label":     "一般質問（9/18）",
+        "youtube":   "https://www.youtube.com/watch?v=6P8oYEHDL4E",
+        "pdf":       "r6-2024-09-regular-3_qna.pdf",
+        "slidesDir": "qna"
+      },
+      {
+        "label":     "最終日（9/20）",
+        "youtube":   "https://www.youtube.com/watch?v=B9k-nioE8N8",
+        "pdf":       "r6-2024-09-regular-3_final.pdf",
+        "slidesDir": "final"
+      }
+    ]
+  },
+  {
+    "id": "r8-2026-01-20-basic-plan",
+    "officialTitle": "令和８年１月２０日 新得町基本構想審査特別委員会",
+    "narrativeTitle": "新得の未来は描けているか？",
+    "date": "2026-01-20",
+    "summary": {
+      "issues":      "観光振興の評価と人口減少の現実",
+      "conflicts":   "基本構想は実効性を持つのか",
+      "nextActions": "計画のKPIと財源の明確化"
+    },
+    "parts": [
+      {
+        "label": "午前",
+        "youtube": "https://www.youtube.com/watch?v=14_23_jU3pc",
+        "pdf": "r8-2026-01-20-basic-plan_morning.pdf",
+        "slidesDir": "morning"
+      },
+      {
+        "label": "午後",
+        "youtube": "https://www.youtube.com/watch?v=3tp-NdwjqmA",
+        "pdf": "r8-2026-01-20-basic-plan_afternoon.pdf",
+        "slidesDir": "afternoon"
+      }
+    ]
+  },
+  {
+    "id": "r8-2026-01-27-rinji-01",
+    "officialTitle": "令和８年１月２７日 臨時第１回新得町議会",
+    "narrativeTitle": "基本構想と補正予算——臨時議会が決めたこと",
+    "date": "2026-01-27",
+    "summary": {
+      "issues":      "基本構想審査特別委員会の審査報告と補正予算（専決処分の追認含む）の審議",
+      "conflicts":   "補正予算の内訳・専決処分の妥当性（PDFのみでは確認困難。動画での発言確認が必要）",
+      "nextActions": "補正予算書の内訳資料と動画の該当箇所タイムスタンプを追記し、何が動いたかを確定する"
+    },
+    "parts": [
+      {
+        "label":     "本会議",
+        "youtube":   "https://www.youtube.com/watch?v=G0lyO_1llus&t=1s",
+        "pdf":       "r8-2026-01-27-rinji-01_main.pdf",
+        "slidesDir": "main"
+      }
+    ]
+  },
+  {
+    "id": "r6-2024-06-regular-2",
+    "officialTitle": "令和６年定例第２回新得町議会（６月）",
+    "narrativeTitle": "産業支援か財政規律か——3億円融資を修正した6月定例会",
+    "date": "2024-06-04",
+    "summary": {
+      "issues":      "駅前複合施設（総額11億円超）の着工開始と、経営難の新得アユミルクへの3億円融資案（議案第57号）の審議",
+      "conflicts":   "アユミルク融資で議会が二分。「地域酪農を守る公益支援」か「税金で借金肩代わりはできない」か——修正動議により債務返済分が削除され、ラグーン整備のみ約1.5億円で可決（起立6名）",
+      "nextActions": "削減融資でアユミルクの経営再建が成立するか継続監視が必要。宿泊税導入（2026年目標）・エゾシカ被害対策・出生率1.20の人口問題など一般質問で浮上した中長期課題の進捗も要確認"
+    },
+    "parts": [
+      {
+        "label":     "初日（6/4）",
+        "youtube":   "https://www.youtube.com/watch?v=NzixeOvWppo",
+        "pdf":       "r6-2024-06-regular-2_day1.pdf",
+        "slidesDir": "day1"
+      },
+      {
+        "label":     "一般質問（6/19）",
+        "youtube":   "https://www.youtube.com/watch?v=OMtQtIPflCw",
+        "pdf":       "r6-2024-06-regular-2_qna.pdf",
+        "slidesDir": "qna"
+      },
+      {
+        "label":     "最終日（6/21）",
+        "youtube":   "https://www.youtube.com/watch?v=sLpH_X--7Zk",
+        "pdf":       "r6-2024-06-regular-2_final.pdf",
+        "slidesDir": "final"
+      }
+    ]
+  }
+]
