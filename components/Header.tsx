@@ -11,7 +11,7 @@ const GITHUB_URL = "https://github.com/kentatorimoto/shintoku-platform"
 const PRIMARY_LINKS = [
   { href: "/announcements", label: "町政ニュース" },
   { href: "/newsletters",   label: "広報誌検索" },
-  { href: "/gikai",         label: "議会" },
+  { href: "/gikai/sessions", label: "町議会を読む" },
   { href: "/insights",      label: "分析" },
 ] as const
 
@@ -28,8 +28,8 @@ const MOBILE_SECTIONS = [
     links: [
       { href: "/announcements", label: "町政ニュース", external: false },
       { href: "/newsletters",   label: "広報誌検索",   external: false },
-      { href: "/gikai",          label: "議会",           external: false },
-      { href: "/gikai/sessions", label: "会議アーカイブ", external: false },
+      { href: "/gikai",          label: "議会（議決結果）", external: false },
+      { href: "/gikai/sessions", label: "町議会を読む",   external: false },
     ],
   },
   {
@@ -76,7 +76,6 @@ export default function Header() {
   function desktopClass(href: string) {
     const isActive = pathname === href || (href !== "/" && pathname.startsWith(href))
     if (isActive) return "text-textMain font-medium border-b border-accent pb-0.5 transition"
-    if (href === "/insights") return "text-accent hover:opacity-80 transition font-medium"
     return "text-textSub hover:text-textMain transition"
   }
 

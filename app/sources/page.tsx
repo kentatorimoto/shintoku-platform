@@ -8,24 +8,18 @@ type SourceItem = {
 
 const PRIMARY_SOURCES: SourceItem[] = [
   {
-    title: "新得町 議会中継（公式）",
-    url: "https://www.shintoku-town.jp/gyousei/gikai/gikailive/",
-    note: "議会中継・関連ページ（一次情報）",
+    title: "新得町 公式サイト",
+    url: "https://www.shintoku-town.jp/",
+    note: "新得町が公開する行政情報の一次情報源",
   },
   {
-    title: "YouTube（議会関連動画）",
-    url: "https://www.youtube.com/watch?v=14_23_jU3pc",
-    note: "議会関連の公開動画（一次情報）",
+    title: "北海道十勝新得町議会 YouTube チャンネル",
+    url: "https://www.youtube.com/@%E5%8C%97%E6%B5%B7%E9%81%93%E5%8D%81%E5%8B%9D%E6%96%B0%E5%BE%97%E7%94%BA%E8%AD%B0%E4%BC%9A",
+    note: "新得町議会が公開する会議の録画アーカイブ（一次情報）",
   },
 ]
 
-const DERIVED_MATERIALS: SourceItem[] = [
-  {
-    title: "Shintoku 10-Year Plan Reality Check",
-    url: "#",
-    note: "上記YouTube動画を NotebookLM で要約・スライド化した二次資料（内部生成）。",
-  },
-]
+const DERIVED_MATERIALS: SourceItem[] = []
 
 function SourceCard({ item }: { item: SourceItem }) {
   const isExternal = item.url.startsWith("http")
@@ -116,28 +110,30 @@ export default function SourcesPage() {
         </section>
 
         {/* Derived */}
-        <section>
-          <div className="flex items-baseline justify-between gap-4 mb-4">
-            <h2 className="text-xs font-semibold text-textSub uppercase tracking-widest">
-              Derived Materials
-            </h2>
-            <span className="text-textSub text-xs">二次資料（内部作成）</span>
-          </div>
+        {DERIVED_MATERIALS.length > 0 && (
+          <section>
+            <div className="flex items-baseline justify-between gap-4 mb-4">
+              <h2 className="text-xs font-semibold text-textSub uppercase tracking-widest">
+                Derived Materials
+              </h2>
+              <span className="text-textSub text-xs">二次資料（内部作成）</span>
+            </div>
 
-          <div className="grid grid-cols-1 gap-4">
-            {DERIVED_MATERIALS.map((item) => (
-              <SourceCard key={item.title} item={item} />
-            ))}
-          </div>
+            <div className="grid grid-cols-1 gap-4">
+              {DERIVED_MATERIALS.map((item) => (
+                <SourceCard key={item.title} item={item} />
+              ))}
+            </div>
 
-          {/* Note */}
-          <div className="mt-8 bg-ink border border-line rounded-xl p-6">
-            <h3 className="text-lg font-semibold">注意</h3>
-            <p className="text-textMain/70 text-sm mt-2 leading-relaxed">
-              二次資料は、公開情報の理解を助けるための要約・整理です。正確な内容は必ず一次情報をご確認ください。
-            </p>
-          </div>
-        </section>
+            {/* Note */}
+            <div className="mt-8 bg-ink border border-line rounded-xl p-6">
+              <h3 className="text-lg font-semibold">注意</h3>
+              <p className="text-textMain/70 text-sm mt-2 leading-relaxed">
+                二次資料は、公開情報の理解を助けるための要約・整理です。正確な内容は必ず一次情報をご確認ください。
+              </p>
+            </div>
+          </section>
+        )}
       </div>
     </main>
   )

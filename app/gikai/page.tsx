@@ -314,12 +314,15 @@ function GikaiPageContent() {
         >
           ← トップ
         </Link>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        <h1 className="!text-4xl md:!text-5xl font-bold tracking-tight mb-4 text-textMain">
           議会（議決結果）
         </h1>
         <p className="text-textMain/70 text-lg">
-          議決結果（議案・意見案）の検索・閲覧
+          何が決まり、何が見送られたか
         </p>
+        <Link href="/gikai/sessions" className="text-sm text-accent hover:text-accent/80 transition-colors mt-2 inline-block">
+          町議会を読む（会議の論点・争点アーカイブ）→
+        </Link>
       </div>
 
       {/* ── 直近セッション（top 3） ───────────────────────── */}

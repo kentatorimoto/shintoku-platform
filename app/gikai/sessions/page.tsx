@@ -4,8 +4,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "会議アーカイブ | Shintoku Atlas",
-  description: "新得町議会 会議の動画・スライドアーカイブ",
+  title: "町議会を読む | Shintoku Atlas",
+  description: "新得町議会のライブ配信を要約・構造化し、意思決定の記録としてアーカイブしています。",
 }
 
 // ── 型定義 ─────────────────────────────────────────────────────────────────
@@ -59,16 +59,17 @@ export default function GikaiSessionsPage() {
       {/* ── ヘッダー ───────────────────────────────────────────────────── */}
       <div className="mb-10">
         <Link
-          href="/gikai"
+          href="/"
           className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
-          ← 議会（議決結果）
+          ← トップ
         </Link>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          会議アーカイブ
+          町議会を読む
         </h1>
         <p className="text-textMain/70 text-lg">
-          議会会議の動画・NotebookLM スライドを閲覧できます
+          新得町議会のライブ配信を要約・構造化し、<br className="hidden sm:inline" />
+          意思決定の記録としてアーカイブ
         </p>
       </div>
 

@@ -1,22 +1,6 @@
-import fs from "fs"
-import path from "path"
 import Link from "next/link"
 
-async function getLastSync() {
-  try {
-    const filePath = path.join(process.cwd(), "public", "data", "lastSync.json")
-    if (fs.existsSync(filePath)) {
-      return JSON.parse(fs.readFileSync(filePath, "utf-8"))
-    }
-    return { date: "----.--.--" }
-  } catch (e) {
-    console.error("Failed to load lastSync:", e)
-    return { date: "----.--.--" }
-  }
-}
-
-export default async function Home() {
-  const lastSync = await getLastSync()
+export default function Home() {
 
   return (
     <main className="min-h-screen bg-base text-textMain font-sans p-8">
@@ -41,63 +25,13 @@ export default async function Home() {
     </Link>
 
     <Link
-      href="/gikai"
+      href="/gikai/sessions"
       className="inline-flex items-center justify-center w-full md:w-auto border border-line text-textMain font-semibold px-7 py-4 md:py-3 rounded-xl hover:border-accent bg-transparent transition-colors"
     >
-      議会の決定を見る →
+      町議会を読む →
     </Link>
   </div>
 </section>
-
-        {/* Unified Status Card */}
-        <section className="mb-14 md:mb-16">
-          <div className="bg-ink border border-line rounded-xl p-6 md:p-7 hover:border-accent transition-all">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-              {/* left */}
-              <div>
-                <div className="text-textSub text-sm mb-2">STATUS</div>
-                <div className="text-2xl md:text-3xl font-semibold tracking-tight">
-                  <span className="text-accent">●</span> OPERATIONAL
-                </div>
-                <div className="text-textSub text-sm mt-2">
-                  Last sync:{" "}
-                  <span className="text-textMain/90 font-medium">
-                    {lastSync.date}
-                  </span>
-                </div>
-              </div>
-
-              {/* right stats */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                <div className="bg-base/0 border border-line/60 rounded-lg px-4 py-3">
-                  <div className="text-textSub text-xs tracking-wide mb-1">
-                    DATA POINTS
-                  </div>
-                  <div className="text-textMain font-semibold text-lg">20+</div>
-                </div>
-
-                <div className="bg-base/0 border border-line/60 rounded-lg px-4 py-3">
-                  <div className="text-textSub text-xs tracking-wide mb-1">
-                    NEWSLETTERS
-                  </div>
-                  <div className="text-textMain font-semibold text-lg">39</div>
-                </div>
-
-                <div className="bg-base/0 border border-line/60 rounded-lg px-4 py-3 hidden md:block">
-                  <div className="text-textSub text-xs tracking-wide mb-1">
-                    AUTO SYNC
-                  </div>
-                  <div className="text-textMain font-semibold text-lg">Daily</div>
-                </div>
-              </div>
-            </div>
-
-            {/* small note row (mobile extra) */}
-            <div className="mt-5 md:hidden text-textSub text-sm">
-              Auto sync: <span className="text-textMain/90">Daily</span>
-            </div>
-          </div>
-        </section>
 
        {/* Modules */}
 <section>
@@ -119,17 +53,18 @@ export default async function Home() {
       </div>
     </Link>
 
-    {/* 2. 議会（議決結果） */}
+    {/* 2. 町議会を読む */}
     <Link
-      href="/gikai"
+      href="/gikai/sessions"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">議会（議決結果）</h3>
+      <h3 className="text-xl font-semibold mb-2">町議会を読む</h3>
       <p className="text-textSub mb-4">
-        何が決まり、どう決まったかを探す
+        町議会のライブ映像を構造化し、<br />
+        論点・争点・動きを読める形で蓄積
       </p>
       <div className="text-sm text-accent font-medium">
-        → 議決を探す
+        → 議会を読む
       </div>
     </Link>
 
@@ -161,7 +96,7 @@ export default async function Home() {
       </div>
     </Link>
 
-    {/* 6. 広報しんとくアーカイブ */}
+    {/* 5. 広報しんとくアーカイブ */}
     <Link
       href="/newsletters"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
@@ -174,6 +109,20 @@ export default async function Home() {
       </p>
       <div className="text-sm text-accent font-medium">
         → 記事を探す
+      </div>
+    </Link>
+
+    {/* 6. 議会（議決結果） */}
+    <Link
+      href="/gikai"
+      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
+    >
+      <h3 className="text-xl font-semibold mb-2">議会（議決結果）</h3>
+      <p className="text-textSub mb-4">
+        議案・意見案の可決・否決結果を検索する
+      </p>
+      <div className="text-sm text-accent font-medium">
+        → 議決を調べる
       </div>
     </Link>
 
