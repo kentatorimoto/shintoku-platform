@@ -1,0 +1,43 @@
+[
+  {
+    "id": "q-center-shift",
+    "title": "なぜ中心はここに移ったのか？",
+    "view": {
+      "center": [43.15, 142.92],
+      "zoom": 11
+    },
+    "layers": {
+      "rivers":      true,
+      "passes":      true,
+      "centershift": true,
+      "relief":      true,
+      "hillshade":   false
+    },
+    "clues": [
+      {
+        "id": "clue-river",
+        "label": "十勝川の流れを見る",
+        "note": "河川はどの方向に流れているか。旧・新の中心地との位置関係は？",
+        "targets": [
+          { "layer": "rivers", "nameIncludes": "十勝川" }
+        ]
+      },
+      {
+        "id": "clue-pass",
+        "label": "狩勝峠の位置を確認する",
+        "note": "峠は旧・新の中心地に対してどちら側にあるか？物資・人の流れを想像してみよう。",
+        "targets": [
+          { "layer": "passes", "nameIncludes": "狩勝峠" }
+        ]
+      },
+      {
+        "id": "clue-shift",
+        "label": "重心移動ラインをたどる",
+        "note": "屈足から新得へ、どの方向へどれだけ動いたか。その理由を地形から考えよう。",
+        "targets": [
+          { "layer": "centershift", "nameIncludes": "" }
+        ]
+      }
+    ]
+  }
+]

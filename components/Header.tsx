@@ -17,6 +17,7 @@ const PRIMARY_LINKS = [
 
 // Desktop 二次導線（| 区切り後）
 const SECONDARY_LINKS = [
+  { href: "/map",     label: "地形マップ" },
   { href: "/sources", label: "Sources" },
 ] as const
 
@@ -27,7 +28,8 @@ const MOBILE_SECTIONS = [
     links: [
       { href: "/announcements", label: "町政ニュース", external: false },
       { href: "/newsletters",   label: "広報誌検索",   external: false },
-      { href: "/gikai",         label: "議会",         external: false },
+      { href: "/gikai",          label: "議会",           external: false },
+      { href: "/gikai/sessions", label: "会議アーカイブ", external: false },
     ],
   },
   {
@@ -40,8 +42,9 @@ const MOBILE_SECTIONS = [
   {
     title: "情報",
     links: [
-      { href: "/sources",  label: "Sources", external: false },
-      { href: GITHUB_URL,  label: "GitHub",  external: true  },
+      { href: "/map",      label: "地形マップ", external: false },
+      { href: "/sources",  label: "Sources",   external: false },
+      { href: GITHUB_URL,  label: "GitHub",    external: true  },
     ],
   },
 ] as const

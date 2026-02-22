@@ -1,0 +1,43 @@
+{
+  "_comment": "新得町の行政的重心の移動（屈足→新得）を示す仮データ。",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "屈足（旧中心）",
+        "shortNote": "かつての行政・商業の中心地。鉄道開通以前は屈足が地域の拠点だった（仮）。"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [143.003, 43.218]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "新得（現中心）",
+        "shortNote": "現在の行政・商業の中心地。鉄道の開通と役場の移転により新得が拠点となった（仮）。"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [142.840, 43.077]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "period": "明治末〜昭和初期（仮）",
+        "reason": "根室本線の開通・行政機能の移転により、地域の重心が北東から南西へ移動したとされる（仮テキスト）。",
+        "linkTags": ["centershift", "transport"]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [143.003, 43.218],
+          [142.840, 43.077]
+        ]
+      }
+    }
+  ]
+}

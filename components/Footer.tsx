@@ -8,7 +8,9 @@ const SECTIONS = [
     links: [
       { href: "/announcements", label: "町政ニュース", external: false },
       { href: "/newsletters",   label: "広報誌検索",   external: false },
-      { href: "/gikai",         label: "議会",         external: false },
+      { href: "/gikai",          label: "議会",           external: false },
+      { href: "/gikai/sessions", label: "会議アーカイブ", external: false },
+      { href: "/map",            label: "地形マップ",     external: false },
     ],
   },
   {

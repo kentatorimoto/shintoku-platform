@@ -65,6 +65,66 @@ npx tsx scripts/test-scraper.ts
 
 データは `data/scraped/` に保存されます
 
+## 🎥 会議アーカイブ（スライド画像生成）
+
+議会の会議動画・NotebookLM スライドを `/gikai/sessions` ページで閲覧できます。
+
+### 前提
+
+**poppler** が必要です（macOS）:
+```bash
+brew install poppler
+```
+
+### PDF の配置
+
+NotebookLM スライドの PDF を以下の命名規則で配置してください:
+
+```
+public/pdf/<sessionId>_<slideId>.pdf
+```
+
+例:
+```
+public/pdf/r8-2026-01-20-basic-plan_morning.pdf
+public/pdf/r8-2026-01-20-basic-plan_afternoon.pdf
+```
+
+### スライド画像の生成
+
+```bash
+npm run slides:generate <sessionId> <slideId>
+```
+
+例:
+```bash
+npm run slides:generate r8-2026-01-20-basic-plan morning
+npm run slides:generate r8-2026-01-20-basic-plan afternoon
+```
+
+生成先: `public/slides/<sessionId>/<slideId>/page-001.jpg` 〜
+
+- 先頭 20 ページまで生成（150dpi JPEG）
+- `page-001.jpg` が存在する場合はスキップ（再生成は出力ディレクトリを削除して再実行）
+
+### 会議データの追加
+
+`public/data/gikai_sessions.json` に会議を追加してください:
+
+```json
+{
+  "id": "<sessionId>",
+  "title": "会議タイトル",
+  "date": "YYYY-MM-DD",
+  "videos": [
+    { "label": "午前", "youtubeUrl": "https://www.youtube.com/watch?v=..." }
+  ],
+  "slides": [
+    { "id": "morning", "label": "午前スライド", "pdfFile": "<sessionId>_morning.pdf" }
+  ]
+}
+```
+
 ## 📁 プロジェクト構成
 ```
 shintoku-platform/

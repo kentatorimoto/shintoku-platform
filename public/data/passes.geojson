@@ -1,0 +1,31 @@
+{
+  "_comment": "テスト用簡易データ。本番データ（国土数値情報 等）に差し替え可。",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "狩勝峠", "elevation": 644 },
+      "geometry": { "type": "Point", "coordinates": [142.869, 43.133] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "新内峠", "elevation": 535 },
+      "geometry": { "type": "Point", "coordinates": [142.778, 43.182] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "金山峠", "elevation": 763 },
+      "geometry": { "type": "Point", "coordinates": [142.730, 43.248] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "桂沢峠", "elevation": 480 },
+      "geometry": { "type": "Point", "coordinates": [142.823, 43.062] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "熊牛峠", "elevation": 511 },
+      "geometry": { "type": "Point", "coordinates": [142.922, 43.164] }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "_comment": "テスト用簡易データ。本番はW05（国土数値情報 河川中心線）に差し替える。",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "十勝川", "class": 1 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [142.57, 43.34],
+          [142.63, 43.28],
+          [142.70, 43.22],
+          [142.77, 43.16],
+          [142.84, 43.10],
+          [142.91, 43.04],
+          [142.98, 42.98],
+          [143.06, 42.93]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "新得川", "class": 2 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [142.54, 43.17],
+          [142.60, 43.15],
+          [142.67, 43.13],
+          [142.74, 43.11],
+          [142.81, 43.10],
+          [142.84, 43.10]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "佐幌川", "class": 2 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [142.76, 43.24],
+          [142.78, 43.20],
+          [142.80, 43.16],
+          [142.82, 43.12],
+          [142.84, 43.10]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "戸蔦別川", "class": 2 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [142.93, 43.22],
+          [142.93, 43.18],
+          [142.92, 43.14],
+          [142.91, 43.10],
+          [142.91, 43.04]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "ペンケシントク川", "class": 3 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [142.62, 43.22],
+          [142.66, 43.19],
+          [142.70, 43.16],
+          [142.74, 43.13],
+          [142.77, 43.11]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "パンケシントク川", "class": 3 },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [142.70, 43.27],
+          [142.72, 43.23],
+          [142.74, 43.19],
+          [142.75, 43.15],
+          [142.77, 43.11]
+        ]
+      }
+    }
+  ]
+}

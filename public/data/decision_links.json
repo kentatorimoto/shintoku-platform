@@ -1,0 +1,29 @@
+[
+  {
+    "id": "centershift-001",
+    "title": "根室本線開通と新得への重心移動",
+    "tags": ["centershift", "transport"],
+    "type": "source",
+    "date": "2024-03-01",
+    "url": "https://www.town.shintoku.hokkaido.jp/",
+    "note": "鉄道開通が屈足から新得への行政・商業重心移動を促進した経緯（仮）"
+  },
+  {
+    "id": "rivers-001",
+    "title": "十勝川流域の治水事業",
+    "tags": ["rivers", "infrastructure"],
+    "type": "minutes",
+    "date": "2023-09-15",
+    "url": "https://www.town.shintoku.hokkaido.jp/",
+    "note": "十勝川の堤防整備・流量管理に関する議会での議論（仮）"
+  },
+  {
+    "id": "passes-001",
+    "title": "狩勝峠の観光振興計画",
+    "tags": ["passes", "tourism"],
+    "type": "news",
+    "date": "2024-06-20",
+    "url": "https://www.town.shintoku.hokkaido.jp/",
+    "note": "狩勝峠エリアの観光資源活用に向けた取り組み（仮）"
+  }
+]

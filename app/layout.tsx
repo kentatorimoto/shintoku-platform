@@ -3,6 +3,7 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { Inter, Noto_Sans_JP } from "next/font/google"
 import "./globals.css"
+import "leaflet/dist/leaflet.css"
 
 const inter = Inter({
   subsets: ["latin"],
