@@ -15,7 +15,7 @@ const NAV_LINKS = [
 ] as const
 
 /** デスクトップナビに表示するリンク（トップは除外） */
-const DESKTOP_NAV_LINKS = NAV_LINKS.filter((l) => l.href !== "/")
+const DESKTOP_NAV_LINKS = NAV_LINKS.filter((l) => l.href !== "/" && l.href !== "/sources")
 
 export default function Header() {
   const pathname = usePathname()
