@@ -5,8 +5,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
-const GITHUB_URL = "https://github.com/kentatorimoto/shintoku-platform"
-
 // Desktop 一次導線
 const PRIMARY_LINKS = [
   { href: "/announcements", label: "町政ニュース" },
@@ -17,9 +15,8 @@ const PRIMARY_LINKS = [
 
 // Desktop 二次導線（| 区切り後）
 const SECONDARY_LINKS = [
-  { href: "/map",     label: "地形マップ" },
-  { href: "/sources", label: "Sources" },
-  { href: "/about",   label: "About" },
+  { href: "/map",   label: "地形マップ" },
+  { href: "/about", label: "About" },
 ] as const
 
 // Mobile ドロワー セクション構造
@@ -29,7 +26,6 @@ const MOBILE_SECTIONS = [
     links: [
       { href: "/announcements", label: "町政ニュース", external: false },
       { href: "/newsletters",   label: "広報誌検索",   external: false },
-      { href: "/gikai",          label: "議会（議決結果）", external: false },
       { href: "/gikai/sessions", label: "町議会を読む",   external: false },
     ],
   },
@@ -43,10 +39,8 @@ const MOBILE_SECTIONS = [
   {
     title: "情報",
     links: [
-      { href: "/map",      label: "地形マップ", external: false },
-      { href: "/sources",  label: "Sources",   external: false },
-      { href: "/about",    label: "About",     external: false },
-      { href: GITHUB_URL,  label: "GitHub",    external: true  },
+      { href: "/map",   label: "地形マップ", external: false },
+      { href: "/about", label: "About",     external: false },
     ],
   },
 ] as const
@@ -128,14 +122,6 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-textSub hover:text-textMain transition"
-            >
-              GitHub
-            </a>
           </div>
 
           {/* Mobile ハンバーガー */}

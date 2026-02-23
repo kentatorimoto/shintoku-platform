@@ -18,15 +18,8 @@ export default function Home() {
 
   <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:gap-5">
     <Link
-      href="/process"
-      className="inline-flex items-center justify-center w-full md:w-auto bg-accent text-base font-semibold px-7 py-4 md:py-3 rounded-xl hover:bg-accentSoft transition-colors"
-    >
-      意思決定の流れを見る →
-    </Link>
-
-    <Link
       href="/gikai/sessions"
-      className="inline-flex items-center justify-center w-full md:w-auto border border-line text-textMain font-semibold px-7 py-4 md:py-3 rounded-xl hover:border-accent bg-transparent transition-colors"
+      className="inline-flex items-center justify-center w-full md:w-auto bg-accent text-base font-semibold px-7 py-4 md:py-3 rounded-xl hover:bg-accentSoft transition-colors"
     >
       町議会を読む →
     </Link>
@@ -38,53 +31,38 @@ export default function Home() {
   <h2 className="text-2xl font-bold mb-6">ACTIVE MODULES</h2>
 
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    
-    {/* 1. 意思決定プロセス */}
-    <Link
-      href="/process"
-      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
-    >
-      <h3 className="text-xl font-semibold mb-2">意思決定プロセス</h3>
-      <p className="text-textSub mb-4">
-        町の動きが、一本の線でわかる
-      </p>
-      <div className="text-sm text-accent font-medium">
-        → 流れを見る
-      </div>
-    </Link>
 
-    {/* 2. 町議会を読む */}
+    {/* 1. 町議会を読む */}
     <Link
       href="/gikai/sessions"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">町議会を読む</h3>
       <p className="text-textSub mb-4">
-        町議会のライブ映像を構造化し、<br />
-        論点・争点・動きを読める形で蓄積
+        議決結果・会議アーカイブ・論点を読む
       </p>
       <div className="text-sm text-accent font-medium">
         → 議会を読む
       </div>
     </Link>
 
-    {/* 3. 分析（インサイト） */}
+    {/* 2. 分析・意思決定プロセス */}
     <Link
       href="/insights"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">分析（インサイト）</h3>
+      <h3 className="text-xl font-semibold mb-2">分析・意思決定プロセス</h3>
       <p className="text-textSub mb-4">
-        議決 × テーマ・論点のクロス集計と可視化
+        議決データの可視化と、意思決定の流れを読む
       </p>
       <div className="text-sm text-accent font-medium">
         → データを読む
       </div>
     </Link>
 
-    {/* 5. 町政ニュース */}
+    {/* 3. 町政ニュース */}
     <Link
-      href="/announcements"
+      href="/news"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">町政ニュース</h3>
@@ -96,7 +74,7 @@ export default function Home() {
       </div>
     </Link>
 
-    {/* 5. 広報しんとくアーカイブ */}
+    {/* 4. 広報しんとくアーカイブ */}
     <Link
       href="/newsletters"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
@@ -112,17 +90,17 @@ export default function Home() {
       </div>
     </Link>
 
-    {/* 6. 議会（議決結果） */}
+    {/* 5. 地形マップ */}
     <Link
-      href="/gikai"
+      href="/map"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">議会（議決結果）</h3>
+      <h3 className="text-xl font-semibold mb-2">地形マップ</h3>
       <p className="text-textSub mb-4">
-        議案・意見案の可決・否決結果を検索する
+        流域・地形・歴史を重ねて読む
       </p>
       <div className="text-sm text-accent font-medium">
-        → 議決を調べる
+        → マップを見る
       </div>
     </Link>
 

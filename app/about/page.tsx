@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
+const GITHUB_URL = "https://github.com/kentatorimoto/shintoku-platform"
+
 export const metadata: Metadata = {
   title: "About | Shintoku Atlas",
   description: "Shintoku Atlas は、新得町の公開情報を再構造化し、町の意思決定を可視化する非公式アーカイブです。",
@@ -93,6 +95,24 @@ export default function AboutPage() {
         <p className="text-lg md:text-xl leading-relaxed text-textMain/60 whitespace-pre-line">
           {CONCEPT}
         </p>
+      </section>
+
+      {/* ── Links ─────────────────────────────────────────────────────── */}
+      <section className="mt-12 pt-8 border-t border-line/20 flex gap-6">
+        <Link
+          href="/sources"
+          className="text-sm text-textSub/50 hover:text-textMain transition-colors"
+        >
+          Sources
+        </Link>
+        <a
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-textSub/50 hover:text-textMain transition-colors"
+        >
+          GitHub
+        </a>
       </section>
 
     </div>
