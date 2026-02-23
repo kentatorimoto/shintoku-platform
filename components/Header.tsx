@@ -7,10 +7,9 @@ import { Menu, X } from "lucide-react"
 
 // Desktop 一次導線
 const PRIMARY_LINKS = [
-  { href: "/announcements", label: "町政ニュース" },
-  { href: "/newsletters",   label: "広報誌検索" },
   { href: "/gikai/sessions", label: "町議会を読む" },
-  { href: "/insights",      label: "分析" },
+  { href: "/gikai",          label: "議決結果" },
+  { href: "/insights",       label: "分析" },
 ] as const
 
 // Desktop 二次導線（| 区切り後）
@@ -22,11 +21,10 @@ const SECONDARY_LINKS = [
 // Mobile ドロワー セクション構造
 const MOBILE_SECTIONS = [
   {
-    title: "探す",
+    title: "読む",
     links: [
-      { href: "/announcements", label: "町政ニュース", external: false },
-      { href: "/newsletters",   label: "広報誌検索",   external: false },
-      { href: "/gikai/sessions", label: "町議会を読む",   external: false },
+      { href: "/gikai/sessions", label: "町議会を読む", external: false },
+      { href: "/gikai",          label: "議決結果",     external: false },
     ],
   },
   {
@@ -39,8 +37,10 @@ const MOBILE_SECTIONS = [
   {
     title: "情報",
     links: [
-      { href: "/map",   label: "地形マップ", external: false },
-      { href: "/about", label: "About",     external: false },
+      { href: "/map",     label: "地形マップ", external: false },
+      { href: "/sources", label: "Sources",   external: false },
+      { href: "/about",   label: "About",     external: false },
+      { href: GITHUB_URL, label: "GitHub",    external: true  },
     ],
   },
 ] as const

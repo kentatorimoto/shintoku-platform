@@ -6,10 +6,9 @@ const SECTIONS = [
   {
     title: "見る",
     links: [
-      { href: "/announcements", label: "町政ニュース", external: false },
-      { href: "/newsletters",   label: "広報誌検索",   external: false },
-      { href: "/gikai/sessions", label: "町議会を読む",    external: false },
-      { href: "/map",            label: "地形マップ",     external: false },
+      { href: "/gikai/sessions", label: "町議会を読む", external: false },
+      { href: "/gikai",          label: "議決結果",     external: false },
+      { href: "/map",            label: "地形マップ",   external: false },
     ],
   },
   {
@@ -22,9 +21,9 @@ const SECTIONS = [
   {
     title: "プロジェクト",
     links: [
-      { href: "/about",    label: "About",   external: false },
-      { href: "/sources",  label: "Sources", external: false },
-      { href: GITHUB_URL,  label: "GitHub",  external: true  },
+      { href: "/about",   label: "About",   external: false },
+      { href: "/sources", label: "Sources", external: false },
+      { href: GITHUB_URL, label: "GitHub",  external: true  },
     ],
   },
 ] as const

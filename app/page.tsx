@@ -75,7 +75,7 @@ export default function Home() {
     >
       <h3 className="text-xl font-semibold mb-2">町議会を読む</h3>
       <p className="text-textSub mb-4">
-        議決結果・会議アーカイブ・論点を読む
+        会議アーカイブ・論点を読む
       </p>
       <div className="text-sm text-accent font-medium">
         → 議会を読む
@@ -96,38 +96,21 @@ export default function Home() {
       </div>
     </Link>
 
-    {/* 3. 町政ニュース */}
+    {/* 3. 議決結果を調べる */}
     <Link
-      href="/announcements"
+      href="/gikai"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">町政ニュース</h3>
+      <h3 className="text-xl font-semibold mb-2">議決結果を調べる</h3>
       <p className="text-textSub mb-4">
-        新得町の最新お知らせを自動収集・検索
+        10年分・729件の議案・意見案の可決／否決結果
       </p>
       <div className="text-sm text-accent font-medium">
-        → 最新を見る
+        → 結果を調べる
       </div>
     </Link>
 
-    {/* 4. 広報しんとくアーカイブ */}
-    <Link
-      href="/newsletters"
-      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
-    >
-      <h3 className="text-xl font-semibold mb-2">広報しんとくアーカイブ</h3>
-      <p className="text-textSub mb-4">
-        広報誌PDF検索・全文検索
-      </p>
-      <div className="text-sm text-accent font-medium">
-        → 記事を探す
-      </div>
-    </Link>
-
-    {/* 5. 空欄（左下） */}
-    <div />
-
-    {/* 6. 地形マップ（右下） */}
+    {/* 4. 地形マップ */}
     <Link
       href="/map"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
