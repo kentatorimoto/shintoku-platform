@@ -66,10 +66,6 @@ export default function Home() {
 
        {/* Modules */}
 <section>
-  <p className="text-xs font-semibold uppercase tracking-widest text-textSub/50 mb-6">
-    できること
-  </p>
-
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
     {/* 1. 町議会を読む */}
