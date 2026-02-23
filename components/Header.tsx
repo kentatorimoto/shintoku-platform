@@ -7,8 +7,16 @@ import { Menu, X } from "lucide-react"
 
 const NAV_LINKS = [
   { href: "/gikai/sessions", label: "議会を読む" },
+  { href: "/gikai",          label: "町の決定を読む" },
+  { href: "/process",        label: "意思決定の流れを読む" },
+  { href: "/map",            label: "地形を読む" },
+  "separator",
   { href: "/about",          label: "About" },
 ] as const
+
+type NavItem = (typeof NAV_LINKS)[number]
+type NavLink = Exclude<NavItem, string>
+const isLink = (item: NavItem): item is NavLink => typeof item !== "string"
 
 export default function Header() {
   const pathname = usePathname()
@@ -33,10 +41,16 @@ export default function Header() {
     return () => { document.body.style.overflow = prev }
   }, [open])
 
+  /** パスが active かどうか（prefix 一致は境界文字で区切る） */
+  function isActivePath(href: string) {
+    if (pathname === href) return true
+    if (href === "/") return false
+    return pathname.startsWith(href + "/")
+  }
+
   /** Desktop リンクのクラス */
   function desktopClass(href: string) {
-    const isActive = pathname === href || (href !== "/" && pathname.startsWith(href))
-    if (isActive) return "text-textMain font-medium border-b border-accent pb-0.5 transition"
+    if (isActivePath(href)) return "text-textMain font-medium border-b border-accent pb-0.5 transition"
     return "text-textSub hover:text-textMain transition"
   }
 
@@ -44,8 +58,7 @@ export default function Header() {
   function mobileClass(href: string, external: boolean) {
     const base = "rounded-lg px-4 py-2.5 text-base font-medium block transition-colors"
     if (external) return `${base} text-textMain/70 hover:text-accent`
-    const isActive = pathname === href || (href !== "/" && pathname.startsWith(href))
-    return isActive
+    return isActivePath(href)
       ? `${base} text-accent bg-accent/8`
       : `${base} text-textMain hover:text-accent`
   }
@@ -78,7 +91,7 @@ export default function Header() {
 
           {/* Desktop ナビ */}
           <div className="hidden md:flex items-center gap-5 text-sm">
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.filter(isLink).map((link) => (
               <Link key={link.href} href={link.href} className={desktopClass(link.href)}>
                 {link.label}
               </Link>
@@ -110,16 +123,20 @@ export default function Header() {
 
           {/* パネル */}
           <div className="fixed top-20 right-4 left-4 z-50 bg-ink border border-line rounded-2xl p-5">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={close}
-                className={mobileClass(link.href, false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((item, i) =>
+              isLink(item) ? (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={close}
+                  className={mobileClass(item.href, false)}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <hr key={`sep-${i}`} className="my-2 border-line/40" />
+              )
+            )}
           </div>
         </>
       )}
