@@ -33,6 +33,13 @@ export default function ProcessPage() {
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-16">
+        <Link href="/insights" className="card cardHover">
+          <div className="min-w-0">
+            <h2 className="text-xl font-semibold text-textMain">分析データ</h2>
+            <p className="mt-2 text-textSub">議決データの集計・タグ分布・可視化</p>
+            <p className="mt-4 text-sm text-accent">→ 分析を見る</p>
+          </div>
+        </Link>
         {CARDS.map((c) => (
           <Link key={c.href} href={c.href} className="card cardHover">
             <div className="flex items-start justify-between gap-4">

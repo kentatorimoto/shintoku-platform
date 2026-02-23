@@ -81,7 +81,7 @@ export default function Home() {
 
     {/* 2. 意思決定の流れを読む */}
     <Link
-      href="/insights"
+      href="/process"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">意思決定の流れを読む</h3>
