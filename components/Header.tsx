@@ -19,6 +19,7 @@ const PRIMARY_LINKS = [
 const SECONDARY_LINKS = [
   { href: "/map",     label: "地形マップ" },
   { href: "/sources", label: "Sources" },
+  { href: "/about",   label: "About" },
 ] as const
 
 // Mobile ドロワー セクション構造
@@ -44,6 +45,7 @@ const MOBILE_SECTIONS = [
     links: [
       { href: "/map",      label: "地形マップ", external: false },
       { href: "/sources",  label: "Sources",   external: false },
+      { href: "/about",    label: "About",     external: false },
       { href: GITHUB_URL,  label: "GitHub",    external: true  },
     ],
   },
@@ -96,10 +98,19 @@ export default function Header() {
           {/* ロゴ */}
           <Link
             href="/"
-            className="text-textMain font-semibold tracking-tight shrink-0"
             onClick={close}
+            style={{
+              fontFamily: "'Spectral', serif",
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              borderBottom: "0.5px solid #E6E4DD",
+              paddingBottom: "2px",
+              color: "#E6E4DD",
+              textDecoration: "none",
+              fontSize: "14px",
+            }}
           >
-            Shintoku Atlas
+            SHINTOKU ATLAS
           </Link>
 
           {/* Desktop ナビ */}
