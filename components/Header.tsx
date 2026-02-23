@@ -40,7 +40,7 @@ const MOBILE_SECTIONS = [
       { href: "/map",     label: "地形マップ", external: false },
       { href: "/sources", label: "Sources",   external: false },
       { href: "/about",   label: "About",     external: false },
-      { href: GITHUB_URL, label: "GitHub",    external: true  },
+      { href: "https://github.com/torimotokenta/shintoku-platform", label: "GitHub", external: true },
     ],
   },
 ] as const
