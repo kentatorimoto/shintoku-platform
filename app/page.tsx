@@ -1,6 +1,31 @@
+import fs from "fs"
+import path from "path"
 import Link from "next/link"
 
+interface GikaiSession {
+  id:             string
+  narrativeTitle?: string
+  officialTitle:  string
+  date:           string
+}
+
+function getLatestSession(): GikaiSession | null {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
+    const sessions = JSON.parse(fs.readFileSync(filePath, "utf-8")) as GikaiSession[]
+    return sessions.sort((a, b) => b.date.localeCompare(a.date))[0] ?? null
+  } catch {
+    return null
+  }
+}
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  return d.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })
+}
+
 export default function Home() {
+  const latest = getLatestSession()
 
   return (
     <main className="min-h-screen bg-base text-textMain font-sans p-8">
@@ -15,6 +40,19 @@ export default function Home() {
     ニュースではなく、流れを見る。<br />
     断片ではなく、構造を見る。
   </p>
+
+  {latest && (
+    <div className="mt-8 border-l-2 border-accent pl-4">
+      <p className="text-xs text-textSub/60 tracking-widest uppercase mb-1">最新の会議</p>
+      <p className="text-sm text-textSub/80">{formatDate(latest.date)}</p>
+      <p className="text-base text-textMain font-medium mt-0.5">
+        {latest.narrativeTitle ?? latest.officialTitle}
+      </p>
+      <Link href={`/gikai/sessions/${latest.id}`} className="text-xs text-accent mt-2 inline-block">
+        → 会議を読む
+      </Link>
+    </div>
+  )}
 
   <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:gap-5">
     <Link
