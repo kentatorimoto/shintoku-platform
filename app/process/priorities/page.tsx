@@ -1,104 +1,220 @@
 import fs from "fs"
 import path from "path"
+import type { Metadata } from "next"
 import Link from "next/link"
 
-interface Priority {
-  id: string
-  title: string
-  bullets: string[]
+export const metadata: Metadata = {
+  title: "重点テーマ | Shintoku Atlas",
+  description: "町が掲げる目標と、議会で実際に議論されていること",
 }
 
-type GikaiLinks = Record<string, string[]>
+// ── 型定義 ─────────────────────────────────────────────────────────────────
+interface Summary {
+  issues:      string
+  conflicts:   string
+  nextActions: string
+}
 
-async function getPriorities(): Promise<Priority[]> {
+interface GikaiSession {
+  id:              string
+  officialTitle:   string
+  narrativeTitle?: string
+  date:            string
+  tags:            string[]
+  summary?:        Summary
+}
+
+// ── 静的データ：第8期総合計画 5つの基本目標 ────────────────────────────
+const OFFICIAL_PRIORITIES = [
+  {
+    goal: "協働",
+    desc: "人口減少対策・移住定住・財政健全化",
+    tags: ["人口政策", "財政", "総合計画"],
+  },
+  {
+    goal: "保健福祉",
+    desc: "子育て・高齢者・医療・福祉",
+    tags: ["子育て", "福祉"],
+  },
+  {
+    goal: "教育・文化",
+    desc: "子どもの育成・生涯学習・文化",
+    tags: ["教育", "文化"],
+  },
+  {
+    goal: "産業",
+    desc: "農林業・観光・6次産業化・駅前活性化",
+    tags: ["農業", "観光"],
+  },
+  {
+    goal: "生活環境",
+    desc: "インフラ・交通・防災・エネルギー",
+    tags: ["インフラ", "エネルギー"],
+  },
+] as const
+
+// ── データ読み込み ──────────────────────────────────────────────────────────
+function getSessions(): GikaiSession[] {
   try {
-    const filePath = path.join(process.cwd(), "data", "process.json")
-    const data = JSON.parse(fs.readFileSync(filePath, "utf-8"))
-    return data.priorities
-  } catch (error) {
-    console.error("Failed to load priorities:", error)
+    const filePath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
+    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as GikaiSession[]
+  } catch {
     return []
   }
 }
 
-async function getGikaiLinks(): Promise<GikaiLinks> {
-  try {
-    const filePath = path.join(process.cwd(), "public", "data", "gikai_links.json")
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"))
-  } catch {
-    return {}
-  }
+// ── 日付フォーマット ────────────────────────────────────────────────────────
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  return d.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })
 }
 
-export default async function PrioritiesPage() {
-  const [priorities, links] = await Promise.all([getPriorities(), getGikaiLinks()])
+// ──────────────────────────────────────────────────────────────────────────────
 
-  const linkCounts = Object.fromEntries(
-    priorities.map((p) => [
-      p.id,
-      Object.values(links).filter((refs) => refs.includes(`theme:${p.id}`)).length,
-    ])
-  )
+export default function PrioritiesPage() {
+  const sessions = getSessions()
+
+  // ── セクション1：基本目標ごとの集計 ──────────────────────────────────
+  const priorityStats = OFFICIAL_PRIORITIES.map((p) => {
+    const matched = sessions.filter((s) =>
+      p.tags.some((tag) => s.tags.includes(tag))
+    )
+    // 日付降順で最新を取得
+    const latest = matched.sort((a, b) => b.date.localeCompare(a.date))[0]
+    return { ...p, count: matched.length, latest }
+  })
+
+  // ── セクション2：「争点あり」タグの会議から conflicts を抽出 ─────────
+  const disputeSessions = sessions
+    .filter((s) => s.tags.includes("争点あり") && s.summary?.conflicts)
+    .sort((a, b) => b.date.localeCompare(a.date))
 
   return (
-    <div className="pageWrap">
-      <header className="pageHeader">
-        <Link href="/process" className="backLink">
-          ← 意思決定プロセスに戻る
-        </Link>
-        <h1 className="pageTitle">政策の優先度</h1>
-        <p className="pageDesc">町の政策議論の焦点・優先度を整理</p>
-      </header>
+    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="card">
-          <div className="text-textSub text-xs">CATEGORIES</div>
-          <div className="mt-2 text-2xl font-semibold">{priorities.length}</div>
-        </div>
-        <div className="card">
-          <div className="text-textSub text-xs">STATUS</div>
-          <div className="mt-2 text-2xl font-semibold">整理中</div>
-          <div className="mt-2 text-xs text-textSub">
-            ※表示は仮。後で「更新日」「根拠資料」などに差し替え可
-          </div>
-        </div>
+      {/* ── ヘッダー ───────────────────────────────────────────────────── */}
+      <div className="mb-10">
+        <Link
+          href="/process"
+          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
+        >
+          ← 意思決定プロセス
+        </Link>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          重点テーマ
+        </h1>
+        <p className="text-textMain/70 text-lg">
+          町が掲げる目標と、議会で実際に議論されていること
+        </p>
       </div>
 
-      <section className="mt-8">
-        <h2 className="text-lg md:text-xl font-semibold">一覧</h2>
+      {/* ── セクション1：重点テーマ対照表 ─────────────────────────────── */}
+      <section className="mb-14">
+        <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
+          第8期総合計画 基本目標 × 議会での議論
+        </h2>
+        <div className="space-y-3">
+          {priorityStats.map((p) => (
+            <div
+              key={p.goal}
+              className="bg-ink border border-line rounded-xl p-5
+                         hover:border-accent/50 transition-all"
+            >
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                {/* 左：公式目標 */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-xs font-semibold text-accent/80 tracking-wide">
+                      【{p.goal}】
+                    </span>
+                    <span className="text-sm text-textSub">{p.desc}</span>
+                  </div>
+                  {p.latest ? (
+                    <p className="text-sm text-textMain/70 mt-1 leading-snug">
+                      {p.latest.narrativeTitle ?? p.latest.officialTitle}
+                      {p.count > 1 && (
+                        <span className="text-textSub/50 ml-1">
+                          ほか {p.count - 1} 件
+                        </span>
+                      )}
+                    </p>
+                  ) : (
+                    <p className="text-sm text-textSub/40 mt-1 italic">記録なし</p>
+                  )}
+                </div>
 
-        <div className="mt-4 space-y-4">
-          {priorities.map((p) => (
-            <div key={p.id} className="card">
-              <div className="text-textMain font-semibold text-lg">
-                {p.title}
+                {/* 右：件数＋タイムラインリンク */}
+                <div className="flex flex-col items-end gap-2 shrink-0">
+                  <span className="text-xs text-textSub">
+                    議論：<span className="text-textMain font-semibold">{p.count}</span> 件
+                  </span>
+                  {p.count > 0 && (
+                    <Link
+                      href={`/process/timeline?tag=${encodeURIComponent(p.tags[0])}`}
+                      className="text-xs text-accent hover:text-accent/70 transition-colors whitespace-nowrap"
+                    >
+                      → タイムラインで見る
+                    </Link>
+                  )}
+                </div>
               </div>
-              <ul className="mt-3 space-y-2 text-sm text-textSub">
-                {p.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-accent shrink-0">→</span>
-                    <span className="leading-relaxed">{b}</span>
-                  </li>
-                ))}
-              </ul>
-              {linkCounts[p.id] > 0 && (
-                <Link
-                  href={`/gikai?theme=${p.id}`}
-                  className="mt-4 inline-flex items-center gap-1 text-xs text-accent border border-line rounded px-3 py-1.5 hover:border-accent hover:bg-accent/5 transition-colors"
-                >
-                  関連議決: {linkCounts[p.id]}件 →
-                </Link>
-              )}
             </div>
           ))}
         </div>
+        <p className="text-xs text-textSub/50 mt-3">
+          ※ 出典：新得町第8期総合計画（R8〜R17）。議論件数は会議アーカイブに基づく。
+        </p>
       </section>
 
-      <div className="mt-8 card">
-        <div className="text-textSub text-sm">
-          出典：内部メモ（非公式）＋公開資料の要点
-        </div>
-      </div>
+      {/* ── セクション2：議会で浮上している未解決の争点 ─────────────────── */}
+      <section>
+        <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
+          議会で浮上している未解決の争点
+        </h2>
+
+        {disputeSessions.length === 0 ? (
+          <p className="text-textSub text-center py-12">
+            争点データがありません
+          </p>
+        ) : (
+          <div className="space-y-3">
+            {disputeSessions.map((session) => (
+              <div
+                key={session.id}
+                className="bg-ink border border-line rounded-xl p-5"
+              >
+                {/* 会議情報 */}
+                <div className="flex items-center justify-between gap-4 mb-3">
+                  <div className="min-w-0">
+                    <p className="text-xs text-accent font-semibold tracking-wide mb-0.5">
+                      {formatDate(session.date)}
+                    </p>
+                    <p className="text-sm font-medium text-textMain leading-snug">
+                      {session.narrativeTitle ?? session.officialTitle}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/gikai/sessions/${session.id}`}
+                    className="text-xs text-accent hover:text-accent/70 transition-colors shrink-0 whitespace-nowrap"
+                  >
+                    会議を読む →
+                  </Link>
+                </div>
+                {/* 争点本文 */}
+                <div className="flex gap-1.5 items-baseline">
+                  <span className="text-[11px] text-textSub/50 whitespace-nowrap shrink-0">
+                    争点：
+                  </span>
+                  <p className="text-sm leading-relaxed text-textMain/80">
+                    {session.summary!.conflicts}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
     </div>
   )
 }
