@@ -66,7 +66,9 @@ export default function Home() {
 
        {/* Modules */}
 <section>
-  <h2 className="text-2xl font-bold mb-6">ACTIVE MODULES</h2>
+  <p className="text-xs font-semibold uppercase tracking-widest text-textSub/50 mb-6">
+    できること
+  </p>
 
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -117,9 +119,7 @@ export default function Home() {
       href="/newsletters"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">
-        広報しんとくアーカイブ
-      </h3>
+      <h3 className="text-xl font-semibold mb-2">広報しんとくアーカイブ</h3>
       <p className="text-textSub mb-4">
         広報誌PDF検索・全文検索
       </p>
@@ -128,7 +128,10 @@ export default function Home() {
       </div>
     </Link>
 
-    {/* 5. 地形マップ */}
+    {/* 5. 空欄（左下） */}
+    <div />
+
+    {/* 6. 地形マップ（右下） */}
     <Link
       href="/map"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
