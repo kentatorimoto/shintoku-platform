@@ -6,17 +6,13 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
 const NAV_LINKS = [
+  { href: "/",               label: "トップ" },
   { href: "/gikai/sessions", label: "議会を読む" },
-  { href: "/gikai",          label: "町の決定を読む" },
-  { href: "/process",        label: "意思決定の流れを読む" },
-  { href: "/map",            label: "地形を読む" },
-  "separator",
+  { href: "/gikai",          label: "決まったこと" },
+  { href: "/process",        label: "流れを読む" },
+  { href: "/sources",        label: "ソース" },
   { href: "/about",          label: "About" },
 ] as const
-
-type NavItem = (typeof NAV_LINKS)[number]
-type NavLink = Exclude<NavItem, string>
-const isLink = (item: NavItem): item is NavLink => typeof item !== "string"
 
 export default function Header() {
   const pathname = usePathname()
@@ -91,7 +87,7 @@ export default function Header() {
 
           {/* Desktop ナビ */}
           <div className="hidden md:flex items-center gap-5 text-sm">
-            {NAV_LINKS.filter(isLink).map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={desktopClass(link.href)}>
                 {link.label}
               </Link>
@@ -123,20 +119,16 @@ export default function Header() {
 
           {/* パネル */}
           <div className="fixed top-20 right-4 left-4 z-50 bg-ink border border-line rounded-2xl p-5">
-            {NAV_LINKS.map((item, i) =>
-              isLink(item) ? (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={close}
-                  className={mobileClass(item.href, false)}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <hr key={`sep-${i}`} className="my-2 border-line/40" />
-              )
-            )}
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={close}
+                className={mobileClass(link.href, false)}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </>
       )}
