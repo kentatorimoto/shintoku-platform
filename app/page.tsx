@@ -42,16 +42,16 @@ export default function Home() {
   </p>
 
   {latest && (
-    <div className="mt-8 border-l-2 border-accent pl-4">
+    <Link
+      href={`/gikai/sessions/${latest.id}`}
+      className="mt-8 border-l-2 border-accent pl-4 block hover:opacity-80 transition"
+    >
       <p className="text-xs text-textSub/60 tracking-widest uppercase mb-1">最新の会議</p>
       <p className="text-sm text-textSub/80">{formatDate(latest.date)}</p>
       <p className="text-base text-textMain font-medium mt-0.5">
         {latest.narrativeTitle ?? latest.officialTitle}
       </p>
-      <Link href={`/gikai/sessions/${latest.id}`} className="text-xs text-accent mt-2 inline-block">
-        → 会議を読む
-      </Link>
-    </div>
+    </Link>
   )}
 
   <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:gap-5">
