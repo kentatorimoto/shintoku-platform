@@ -6,9 +6,16 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
 const NAV_LINKS = [
+  { href: "/",               label: "トップ" },
   { href: "/gikai/sessions", label: "議会を読む" },
+  { href: "/gikai",          label: "決まったこと" },
+  { href: "/process",        label: "流れを読む" },
+  { href: "/sources",        label: "ソース" },
   { href: "/about",          label: "About" },
 ] as const
+
+/** デスクトップナビに表示するリンク（トップは除外） */
+const DESKTOP_NAV_LINKS = NAV_LINKS.filter((l) => l.href !== "/")
 
 export default function Header() {
   const pathname = usePathname()
@@ -33,19 +40,31 @@ export default function Header() {
     return () => { document.body.style.overflow = prev }
   }, [open])
 
+  /** リンクがアクティブか判定（より具体的なリンクを優先） */
+  function isActive(href: string) {
+    if (pathname === href) return true
+    if (href === "/") return false
+    if (!pathname.startsWith(href + "/")) return false
+    // より具体的にマッチする他のリンクがあれば非アクティブ
+    return !NAV_LINKS.some(
+      (other) =>
+        other.href !== href &&
+        other.href.length > href.length &&
+        other.href.startsWith(href) &&
+        (pathname === other.href || pathname.startsWith(other.href + "/"))
+    )
+  }
+
   /** Desktop リンクのクラス */
   function desktopClass(href: string) {
-    const isActive = pathname === href || (href !== "/" && pathname.startsWith(href))
-    if (isActive) return "text-textMain font-medium border-b border-accent pb-0.5 transition"
+    if (isActive(href)) return "text-textMain font-medium border-b border-accent pb-0.5 transition"
     return "text-textSub hover:text-textMain transition"
   }
 
   /** Mobile リンクのクラス */
-  function mobileClass(href: string, external: boolean) {
+  function mobileClass(href: string) {
     const base = "rounded-lg px-4 py-2.5 text-base font-medium block transition-colors"
-    if (external) return `${base} text-textMain/70 hover:text-accent`
-    const isActive = pathname === href || (href !== "/" && pathname.startsWith(href))
-    return isActive
+    return isActive(href)
       ? `${base} text-accent bg-accent/8`
       : `${base} text-textMain hover:text-accent`
   }
@@ -78,7 +97,7 @@ export default function Header() {
 
           {/* Desktop ナビ */}
           <div className="hidden md:flex items-center gap-5 text-sm">
-            {NAV_LINKS.map((link) => (
+            {DESKTOP_NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={desktopClass(link.href)}>
                 {link.label}
               </Link>
@@ -115,7 +134,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={close}
-                className={mobileClass(link.href, false)}
+                className={mobileClass(link.href)}
               >
                 {link.label}
               </Link>
