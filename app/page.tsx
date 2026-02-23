@@ -62,7 +62,7 @@ export default function Home() {
 
     {/* 3. 町政ニュース */}
     <Link
-      href="/news"
+      href="/announcements"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">町政ニュース</h3>
@@ -95,7 +95,12 @@ export default function Home() {
       href="/map"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">地形マップ</h3>
+      <h3 className="text-xl font-semibold mb-2">
+        地形マップ
+        <span className="text-[10px] font-semibold tracking-widest text-textSub/50 border border-textSub/30 rounded px-1.5 py-0.5 ml-2">
+          実験中
+        </span>
+      </h3>
       <p className="text-textSub mb-4">
         流域・地形・歴史を重ねて読む
       </p>
