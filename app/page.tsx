@@ -28,10 +28,10 @@ export default function Home() {
   const latest = getLatestSession()
 
   return (
-    <main className="min-h-screen bg-base text-textMain font-sans p-8">
+    <main className="bg-base text-textMain font-sans p-8">
       <div className="max-w-6xl mx-auto">
         {/* Hero */}
-<section className="max-w-3xl py-20 md:py-36 mb-16">
+<section className="max-w-3xl py-16 md:py-24 mb-16">
   <h2 className="text-6xl md:text-7xl font-bold tracking-tight leading-tight break-keep">
   町を、読む。
 </h2>
