@@ -68,64 +68,64 @@ export default function Home() {
 <section>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-    {/* 1. 町議会を読む */}
+    {/* 1. 議会を読む */}
     <Link
       href="/gikai/sessions"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">町議会を読む</h3>
+      <h3 className="text-xl font-semibold mb-2">議会を読む</h3>
       <p className="text-textSub mb-4">
-        会議アーカイブ・論点を読む
+        会議の記録から、町の議論をたどる。
       </p>
       <div className="text-sm text-accent font-medium">
         → 議会を読む
       </div>
     </Link>
 
-    {/* 2. 分析・意思決定プロセス */}
+    {/* 2. 意思決定の流れを読む */}
     <Link
       href="/insights"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">分析・意思決定プロセス</h3>
+      <h3 className="text-xl font-semibold mb-2">意思決定の流れを読む</h3>
       <p className="text-textSub mb-4">
-        議決データの可視化と、意思決定の流れを読む
+        何がどう積み上がり、決まっていくのか。
       </p>
       <div className="text-sm text-accent font-medium">
-        → データを読む
+        → 流れを読む
       </div>
     </Link>
 
-    {/* 3. 議決結果を調べる */}
+    {/* 3. 町の決定を読む */}
     <Link
       href="/gikai"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">議決結果を調べる</h3>
+      <h3 className="text-xl font-semibold mb-2">町の決定を読む</h3>
       <p className="text-textSub mb-4">
-        10年分・729件の議案・意見案の可決／否決結果
+        町が選んだこと、選ばなかったこと。
       </p>
       <div className="text-sm text-accent font-medium">
-        → 結果を調べる
+        → 決定を読む
       </div>
     </Link>
 
-    {/* 4. 地形マップ */}
+    {/* 4. 地形を読む */}
     <Link
       href="/map"
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">
-        地形マップ
+        地形を読む
         <span className="text-[10px] font-semibold tracking-widest text-textSub/50 border border-textSub/30 rounded px-1.5 py-0.5 ml-2">
           実験中
         </span>
       </h3>
       <p className="text-textSub mb-4">
-        流域・地形・歴史を重ねて読む
+        流域・地形・歴史を重ねて見る。
       </p>
       <div className="text-sm text-accent font-medium">
-        → マップを見る
+        → 地形を見る
       </div>
     </Link>
 
