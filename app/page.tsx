@@ -9,6 +9,10 @@ interface GikaiSession {
   date:           string
 }
 
+interface GiketsuSession {
+  items: unknown[]
+}
+
 function getLatestSession(): GikaiSession | null {
   try {
     const filePath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
@@ -19,6 +23,21 @@ function getLatestSession(): GikaiSession | null {
   }
 }
 
+function getStats(): { sessionCount: number; giketsuCount: number } {
+  try {
+    const sessionsPath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
+    const sessionCount = (JSON.parse(fs.readFileSync(sessionsPath, "utf-8")) as GikaiSession[]).length
+
+    const giketsuPath = path.join(process.cwd(), "public", "data", "giketsu_index.json")
+    const giketsuCount = (JSON.parse(fs.readFileSync(giketsuPath, "utf-8")) as GiketsuSession[])
+      .reduce((sum, s) => sum + s.items.length, 0)
+
+    return { sessionCount, giketsuCount }
+  } catch {
+    return { sessionCount: 0, giketsuCount: 0 }
+  }
+}
+
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   return d.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })
@@ -26,6 +45,7 @@ function formatDate(dateStr: string): string {
 
 export default function Home() {
   const latest = getLatestSession()
+  const { sessionCount, giketsuCount } = getStats()
 
   return (
     <main className="bg-base text-textMain font-sans px-8 pb-8">
@@ -40,6 +60,21 @@ export default function Home() {
     ニュースではなく、流れを見る。<br />
     断片ではなく、構造を見る。
   </p>
+
+  <div className="flex gap-8 mb-8 mt-10">
+    <div>
+      <p className="text-3xl font-bold text-textMain">{sessionCount}</p>
+      <p className="text-xs text-textSub/60">の会議</p>
+    </div>
+    <div>
+      <p className="text-3xl font-bold text-textMain">{giketsuCount.toLocaleString()}</p>
+      <p className="text-xs text-textSub/60">件の議決</p>
+    </div>
+    <div>
+      <p className="text-3xl font-bold text-textMain">3</p>
+      <p className="text-xs text-textSub/60">つの継続論点</p>
+    </div>
+  </div>
 
   {latest && (
     <Link
