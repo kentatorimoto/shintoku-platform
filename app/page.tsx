@@ -31,7 +31,7 @@ export default function Home() {
     <main className="bg-base text-textMain font-sans px-8 pb-8">
       <div className="max-w-6xl mx-auto">
         {/* Hero */}
-<section className="max-w-3xl pt-16 pb-12 mb-16">
+<section className="max-w-3xl pt-8 pb-12 mb-16">
   <h2 className="text-6xl md:text-7xl font-bold tracking-tight leading-tight break-keep">
   町を、読む。
 </h2>
