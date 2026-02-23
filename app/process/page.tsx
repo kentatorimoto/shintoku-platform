@@ -1,4 +1,10 @@
+import type { Metadata } from "next"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "意思決定の流れを読む | Shintoku Atlas",
+  description: "何がどう積み上がり、決まっていくのか。",
+}
 
 const CARDS = [
   {
@@ -28,8 +34,8 @@ export default function ProcessPage() {
         <Link href="/" className="backLink">
           ← トップに戻る
         </Link>
-        <h1 className="pageTitle">意思決定プロセス</h1>
-        <p className="pageDesc">町の課題・議論・計画策定の流れを可視化</p>
+        <h1 className="pageTitle">意思決定の流れを読む</h1>
+        <p className="pageDesc">何がどう積み上がり、決まっていくのか。</p>
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-16">
