@@ -60,6 +60,9 @@ export default function GikaiSessionsPage() {
           新得町議会のライブ配信を要約・構造化し、<br className="hidden sm:inline" />
           意思決定の記録としてアーカイブ
         </p>
+        <p className="text-xs text-textSub/50 mt-2">
+          AIによる要約を含むため、内容に誤りがある場合があります。
+        </p>
       </div>
 
       {/* ── フィルター＆一覧（Client Component） ────────────────────────── */}
