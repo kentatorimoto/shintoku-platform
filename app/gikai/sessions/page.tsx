@@ -6,7 +6,7 @@ import Link from "next/link"
 import SessionsList, { type GikaiSession } from "./SessionsList"
 
 export const metadata: Metadata = {
-  title: "町議会を読む | Shintoku Atlas",
+  title: "議会を読む | Shintoku Atlas",
   description: "新得町議会のライブ配信を要約・構造化し、意思決定の記録としてアーカイブしています。",
 }
 
@@ -60,7 +60,7 @@ export default function GikaiSessionsPage() {
           ← トップ
         </Link>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          町議会を読む
+          議会を読む
         </h1>
         <p className="text-textMain/70 text-lg">
           新得町議会のライブ配信を要約・構造化し、<br className="hidden sm:inline" />

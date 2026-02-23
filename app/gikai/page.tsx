@@ -319,7 +319,7 @@ function GikaiPageContent() {
           ← トップ
         </Link>
         <h1 className="!text-4xl md:!text-5xl font-bold tracking-tight mb-4 text-textMain">
-          議会（議決結果）
+          町の決定を読む
         </h1>
         <p className="text-textMain/70 text-lg">
           何が決まり、何が見送られたか
