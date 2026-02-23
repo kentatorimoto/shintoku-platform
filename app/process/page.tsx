@@ -38,9 +38,9 @@ export default function ProcessPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-16">
         <Link href="/insights" className="card cardHover">
           <div className="min-w-0">
-            <h2 className="text-xl font-semibold text-textMain">分析データ</h2>
-            <p className="mt-2 text-textSub">議決データの集計・タグ分布・可視化</p>
-            <p className="mt-4 text-sm text-accent">→ 分析を見る</p>
+            <h2 className="text-xl font-semibold text-textMain">データで見る</h2>
+            <p className="mt-2 text-textSub">議決の分布・タグ・年別推移を読む。</p>
+            <p className="mt-4 text-sm text-accent">→ 見る</p>
           </div>
         </Link>
         {CARDS.map((c) => (

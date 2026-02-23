@@ -1,6 +1,12 @@
 import fs from "fs"
 import path from "path"
+import type { Metadata } from "next"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "データで見る | Shintoku Atlas",
+  description: "議決の分布・タグ・年別推移を読む。",
+}
 
 // ─────────────────────────── Types ────────────────────────────────
 
@@ -130,22 +136,11 @@ export default function InsightsPage() {
       {/* ヘッダー */}
       <div className="mb-12">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          インサイト
+          データで見る
         </h1>
         <p className="text-textMain/70 text-lg">
-          議会議決 × 政策テーマ・論点のクロス集計
+          議決の分布・タグ・年別推移を読む。
         </p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-textSub">
-          <span>議決結果とテーマ・論点の関係を俯瞰できます。</span>
-          <div className="flex items-center gap-3">
-            <Link href="/gikai" className="text-accent hover:underline transition-colors">
-              → 議会（一覧）
-            </Link>
-            <Link href="/process" className="text-accent hover:underline transition-colors">
-              → 意思決定プロセス
-            </Link>
-          </div>
-        </div>
       </div>
 
       {/* ── A. ヒートマップ ────────────────────────────────── */}
@@ -154,7 +149,7 @@ export default function InsightsPage() {
           年度 × テーマ ヒートマップ
         </h2>
         <p className="text-xs text-textSub mb-4">
-          セルをクリックすると /gikai に絞り込み遷移します
+          セルをクリックすると議決一覧に絞り込み表示します
         </p>
 
         <div className="bg-ink border border-line rounded-xl overflow-x-auto">
