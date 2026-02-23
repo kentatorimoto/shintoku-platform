@@ -22,6 +22,7 @@ interface GiketsuSession {
   sessionLabel: string
   sessionName: string
   sessionRange: string
+  sessionId: string | null
   items: GiketsuItem[]
 }
 
@@ -116,6 +117,7 @@ function GikaiPageContent() {
   const result = searchParams.get("result") ?? ""
   const theme = searchParams.get("theme") ?? ""
   const issue = searchParams.get("issue") ?? ""
+  const session = searchParams.get("session") ?? ""
   const limit = Math.max(
     PAGE_SIZE,
     Number(searchParams.get("limit") || PAGE_SIZE)
@@ -171,9 +173,9 @@ function GikaiPageContent() {
 
   // ── テキスト入力のデバウンス（400 ms）→ URL 更新 ───────────
   // ref に最新フィルタ値を持ち、stale closure を回避する
-  const latestRef = useRef({ year, type, result, theme, issue })
+  const latestRef = useRef({ year, type, result, theme, issue, session })
   useEffect(() => {
-    latestRef.current = { year, type, result, theme, issue }
+    latestRef.current = { year, type, result, theme, issue, session }
   })
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -187,7 +189,7 @@ function GikaiPageContent() {
 
   /** q / year / type / result / theme / issue を URL に書き込む（limit はリセット） */
   function commitQuery(value: string) {
-    const { year, type, result, theme, issue } = latestRef.current
+    const { year, type, result, theme, issue, session } = latestRef.current
     const params = new URLSearchParams()
     if (value) params.set("q", value)
     if (year) params.set("year", year)
@@ -195,6 +197,7 @@ function GikaiPageContent() {
     if (result) params.set("result", result)
     if (theme) params.set("theme", theme)
     if (issue) params.set("issue", issue)
+    if (session) params.set("session", session)
     const qs = params.toString()
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
   }
@@ -281,6 +284,7 @@ function GikaiPageContent() {
       )
         return false
       if (year && item.eraLabel !== year) return false
+      if (session && item.sessionName !== session) return false
       if (type && item.caseType !== type) return false
       if (result === "その他") {
         if (RESULT_ORDER.includes(item.result)) return false
@@ -295,11 +299,11 @@ function GikaiPageContent() {
       }
       return true
     })
-  }, [flatItems, q, year, type, result, theme, issue, links])
+  }, [flatItems, q, year, session, type, result, theme, issue, links])
 
   const visibleItems = filteredItems.slice(0, limit)
   const hasMore = visibleItems.length < filteredItems.length
-  const hasFilter = !!(q || year || type || result || theme || issue)
+  const hasFilter = !!(q || year || session || type || result || theme || issue)
   const isPending = inputValue !== q
   const waitingLinks = !!(theme || issue) && !linksLoaded
 
@@ -333,12 +337,13 @@ function GikaiPageContent() {
 </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {activeSessions.slice(0, 3).map((session) => (
-              <button
+              <div
                 key={session.sessionName}
                 onClick={() =>
                   setYear(year === session.eraLabel ? "" : session.eraLabel)
                 }
-                className={`text-left bg-ink border rounded-xl p-4 transition-all ${
+                role="button"
+                className={`cursor-pointer text-left bg-ink border rounded-xl p-4 transition-all ${
                   year === session.eraLabel
                     ? "border-accent"
                     : "border-line hover:border-accent/50"
@@ -358,7 +363,16 @@ function GikaiPageContent() {
                 <div className="text-textSub text-sm mt-2">
                   {session.items.length} 件
                 </div>
-              </button>
+                {session.sessionId && (
+                  <Link
+                    href={`/gikai/sessions/${session.sessionId}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-block mt-3 text-xs text-accent hover:text-accent/70 transition-colors"
+                  >
+                    論点・争点を読む →
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         </section>

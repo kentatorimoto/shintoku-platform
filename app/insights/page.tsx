@@ -15,6 +15,11 @@ interface GiketsuSession {
   items: GiketsuItem[]
 }
 
+interface GikaiSessionTagged {
+  id:   string
+  tags: string[]
+}
+
 type GikaiLinks = Record<string, string[]>
 
 // ─────────────────────────── Label maps ───────────────────────────
@@ -30,18 +35,6 @@ const THEME_LABELS: Record<ThemeId, string> = {
   finance:     "財政",
 }
 
-const ISSUE_LABELS: Record<string, string> = {
-  "agri-conservative-target": "農業は年1%成長で町を支え続けられるか？",
-  "agri-fewer-farms":         "農家戸数が減っても農業総額を維持できるか？",
-  "agri-climate":             "気候変動で作物転換は必要になるか？",
-  "agri-smart":               "技術で農業の労働力不足は補えるか？",
-  "tourism-satisfaction":     "なぜ町民は観光の成果に満足していないのか？",
-  "tourism-org-reform":       "新得町に新しい観光組織は必要か？",
-  "tourism-residents":        "なぜ町民は観光の魅力を実感できていないのか？",
-  "finance-post-project":     "大型事業後の借金をどうコントロールするか？",
-  "finance-kpi":              "財政の\u201c安全運転ライン\u201dは何か？",
-  "finance-slack":            "財政の\u201c余力\u201dをどう確保するか？",
-}
 
 // ─────────────────────────── Helpers ──────────────────────────────
 
@@ -74,6 +67,10 @@ export default function InsightsPage() {
     path.join(root, "public", "data", "gikai_links.json"),
     {}
   )
+  const gikaiSessions = loadJSON<GikaiSessionTagged[]>(
+    path.join(root, "public", "data", "gikai_sessions.json"),
+    []
+  )
 
   // ── eraLabel 一覧（year 降順） ───────────────────────────────
   const eraYearMap = new Map<string, number>()
@@ -90,7 +87,6 @@ export default function InsightsPage() {
   const themeCounts: Record<string, number> = Object.fromEntries(
     THEME_IDS.map((id) => [id, 0])
   )
-  const issueCounts: Record<string, number> = {}
 
   for (const session of sessions) {
     for (const item of session.items) {
@@ -104,8 +100,6 @@ export default function InsightsPage() {
           heatmap[session.eraLabel] ??= {}
           heatmap[session.eraLabel][id] = (heatmap[session.eraLabel][id] ?? 0) + 1
           themeCounts[id] = (themeCounts[id] ?? 0) + 1
-        } else if (kind === "issue") {
-          issueCounts[id] = (issueCounts[id] ?? 0) + 1
         }
       }
     }
@@ -117,11 +111,17 @@ export default function InsightsPage() {
     .sort((a, b) => b.count - a.count)
   const maxThemeCount = Math.max(1, ...themeRanking.map((t) => t.count))
 
-  // 論点ランキング top 10
-  const issueRanking = Object.entries(issueCounts)
+  // タグランキング（gikai_sessions.json の tags フィールドから集計、count 降順）
+  const tagCountMap: Record<string, number> = {}
+  for (const s of gikaiSessions) {
+    for (const tag of s.tags ?? []) {
+      tagCountMap[tag] = (tagCountMap[tag] ?? 0) + 1
+    }
+  }
+  const tagRanking = Object.entries(tagCountMap)
     .sort(([, a], [, b]) => b - a)
-    .slice(0, 10)
-    .map(([id, count]) => ({ id, label: ISSUE_LABELS[id] ?? id, count }))
+    .map(([tag, count]) => ({ tag, count }))
+  const maxTagCount = Math.max(1, ...tagRanking.map((t) => t.count))
 
   // ── JSX ─────────────────────────────────────────────────────
   return (
@@ -251,61 +251,38 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* ── C. 論点別ランキング top 10 ─────────────────────── */}
-      <section>
-        <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
-          論点別 議決件数（上位10）
-        </h2>
-
-        {issueRanking.length === 0 ? (
-          <div className="bg-ink border border-line rounded-xl px-6 py-8 space-y-3">
-            <p className="text-textSub text-sm">
-              論点リンクデータがまだありません。
-            </p>
-            <p className="text-textSub text-xs leading-relaxed">
-              <span className="text-textMain font-medium">data/gikai_links.csv</span>{" "}
-              に以下のような行を追加し、<code className="bg-line rounded px-1 py-0.5">npm run build:links</code> を実行してください。
-            </p>
-            <pre className="text-xs bg-line/60 rounded-lg px-4 py-3 text-textSub overflow-x-auto leading-relaxed">
-{`caseType,num,ref
-議案,2,issue:finance-kpi
-議案,5,issue:agri-climate`}
-            </pre>
+      {/* ── D. 会議アーカイブ × テーマ ─────────────────────── */}
+      <section className="mb-14">
+        <div className="bg-ink border border-line rounded-xl p-6">
+          <h2 className="text-xs font-semibold text-textSub tracking-widest mb-1">
+            会議アーカイブ × テーマ
+          </h2>
+          <p className="text-xs text-textSub mb-4">
+            論点・争点アーカイブのテーマ分布
+          </p>
+          <div className="space-y-2">
+            {tagRanking.map(({ tag, count }) => (
+              <Link
+                key={tag}
+                href={`/gikai/sessions?tag=${encodeURIComponent(tag)}`}
+                className="flex items-center gap-4 border border-line/60 rounded-lg px-4 py-3 hover:border-accent hover:bg-accent/5 transition-all group"
+              >
+                <span className="text-textMain text-sm font-medium w-28 shrink-0">
+                  {tag}
+                </span>
+                <div className="flex-1 h-1.5 bg-line rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-accent rounded-full"
+                    style={{ width: `${(count / maxTagCount) * 100}%` }}
+                  />
+                </div>
+                <span className="text-textSub text-xs w-10 text-right shrink-0 tabular-nums">
+                  {count}件
+                </span>
+              </Link>
+            ))}
           </div>
-        ) : (
-          <div className="bg-ink border border-line rounded-xl overflow-hidden hover:border-accent transition-all">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-line">
-                  <th className="text-left px-4 py-3 text-textSub text-xs font-medium w-8">#</th>
-                  <th className="text-left px-4 py-3 text-textSub text-xs font-medium">論点</th>
-                  <th className="text-right px-4 py-3 text-textSub text-xs font-medium w-16">件数</th>
-                </tr>
-              </thead>
-              <tbody>
-                {issueRanking.map(({ id, label, count }, i) => (
-                  <tr
-                    key={id}
-                    className={i < issueRanking.length - 1 ? "border-b border-line/40" : ""}
-                  >
-                    <td className="px-4 py-3 text-textSub text-xs tabular-nums">{i + 1}</td>
-                    <td className="px-4 py-3">
-                      <Link
-                        href={`/gikai?issue=${id}`}
-                        className="text-textMain hover:text-accent transition-colors line-clamp-2 text-sm"
-                      >
-                        {label}
-                      </Link>
-                    </td>
-                    <td className="px-4 py-3 text-right text-textSub text-xs tabular-nums">
-                      {count}件
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        </div>
       </section>
 
     </div>

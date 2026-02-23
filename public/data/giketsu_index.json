@@ -23,7 +23,8 @@
         "decisionDate": "1月27日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": "r8-2026-01-27-rinji-01"
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3163/33237/r7tei1kekka.pdf",
@@ -297,7 +298,8 @@
         "decisionDate": "3月19日",
         "result": "修正可決"
       }
-    ]
+    ],
+    "sessionId": "r7-2025-03-regular-1"
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3163/33238/r7tei2kekka.pdf",
@@ -491,7 +493,8 @@
         "decisionDate": "6月20日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3163/33987/r7tei3giketu.pdf",
@@ -637,7 +640,8 @@
         "decisionDate": "9月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": "r7-2025-09-regular-3"
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3163/34540/R7tei4giketu.pdf",
@@ -775,7 +779,8 @@
         "decisionDate": "12月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3163/32011/R7rin1kekka.pdf",
@@ -793,7 +798,8 @@
         "decisionDate": "2月3日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3163/33986/r7rinji2giketu.pdf",
@@ -802,7 +808,8 @@
     "sessionLabel": "臨時第2回",
     "sessionName": "令和7年臨時第2回",
     "sessionRange": "8月6日～8月6日",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2979/29950/R6tei1kekka.pdf",
@@ -1076,7 +1083,8 @@
         "decisionDate": "3月21日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2979/30722/R6tei2kekka.pdf",
@@ -1270,7 +1278,8 @@
         "decisionDate": "6月21日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": "r6-2024-06-regular-2"
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2979/31119/R6tei3kekka.pdf",
@@ -1376,7 +1385,8 @@
         "decisionDate": "9月20日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": "r6-2024-09-regular-3"
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2979/31758/R6tei4kekka.pdf",
@@ -1474,7 +1484,8 @@
         "decisionDate": "12月20日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": "r6-2024-12-regular-4"
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2979/29456/R6rin1kekka.pdf",
@@ -1500,7 +1511,8 @@
         "decisionDate": "2月13日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2784/27103/R5tei1kekka.pdf",
@@ -1710,7 +1722,8 @@
         "decisionDate": "3月23日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2784/27906/R5tei2kekka.pdf",
@@ -1816,7 +1829,8 @@
         "decisionDate": "6月22日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2784/28412/R5tei3kekka.pdf",
@@ -1938,7 +1952,8 @@
         "decisionDate": "9月22日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2784/28853/R5tei4kekka.pdf",
@@ -2108,7 +2123,8 @@
         "decisionDate": "12月22日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2784/27722/R5rin1kekka.pdf",
@@ -2126,7 +2142,8 @@
         "decisionDate": "5月9日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2522/23454/R4tei1kekka.pdf",
@@ -2304,7 +2321,8 @@
         "decisionDate": "3月18日",
         "result": "否決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2522/25378/R4tei2kekka.pdf",
@@ -2450,7 +2468,8 @@
         "decisionDate": "6月24日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2522/26104/R4tei3kekka.pdf",
@@ -2572,7 +2591,8 @@
         "decisionDate": "9月22日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2522/26646/R4tei4kekka.pdf",
@@ -2702,7 +2722,8 @@
         "decisionDate": "12月23日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2522/23042/R4rin1kekka.pdf",
@@ -2720,7 +2741,8 @@
         "decisionDate": "2月1日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2522/24706/R4rin2kekka.pdf",
@@ -2762,7 +2784,8 @@
         "decisionDate": "4月28日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3tei1kekka.pdf",
@@ -3012,7 +3035,8 @@
         "decisionDate": "3月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3tei2kekka.pdf",
@@ -3126,7 +3150,8 @@
         "decisionDate": "6月18日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3tei3kekka.pdf",
@@ -3232,7 +3257,8 @@
         "decisionDate": "9月17日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3tei4kekka.pdf",
@@ -3346,7 +3372,8 @@
         "decisionDate": "12月17日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3rin1kekka.pdf",
@@ -3372,7 +3399,8 @@
         "decisionDate": "5月18日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3rin2kekka.pdf",
@@ -3390,7 +3418,8 @@
         "decisionDate": "8月6日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1990/18144/R3rin3kekka.pdf",
@@ -3408,7 +3437,8 @@
         "decisionDate": "10月8日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/15445/R2tei1kekka.pdf",
@@ -3626,7 +3656,8 @@
         "decisionDate": "3月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16278/R2tei2kekka.pdf",
@@ -3796,7 +3827,8 @@
         "decisionDate": "6月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16850/R2tei3kekka.pdf",
@@ -3918,7 +3950,8 @@
         "decisionDate": "9月18日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/17587/R2tei4kekka.pdf",
@@ -4000,7 +4033,8 @@
         "decisionDate": "12月18日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16275/R2rin1kekka.pdf",
@@ -4018,7 +4052,8 @@
         "decisionDate": "4月7日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16276/R2rin2kekka.pdf",
@@ -4036,7 +4071,8 @@
         "decisionDate": "5月8日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16277/R2rin3kekka.pdf",
@@ -4062,7 +4098,8 @@
         "decisionDate": "5月21日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16849/R2rin4kekka.pdf",
@@ -4080,7 +4117,8 @@
         "decisionDate": "7月21日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/16851/R2rin5kekka.pdf",
@@ -4098,7 +4136,8 @@
         "decisionDate": "10月9日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1742/17586/R2rin6kekka.pdf",
@@ -4132,7 +4171,8 @@
         "decisionDate": "11月26日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/8602/28tei1kekka.pdf",
@@ -4374,7 +4414,8 @@
         "decisionDate": "3月18日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/8964/28tei2kekka.pdf",
@@ -4504,7 +4545,8 @@
         "decisionDate": "6月16日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/9830/28tei3kekka.pdf",
@@ -4602,7 +4644,8 @@
         "decisionDate": "9月15日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/10229/28tei4kekka.pdf",
@@ -4732,7 +4775,8 @@
         "decisionDate": "12月15日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/8266/28rinji1kekka.pdf",
@@ -4766,7 +4810,8 @@
         "decisionDate": "1月26日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/8622/28rinji2kekka.pdf",
@@ -4792,7 +4837,8 @@
         "decisionDate": "3月24日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/8747/28rinji3kekka.pdf",
@@ -4834,7 +4880,8 @@
         "decisionDate": "5月10日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/9905/28rinji4kekka.pdf",
@@ -4868,7 +4915,8 @@
         "decisionDate": "9月29日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/904/10054/28rinji5kekka.pdf",
@@ -4886,7 +4934,8 @@
         "decisionDate": "11月7日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/6461/27tei1kekka.pdf",
@@ -5144,7 +5193,8 @@
         "decisionDate": "3月20日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7412/27tei2kekka.pdf",
@@ -5258,7 +5308,8 @@
         "decisionDate": "6月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7657/27tei3kekka.pdf",
@@ -5420,7 +5471,8 @@
         "decisionDate": "9月17日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/8073/27tei4kekka.pdf",
@@ -5574,7 +5626,8 @@
         "decisionDate": "12月17日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/6461/27rinji1kekka.pdf",
@@ -5592,7 +5645,8 @@
         "decisionDate": "2月10日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7050/27rinji2kekka.pdf",
@@ -5610,7 +5664,8 @@
         "decisionDate": "5月8日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7493/27rinji3kekka.pdf",
@@ -5636,7 +5691,8 @@
         "decisionDate": "7月22日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7518/27rinji4kekka.pdf",
@@ -5654,7 +5710,8 @@
         "decisionDate": "8月3日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7694/27rinji5kekka.pdf",
@@ -5672,7 +5729,8 @@
         "decisionDate": "10月9日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/740/7815/27rinji6kekka.pdf",
@@ -5706,7 +5764,8 @@
         "decisionDate": "11月9日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0305_h26tei1giketu.pdf",
@@ -5932,7 +5991,8 @@
         "decisionDate": "3月24日",
         "result": "修正可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0606_h26tei2.pdf",
@@ -6070,7 +6130,8 @@
         "decisionDate": "6月20日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0905_h26tei3kekka.pdf",
@@ -6208,7 +6269,8 @@
         "decisionDate": "9月19日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/1203_h26tei4kekka.pdf",
@@ -6354,7 +6416,8 @@
         "decisionDate": "12月16日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0117_h26rin1kekka.pdf",
@@ -6363,7 +6426,8 @@
     "sessionLabel": "臨時第1回",
     "sessionName": "平成26年臨時第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0423_h26rin2kekka.pdf",
@@ -6397,7 +6461,8 @@
         "decisionDate": "4月23日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0630_h26rin3.pdf",
@@ -6415,7 +6480,8 @@
         "decisionDate": "6月30日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/0818_h26rin4kekka.pdf",
@@ -6433,7 +6499,8 @@
         "decisionDate": "8月18日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/401/3218/1128_h26rinnji5kekka.pdf",
@@ -6507,7 +6574,8 @@
         "decisionDate": "11月28日",
         "result": "原案可決"
       }
-    ]
+    ],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/0305_h25tei1giketu.pdf",
@@ -6516,7 +6584,8 @@
     "sessionLabel": "定例第1回",
     "sessionName": "平成25年定例第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/0607_H25tei2giketu..pdf",
@@ -6525,7 +6594,8 @@
     "sessionLabel": "定例第2回",
     "sessionName": "平成25年定例第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/0904_H25tei3giketu.pdf",
@@ -6534,7 +6604,8 @@
     "sessionLabel": "定例第3回",
     "sessionName": "平成25年定例第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/1204_H25tei4giketu.pdf",
@@ -6543,7 +6614,8 @@
     "sessionLabel": "定例第4回",
     "sessionName": "平成25年定例第4回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/0129_h25rinnji1.pdf",
@@ -6552,7 +6624,8 @@
     "sessionLabel": "臨時第1回",
     "sessionName": "平成25年臨時第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/0419_h25rinnji2.pdf",
@@ -6561,7 +6634,8 @@
     "sessionLabel": "臨時第2回",
     "sessionName": "平成25年臨時第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/402/3221/0802_H25rinnji3.pdf",
@@ -6570,7 +6644,8 @@
     "sessionLabel": "臨時第3回",
     "sessionName": "平成25年臨時第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/0302_h24giketuteirei_1a.pdf",
@@ -6579,7 +6654,8 @@
     "sessionLabel": "定例第1回",
     "sessionName": "平成24年定例第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/0604_h24tei2giketu.pdf",
@@ -6588,7 +6664,8 @@
     "sessionLabel": "定例第2回",
     "sessionName": "平成24年定例第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/0904_h24tei3giketu.pdf",
@@ -6597,7 +6674,8 @@
     "sessionLabel": "定例第3回",
     "sessionName": "平成24年定例第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/1203_h24tei4giketu.pdf",
@@ -6606,7 +6684,8 @@
     "sessionLabel": "定例第4回",
     "sessionName": "平成24年定例第4回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/0511_h24rinnji1-01.pdf",
@@ -6615,7 +6694,8 @@
     "sessionLabel": "臨時第1回",
     "sessionName": "平成24年臨時第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/0806_h24rinnji2.pdf",
@@ -6624,7 +6704,8 @@
     "sessionLabel": "臨時第2回",
     "sessionName": "平成24年臨時第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/403/3223/1105_h24rinji3giketu.pdf",
@@ -6633,7 +6714,8 @@
     "sessionLabel": "臨時第3回",
     "sessionName": "平成24年臨時第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0302_h23giketuteirei_1.pdf",
@@ -6642,7 +6724,8 @@
     "sessionLabel": "定例第1回",
     "sessionName": "平成23年定例第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0603_h23giketuteirei_2.pdf",
@@ -6651,7 +6734,8 @@
     "sessionLabel": "定例第2回",
     "sessionName": "平成23年定例第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0905_h23giketuteirei_3.pdf",
@@ -6660,7 +6744,8 @@
     "sessionLabel": "定例第3回",
     "sessionName": "平成23年定例第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/1205_h23giketuteirei_4.pdf",
@@ -6669,7 +6754,8 @@
     "sessionLabel": "定例第4回",
     "sessionName": "平成23年定例第4回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0201_h23rinji1.pdf",
@@ -6678,7 +6764,8 @@
     "sessionLabel": "臨時第1回",
     "sessionName": "平成23年臨時第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0228_h23rinji2.pdf",
@@ -6687,7 +6774,8 @@
     "sessionLabel": "臨時第2回",
     "sessionName": "平成23年臨時第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0506_h23rinji3.pdf",
@@ -6696,7 +6784,8 @@
     "sessionLabel": "臨時第3回",
     "sessionName": "平成23年臨時第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0706_h23rinji4.pdf",
@@ -6705,7 +6794,8 @@
     "sessionLabel": "臨時第4回",
     "sessionName": "平成23年臨時第4回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/0809_h23rinji5.pdf",
@@ -6714,7 +6804,8 @@
     "sessionLabel": "臨時第5回",
     "sessionName": "平成23年臨時第5回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/1101_h23rinji6.pdf",
@@ -6723,7 +6814,8 @@
     "sessionLabel": "臨時第6回",
     "sessionName": "平成23年臨時第6回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/1110_h23rinji7.pdf",
@@ -6732,7 +6824,8 @@
     "sessionLabel": "臨時第7回",
     "sessionName": "平成23年臨時第7回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/1128_h23rinji8.pdf",
@@ -6741,7 +6834,8 @@
     "sessionLabel": "臨時第8回",
     "sessionName": "平成23年臨時第8回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/404/3225/1228_h23rinji_9.pdf",
@@ -6750,7 +6844,8 @@
     "sessionLabel": "臨時第9回",
     "sessionName": "平成23年臨時第9回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/0302_h22giketueirei_1.pdf",
@@ -6759,7 +6854,8 @@
     "sessionLabel": "定例第1回",
     "sessionName": "平成22年定例第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/0608_h22giketuteirei_2.pdf",
@@ -6768,7 +6864,8 @@
     "sessionLabel": "定例第2回",
     "sessionName": "平成22年定例第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/0902_h22giketuteirei_3.pdf",
@@ -6777,7 +6874,8 @@
     "sessionLabel": "定例第3回",
     "sessionName": "平成22年定例第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/1206_h22giketuteirei_4.pdf",
@@ -6786,7 +6884,8 @@
     "sessionLabel": "定例第4回",
     "sessionName": "平成22年定例第4回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/0129_h22rinji1.pdf",
@@ -6795,7 +6894,8 @@
     "sessionLabel": "臨時第1回",
     "sessionName": "平成22年臨時第1回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/0514_h22rinji2.pdf",
@@ -6804,7 +6904,8 @@
     "sessionLabel": "臨時第2回",
     "sessionName": "平成22年臨時第2回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/1108_h22rinji3.pdf",
@@ -6813,7 +6914,8 @@
     "sessionLabel": "臨時第3回",
     "sessionName": "平成22年臨時第3回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   },
   {
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/405/3228/1129_h22rinji_4.pdf",
@@ -6822,6 +6924,7 @@
     "sessionLabel": "臨時第4回",
     "sessionName": "平成22年臨時第4回",
     "sessionRange": "",
-    "items": []
+    "items": [],
+    "sessionId": null
   }
 ]
