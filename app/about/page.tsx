@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "About | Shintoku Atlas",
-  description: "Shintoku Atlas は、新得町の意思決定を可視化するための独立したプロジェクトです。",
+  description: "Shintoku Atlas は、新得町の意思決定を可視化するための実験的なプロジェクトです。",
 }
 
 export default function AboutPage() {
@@ -16,12 +16,12 @@ export default function AboutPage() {
         </h1>
         <p className="text-textMain/70 text-lg leading-relaxed">
           SHINTOKU ATLAS は、<br />
-          新得町の意思決定を可視化するための独立したプロジェクトです。
+          新得町の意思決定を可視化するための実験的なプロジェクトです。
         </p>
         <p className="text-textMain/70 text-lg leading-relaxed mt-5">
-          ニュースではなく、<br />
+          ニュースでもなく、<br />
           単発の出来事でもなく、<br />
-          時間をかけて積み上がる「決まり方」を記録します。
+          時間をかけて積み上がる「決まり方」に目を向けます。
         </p>
       </div>
 
@@ -31,20 +31,18 @@ export default function AboutPage() {
         <div className="space-y-5 text-textMain/70 leading-relaxed">
           <p>
             町の未来は、<br />
-            ある日突然決まるわけではありません。
+            どこかで一度に決まるものではなく、<br />
+            話し合いと見直しの繰り返し、<br />
+            そうした小さな選択の積み重ねが、<br />
+            少しずつ方向を形づくっていくように見えます。
           </p>
           <p>
-            会議、議論、修正、継続審査。<br />
-            小さな選択の連続が、<br />
-            やがて大きな方向性になります。
-          </p>
-          <p>
-            その流れは、<br />
-            通常は見えません。
+            けれど、その「流れ」は、<br />
+            日々の情報の中ではなかなか見えません。
           </p>
           <p>
             SHINTOKU ATLAS は、<br />
-            その「見えにくさ」を減らすための試みです。
+            その見えにくさを、ほんの少し減らせないかと考えた試みです。
           </p>
         </div>
       </section>
@@ -55,8 +53,8 @@ export default function AboutPage() {
         <ul className="space-y-2 text-textMain/70 leading-relaxed mb-6">
           {[
             "議会アーカイブの整理",
-            "議決結果の構造化",
-            "継続論点の抽出",
+            "議決データの構造化",
+            "継続して議論されている論点の抽出",
             "意思決定プロセスの可視化",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2">
@@ -65,10 +63,16 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
-        <p className="text-textMain/70 leading-relaxed">
-          立場を示すのではなく、<br />
-          構造を示すことを目的としています。
-        </p>
+        <div className="space-y-5 text-textMain/70 leading-relaxed">
+          <p>
+            意見を示すことよりも、<br />
+            まず構造を示すこと。
+          </p>
+          <p>
+            そこから考えるための材料を、<br />
+            静かに並べることを目的としています。
+          </p>
+        </div>
       </section>
 
       {/* 立場について */}
@@ -77,32 +81,45 @@ export default function AboutPage() {
         <div className="space-y-5 text-textMain/70 leading-relaxed">
           <p>
             このサイトは、<br />
-            特定の政策や候補者を支持するものではありません。
+            特定の政策や立場を支持するものではありません。
           </p>
           <p>
-            意見の前に、<br />
-            まず構造を見る。
+            評価の前に、<br />
+            まず流れを見る。
           </p>
-          <p>それが、このプロジェクトの立場です。</p>
+          <p>
+            SHINTOKU ATLAS は、<br />
+            そのための観測装置のような存在でありたいと考えています。
+          </p>
         </div>
       </section>
 
       {/* データについて */}
       <section className="mb-14">
         <p className="text-sm tracking-widest text-textSub/60 mb-6">データについて</p>
-        <p className="text-textMain/70 leading-relaxed">
-          本サイトは、新得町が公開している資料・議会記録・動画アーカイブをもとに構成しています。<br />
-          内容に誤りがあれば修正します。
-        </p>
+        <div className="space-y-5 text-textMain/70 leading-relaxed">
+          <p>
+            本サイトは、新得町が公開している<br />
+            議会資料・記録・動画アーカイブをもとに構成しています。
+          </p>
+          <p>
+            内容に誤りや不足があれば、<br />
+            都度修正・更新していきます。
+          </p>
+        </div>
       </section>
 
-      {/* 実験について */}
+      {/* 実験として */}
       <section className="mb-16">
-        <p className="text-sm tracking-widest text-textSub/60 mb-6">実験について</p>
-        <p className="text-textMain/70 leading-relaxed">
-          SHINTOKU ATLAS は進行中のプロジェクトです。<br />
-          より良い可視化の方法を模索しています。
-        </p>
+        <p className="text-sm tracking-widest text-textSub/60 mb-6">実験として</p>
+        <div className="space-y-5 text-textMain/70 leading-relaxed">
+          <p>
+            SHINTOKU ATLAS は、進行中のプロジェクトです。<br />
+            より見やすく、より考えやすく、<br />
+            構造を捉えるための方法を探りながら、<br />
+            少しずつ形を整えています。
+          </p>
+        </div>
       </section>
 
     </div>
