@@ -74,12 +74,9 @@ export default function Home() {
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">議会を読む</h3>
-      <p className="text-textSub mb-4">
+      <p className="text-textSub">
         会議の記録から、町の議論をたどる。
       </p>
-      <div className="text-sm text-accent font-medium">
-        → 議会を読む
-      </div>
     </Link>
 
     {/* 2. 意思決定の流れを読む */}
@@ -88,12 +85,9 @@ export default function Home() {
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">意思決定の流れを読む</h3>
-      <p className="text-textSub mb-4">
+      <p className="text-textSub">
         何がどう積み上がり、決まっていくのか。
       </p>
-      <div className="text-sm text-accent font-medium">
-        → 流れを読む
-      </div>
     </Link>
 
     {/* 3. 町の決定を読む */}
@@ -102,12 +96,9 @@ export default function Home() {
       className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
     >
       <h3 className="text-xl font-semibold mb-2">町の決定を読む</h3>
-      <p className="text-textSub mb-4">
+      <p className="text-textSub">
         町が選んだこと、選ばなかったこと。
       </p>
-      <div className="text-sm text-accent font-medium">
-        → 決定を読む
-      </div>
     </Link>
 
     {/* 4. 地形を読む */}
@@ -121,12 +112,9 @@ export default function Home() {
           実験中
         </span>
       </h3>
-      <p className="text-textSub mb-4">
+      <p className="text-textSub">
         流域・地形・歴史を重ねて見る。
       </p>
-      <div className="text-sm text-accent font-medium">
-        → 地形を見る
-      </div>
     </Link>
 
   </div>
