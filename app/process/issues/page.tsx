@@ -1,245 +1,165 @@
-import fs from "fs"
-import path from "path"
+import type { Metadata } from "next"
 import Link from "next/link"
 
-interface IssueSource {
-  primary: {
-    townPage: { title: string; url: string }
-    youtube: { title: string; url: string; timestampSec?: number }
-  }
-  derived: {
-    title: string
-    note: string
-    page?: number
-  }
+export const metadata: Metadata = {
+  title: "論点カード | Shintoku Atlas",
+  description: "複数の会議をまたいで繰り返されている争点を時系列で読む",
+}
+
+// ── 型定義 ─────────────────────────────────────────────────────────────────
+interface SessionRef {
+  sessionId: string
+  date:      string
+  title:     string
+  conflict:  string
 }
 
 interface Issue {
-  id: string
-  theme: string
-  title: string
-  issue: string
-  context: string
-  admin_view: string
-  next_step: string
-  source: IssueSource
+  id:          string
+  title:       string
+  status:      string
+  statusColor: string
+  summary:     string
+  timelineTag: string
+  sessions:    SessionRef[]
 }
 
-type GikaiLinks = Record<string, string[]>
+// ── 静的データ ──────────────────────────────────────────────────────────────
+const ISSUES: Issue[] = [
+  {
+    id: "fiscal-balance",
+    title: "財政規律 vs 投資・サービス維持",
+    status: "継続中",
+    statusColor: "text-red-400 border-red-400/40",
+    summary: "借金が貯金を上回る財政状況の中で、必要な投資規模をどう確保するか。毎回の予算・決算審議で繰り返し浮上している。",
+    timelineTag: "財政",
+    sessions: [
+      { sessionId: "r6-2024-09-kessan-tokubetsu", date: "2024-09-13", title: "令和5年度決算審査", conflict: "財政調整基金の残高と今後の財源確保" },
+      { sessionId: "r7-2025-03-regular-1",        date: "2025-03-03", title: "令和7年度当初予算", conflict: "予算の規模・重点配分バランス" },
+      { sessionId: "r7-2025-03-yosan-tokubetsu",  date: "2025-03-17", title: "予算審査特別委員会", conflict: "北斗クリニック医療転換・3本柱の投資規模" },
+      { sessionId: "r7-2025-09-regular-3",        date: "2025-09-01", title: "令和7年定例第3回", conflict: "財政規律と未来投資の狭間" },
+      { sessionId: "r7-2025-09-kessan-tokubetsu", date: "2025-09-12", title: "令和6年度決算審査", conflict: "貯金が借金を下回った財政構造の検証" },
+    ],
+  },
+  {
+    id: "tourism-tax",
+    title: "宿泊税・観光財源の設計",
+    status: "条例化済み・監視中",
+    statusColor: "text-yellow-400 border-yellow-400/40",
+    summary: "宿泊税は令和7年定例第2回で条例制定。税率設定（50〜500円）と観光財源としての使途が争点だった。徴収開始後の実績が次の焦点。",
+    timelineTag: "観光",
+    sessions: [
+      { sessionId: "r6-2024-06-regular-2", date: "2024-06-04", title: "令和6年定例第2回", conflict: "宿泊税導入の是非と税率設計" },
+      { sessionId: "r6-2024-09-regular-3", date: "2024-09-02", title: "令和6年定例第3回", conflict: "観光財源の使途と配分方針" },
+      { sessionId: "r7-2025-06-regular-2", date: "2025-06-02", title: "令和7年定例第2回", conflict: "税率設定（50〜500円）と観光財源の使途" },
+    ],
+  },
+  {
+    id: "zero-carbon",
+    title: "ゼロカーボン・エネルギー政策の遅れ",
+    status: "検討中",
+    statusColor: "text-blue-400 border-blue-400/40",
+    summary: "新得町のエネルギー資源（水力・バイオマス等）活用が政策として具体化されていない。ゼロカーボン調査が進行中だが結論未出。",
+    timelineTag: "エネルギー",
+    sessions: [
+      { sessionId: "r6-2024-09-regular-3",    date: "2024-09-02", title: "令和6年定例第3回", conflict: "エネルギー資源活用の遅れ" },
+      { sessionId: "r7-2025-06-regular-2",     date: "2025-06-02", title: "令和7年定例第2回", conflict: "ゼロカーボン調査の予算計上" },
+      { sessionId: "r8-2026-01-20-basic-plan", date: "2026-01-20", title: "第9期総合計画審査特別委", conflict: "長期計画へのエネルギー政策の位置づけ" },
+    ],
+  },
+]
 
-const THEME_LABELS: Record<string, string> = {
-  agriculture: "農業・産業",
-  tourism: "観光",
-  health: "健康・福祉",
-  community: "地域・参加",
-  finance: "財政",
+// ── 日付フォーマット ────────────────────────────────────────────────────────
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  return d.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })
 }
 
-function youtubeUrl(source: IssueSource): string {
-  const yt = source.primary.youtube
-  if (yt.timestampSec) return `${yt.url}&t=${yt.timestampSec}s`
-  return yt.url
-}
+// ──────────────────────────────────────────────────────────────────────────────
 
-async function getIssues(): Promise<Issue[]> {
-  try {
-    const filePath = path.join(process.cwd(), "data", "process.json")
-    const data = JSON.parse(fs.readFileSync(filePath, "utf-8"))
-    return data.issues
-  } catch (error) {
-    console.error("Failed to load issues:", error)
-    return []
-  }
-}
-
-async function getGikaiLinks(): Promise<GikaiLinks> {
-  try {
-    const filePath = path.join(process.cwd(), "public", "data", "gikai_links.json")
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"))
-  } catch {
-    return {}
-  }
-}
-
-export default async function IssuesPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ theme?: string; issue?: string }>
-}) {
-  const [issues, links] = await Promise.all([getIssues(), getGikaiLinks()])
-  const { theme: activeTheme, issue: activeIssue } = await searchParams
-
-  const themes = [...new Set(issues.map((i) => i.theme))]
-  const filtered = issues.filter((i) => {
-    if (activeTheme && i.theme !== activeTheme) return false
-    if (activeIssue && i.id !== activeIssue) return false
-    return true
-  })
-
-  const linkCounts = Object.fromEntries(
-    issues.map((issue) => [
-      issue.id,
-      Object.values(links).filter((refs) => refs.includes(`issue:${issue.id}`)).length,
-    ])
-  )
-
+export default function IssuesPage() {
   return (
-    <div className="pageWrap">
-      <header className="pageHeader">
-        <Link href="/process" className="backLink">
+    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+      {/* ── ヘッダー ───────────────────────────────────────────────────── */}
+      <div className="mb-10">
+        <Link
+          href="/process"
+          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
+        >
           ← 意思決定プロセスに戻る
         </Link>
-        <h1 className="pageTitle">論点カード</h1>
-        <p className="pageDesc">議論・判断・次の一手を、公開情報から要点抽出</p>
-        <p className="mt-2 text-sm text-textSub">
-          ※公式資料・議会中継等から要約を含みます（非公式）
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          論点カード
+        </h1>
+        <p className="text-textMain/70 text-lg">
+          複数の会議をまたいで繰り返されている争点
         </p>
-      </header>
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="card">
-          <div className="text-textSub text-xs">TOTAL</div>
-          <div className="mt-2 text-2xl font-semibold">{issues.length}</div>
-        </div>
-        <div className="card">
-          <div className="text-textSub text-xs">THEMES</div>
-          <div className="mt-2 text-2xl font-semibold">{themes.length}</div>
-        </div>
-        <div className="card">
-          <div className="text-textSub text-xs">SHOWING</div>
-          <div className="mt-2 text-2xl font-semibold">{filtered.length}</div>
-        </div>
       </div>
 
-      {/* Filter chips */}
-      <div className="mt-6 flex flex-wrap gap-2">
-        <Link
-          href="/process/issues"
-          className={`chip ${!activeTheme && !activeIssue ? "chipActive" : ""}`}
-        >
-          すべて
-        </Link>
-        {themes.map((t) => (
-          <Link
-            key={t}
-            href={`/process/issues?theme=${t}`}
-            className={`chip ${activeTheme === t ? "chipActive" : ""}`}
+      {/* ── 論点カード一覧 ──────────────────────────────────────────────── */}
+      <div className="space-y-8">
+        {ISSUES.map((issue) => (
+          <section
+            key={issue.id}
+            className="bg-ink border border-line rounded-xl p-6"
           >
-            {THEME_LABELS[t] || t}
-          </Link>
-        ))}
-        <div className="w-full text-xs text-textSub mt-2">
-          {activeIssue
-            ? `論点フィルタ中（${activeIssue}）`
-            : `フィルタ：${activeTheme ? (THEME_LABELS[activeTheme] || activeTheme) : "なし"}`}
-        </div>
-      </div>
-
-      {/* List */}
-      <section className="mt-8">
-        <h2 className="text-lg md:text-xl font-semibold">一覧</h2>
-
-        <div className="mt-4 space-y-4">
-          {filtered.map((issue) => (
-            <div key={issue.id} className="card">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center rounded-full border border-line px-3 py-1 text-xs text-textSub">
-                  {THEME_LABELS[issue.theme] || issue.theme}
-                </span>
-                <div className="text-textMain font-semibold text-base md:text-lg">
-                  {issue.title}
-                </div>
-              </div>
-
-              <div className="mt-4 space-y-3 text-sm text-textSub leading-relaxed">
-                <div>
-                  <span className="text-textMain font-semibold">論点：</span>
-                  {issue.issue}
-                </div>
-                <div>
-                  <span className="text-textMain font-semibold">背景：</span>
-                  {issue.context}
-                </div>
-                {issue.admin_view && (
-                  <div>
-                    <span className="text-textMain font-semibold">行政の見解：</span>
-                    {issue.admin_view}
-                  </div>
-                )}
-                <div>
-                  <span className="text-textMain font-semibold">次の一手：</span>
-                  {issue.next_step}
-                </div>
-
-                {/* Sources */}
-                <div className="pt-4 border-t border-line/40">
-                  <div className="text-textMain font-semibold">出典</div>
-
-                  <div className="mt-2">
-                    <div className="text-xs text-textSub">一次情報</div>
-                    <ul className="mt-1 space-y-1">
-                      <li>
-                        <a
-                          href={issue.source.primary.townPage.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-accent hover:text-accentSoft transition"
-                        >
-                          町ページ（議会・関連ページ） →
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href={youtubeUrl(issue.source)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-accent hover:text-accentSoft transition"
-                        >
-                          YouTube（中継・委員会） →
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="text-xs text-textSub">二次（編集メモ）</div>
-                    <div className="mt-1">
-                      {issue.source.derived.title}
-                      {issue.source.derived.page != null && (
-                        <span className="text-textSub">（p.{issue.source.derived.page}）</span>
-                      )}
-                    </div>
-                    <div className="mt-2">
-                      <Link
-                        href="/sources"
-                        className="text-accent hover:text-accentSoft transition text-sm"
-                      >
-                        Sources を見る →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {linkCounts[issue.id] > 0 && (
-                <Link
-                  href={`/gikai?issue=${issue.id}`}
-                  className="mt-4 inline-flex items-center gap-1 text-xs text-accent border border-line rounded px-3 py-1.5 hover:border-accent hover:bg-accent/5 transition-colors"
-                >
-                  関連議決: {linkCounts[issue.id]}件 →
-                </Link>
-              )}
+            {/* カードヘッダー */}
+            <div className="flex flex-wrap items-start gap-3 mb-4">
+              <h2 className="text-lg font-semibold text-textMain leading-snug flex-1 min-w-0">
+                {issue.title}
+              </h2>
+              <span className={`shrink-0 text-xs font-semibold px-2 py-0.5 rounded border ${issue.statusColor}`}>
+                {issue.status}
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <div className="mt-8 card">
-        <div className="text-textSub text-sm">
-          出典の全体は <Link href="/sources" className="text-accent hover:text-accentSoft transition">/sources</Link> にまとめています。
-        </div>
+            {/* サマリー */}
+            <p className="text-sm leading-relaxed text-textMain/70 mb-6">
+              {issue.summary}
+            </p>
+
+            {/* 時系列リスト */}
+            <div className="space-y-3 mb-6">
+              {issue.sessions.map((s) => (
+                <div
+                  key={s.sessionId}
+                  className="flex gap-4 items-start border-l-2 border-line pl-4"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-accent font-semibold mb-0.5">
+                      {formatDate(s.date)}
+                    </p>
+                    <p className="text-sm font-medium text-textMain leading-snug mb-1">
+                      {s.title}
+                    </p>
+                    <p className="text-xs text-textMain/60 leading-relaxed">
+                      {s.conflict}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/gikai/sessions/${s.sessionId}`}
+                    className="shrink-0 text-xs text-accent hover:text-accent/70 transition-colors whitespace-nowrap pt-0.5"
+                  >
+                    → 会議を読む
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* タイムラインリンク */}
+            <div className="border-t border-line/40 pt-4">
+              <Link
+                href={`/process/timeline?tag=${encodeURIComponent(issue.timelineTag)}`}
+                className="text-sm text-accent hover:text-accent/70 transition-colors"
+              >
+                タイムラインで見る →
+              </Link>
+            </div>
+          </section>
+        ))}
       </div>
+
     </div>
   )
 }

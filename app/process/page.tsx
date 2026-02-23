@@ -10,8 +10,8 @@ const CARDS = [
   {
     href: "/process/issues",
     title: "論点カード",
-    desc: "議論・判断・次の一手（論点の見える化）",
-    meta: "10件（仮）",
+    desc: "複数会議をまたいで繰り返される争点を読む",
+    meta: "3件",
   },
   {
     href: "/process/timeline",
