@@ -35,7 +35,7 @@ export default function TimelinePage({
           href="/process"
           className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
-          ← 意思決定プロセス
+          ← 意思決定の流れを読む
         </Link>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           意思決定タイムライン

@@ -54,14 +54,6 @@ export default function Home() {
     </Link>
   )}
 
-  <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:gap-5">
-    <Link
-      href="/gikai/sessions"
-      className="inline-flex items-center justify-center w-full md:w-auto bg-accent text-base font-semibold px-7 py-4 md:py-3 rounded-xl hover:bg-accentSoft transition-colors"
-    >
-      町議会を読む →
-    </Link>
-  </div>
 </section>
 
        {/* Modules */}

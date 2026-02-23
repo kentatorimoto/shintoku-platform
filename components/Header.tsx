@@ -5,44 +5,9 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
-// Desktop 一次導線
-const PRIMARY_LINKS = [
-  { href: "/gikai/sessions", label: "町議会を読む" },
-  { href: "/gikai",          label: "議決結果" },
-  { href: "/insights",       label: "分析" },
-] as const
-
-// Desktop 二次導線（| 区切り後）
-const SECONDARY_LINKS = [
-  { href: "/map",   label: "地形マップ" },
-  { href: "/about", label: "About" },
-] as const
-
-// Mobile ドロワー セクション構造
-const MOBILE_SECTIONS = [
-  {
-    title: "読む",
-    links: [
-      { href: "/gikai/sessions", label: "町議会を読む", external: false },
-      { href: "/gikai",          label: "議決結果",     external: false },
-    ],
-  },
-  {
-    title: "読み解く",
-    links: [
-      { href: "/insights", label: "分析",             external: false },
-      { href: "/process",  label: "意思決定プロセス",   external: false },
-    ],
-  },
-  {
-    title: "情報",
-    links: [
-      { href: "/map",     label: "地形マップ", external: false },
-      { href: "/sources", label: "Sources",   external: false },
-      { href: "/about",   label: "About",     external: false },
-      { href: "https://github.com/torimotokenta/shintoku-platform", label: "GitHub", external: true },
-    ],
-  },
+const NAV_LINKS = [
+  { href: "/gikai/sessions", label: "議会を読む" },
+  { href: "/about",          label: "About" },
 ] as const
 
 export default function Header() {
@@ -109,15 +74,7 @@ export default function Header() {
 
           {/* Desktop ナビ */}
           <div className="hidden md:flex items-center gap-5 text-sm">
-            {PRIMARY_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className={desktopClass(link.href)}>
-                {link.label}
-              </Link>
-            ))}
-
-            <span className="text-line select-none" aria-hidden="true">|</span>
-
-            {SECONDARY_LINKS.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={desktopClass(link.href)}>
                 {link.label}
               </Link>
@@ -149,43 +106,15 @@ export default function Header() {
 
           {/* パネル */}
           <div className="fixed top-20 right-4 left-4 z-50 bg-ink border border-line rounded-2xl p-5">
-            {MOBILE_SECTIONS.map((section, i) => (
-              <div key={section.title}>
-                {/* セクション区切り（初回以外） */}
-                {i > 0 && (
-                  <div className="h-px bg-line/40 my-4" />
-                )}
-
-                {/* カテゴリ見出し：小さく・薄く・大文字 */}
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 px-4 mb-3">
-                  {section.title}
-                </p>
-
-                {/* リンク */}
-                {section.links.map((link) =>
-                  link.external ? (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={close}
-                      className={mobileClass(link.href, true)}
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={close}
-                      className={mobileClass(link.href, false)}
-                    >
-                      {link.label}
-                    </Link>
-                  )
-                )}
-              </div>
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={close}
+                className={mobileClass(link.href, false)}
+              >
+                {link.label}
+              </Link>
             ))}
           </div>
         </>

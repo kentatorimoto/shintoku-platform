@@ -53,12 +53,6 @@ export default function GikaiSessionsPage() {
     <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       {/* ── ヘッダー ───────────────────────────────────────────────────── */}
       <div className="mb-10">
-        <Link
-          href="/"
-          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
-        >
-          ← トップ
-        </Link>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           議会を読む
         </h1>

@@ -102,20 +102,13 @@ export default async function SessionPage({
 
   return (
     <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      {/* ── パンくず ─────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-2 text-sm text-textSub mb-8">
-        <Link href="/gikai" className="hover:text-textMain transition-colors">
-          議会
-        </Link>
-        <span className="text-textSub/30">/</span>
-        <Link href="/gikai/sessions" className="hover:text-textMain transition-colors">
-          会議アーカイブ
-        </Link>
-        <span className="text-textSub/30">/</span>
-        <span className="text-textMain/70 truncate">
-          {session.narrativeTitle ?? session.officialTitle}
-        </span>
-      </div>
+      {/* ── 戻りリンク ───────────────────────────────────────────────── */}
+      <Link
+        href="/gikai/sessions"
+        className="text-textSub text-sm hover:text-textMain transition-colors mb-8 inline-block"
+      >
+        ← 議会を読む
+      </Link>
 
       {/* ── ページヘッダー ───────────────────────────────────────────── */}
       <div className="mb-8">

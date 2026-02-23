@@ -129,12 +129,6 @@ export default function InsightsPage() {
 
       {/* ヘッダー */}
       <div className="mb-12">
-        <Link
-          href="/"
-          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
-        >
-          ← トップ
-        </Link>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           インサイト
         </h1>

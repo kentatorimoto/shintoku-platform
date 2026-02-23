@@ -31,9 +31,6 @@ export default function ProcessPage() {
   return (
     <div className="pageWrap">
       <header className="pageHeader">
-        <Link href="/" className="backLink">
-          ← トップに戻る
-        </Link>
         <h1 className="pageTitle">意思決定の流れを読む</h1>
         <p className="pageDesc">何がどう積み上がり、決まっていくのか。</p>
       </header>

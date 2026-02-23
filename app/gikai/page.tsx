@@ -298,7 +298,7 @@ function GikaiPageContent() {
         if (issue && !refs.includes(`issue:${issue}`)) return false
       }
       return true
-    })
+    }).sort((a, b) => b.year - a.year)
   }, [flatItems, q, year, session, type, result, theme, issue, links])
 
   const visibleItems = filteredItems.slice(0, limit)
@@ -312,12 +312,6 @@ function GikaiPageContent() {
     <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-base md:text-lg">
       {/* ── ヘッダー ─────────────────────────────────────── */}
       <div className="mb-10">
-        <Link
-          href="/"
-          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
-        >
-          ← トップ
-        </Link>
         <h1 className="!text-4xl md:!text-5xl font-bold tracking-tight mb-4 text-textMain">
           町の決定を読む
         </h1>
@@ -325,7 +319,7 @@ function GikaiPageContent() {
           何が決まり、何が見送られたか
         </p>
         <Link href="/gikai/sessions" className="text-sm text-accent hover:text-accent/80 transition-colors mt-2 inline-block">
-          町議会を読む（会議の論点・争点アーカイブ）→
+          議会を読む →
         </Link>
       </div>
 
@@ -511,21 +505,6 @@ function GikaiPageContent() {
               </option>
             ))}
           </select>
-
-          {/* 種別チップ */}
-          {(["議案", "意見案"] as const).map((t) => (
-            <button
-              key={t}
-              onClick={() => setType(t)}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
-                type === t
-                  ? "bg-accent text-base border-accent"
-                  : "bg-ink border-line text-textSub hover:border-accent/50"
-              }`}
-            >
-              {t}
-            </button>
-          ))}
 
           {/* 結果チップ */}
           {resultTypes.map((r) => (
