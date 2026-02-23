@@ -1,5 +1,46 @@
 [
   {
+    "id": "q-deep-basin",
+    "title": "なぜ水はここに集まるのか？",
+    "view": {
+      "center": [43.08, 142.84],
+      "zoom": 10
+    },
+    "layers": {
+      "rivers":      true,
+      "passes":      false,
+      "centershift": false,
+      "relief":      true,
+      "hillshade":   true
+    },
+    "clues": [
+      {
+        "id": "clue-source",
+        "label": "十勝川の源流を探す",
+        "note": "十勝川はどこから始まるか。山脈の稜線と水の流れる方向を地形から読んでみよう。",
+        "targets": [
+          { "layer": "rivers", "nameIncludes": "十勝川" }
+        ]
+      },
+      {
+        "id": "clue-ridge",
+        "label": "稜線と流域の境界を見る",
+        "note": "色別標高図で稜線を確認する。この稜線が流域の境界線になっている。",
+        "targets": [
+          { "layer": "passes", "nameIncludes": "" }
+        ]
+      },
+      {
+        "id": "clue-valley",
+        "label": "谷の形と集落の位置を重ねる",
+        "note": "水が集まる場所に人は住んだ。陰影起伏図で谷の形を確認し、現在の集落との関係を考えよう。",
+        "targets": [
+          { "layer": "rivers", "nameIncludes": "" }
+        ]
+      }
+    ]
+  },
+  {
     "id": "q-center-shift",
     "title": "なぜ中心はここに移ったのか？",
     "view": {
@@ -36,6 +77,47 @@
         "note": "屈足から新得へ、どの方向へどれだけ動いたか。その理由を地形から考えよう。",
         "targets": [
           { "layer": "centershift", "nameIncludes": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "q-surface-now",
+    "title": "いま、この場所は何と呼ばれているか？",
+    "view": {
+      "center": [43.08, 142.84],
+      "zoom": 12
+    },
+    "layers": {
+      "rivers":      false,
+      "passes":      false,
+      "centershift": false,
+      "relief":      false,
+      "hillshade":   false
+    },
+    "clues": [
+      {
+        "id": "clue-dam",
+        "label": "ダムの位置を確認する",
+        "note": "サホロダムはどの川を堰き止めているか。上流の地形と比較してみよう。",
+        "targets": [
+          { "layer": "rivers", "nameIncludes": "佐幌川" }
+        ]
+      },
+      {
+        "id": "clue-resort",
+        "label": "リゾート施設の立地を読む",
+        "note": "サホロリゾートはなぜこの場所にあるか。地形・雪・アクセスの関係を考えよう。",
+        "targets": [
+          { "layer": "passes", "nameIncludes": "" }
+        ]
+      },
+      {
+        "id": "clue-admin",
+        "label": "行政区域の境界と地形を重ねる",
+        "note": "町の境界はどこを通っているか。稜線・川・峠と一致している部分はあるか。",
+        "targets": [
+          { "layer": "rivers", "nameIncludes": "" }
         ]
       }
     ]

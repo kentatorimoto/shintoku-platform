@@ -7,5 +7,14 @@ export const metadata: Metadata = {
 }
 
 export default function MapPage() {
-  return <MapView />
+  return (
+    <div className="relative">
+      <MapView />
+      <p className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[1000]
+                    text-[11px] text-textSub/40 pointer-events-none select-none
+                    tracking-widest text-center">
+        流域は変わらない。読み方が変わる。
+      </p>
+    </div>
+  )
 }
