@@ -59,12 +59,16 @@ export default function Header() {
             href="/"
             onClick={close}
             style={{
-              fontFamily: "'Spectral', serif",
+              fontFamily: "var(--font-ibm-plex), 'IBM Plex Sans', sans-serif",
               fontWeight: 500,
-              letterSpacing: "0.08em",
-              borderBottom: "0.5px solid #E6E4DD",
-              paddingBottom: "2px",
-              color: "#E6E4DD",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase" as const,
+              backgroundImage: "linear-gradient(color-mix(in srgb, currentColor 60%, transparent), color-mix(in srgb, currentColor 60%, transparent))",
+              backgroundSize: "80% 1px",
+              backgroundPosition: "center bottom",
+              backgroundRepeat: "no-repeat",
+              paddingBottom: "3px",
+              color: "#D5D3CC",
               textDecoration: "none",
               fontSize: "14px",
             }}
