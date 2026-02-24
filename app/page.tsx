@@ -71,7 +71,7 @@ export default function Home() {
       <p className="text-xs text-textSub/60">件の議決</p>
     </div>
     <div>
-      <p className="text-3xl font-bold text-textMain">3</p>
+      <p className="text-3xl font-bold text-textMain">6</p>
       <p className="text-xs text-textSub/60">つの継続論点</p>
     </div>
   </div>
