@@ -121,7 +121,7 @@ export default async function SessionPage({
         </h1>
         {/* officialTitle：補助的に小さく */}
         {session.narrativeTitle && (
-          <p className="text-sm text-textSub leading-snug">
+          <p className="text-sm text-textSub leading-snug" style={{ fontFeatureSettings: '"palt"' }}>
             {session.officialTitle}
           </p>
         )}

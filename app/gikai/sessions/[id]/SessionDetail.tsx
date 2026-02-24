@@ -72,8 +72,8 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
         <p className="text-sm font-semibold text-textMain group-hover:text-red-400 transition-colors">
           {label}
         </p>
-        <p className="text-[11px] text-textSub/50 mt-0.5 truncate">
-          {youtube}
+        <p className="text-[11px] text-textSub/50 mt-0.5">
+          YouTube で見る →
         </p>
       </div>
 

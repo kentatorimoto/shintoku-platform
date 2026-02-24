@@ -24,7 +24,7 @@ interface GikaiSession {
   summary?:        Summary
 }
 
-// ── 静的データ：第8期総合計画 5つの基本目標 ────────────────────────────
+// ── 静的データ：第9期総合計画 5つの基本目標 ────────────────────────────
 const OFFICIAL_PRIORITIES = [
   {
     goal: "協働",
@@ -111,7 +111,7 @@ export default function PrioritiesPage() {
       {/* ── セクション1：重点テーマ対照表 ─────────────────────────────── */}
       <section className="mb-14">
         <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
-          第8期総合計画 基本目標 × 議会での議論
+          第9期総合計画 基本目標 × 議会での議論
         </h2>
         <div className="space-y-3">
           {priorityStats.map((p) => (
@@ -162,7 +162,7 @@ export default function PrioritiesPage() {
           ))}
         </div>
         <p className="text-xs text-textSub/50 mt-3">
-          ※ 出典：新得町第8期総合計画（R8〜R17）。議論件数は会議アーカイブに基づく。
+          ※ 出典：新得町第9期総合計画（R8〜R17）。議論件数は会議アーカイブに基づく。
         </p>
       </section>
 
