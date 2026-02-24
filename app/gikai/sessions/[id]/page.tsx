@@ -25,6 +25,7 @@ interface GikaiSession {
   narrativeTitle?: string
   date:            string
   summary?:        Summary
+  tags:            string[]
   parts:           Part[]
 }
 
@@ -124,6 +125,15 @@ export default async function SessionPage({
           <p className="text-sm text-textSub leading-snug" style={{ fontFeatureSettings: '"palt"' }}>
             {session.officialTitle}
           </p>
+        )}
+        {session.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-3">
+            {session.tags.map(tag => (
+              <span key={tag} className="text-xs border border-line text-textSub px-2 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
         )}
       </div>
 
