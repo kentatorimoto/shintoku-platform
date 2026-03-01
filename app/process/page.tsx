@@ -17,7 +17,7 @@ const CARDS = [
     href: "/process/issues",
     title: "論点カード",
     desc: "複数会議をまたいで繰り返される争点を読む",
-    meta: "3件",
+    meta: "6件",
   },
   {
     href: "/process/timeline",

@@ -22,6 +22,7 @@ interface Issue {
   summary:     string
   timelineTag: string
   sessions:    SessionRef[]
+  detailHref?: string
 }
 
 // ── 静的データ ──────────────────────────────────────────────────────────────
@@ -104,6 +105,7 @@ const ISSUES: Issue[] = [
     sessions: [
       { sessionId: "r7-2025-12-regular-4", date: "2025-12-02", title: "令和7年定例第4回", conflict: "観光拠点 vs 日常利用の議論が一般質問で浮上" },
     ],
+    detailHref: "/process/issues/tuktuk",
   },
 ]
 
@@ -186,13 +188,21 @@ export default function IssuesPage() {
             </div>
 
             {/* タイムラインリンク */}
-            <div className="border-t border-line/40 pt-4">
+            <div className="border-t border-line/40 pt-4 flex flex-wrap gap-x-6 gap-y-2">
               <Link
                 href={`/process/timeline?tag=${encodeURIComponent(issue.timelineTag)}`}
                 className="text-sm text-accent hover:text-accent/70 transition-colors"
               >
                 タイムラインで見る →
               </Link>
+              {issue.detailHref && (
+                <Link
+                  href={issue.detailHref}
+                  className="text-sm text-accent hover:text-accent/70 transition-colors"
+                >
+                  意思決定の流れを読む →
+                </Link>
+              )}
             </div>
           </section>
         ))}

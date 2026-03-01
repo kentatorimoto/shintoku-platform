@@ -53,7 +53,7 @@ export default function Home() {
         {/* Hero */}
 <section className="max-w-3xl pt-8 pb-12 mb-16">
   <h2 className="text-6xl md:text-7xl font-bold tracking-tight leading-tight break-keep">
-  町を、読む。
+  町を読む。
 </h2>
 
   <p className="text-textMain/70 text-lg md:text-xl mt-6 leading-relaxed">
