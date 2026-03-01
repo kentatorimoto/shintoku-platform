@@ -12,7 +12,7 @@ export default function AboutPage() {
       {/* タイトル */}
       <div className="mb-16 mt-16">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">
-          町を、構造として読む。
+          町を構造として読む。
         </h1>
         <p className="text-textMain/70 text-lg leading-relaxed">
           SHINTOKU ATLAS は、<br />
