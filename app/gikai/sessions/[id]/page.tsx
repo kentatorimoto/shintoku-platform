@@ -140,9 +140,6 @@ export default async function SessionPage({
       {/* ── サマリー ──────────────────────────────────────────────────────── */}
       {session.summary && (
         <div className="bg-ink border border-line rounded-xl p-5 sm:p-6 mb-8">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-4">
-            今回の要点
-          </p>
           <dl className="space-y-2">
             {([
               { dt: "論点",       dd: session.summary.issues },
