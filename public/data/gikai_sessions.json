@@ -15,6 +15,12 @@
         "youtube": "https://www.youtube.com/watch?v=Dl_bciU4qEs&t=2s",
         "pdf": "r8-2026-03-regular-1_day1.pdf",
         "slidesDir": "day1"
+      },
+      {
+        "label": "一般質問（3/12）",
+        "youtube": "https://www.youtube.com/watch?v=Wc1AFR3nkOg&t=33s",
+        "pdf": "r8-2026-03-regular-1_qna.pdf",
+        "slidesDir": "qna"
       }
     ],
     "tags": [
