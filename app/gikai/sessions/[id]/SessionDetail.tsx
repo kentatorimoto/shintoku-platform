@@ -54,18 +54,15 @@ function QnaSection({ items }: { items: QnaItem[] }) {
                 className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-line/20 transition-colors"
               >
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 mb-0.5">
-                    <span className="text-sm font-semibold text-textMain">{item.speaker_name}</span>
-                    <span className="text-xs text-textSub/60">{item.speaker_role}</span>
-                  </div>
-                  <p className="text-xs text-textSub/80 truncate">{item.topic_title}</p>
-                  <div className="flex flex-wrap gap-1.5 mt-2">
+                  <div className="flex flex-wrap gap-1.5 mb-2">
                     {item.topic_tags.map(tag => (
                       <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-full">
                         {tag}
                       </span>
                     ))}
                   </div>
+                  <p className="text-sm font-medium text-textMain mb-1">{item.topic_title}</p>
+                  <p className="text-xs text-textSub/60">{item.speaker_name} {item.speaker_role}</p>
                 </div>
                 <svg
                   className={`w-4 h-4 text-textSub/40 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
