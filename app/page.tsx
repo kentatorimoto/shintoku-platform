@@ -3,21 +3,47 @@ import path from "path"
 import Link from "next/link"
 
 interface GikaiSession {
-  id:             string
+  id:              string
   narrativeTitle?: string
-  officialTitle:  string
-  date:           string
+  officialTitle:   string
+  date:            string
+  parts:           { label: string }[]
 }
 
 interface GiketsuSession {
   items: unknown[]
 }
 
-function getLatestSession(): GikaiSession | null {
+interface LatestInfo {
+  session:   GikaiSession
+  partIndex: number
+  partLabel: string
+  partDate:  string
+}
+
+function extractDateFromLabel(label: string, sessionDate: string): string {
+  const match = label.match(/[（(](\d{1,2})\/(\d{1,2})[）)]/)
+  if (!match) return sessionDate
+  const year = new Date(sessionDate).getFullYear()
+  const month = match[1].padStart(2, "0")
+  const day   = match[2].padStart(2, "0")
+  return `${year}-${month}-${day}`
+}
+
+function getLatestInfo(): LatestInfo | null {
   try {
     const filePath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
     const sessions = JSON.parse(fs.readFileSync(filePath, "utf-8")) as GikaiSession[]
-    return sessions.sort((a, b) => b.date.localeCompare(a.date))[0] ?? null
+    const session = sessions.sort((a, b) => b.date.localeCompare(a.date))[0]
+    if (!session) return null
+    const partIndex = session.parts.length - 1
+    const lastPart  = session.parts[partIndex]
+    return {
+      session,
+      partIndex,
+      partLabel: lastPart.label,
+      partDate:  extractDateFromLabel(lastPart.label, session.date),
+    }
   } catch {
     return null
   }
@@ -44,7 +70,7 @@ function formatDate(dateStr: string): string {
 }
 
 export default function Home() {
-  const latest = getLatestSession()
+  const latestInfo = getLatestInfo()
   const { sessionCount, giketsuCount } = getStats()
 
   return (
@@ -76,16 +102,17 @@ export default function Home() {
     </div>
   </div>
 
-  {latest && (
+  {latestInfo && (
     <Link
-      href={`/gikai/sessions/${latest.id}`}
+      href={`/gikai/sessions/${latestInfo.session.id}/${latestInfo.partIndex}`}
       className="mt-8 border-l-2 border-accent pl-4 block hover:opacity-80 transition"
     >
       <p className="text-xs text-textSub/60 tracking-widest uppercase mb-1">最新の会議</p>
-      <p className="text-sm text-textSub/80">{formatDate(latest.date)}</p>
+      <p className="text-sm text-textSub/80">{formatDate(latestInfo.partDate)}</p>
       <p className="text-base text-textMain font-medium mt-0.5">
-        {latest.narrativeTitle ?? latest.officialTitle}
+        {latestInfo.session.narrativeTitle ?? latestInfo.session.officialTitle}
       </p>
+      <p className="text-sm text-textSub/60 mt-0.5">{latestInfo.partLabel}</p>
     </Link>
   )}
 

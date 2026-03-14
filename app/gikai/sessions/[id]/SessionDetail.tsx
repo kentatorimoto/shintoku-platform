@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 // ── 型定義 ─────────────────────────────────────────────────────────────────
@@ -13,8 +14,9 @@ interface Part {
 }
 
 interface Props {
-  sessionId: string
-  parts:     Part[]
+  sessionId:         string
+  parts:             Part[]
+  initialPartIndex?: number
 }
 
 // ── YouTube 動画 ID 抽出 ────────────────────────────────────────────────────
@@ -90,9 +92,10 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-export default function SessionDetail({ sessionId, parts }: Props) {
-  const [activeIdx, setActiveIdx] = useState(0)
+export default function SessionDetail({ sessionId, parts, initialPartIndex = 0 }: Props) {
+  const [activeIdx, setActiveIdx] = useState(initialPartIndex)
   const topRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   if (parts.length === 0) {
     return <p className="text-textSub/50 text-sm">コンテンツがありません</p>
@@ -102,6 +105,7 @@ export default function SessionDetail({ sessionId, parts }: Props) {
 
   function handleTabChange(i: number) {
     setActiveIdx(i)
+    router.push(`/gikai/sessions/${sessionId}/${i}`)
     requestAnimationFrame(() => {
       topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
     })
