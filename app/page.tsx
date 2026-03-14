@@ -77,100 +77,91 @@ export default function Home() {
     <main className="bg-base text-textMain font-sans px-8 pb-8">
       <div className="max-w-6xl mx-auto">
         {/* Hero */}
-<section className="max-w-3xl pt-8 pb-12 mb-16">
-  <h2 className="text-6xl md:text-7xl font-bold tracking-tight leading-tight break-keep">
-  町を読む。
-</h2>
+<section className="max-w-3xl pt-6 pb-8 mb-8">
+  <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight break-keep">
+    町を読む。
+  </h2>
 
-  <p className="text-textMain/70 text-lg md:text-xl mt-6 leading-relaxed">
-    ニュースではなく、流れを見る。<br />
+  <p className="text-textMain/60 text-base mt-4 leading-relaxed">
+    ニュースではなく、流れを見る。
     断片ではなく、構造を見る。
   </p>
 
-  <div className="flex gap-8 mb-8 mt-10">
-    <div>
-      <p className="text-3xl font-bold text-textMain">{sessionCount}</p>
-      <p className="text-xs text-textSub/60">の会議</p>
+  <div className="grid grid-cols-3 gap-px bg-line/30 rounded-xl overflow-hidden mt-8 mb-6">
+    <div className="bg-base flex flex-col items-center py-4">
+      <p className="text-2xl font-bold text-textMain">{sessionCount}</p>
+      <p className="text-[10px] text-textSub/50 mt-1">会議</p>
     </div>
-    <div>
-      <p className="text-3xl font-bold text-textMain">{giketsuCount.toLocaleString()}</p>
-      <p className="text-xs text-textSub/60">件の議決</p>
+    <div className="bg-base flex flex-col items-center py-4 border-x border-line/30">
+      <p className="text-2xl font-bold text-textMain">{giketsuCount.toLocaleString()}</p>
+      <p className="text-[10px] text-textSub/50 mt-1">議決</p>
     </div>
-    <div>
-      <p className="text-3xl font-bold text-textMain">6</p>
-      <p className="text-xs text-textSub/60">つの継続論点</p>
+    <div className="bg-base flex flex-col items-center py-4">
+      <p className="text-2xl font-bold text-textMain">6</p>
+      <p className="text-[10px] text-textSub/50 mt-1">継続論点</p>
     </div>
   </div>
 
   {latestInfo && (
     <Link
       href={`/gikai/sessions/${latestInfo.session.id}/${latestInfo.partIndex}`}
-      className="mt-8 border-l-2 border-accent pl-4 block hover:opacity-80 transition"
+      className="border border-line rounded-xl p-4 flex items-start justify-between gap-3 hover:border-accent/50 transition bg-ink block"
     >
-      <p className="text-xs text-textSub/60 tracking-widest uppercase mb-1">最新の会議</p>
-      <p className="text-sm text-textSub/80">{formatDate(latestInfo.partDate)}</p>
-      <p className="text-base text-textMain font-medium mt-0.5">
-        {latestInfo.session.narrativeTitle ?? latestInfo.session.officialTitle}
-      </p>
-      <p className="text-sm text-textSub/60 mt-0.5">{latestInfo.partLabel}</p>
+      <div className="min-w-0">
+        <p className="text-[10px] text-textSub/50 tracking-widest uppercase mb-1">
+          最新 — {formatDate(latestInfo.partDate)}
+        </p>
+        <p className="text-sm font-medium text-textMain leading-snug mb-1">
+          {latestInfo.session.narrativeTitle ?? latestInfo.session.officialTitle}
+        </p>
+        <p className="text-xs text-accent/70">{latestInfo.partLabel}</p>
+      </div>
+      <svg className="w-4 h-4 text-textSub/30 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
     </Link>
   )}
-
 </section>
 
        {/* Modules */}
 <section>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-    {/* 1. 議会を読む */}
+  <div className="grid grid-cols-2 gap-3">
     <Link
       href="/gikai/sessions"
-      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
+      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">議会を読む</h3>
-      <p className="text-textSub">
-        会議の記録から、町の議論をたどる。
-      </p>
+      <h3 className="text-sm font-semibold mb-1">議会を読む</h3>
+      <p className="text-xs text-textSub/60 leading-relaxed">会議の記録から議論をたどる</p>
     </Link>
 
-    {/* 2. 意思決定の流れを読む */}
-    <Link
-      href="/process"
-      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
-    >
-      <h3 className="text-xl font-semibold mb-2">意思決定の流れを読む</h3>
-      <p className="text-textSub">
-        何がどう積み上がり、決まっていくのか。
-      </p>
-    </Link>
-
-    {/* 3. 町の決定を読む */}
     <Link
       href="/gikai"
-      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
+      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">町の決定を読む</h3>
-      <p className="text-textSub">
-        町が選んだこと、選ばなかったこと。
-      </p>
+      <h3 className="text-sm font-semibold mb-1">決まったこと</h3>
+      <p className="text-xs text-textSub/60 leading-relaxed">町が選んだこと</p>
     </Link>
 
-    {/* 4. 地形を読む */}
+    <Link
+      href="/process"
+      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
+    >
+      <h3 className="text-sm font-semibold mb-1">流れを読む</h3>
+      <p className="text-xs text-textSub/60 leading-relaxed">意思決定の構造</p>
+    </Link>
+
     <Link
       href="/map"
-      className="bg-ink border border-line rounded-xl p-6 hover:border-accent transition-all"
+      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
     >
-      <h3 className="text-xl font-semibold mb-2">
+      <h3 className="text-sm font-semibold mb-1">
         地形を読む
-        <span className="text-[10px] font-semibold tracking-widest text-textSub/50 border border-textSub/30 rounded px-1.5 py-0.5 ml-2">
+        <span className="text-[9px] font-semibold tracking-widest text-textSub/40 border border-textSub/20 rounded px-1.5 py-0.5 ml-1.5">
           実験中
         </span>
       </h3>
-      <p className="text-textSub">
-        流域・地形・歴史を重ねて見る。
-      </p>
+      <p className="text-xs text-textSub/60 leading-relaxed">流域・地形・歴史を重ねる</p>
     </Link>
-
   </div>
 </section>
       </div>
