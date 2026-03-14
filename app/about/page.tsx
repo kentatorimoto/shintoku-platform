@@ -11,13 +11,14 @@ export default function AboutPage() {
 
       <div className="mt-16 mb-16">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-10">
-          SHINTOKU ATLAS について
+          SHINTOKU ATLAS
         </h1>
 
         <div className="space-y-8 text-textMain/70 leading-relaxed text-base">
           <p>
             新得町の議会・議決・プロセスを構造化し、<br />
-            「どう決まっていくか」を記録するプロジェクトです。
+            「どう決まっていくか」を記録するプロジェクトです。<br />
+            非公式の個人プロジェクト。
           </p>
 
           <p>
