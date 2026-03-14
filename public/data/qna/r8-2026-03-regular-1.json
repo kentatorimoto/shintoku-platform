@@ -5,7 +5,7 @@
   "source_url": "https://www.youtube.com/watch?v=Wc1AFR3nkOg&t=33s",
   "items": [
     {
-      "speaker_name": "初山か",
+      "speaker_name": "初山 一也",
       "speaker_role": "議員",
       "topic_title": "東京ふるさと新得会との連携・川崎市民まつりでの物産販売",
       "topic_tags": ["観光", "関係人口"],
@@ -28,7 +28,7 @@
       "mentioned_numbers": ["平成2年結成", "36回目", "50万人以上", "約30名"]
     },
     {
-      "speaker_name": "岡村力造",
+      "speaker_name": "岡村 力藏",
       "speaker_role": "議員",
       "topic_title": "町独自の高等教育修学支援制度の創設",
       "topic_tags": ["教育", "人口政策"],
@@ -48,7 +48,7 @@
       "mentioned_numbers": ["令和2年〜", "年間1〜2件"]
     },
     {
-      "speaker_name": "中村優太",
+      "speaker_name": "中村 雄太",
       "speaker_role": "議員",
       "topic_title": "商工業活性化事業補助金の制度見直し",
       "topic_tags": ["商工業", "財政"],
@@ -68,7 +68,7 @@
       "mentioned_numbers": ["3万円以下", "10年間", "5年（大樹町）", "3年（浦幌町）"]
     },
     {
-      "speaker_name": "桜田",
+      "speaker_name": "櫻田 郷史",
       "speaker_role": "議員",
       "topic_title": "観光施策の投資対効果検証とDMO化等の推進体制構築",
       "topic_tags": ["観光", "財政"],
@@ -91,7 +91,7 @@
       "mentioned_numbers": ["4136万円", "1948万円", "25%", "650万", "544.7万", "694.7万", "145.2万"]
     },
     {
-      "speaker_name": "村田浩",
+      "speaker_name": "村田 博",
       "speaker_role": "議員",
       "topic_title": "藤越道路と道道帯広新得線の交差点の冬季凍結路面対策",
       "topic_tags": ["インフラ", "農業"],
@@ -113,7 +113,7 @@
       "mentioned_numbers": ["勾配2.4%", "毎日35〜56台", "178台", "15m程度", "平成30年度", "令和2年度"]
     },
     {
-      "speaker_name": "青柳",
+      "speaker_name": "青柳 茂行",
       "speaker_role": "議員",
       "topic_title": "地域担当職員制度の導入検討",
       "topic_tags": ["地域自治", "人口政策"],
@@ -138,42 +138,42 @@
     {
       "topic_title": "関係人口・ふるさと会との連携",
       "topic_tags": ["観光", "関係人口"],
-      "speakers": ["初山か"],
+      "speakers": ["初山 一也"],
       "admin_stance": "継続検討",
       "future_review": true
     },
     {
       "topic_title": "高等教育支援制度",
       "topic_tags": ["教育", "人口政策"],
-      "speakers": ["岡村力造"],
+      "speakers": ["岡村 力藏"],
       "admin_stance": "現行制度維持",
       "future_review": false
     },
     {
       "topic_title": "商工業補助金制度",
       "topic_tags": ["商工業", "財政"],
-      "speakers": ["中村優太"],
+      "speakers": ["中村 雄太"],
       "admin_stance": "現行制度維持",
       "future_review": true
     },
     {
       "topic_title": "観光協会・DMO化",
       "topic_tags": ["観光", "財政"],
-      "speakers": ["桜田"],
+      "speakers": ["櫻田 郷史"],
       "admin_stance": "継続協議",
       "future_review": true
     },
     {
       "topic_title": "道路凍結対策",
       "topic_tags": ["インフラ", "農業"],
-      "speakers": ["村田浩"],
+      "speakers": ["村田 博"],
       "admin_stance": "前向き検討",
       "future_review": true
     },
     {
       "topic_title": "地域担当職員制度",
       "topic_tags": ["地域自治", "人口政策"],
-      "speakers": ["青柳"],
+      "speakers": ["青柳 茂行"],
       "admin_stance": "現時点困難・来年度再検討",
       "future_review": true
     }
