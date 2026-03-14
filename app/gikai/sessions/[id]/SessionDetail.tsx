@@ -266,7 +266,7 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center gap-3 bg-ink border border-line rounded-xl p-4
-                 hover:border-red-500/50 transition-all group"
+                 hover:border-accent/50 transition-all group"
     >
       {/* サムネイル */}
       <div className="relative w-24 h-14 sm:w-28 sm:h-16 shrink-0 rounded-lg overflow-hidden bg-line">
@@ -296,10 +296,10 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
 
       {/* テキスト */}
       <div className="flex-1 min-w-0">
-        <p className="text-[11px] font-semibold tracking-widest text-red-400/80 mb-0.5">
+        <p className="text-[11px] font-semibold tracking-widest text-accent/70 mb-0.5">
           YouTube
         </p>
-        <p className="text-sm font-semibold text-textMain group-hover:text-red-400 transition-colors">
+        <p className="text-sm font-semibold text-textMain group-hover:text-accent transition-colors">
           {label}
         </p>
         <p className="text-[11px] text-textSub/50 mt-0.5">
@@ -308,7 +308,7 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
       </div>
 
       {/* 外部リンクアイコン */}
-      <svg className="w-4 h-4 text-textSub/30 shrink-0 group-hover:text-red-400/50 transition-colors"
+      <svg className="w-4 h-4 text-textSub/30 shrink-0 group-hover:text-accent/50 transition-colors"
            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
         <polyline points="15 3 21 3 21 9"/>

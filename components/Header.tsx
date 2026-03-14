@@ -87,7 +87,7 @@ export default function Header() {
               backgroundPosition: "center bottom",
               backgroundRepeat: "no-repeat",
               paddingBottom: "3px",
-              color: "#D5D3CC",
+              color: "var(--color-textMain)",
               textDecoration: "none",
               fontSize: "14px",
             }}
