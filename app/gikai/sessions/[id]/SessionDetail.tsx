@@ -13,10 +13,23 @@ interface Part {
   slidesDir: string
 }
 
+interface QnaItem {
+  speaker_name:      string
+  speaker_role:      string
+  topic_title:       string
+  topic_tags:        string[]
+  question_points:   string[]
+  answer_summary:    string
+  answer_points:     string[]
+  conclusion:        string
+  continuing_issues: string[]
+}
+
 interface Props {
   sessionId:         string
   parts:             Part[]
   initialPartIndex?: number
+  qnaItems?:         QnaItem[] | null
 }
 
 // ── YouTube 動画 ID 抽出 ────────────────────────────────────────────────────
@@ -92,7 +105,7 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-export default function SessionDetail({ sessionId, parts, initialPartIndex = 0 }: Props) {
+export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, qnaItems }: Props) {
   const [activeIdx, setActiveIdx] = useState(initialPartIndex)
   const topRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -141,6 +154,74 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0 }
             動画アーカイブ
           </h2>
           <VideoCard youtube={activePart.youtube} label={activePart.label} />
+        </section>
+      )}
+
+      {/* ── 一般質問 ─────────────────────────────────────────────── */}
+      {qnaItems && qnaItems.length > 0 && (
+        <section>
+          <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
+            一般質問 — 議員ごとの質疑
+          </h2>
+          <div className="space-y-6">
+            {qnaItems.map((item) => (
+              <div key={item.speaker_name} className="bg-ink border border-line rounded-xl p-5 sm:p-6">
+                {/* 議員名・テーマ */}
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-lg font-bold text-textMain">{item.speaker_name}</span>
+                  <span className="text-xs text-textSub/60">{item.speaker_role}</span>
+                </div>
+                <p className="text-base font-semibold text-textMain/90 mb-3">{item.topic_title}</p>
+
+                {/* タグ */}
+                {item.topic_tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {item.topic_tags.map(tag => (
+                      <span key={tag} className="text-[11px] border border-line text-textSub px-2 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* 質問・回答・結論 */}
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">質問</p>
+                    <div className="text-textMain/80 leading-relaxed">
+                      <ul className="space-y-1">
+                        {item.question_points.map((p, i) => (
+                          <li key={i} className="flex gap-1.5">
+                            <span className="text-accent/50 shrink-0">·</span>
+                            <span>{p}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">行政の回答</p>
+                    <p className="text-textMain/80 leading-relaxed">{item.answer_summary}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">結論</p>
+                    <p className="text-textMain/80 leading-relaxed">{item.conclusion}</p>
+                  </div>
+
+                  {item.continuing_issues.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">継続課題</p>
+                      <p className="text-textSub text-xs leading-relaxed">
+                        {item.continuing_issues.join("　")}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       )}
 

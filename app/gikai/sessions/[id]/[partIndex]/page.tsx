@@ -5,6 +5,39 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import SessionDetail from "../SessionDetail"
 
+interface QnaItem {
+  speaker_name:      string
+  speaker_role:      string
+  topic_title:       string
+  topic_tags:        string[]
+  question_points:   string[]
+  answer_summary:    string
+  answer_points:     string[]
+  conclusion:        string
+  continuing_issues: string[]
+  mentioned_entities: string[]
+  mentioned_numbers:  string[]
+}
+
+interface QnaData {
+  session_id:   string
+  part_index:   number
+  session_date: string
+  source_url:   string
+  items:        QnaItem[]
+}
+
+function getQnaData(sessionId: string, partIndex: number): QnaData | null {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "qna", `${sessionId}.json`)
+    const data = JSON.parse(fs.readFileSync(filePath, "utf-8")) as QnaData
+    if (data.part_index !== partIndex) return null
+    return data
+  } catch {
+    return null
+  }
+}
+
 interface Part {
   label:     string
   youtube?:  string
@@ -90,6 +123,8 @@ export default async function SessionPartPage({
   const idx = Number(partIndex)
   if (isNaN(idx) || idx < 0 || idx >= session.parts.length) notFound()
 
+  const qnaData = getQnaData(session.id, idx)
+
   const parts = session.parts.map(part => ({
     label:     part.label,
     youtube:   part.youtube ?? null,
@@ -155,6 +190,7 @@ export default async function SessionPartPage({
         sessionId={session.id}
         parts={parts}
         initialPartIndex={idx}
+        qnaItems={qnaData?.items ?? null}
       />
     </div>
   )
