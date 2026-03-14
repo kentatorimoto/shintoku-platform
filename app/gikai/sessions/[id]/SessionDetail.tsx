@@ -25,11 +25,143 @@ interface QnaItem {
   continuing_issues: string[]
 }
 
+interface BillQuestion {
+  questioner: string
+  content:    string
+  answer:     string
+}
+
+interface BillItem {
+  bill_number:           string
+  bill_title:            string
+  bill_tags:             string[]
+  summary:               string
+  proposer:              string
+  questions:             BillQuestion[]
+  result:                string
+  result_detail:         string
+  referred_to_committee: boolean
+}
+
+interface CommitteeReferral {
+  bill_numbers: string[]
+  committee:    string
+  note:         string
+}
+
+interface HonkaigiData {
+  session_id:           string
+  part_index:           number
+  session_date:         string
+  part_type:            "honkaigi"
+  source_url:           string
+  items:                BillItem[]
+  committee_referrals:  CommitteeReferral[]
+}
+
 interface Props {
   sessionId:         string
   parts:             Part[]
   initialPartIndex?: number
   qnaItems?:         QnaItem[] | null
+  honkaigiData?:     HonkaigiData | null
+}
+
+// ── 本会議・議案アコーディオン ────────────────────────────────────────────────
+function HonkaigiSection({ data }: { data: HonkaigiData }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  return (
+    <section>
+      <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
+        議案審議
+      </h2>
+      <div className="space-y-2">
+        {data.items.map((item, i) => {
+          const isOpen = openIndex === i
+          return (
+            <div key={item.bill_number} className="bg-ink border border-line rounded-xl overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-line/20 transition-colors"
+              >
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    {item.bill_tags.map(tag => (
+                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-sm font-medium text-textMain mb-1">{item.bill_title}</p>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-textSub/60">{item.bill_number}</span>
+                    <span className={`text-xs px-2 py-0.5 rounded-full border ${
+                      item.result === "可決"
+                        ? "border-accent/40 text-accent/70"
+                        : "border-line text-textSub/60"
+                    }`}>
+                      {item.result}
+                    </span>
+                  </div>
+                </div>
+                <svg
+                  className={`w-4 h-4 text-textSub/40 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+
+              {isOpen && (
+                <div className="px-5 pb-5 border-t border-line/50">
+                  <dl className="space-y-3 mt-4">
+                    <div className="flex gap-3">
+                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">概要</dt>
+                      <dd className="text-sm text-textMain/80 leading-relaxed">{item.summary}</dd>
+                    </div>
+                    <div className="border-t border-line/50 pt-3 flex gap-3">
+                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">提案者</dt>
+                      <dd className="text-sm text-textMain/80">{item.proposer}</dd>
+                    </div>
+                    {item.questions.length > 0 && (
+                      <div className="border-t border-line/50 pt-3 flex gap-3">
+                        <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">質疑</dt>
+                        <dd className="space-y-3 flex-1">
+                          {item.questions.map((q, j) => (
+                            <div key={j} className="text-sm">
+                              <p className="text-textSub/70 text-xs mb-1">{q.questioner}</p>
+                              <p className="text-textMain/80 leading-relaxed mb-1">{q.content}</p>
+                              <p className="text-textSub/60 leading-relaxed text-xs border-l border-line/50 pl-3">{q.answer}</p>
+                            </div>
+                          ))}
+                        </dd>
+                      </div>
+                    )}
+                    <div className="border-t border-line/50 pt-3 flex gap-3">
+                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">採決</dt>
+                      <dd className="text-sm text-textMain/80">{item.result}（{item.result_detail}）</dd>
+                    </div>
+                  </dl>
+                </div>
+              )}
+            </div>
+          )
+        })}
+
+        {data.committee_referrals.length > 0 && (
+          <div className="bg-ink border border-line/30 rounded-xl px-5 py-4">
+            {data.committee_referrals.map((ref, i) => (
+              <div key={i}>
+                <p className="text-xs text-textSub/60 mb-1">{ref.bill_numbers.join("、")} → {ref.committee}に付託</p>
+                <p className="text-xs text-textSub/40">{ref.note}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
 }
 
 // ── 一般質問アコーディオン ────────────────────────────────────────────────────
@@ -188,7 +320,7 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
 
 // ──────────────────────────────────────────────────────────────────────────────
 
-export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, qnaItems }: Props) {
+export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, qnaItems, honkaigiData }: Props) {
   const [activeIdx, setActiveIdx] = useState(initialPartIndex)
   const topRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -238,6 +370,11 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
           </h2>
           <VideoCard youtube={activePart.youtube} label={activePart.label} />
         </section>
+      )}
+
+      {/* ── 本会議・議案 ──────────────────────────────────────────── */}
+      {honkaigiData && honkaigiData.items.length > 0 && (
+        <HonkaigiSection data={honkaigiData} />
       )}
 
       {/* ── 一般質問 ─────────────────────────────────────────────── */}

@@ -23,19 +23,65 @@ interface QnaData {
   session_id:   string
   part_index:   number
   session_date: string
+  part_type?:   string
   source_url:   string
   items:        QnaItem[]
 }
 
-function getQnaData(sessionId: string, partIndex: number): QnaData | null {
-  try {
-    const filePath = path.join(process.cwd(), "public", "data", "qna", `${sessionId}.json`)
-    const data = JSON.parse(fs.readFileSync(filePath, "utf-8")) as QnaData
-    if (data.part_index !== partIndex) return null
-    return data
-  } catch {
-    return null
+interface BillQuestion {
+  questioner: string
+  content:    string
+  answer:     string
+}
+
+interface BillItem {
+  bill_number:           string
+  bill_title:            string
+  bill_tags:             string[]
+  summary:               string
+  proposer:              string
+  questions:             BillQuestion[]
+  result:                string
+  result_detail:         string
+  referred_to_committee: boolean
+}
+
+interface CommitteeReferral {
+  bill_numbers: string[]
+  committee:    string
+  note:         string
+}
+
+interface HonkaigiData {
+  session_id:           string
+  part_index:           number
+  session_date:         string
+  part_type:            "honkaigi"
+  source_url:           string
+  items:                BillItem[]
+  committee_referrals:  CommitteeReferral[]
+}
+
+type PartData = QnaData | HonkaigiData
+
+function getPartData(sessionId: string, partIndex: number): PartData | null {
+  const candidates = [
+    `${sessionId}_day${partIndex + 1}.json`,
+    `${sessionId}_part${partIndex + 1}.json`,
+    `${sessionId}.json`,
+  ]
+
+  for (const filename of candidates) {
+    try {
+      const filePath = path.join(process.cwd(), "public", "data", "qna", filename)
+      if (!fs.existsSync(filePath)) continue
+      const data = JSON.parse(fs.readFileSync(filePath, "utf-8")) as PartData
+      if (data.part_index === partIndex) return data
+    } catch {
+      continue
+    }
   }
+  return null
 }
 
 interface Part {
@@ -123,7 +169,9 @@ export default async function SessionPartPage({
   const idx = Number(partIndex)
   if (isNaN(idx) || idx < 0 || idx >= session.parts.length) notFound()
 
-  const qnaData = getQnaData(session.id, idx)
+  const partData = getPartData(session.id, idx)
+  const qnaItems    = partData?.part_type !== "honkaigi" ? (partData as QnaData | null)?.items ?? null : null
+  const honkaigiData = partData?.part_type === "honkaigi" ? partData as HonkaigiData : null
 
   const parts = session.parts.map(part => ({
     label:     part.label,
@@ -190,7 +238,8 @@ export default async function SessionPartPage({
         sessionId={session.id}
         parts={parts}
         initialPartIndex={idx}
-        qnaItems={qnaData?.items ?? null}
+        qnaItems={qnaItems}
+        honkaigiData={honkaigiData}
       />
     </div>
   )
