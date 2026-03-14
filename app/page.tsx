@@ -83,7 +83,7 @@ export default function Home() {
   </h2>
 
   <p className="text-textMain/60 text-base mt-4 leading-relaxed">
-    ニュースではなく、流れを見る。
+    ニュースではなく、流れを見る。<br />
     断片ではなく、構造を見る。
   </p>
 
