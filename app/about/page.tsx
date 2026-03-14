@@ -17,8 +17,7 @@ export default function AboutPage() {
         <div className="space-y-8 text-textMain/70 leading-relaxed text-base">
           <p>
             新得町の議会・議決・プロセスを構造化し、<br />
-            「どう決まっていくか」を記録するプロジェクトです。<br />
-            非公式の個人プロジェクト。
+            「どう決まっていくか」を記録する非公式の個人プロジェクトです。
           </p>
 
           <p>
@@ -35,6 +34,17 @@ export default function AboutPage() {
           <p className="text-textSub/50 text-sm">
             AIによる要約を含むため、内容に誤りがある場合があります。<br />
             誤りや不足があれば、都度修正・更新していきます。
+          </p>
+
+          <p className="text-textSub/50 text-sm">
+            開発・制作：<a
+              href="https://www.office339.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-accent transition-colors"
+            >
+              office339
+            </a>
           </p>
         </div>
       </div>
