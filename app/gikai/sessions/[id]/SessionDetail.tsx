@@ -32,6 +32,92 @@ interface Props {
   qnaItems?:         QnaItem[] | null
 }
 
+// ── 一般質問アコーディオン ────────────────────────────────────────────────────
+function QnaSection({ items }: { items: QnaItem[] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  return (
+    <section>
+      <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
+        一般質問 — 議員ごとの質疑
+      </h2>
+      <div className="space-y-2">
+        {items.map((item, i) => {
+          const isOpen = openIndex === i
+          return (
+            <div
+              key={item.speaker_name}
+              className="bg-ink border border-line rounded-xl overflow-hidden"
+            >
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-line/20 transition-colors"
+              >
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline gap-2 mb-0.5">
+                    <span className="text-sm font-semibold text-textMain">{item.speaker_name}</span>
+                    <span className="text-xs text-textSub/60">{item.speaker_role}</span>
+                  </div>
+                  <p className="text-xs text-textSub/80 truncate">{item.topic_title}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {item.topic_tags.map(tag => (
+                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <svg
+                  className={`w-4 h-4 text-textSub/40 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+
+              {isOpen && (
+                <div className="px-5 pb-5 border-t border-line/50">
+                  <dl className="space-y-3 mt-4">
+                    <div className="flex gap-3">
+                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">質問</dt>
+                      <dd className="text-sm text-textMain/80 leading-relaxed">
+                        <ul className="space-y-1">
+                          {item.question_points.map((p, j) => (
+                            <li key={j} className="flex gap-2">
+                              <span className="text-textSub/40 shrink-0">·</span>
+                              <span>{p}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </dd>
+                    </div>
+                    <div className="border-t border-line/50 pt-3 flex gap-3">
+                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">行政の回答</dt>
+                      <dd className="text-sm text-textMain/80 leading-relaxed">{item.answer_summary}</dd>
+                    </div>
+                    <div className="border-t border-line/50 pt-3 flex gap-3">
+                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">結論</dt>
+                      <dd className="text-sm text-textMain/80 leading-relaxed">{item.conclusion}</dd>
+                    </div>
+                    {item.continuing_issues.length > 0 && (
+                      <div className="border-t border-line/50 pt-3 flex gap-3">
+                        <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">継続課題</dt>
+                        <dd className="text-sm text-textSub/70 leading-relaxed">
+                          {item.continuing_issues.join("　")}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
 // ── YouTube 動画 ID 抽出 ────────────────────────────────────────────────────
 function extractVideoId(url: string): string | null {
   const match = url.match(/[?&]v=([a-zA-Z0-9_-]{11})/)
@@ -159,70 +245,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
 
       {/* ── 一般質問 ─────────────────────────────────────────────── */}
       {qnaItems && qnaItems.length > 0 && (
-        <section>
-          <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
-            一般質問 — 議員ごとの質疑
-          </h2>
-          <div className="space-y-6">
-            {qnaItems.map((item) => (
-              <div key={item.speaker_name} className="bg-ink border border-line rounded-xl p-5 sm:p-6">
-                {/* 議員名・テーマ */}
-                <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-lg font-bold text-textMain">{item.speaker_name}</span>
-                  <span className="text-xs text-textSub/60">{item.speaker_role}</span>
-                </div>
-                <p className="text-base font-semibold text-textMain/90 mb-3">{item.topic_title}</p>
-
-                {/* タグ */}
-                {item.topic_tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {item.topic_tags.map(tag => (
-                      <span key={tag} className="text-[11px] border border-line text-textSub px-2 py-0.5 rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                {/* 質問・回答・結論 */}
-                <div className="space-y-4 text-sm">
-                  <div>
-                    <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">質問</p>
-                    <div className="text-textMain/80 leading-relaxed">
-                      <ul className="space-y-1">
-                        {item.question_points.map((p, i) => (
-                          <li key={i} className="flex gap-1.5">
-                            <span className="text-accent/50 shrink-0">·</span>
-                            <span>{p}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">行政の回答</p>
-                    <p className="text-textMain/80 leading-relaxed">{item.answer_summary}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">結論</p>
-                    <p className="text-textMain/80 leading-relaxed">{item.conclusion}</p>
-                  </div>
-
-                  {item.continuing_issues.length > 0 && (
-                    <div>
-                      <p className="text-xs font-semibold text-accent/80 tracking-wider mb-1">継続課題</p>
-                      <p className="text-textSub text-xs leading-relaxed">
-                        {item.continuing_issues.join("　")}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <QnaSection items={qnaItems} />
       )}
 
       {/* ── スライド ───────────────────────────────────────────────────── */}
