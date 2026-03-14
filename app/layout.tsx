@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import BottomNav from "@/components/BottomNav"
 import { Inter, Noto_Sans_JP, IBM_Plex_Sans } from "next/font/google"
 import "./globals.css"
 import "leaflet/dist/leaflet.css"
@@ -53,10 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased bg-base text-textMain min-h-screen flex flex-col">
         <Header />
-        <main className="pt-16 flex-1">
+        <main className="pt-16 pb-16 md:pb-0 flex-1">
           {children}
         </main>
         <Footer />
+        <BottomNav />
       </body>
     </html>
   )
