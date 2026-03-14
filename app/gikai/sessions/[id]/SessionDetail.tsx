@@ -352,7 +352,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
               className={[
                 "px-4 py-2 rounded-lg text-sm font-medium transition-colors border",
                 activeIdx === i
-                  ? "bg-accent text-base border-accent"
+                  ? "bg-accent/10 text-accent border-accent font-semibold"
                   : "bg-ink border-line text-textSub hover:border-accent/50",
               ].join(" ")}
             >
