@@ -6,7 +6,6 @@ const COL1 = [
   { href: "/gikai/sessions", label: "議会を読む",          external: false },
   { href: "/gikai",          label: "町の決定を読む",       external: false },
   { href: "/process",        label: "意思決定の流れを読む", external: false },
-  { href: "/map",            label: "地形を読む",           external: false },
 ] as const
 
 const COL2 = [
@@ -31,7 +30,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row sm:justify-between gap-10">
           {/* ブランド */}
           <div>
-            <p className="text-textMain font-semibold mb-2">Shintoku Atlas</p>
+            <p className="text-textMain font-semibold mb-2">SHINTOKU ATLAS</p>
             <p className="text-xs text-textSub/60 leading-relaxed">
               新得町の公開情報を<br />整理・可視化するプロジェクト
             </p>
@@ -53,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 mt-8 border-t border-line/20 text-xs text-textSub/50">
-          © 2026 Shintoku Atlas — 非公式・個人プロジェクト
+          © 2026 SHINTOKU ATLAS — 非公式・個人プロジェクト
         </div>
       </div>
     </footer>
