@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Shintoku Atlas** — an unofficial public information dashboard for Shintoku Town (新得町), Hokkaido, Japan. Scrapes municipal data from the official town website and presents it in a searchable, accessible format. Licensed under AGPL-3.0.
 
 Key features:
-- Gikai (議会) session viewer with PDF slides, YouTube links, and AI-generated summaries
+- Gikai (議会) session viewer with PDF slides, YouTube links, AI-generated summaries, Q&A (一般質問), and honkaigi (本会議議案) structured data
 - Full-text search for newsletters (町報) and decisions (議決)
 - Decision-making process visualization (timeline, issue cards, priorities)
 - Interactive map with GeoJSON overlays (rivers, passes, center shifts)
@@ -46,6 +46,8 @@ shintoku-platform/
 │   │       ├── page.tsx          #   Session list
 │   │       ├── SessionsList.tsx  #   Client component
 │   │       └── [id]/             #   Dynamic session detail
+│   │           ├── SessionDetail.tsx  # Client component (tabs, video, honkaigi, QNA, slides)
+│   │           └── [partIndex]/       # Part-specific page (SSG, getPartData)
 │   ├── insights/                 # Data visualizations
 │   ├── map/                      # Interactive map (experimental)
 │   ├── newsletters/              # Newsletter search
@@ -92,6 +94,7 @@ shintoku-platform/
 │   │   ├── decision_links.json
 │   │   ├── basin_questions.json
 │   │   ├── lastSync.json
+│   │   ├── qna/                  # Session part data (QNA / honkaigi)
 │   │   └── *.geojson             # Map layers
 │   ├── pdf/                      # Gikai session PDFs
 │   └── slides/                   # Generated slide images
@@ -261,7 +264,8 @@ GitHub Actions automates:
 |------|-----------|
 | `/` | Top page |
 | `/gikai/sessions` | 議会を読む (Session list) |
-| `/gikai/sessions/[id]` | Individual session page |
+| `/gikai/sessions/[id]` | Individual session page (redirects to /0) |
+| `/gikai/sessions/[id]/[partIndex]` | Part-specific session page (SSG) |
 | `/gikai` | 町の決定を読む (Decisions list) |
 | `/process` | 意思決定の流れを読む (Hub) |
 | `/process/issues` | 論点カード (Issue cards) |
@@ -341,12 +345,102 @@ Defined as static data in `app/process/issues/page.tsx`:
 - AI-generated summaries always disclose the possibility of errors
 - Logo: IBM Plex Sans weight 500, uppercase, wide letter-spacing
 
+### Part Data (`public/data/qna/`)
+
+セッションの各パートに対応する構造化データ。`getPartData()` が以下の順でファイルを探索：
+1. `{sessionId}_day{partIndex+1}.json` — 本会議（初日・最終日等）
+2. `{sessionId}_part{partIndex+1}.json` — パート別データ
+3. `{sessionId}.json` — 単一ファイル（レガシー互換）
+
+`part_type` フィールドで表示コンポーネントを切り替え：
+- **未指定** → 一般質問 (`QnaSection` アコーディオン)
+- **`"honkaigi"`** → 本会議議案審議 (`HonkaigiSection` アコーディオン)
+
+#### QnaData（一般質問）
+
+```json
+{
+  "session_id": "r8-2026-03-regular-1",
+  "part_index": 1,
+  "session_date": "2026-03-12",
+  "source_url": "https://www.youtube.com/...",
+  "items": [
+    {
+      "speaker_name": "議員名",
+      "speaker_role": "議員",
+      "topic_title": "質問テーマ",
+      "topic_tags": ["観光", "財政"],
+      "question_points": ["質問ポイント1"],
+      "answer_summary": "回答要約",
+      "answer_points": ["回答ポイント1"],
+      "conclusion": "結論",
+      "continuing_issues": ["継続課題1"],
+      "mentioned_entities": ["固有名詞"],
+      "mentioned_numbers": ["具体的数値"]
+    }
+  ],
+  "topics_index": [...]
+}
+```
+
+#### HonkaigiData（本会議議案）
+
+```json
+{
+  "session_id": "r8-2026-03-regular-1",
+  "part_index": 0,
+  "session_date": "2026-03-02",
+  "part_type": "honkaigi",
+  "source_url": "https://www.youtube.com/...",
+  "items": [
+    {
+      "bill_number": "議案第3号",
+      "bill_title": "議案名",
+      "bill_tags": ["インフラ", "財政"],
+      "summary": "概要",
+      "proposer": "提案者名",
+      "questions": [
+        { "questioner": "議員名", "content": "質問", "answer": "回答" }
+      ],
+      "result": "可決",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    }
+  ],
+  "committee_referrals": [
+    { "bill_numbers": ["議案第16号〜第26号"], "committee": "予算特別委員会", "note": "..." }
+  ]
+}
+```
+
+#### UI コンポーネント構成
+
+`SessionDetail.tsx` 内のセクション表示順：
+1. タブバー（パート切り替え）
+2. 動画アーカイブ (`VideoCard`)
+3. **本会議・議案** (`HonkaigiSection`) — `honkaigiData` がある場合
+4. **一般質問** (`QnaSection`) — `qnaItems` がある場合
+5. スライド
+
+両セクションともアコーディオン形式。ヘッダーはテーマ主役（タグ → タイトル → 発言者/議案番号）のカードデザイン。
+
+### Data Creation Workflow
+
+新しいセッションデータの作成にはNotebookLM MCP（`notebooklm-mcp`）を活用：
+1. NotebookLMでノートブックを作成し、YouTube URLをソースとして追加
+2. 構造化抽出プロンプトで質疑内容を取得
+3. 結果を `public/data/qna/` にJSON形式で保存
+4. 議員名は正式表記を確認して修正
+
 ### Adding a New Session
 
 1. Copy PDF to `public/pdf/` with naming `{sessionId}_part{n}.pdf`
 2. Run `npm run slides:generate <sessionId> <slideId>` to generate slide images
 3. Add new session entry to `public/data/gikai_sessions.json`
 4. Apply tags following the tagging rules above
+5. (Optional) Add part data to `public/data/qna/`:
+   - 本会議: `{sessionId}_day{n}.json` with `part_type: "honkaigi"`
+   - 一般質問: `{sessionId}.json` or `{sessionId}_part{n}.json`
 
 ### Known Issues
 

@@ -150,18 +150,6 @@ export default function Home() {
       <p className="text-xs text-textSub/60 leading-relaxed">意思決定の構造</p>
     </Link>
 
-    <Link
-      href="/map"
-      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-    >
-      <h3 className="text-sm font-semibold mb-1">
-        地形を読む
-        <span className="text-[9px] font-semibold tracking-widest text-textSub/40 border border-textSub/20 rounded px-1.5 py-0.5 ml-1.5">
-          実験中
-        </span>
-      </h3>
-      <p className="text-xs text-textSub/60 leading-relaxed">流域・地形・歴史を重ねる</p>
-    </Link>
   </div>
 </section>
       </div>
