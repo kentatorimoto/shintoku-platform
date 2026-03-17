@@ -13,12 +13,14 @@
       {
         "label": "午前",
         "youtube": "https://www.youtube.com/watch?v=uAm0PrNXO0Q",
-        "slidesDir": "morning"
+        "pdf": "r8-2026-03-yosan-tokubetsu_part1.pdf",
+        "slidesDir": "part1"
       },
       {
         "label": "午後",
         "youtube": "https://www.youtube.com/watch?v=citvSDw4O8I",
-        "slidesDir": "afternoon"
+        "pdf": "r8-2026-03-yosan-tokubetsu_part2.pdf",
+        "slidesDir": "part2"
       }
     ],
     "tags": [
