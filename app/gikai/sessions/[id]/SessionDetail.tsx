@@ -70,6 +70,10 @@ interface Props {
 // ── 本会議・議案アコーディオン ────────────────────────────────────────────────
 function HonkaigiSection({ data }: { data: HonkaigiData }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [showAll, setShowAll] = useState(false)
+  const INITIAL_COUNT = 5
+  const visibleItems = showAll ? data.items : data.items.slice(0, INITIAL_COUNT)
+  const hasMore = data.items.length > INITIAL_COUNT
 
   return (
     <section>
@@ -77,7 +81,7 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
         議案審議
       </h2>
       <div className="space-y-2">
-        {data.items.map((item, i) => {
+        {visibleItems.map((item, i) => {
           const isOpen = openIndex === i
           return (
             <div key={item.bill_number} className="bg-ink border border-line rounded-xl overflow-hidden">
@@ -148,6 +152,19 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
             </div>
           )
         })}
+
+        {hasMore && (
+          <button
+            onClick={() => {
+              setShowAll(!showAll)
+            }}
+            className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-xl hover:border-accent/50 hover:text-accent transition-colors"
+          >
+            {showAll
+              ? "折りたたむ"
+              : `残り ${data.items.length - INITIAL_COUNT} 件を表示`}
+          </button>
+        )}
 
         {data.committee_referrals.length > 0 && (
           <div className="bg-ink border border-line/30 rounded-xl px-5 py-4">
