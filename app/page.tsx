@@ -123,7 +123,7 @@ export default function Home() {
           </section>
 
           {/* 右カラム：モジュール */}
-          <section className="md:w-72 md:shrink-0 md:sticky md:top-8">
+          <section className="md:w-72 md:shrink-0 md:sticky md:top-24">
             <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
               <Link
                 href="/gikai/sessions"
