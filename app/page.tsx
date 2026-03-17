@@ -76,82 +76,80 @@ export default function Home() {
   return (
     <main className="bg-base text-textMain font-sans px-8 pb-8">
       <div className="max-w-6xl mx-auto">
-        {/* Hero */}
-<section className="max-w-3xl pt-6 pb-8 mb-8">
-  <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight break-keep">
-    町を読む。
-  </h2>
+        <div className="flex flex-col md:flex-row md:gap-16 md:items-start">
 
-  <p className="text-textMain/60 text-base mt-4 leading-relaxed">
-    ニュースではなく、流れを見る。<br />
-    断片ではなく、構造を見る。
-  </p>
+          {/* 左カラム：ヒーロー */}
+          <section className="max-w-3xl md:max-w-none md:flex-1 pt-6 pb-8 md:pt-16 mb-8 md:mb-0">
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight break-keep">
+              町を読む。
+            </h2>
+            <p className="text-textMain/60 text-base mt-4 leading-relaxed">
+              ニュースではなく、流れを見る。<br />
+              断片ではなく、構造を見る。
+            </p>
+            <div className="grid grid-cols-3 gap-px bg-line/30 rounded-xl overflow-hidden mt-8 mb-6">
+              <div className="bg-base flex flex-col items-center py-4">
+                <p className="text-2xl font-bold text-textMain">{sessionCount}</p>
+                <p className="text-[10px] text-textSub/50 mt-1">会議</p>
+              </div>
+              <div className="bg-base flex flex-col items-center py-4 border-x border-line/30">
+                <p className="text-2xl font-bold text-textMain">{giketsuCount.toLocaleString()}</p>
+                <p className="text-[10px] text-textSub/50 mt-1">議決</p>
+              </div>
+              <div className="bg-base flex flex-col items-center py-4">
+                <p className="text-2xl font-bold text-textMain">6</p>
+                <p className="text-[10px] text-textSub/50 mt-1">継続論点</p>
+              </div>
+            </div>
+            {latestInfo && (
+              <Link
+                href={`/gikai/sessions/${latestInfo.session.id}/${latestInfo.partIndex}`}
+                className="border border-line rounded-xl p-4 flex items-start justify-between gap-3 hover:border-accent/50 transition bg-ink block"
+              >
+                <div className="min-w-0">
+                  <p className="text-[10px] text-textSub/50 tracking-widest uppercase mb-1">
+                    最新 — {formatDate(latestInfo.partDate)}
+                  </p>
+                  <p className="text-sm font-medium text-textMain leading-snug mb-1">
+                    {latestInfo.session.narrativeTitle ?? latestInfo.session.officialTitle}
+                  </p>
+                  <p className="text-xs text-accent/70">{latestInfo.partLabel}</p>
+                </div>
+                <svg className="w-4 h-4 text-textSub/30 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </Link>
+            )}
+          </section>
 
-  <div className="grid grid-cols-3 gap-px bg-line/30 rounded-xl overflow-hidden mt-8 mb-6">
-    <div className="bg-base flex flex-col items-center py-4">
-      <p className="text-2xl font-bold text-textMain">{sessionCount}</p>
-      <p className="text-[10px] text-textSub/50 mt-1">会議</p>
-    </div>
-    <div className="bg-base flex flex-col items-center py-4 border-x border-line/30">
-      <p className="text-2xl font-bold text-textMain">{giketsuCount.toLocaleString()}</p>
-      <p className="text-[10px] text-textSub/50 mt-1">議決</p>
-    </div>
-    <div className="bg-base flex flex-col items-center py-4">
-      <p className="text-2xl font-bold text-textMain">6</p>
-      <p className="text-[10px] text-textSub/50 mt-1">継続論点</p>
-    </div>
-  </div>
+          {/* 右カラム：モジュール */}
+          <section className="md:w-72 md:pt-16 md:shrink-0">
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+              <Link
+                href="/gikai/sessions"
+                className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
+              >
+                <h3 className="text-sm font-semibold mb-1">議会を読む</h3>
+                <p className="text-xs text-textSub/60 leading-relaxed">会議の記録から議論をたどる</p>
+              </Link>
+              <Link
+                href="/gikai"
+                className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
+              >
+                <h3 className="text-sm font-semibold mb-1">決まったこと</h3>
+                <p className="text-xs text-textSub/60 leading-relaxed">町が選んだこと</p>
+              </Link>
+              <Link
+                href="/process"
+                className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
+              >
+                <h3 className="text-sm font-semibold mb-1">流れを読む</h3>
+                <p className="text-xs text-textSub/60 leading-relaxed">意思決定の構造</p>
+              </Link>
+            </div>
+          </section>
 
-  {latestInfo && (
-    <Link
-      href={`/gikai/sessions/${latestInfo.session.id}/${latestInfo.partIndex}`}
-      className="border border-line rounded-xl p-4 flex items-start justify-between gap-3 hover:border-accent/50 transition bg-ink block"
-    >
-      <div className="min-w-0">
-        <p className="text-[10px] text-textSub/50 tracking-widest uppercase mb-1">
-          最新 — {formatDate(latestInfo.partDate)}
-        </p>
-        <p className="text-sm font-medium text-textMain leading-snug mb-1">
-          {latestInfo.session.narrativeTitle ?? latestInfo.session.officialTitle}
-        </p>
-        <p className="text-xs text-accent/70">{latestInfo.partLabel}</p>
-      </div>
-      <svg className="w-4 h-4 text-textSub/30 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M9 18l6-6-6-6"/>
-      </svg>
-    </Link>
-  )}
-</section>
-
-       {/* Modules */}
-<section>
-  <div className="grid grid-cols-2 gap-3">
-    <Link
-      href="/gikai/sessions"
-      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-    >
-      <h3 className="text-sm font-semibold mb-1">議会を読む</h3>
-      <p className="text-xs text-textSub/60 leading-relaxed">会議の記録から議論をたどる</p>
-    </Link>
-
-    <Link
-      href="/gikai"
-      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-    >
-      <h3 className="text-sm font-semibold mb-1">決まったこと</h3>
-      <p className="text-xs text-textSub/60 leading-relaxed">町が選んだこと</p>
-    </Link>
-
-    <Link
-      href="/process"
-      className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-    >
-      <h3 className="text-sm font-semibold mb-1">流れを読む</h3>
-      <p className="text-xs text-textSub/60 leading-relaxed">意思決定の構造</p>
-    </Link>
-
-  </div>
-</section>
+        </div>
       </div>
     </main>
   )
