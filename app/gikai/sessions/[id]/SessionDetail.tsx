@@ -167,20 +167,26 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
 // ── 一般質問アコーディオン ────────────────────────────────────────────────────
 function QnaSection({ items }: { items: QnaItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [showAll, setShowAll] = useState(false)
+
+  const INITIAL_COUNT = 5
+  const visibleItems = showAll ? items : items.slice(0, INITIAL_COUNT)
+  const hasMore = items.length > INITIAL_COUNT
+
+  const sectionLabel = items[0]?.speaker_role?.includes("委員")
+    ? "予算審査 — 項目ごとの質疑"
+    : "一般質問 — 議員ごとの質疑"
 
   return (
     <section>
       <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
-        一般質問 — 議員ごとの質疑
+        {sectionLabel}
       </h2>
       <div className="space-y-2">
-        {items.map((item, i) => {
+        {visibleItems.map((item, i) => {
           const isOpen = openIndex === i
           return (
-            <div
-              key={item.speaker_name}
-              className="bg-ink border border-line rounded-xl overflow-hidden"
-            >
+            <div key={item.speaker_name + i} className="bg-ink border border-line rounded-xl overflow-hidden">
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-line/20 transition-colors"
@@ -243,6 +249,20 @@ function QnaSection({ items }: { items: QnaItem[] }) {
           )
         })}
       </div>
+
+      {hasMore && (
+        <button
+          onClick={() => {
+            setShowAll(!showAll)
+            setOpenIndex(null)
+          }}
+          className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-xl hover:border-accent/50 hover:text-accent transition-colors"
+        >
+          {showAll
+            ? "折りたたむ"
+            : `残り ${items.length - INITIAL_COUNT} 件を表示`}
+        </button>
+      )}
     </section>
   )
 }
