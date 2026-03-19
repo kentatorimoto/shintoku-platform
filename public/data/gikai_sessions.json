@@ -48,7 +48,7 @@
     "summary": {
       "issues": "第9期総合計画が始動、86億円の当初予算を提案。認定こども園移行・産業課分割・宿泊税導入など大型改革が集中。",
       "conflicts": "庁舎渡り廊下建設を中止。費用が8,800万円に膨張し、町長が「将来世代への負担」を理由に断念。",
-      "nextActions": "予算特別委員会での審査結果と、4月の宿泊税・新組織体制の運用状況を確認。"
+      "nextActions": "当初予算は挙手多数で可決（反対：国保税引上げ・指定管理者問題）。4月の宿泊税・新組織体制の運用状況を確認。"
     },
     "parts": [
       {
@@ -62,6 +62,12 @@
         "youtube": "https://www.youtube.com/watch?v=Wc1AFR3nkOg&t=33s",
         "pdf": "r8-2026-03-regular-1_qna.pdf",
         "slidesDir": "qna"
+      },
+      {
+        "label": "最終日（3/18）",
+        "youtube": "https://www.youtube.com/watch?v=-pgTXnPoSp8&t=2s",
+        "pdf": "r8-2026-03-regular-1_day3.pdf",
+        "slidesDir": "day3"
       }
     ],
     "tags": [

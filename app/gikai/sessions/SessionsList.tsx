@@ -10,7 +10,7 @@ interface Part {
   label:     string
   youtube?:  string
   pdf?:      string
-  slidesDir: string
+  slidesDir?: string
 }
 
 interface Summary {

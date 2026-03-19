@@ -88,7 +88,7 @@ interface Part {
   label:     string
   youtube?:  string
   pdf?:      string
-  slidesDir: string
+  slidesDir?: string
 }
 
 interface Summary {
@@ -177,8 +177,8 @@ export default async function SessionPartPage({
     label:     part.label,
     youtube:   part.youtube ?? null,
     pdfPath:   part.pdf ? `/pdf/${part.pdf}` : null,
-    images:    getSlideImages(session.id, part.slidesDir),
-    slidesDir: part.slidesDir,
+    images:    part.slidesDir ? getSlideImages(session.id, part.slidesDir) : [],
+    slidesDir: part.slidesDir ?? "",
   }))
 
   return (

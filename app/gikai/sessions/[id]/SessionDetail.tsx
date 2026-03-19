@@ -10,7 +10,7 @@ interface Part {
   youtube:   string | null
   pdfPath:   string | null
   images:    string[]   // /slides/{sessionId}/{slidesDir}/page-NNN.jpg
-  slidesDir: string
+  slidesDir?: string
 }
 
 interface QnaItem {

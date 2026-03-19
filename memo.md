@@ -1,5 +1,5 @@
-新しい会議のPDFの準備ができました。
+#ローカルサーバーrun
+npm run dev
 
 
-令和８年３月１２日　定例第１回　一般質問_The Shintoku Civic Ledger.pdf
-です。~/download　フォルダにあります。
+令和８年３月１７日　予算特別委員会　午前_Shintoku Town Budget Dashboard
