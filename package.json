@@ -15,7 +15,8 @@
     "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts",
     "index:newsletters": "npx tsx scripts/index-newsletters.ts",
     "scrape:giketsu": "npx tsx scripts/scrape-giketsu.ts",
-    "slides:generate": "node scripts/convertSlides.mjs"
+    "slides:generate": "node scripts/convertSlides.mjs",
+    "build:search-index": "npx tsx scripts/build-qna-search-index.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",

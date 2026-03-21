@@ -1,0 +1,734 @@
+[
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 1,
+    "title": "東京ふるさと新得会との連携・川崎市民まつりでの物産販売",
+    "speaker": "初山 一也",
+    "tags": [
+      "観光",
+      "関係人口"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 1,
+    "title": "町独自の高等教育修学支援制度の創設",
+    "speaker": "岡村 力藏",
+    "tags": [
+      "教育",
+      "人口政策"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 1,
+    "title": "商工業活性化事業補助金の制度見直し",
+    "speaker": "中村 雄太",
+    "tags": [
+      "商工業",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 1,
+    "title": "観光施策の投資対効果検証とDMO化等の推進体制構築",
+    "speaker": "櫻田 郷史",
+    "tags": [
+      "観光",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 1,
+    "title": "藤越道路と道道帯広新得線の交差点の冬季凍結路面対策",
+    "speaker": "村田 博",
+    "tags": [
+      "インフラ",
+      "農業"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 1,
+    "title": "地域担当職員制度の導入検討",
+    "speaker": "青柳 茂行",
+    "tags": [
+      "地域自治",
+      "人口政策"
+    ]
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "新得町過疎地域持続的発展計画",
+    "tags": [
+      "人口政策",
+      "地域振興"
+    ],
+    "billNumber": "議案第3号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "町道の路線変更及び認定",
+    "tags": [
+      "インフラ",
+      "観光"
+    ],
+    "billNumber": "議案第4号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "財産の取得",
+    "tags": [
+      "インフラ",
+      "観光",
+      "財政"
+    ],
+    "billNumber": "議案第5号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "財産の無償貸付",
+    "tags": [
+      "商工業"
+    ],
+    "billNumber": "議案第6号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "新得町行政組織設置条例の一部改正",
+    "tags": [
+      "組織改編"
+    ],
+    "billNumber": "議案第7号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "企業版ふるさと納税基金条例の制定",
+    "tags": [
+      "財政"
+    ],
+    "billNumber": "議案第8号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "認定こども園への移行に伴う関係条例整備",
+    "tags": [
+      "子育て"
+    ],
+    "billNumber": "議案第9号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "農道離着陸場条例の一部改正",
+    "tags": [
+      "農業",
+      "インフラ"
+    ],
+    "billNumber": "議案第10号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "令和7年度一般会計補正予算（第9号）",
+    "tags": [
+      "補正予算",
+      "財政"
+    ],
+    "billNumber": "議案第11号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "令和7年度国民健康保険事業特別会計補正予算（第3号）",
+    "tags": [
+      "補正予算",
+      "財政"
+    ],
+    "billNumber": "議案第12号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "令和7年度介護保険特別会計補正予算（第4号）",
+    "tags": [
+      "補正予算",
+      "医療"
+    ],
+    "billNumber": "議案第13号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "令和7年度水道事業会計補正予算（第1号）",
+    "tags": [
+      "補正予算",
+      "インフラ"
+    ],
+    "billNumber": "議案第14号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 0,
+    "title": "令和7年度公共下水道事業会計補正予算（第1号）",
+    "tags": [
+      "補正予算",
+      "インフラ"
+    ],
+    "billNumber": "議案第15号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "予算特別委員会付託議案（令和8年度当初予算ほか）",
+    "tags": [
+      "当初予算",
+      "財政"
+    ],
+    "billNumber": "議案第16号〜第26号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "新得町議会委員会条例の一部を改正する条例の制定",
+    "tags": [
+      "組織改編"
+    ],
+    "billNumber": "議案第27号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "債権の放棄",
+    "tags": [
+      "財政"
+    ],
+    "billNumber": "議案第28号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "令和7年度新得町一般会計補正予算（第10号）",
+    "tags": [
+      "補正予算",
+      "財政"
+    ],
+    "billNumber": "議案第29号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "令和7年度新得町後期高齢者医療特別会計補正予算（第2号）",
+    "tags": [
+      "補正予算",
+      "医療"
+    ],
+    "billNumber": "議案第30号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "令和7年度新得町介護保険特別会計補正予算（第5号）",
+    "tags": [
+      "補正予算",
+      "医療"
+    ],
+    "billNumber": "議案第31号"
+  },
+  {
+    "type": "honkaigi",
+    "sessionId": "r8-2026-03-regular-1",
+    "partIndex": 2,
+    "title": "議員派遣の件",
+    "tags": [],
+    "billNumber": "議案第32号"
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "地方債・財政状況・物価高対策",
+    "speaker": "青柳委員",
+    "tags": [
+      "財政",
+      "物価高騰対策"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "駅前周辺整備・道の駅スケジュール",
+    "speaker": "松山委員",
+    "tags": [
+      "インフラ",
+      "観光"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "受益者負担・地熱発電・地域振興・産業対話",
+    "speaker": "佐藤委員",
+    "tags": [
+      "財政",
+      "エネルギー",
+      "観光"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "市街地ヒグマ対応と通学児童の安全",
+    "speaker": "村田委員",
+    "tags": [
+      "教育"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "議案第16号：職員給与条例の一部改正",
+    "speaker": "（提案説明のみ）",
+    "tags": [
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "職員研修・人事評価・防災専門員・ふるさと会・持続可能性",
+    "speaker": "佐藤委員",
+    "tags": [
+      "財政",
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "年末調整・産業医・交通安全協会",
+    "speaker": "岡村委員",
+    "tags": [
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "低濃度PCB処理・LEDリース化",
+    "speaker": "斎藤委員",
+    "tags": [
+      "エネルギー",
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "北側駐車場案内・地域おこし協力隊",
+    "speaker": "桜田委員",
+    "tags": [
+      "インフラ",
+      "人口政策"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "外構工事・DX推進・コミバス・自転車ルール・協力隊委託料",
+    "speaker": "森本委員",
+    "tags": [
+      "インフラ",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 0,
+    "title": "外構工事・ふるさと会補助・町内会補助・北側駐車場",
+    "speaker": "中村委員",
+    "tags": [
+      "財政",
+      "人口政策"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第2款総務費：人事評価制度・北側駐車場整備",
+    "speaker": "青柳委員",
+    "tags": [
+      "財政",
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第3款民生費：高齢者温泉宿泊助成事業",
+    "speaker": "岡村委員",
+    "tags": [
+      "医療"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第3款民生費：戦没者遺族等支援事業費",
+    "speaker": "森本委員",
+    "tags": [
+      "文化"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第3款民生費：障害者福祉サービス費",
+    "speaker": "中村委員",
+    "tags": [
+      "医療"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第4款衛生費：空き家対策事業",
+    "speaker": "桜田委員",
+    "tags": [
+      "インフラ",
+      "人口政策"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第4款衛生費：害虫駆除経費（カメムシ）",
+    "speaker": "森本委員",
+    "tags": [
+      "観光"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第4款衛生費：浴場管理費",
+    "speaker": "中村委員",
+    "tags": [
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第4款衛生費：清掃センター管理費（ゴミ収集）",
+    "speaker": "福原委員",
+    "tags": [
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第6款農林水産業費：有害鳥獣駆除事業",
+    "speaker": "村田委員",
+    "tags": [
+      "農業"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "議案第17号 宿泊税基金条例 / 議案第18号 東大雪荘指定管理者指定",
+    "speaker": "（提案説明のみ）",
+    "tags": [
+      "観光",
+      "宿泊税"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第7款商工費：駅前地域交流センター等管理経費（ステラステーション・タウンマネジメント）",
+    "speaker": "桜田委員",
+    "tags": [
+      "観光",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第7款商工費：温浴宿泊施設指定管理業務",
+    "speaker": "桜田委員",
+    "tags": [
+      "観光",
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第7款商工費：インバウンド受入環境整備",
+    "speaker": "桜田委員",
+    "tags": [
+      "観光"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第7款商工費：狩勝高原整備費",
+    "speaker": "岡村委員",
+    "tags": [
+      "観光"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第7款商工費：駅前商店街街並み景観形成事業",
+    "speaker": "森本委員",
+    "tags": [
+      "観光",
+      "インフラ"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "議案第19号：サホロリバーサイド運動広場条例改正（パークゴルフ場無料化）",
+    "speaker": "岡村委員",
+    "tags": [
+      "文化"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：全町教育推進事業",
+    "speaker": "中村委員",
+    "tags": [
+      "教育"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：教員の時間外労働・主務教諭制度",
+    "speaker": "青柳委員",
+    "tags": [
+      "教育"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：学校給食費無償化",
+    "speaker": "岡村委員",
+    "tags": [
+      "教育",
+      "子育て"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：幼稚園管理運営費（印刷機借上料）",
+    "speaker": "中村委員",
+    "tags": [
+      "教育"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：新得山スキー場運営",
+    "speaker": "中村委員",
+    "tags": [
+      "文化"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：セカンドブックスタート事業",
+    "speaker": "佐藤委員",
+    "tags": [
+      "教育",
+      "子育て"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 1,
+    "title": "第10款教育費：スポーツ合宿の里推進事業",
+    "speaker": "佐藤委員",
+    "tags": [
+      "観光",
+      "文化"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "国保税引き上げ・子育て支援納付金の全保険上乗せ・十勝管内比較（議案第20号）",
+    "speaker": "青柳委員",
+    "tags": [
+      "財政",
+      "子育て"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "後期高齢者医療特別会計・電算処理委託料の新規計上（議案第23号）",
+    "speaker": "岡村委員",
+    "tags": [
+      "医療"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "介護保険特別会計・フレイル予防事業の実施内容と効果（議案第24号）",
+    "speaker": "青柳委員",
+    "tags": [
+      "医療"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "介護保険特別会計・法定後見受任者報酬の対象と財源（議案第24号）",
+    "speaker": "岡村委員",
+    "tags": [
+      "医療",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "公共下水道事業会計・中央監視装置更新工事の予算区分（議案第26号）",
+    "speaker": "青柳委員",
+    "tags": [
+      "インフラ",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "全般補足質疑：駅前地域交流センター指定管理の透明性確保（173ページ）",
+    "speaker": "桜田委員",
+    "tags": [
+      "観光",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "全般補足質疑：スキー場人工降雪機導入の検討状況（241ページ社会教育）",
+    "speaker": "青柳委員",
+    "tags": [
+      "観光"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "全般補足質疑：温浴宿泊施設の指定管理リスクと対応（173ページ）",
+    "speaker": "中村委員",
+    "tags": [
+      "観光",
+      "財政"
+    ]
+  },
+  {
+    "type": "qna",
+    "sessionId": "r8-2026-03-yosan-tokubetsu",
+    "partIndex": 2,
+    "title": "討論・採決（議案第16号〜第26号一括）",
+    "speaker": "採決結果",
+    "tags": [
+      "財政",
+      "当初予算"
+    ]
+  }
+]

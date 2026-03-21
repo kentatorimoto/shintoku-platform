@@ -3,7 +3,8 @@
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Search } from "lucide-react"
+import GlobalSearch from "@/components/GlobalSearch"
 
 const NAV_LINKS = [
   { href: "/",               label: "トップ" },
@@ -20,7 +21,9 @@ const DESKTOP_NAV_LINKS = NAV_LINKS.filter((l) => l.href !== "/" && l.href !== "
 export default function Header() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const close = useCallback(() => setOpen(false), [])
+  const closeSearch = useCallback(() => setSearchOpen(false), [])
 
   // ESC で閉じる
   useEffect(() => {
@@ -102,17 +105,35 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="text-textSub hover:text-textMain transition p-1.5"
+              aria-label="検索"
+            >
+              <Search size={18} />
+            </button>
           </div>
 
-          {/* Mobile ハンバーガー */}
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            className="md:hidden text-textSub hover:text-textMain transition p-2 -mr-2"
-            aria-label={open ? "メニューを閉じる" : "メニューを開く"}
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: 検索 + ハンバーガー */}
+          <div className="flex items-center gap-1 md:hidden">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="text-textSub hover:text-textMain transition p-2"
+              aria-label="検索"
+            >
+              <Search size={22} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen(!open)}
+              className="text-textSub hover:text-textMain transition p-2 -mr-2"
+              aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -142,6 +163,9 @@ export default function Header() {
           </div>
         </>
       )}
+
+      {/* グローバル検索モーダル */}
+      <GlobalSearch open={searchOpen} onClose={closeSearch} />
     </>
   )
 }
