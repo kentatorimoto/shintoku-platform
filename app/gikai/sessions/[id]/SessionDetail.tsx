@@ -419,7 +419,8 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
         <QnaSection items={qnaItems} />
       )}
 
-      {/* ── スライド ───────────────────────────────────────────────────── */}
+      {/* ── スライド（画像があるパートのみ表示）─────────────────────────── */}
+      {activePart.images.length > 0 && (
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-semibold text-textSub tracking-widest">
@@ -443,18 +444,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
           )}
         </div>
 
-        {activePart.images.length === 0 ? (
-          <div className="bg-ink border border-line rounded-xl p-8 text-center">
-            <p className="text-textSub text-sm mb-3">
-              スライド画像がまだ生成されていません
-            </p>
-            <code className="text-xs text-accent/80 bg-line/50 rounded px-3 py-2
-                             block w-fit mx-auto whitespace-nowrap overflow-x-auto">
-              npm run slides:generate {sessionId} {activePart.slidesDir}
-            </code>
-          </div>
-        ) : (
-          <div className="space-y-3 max-w-4xl mx-auto">
+        <div className="space-y-3 max-w-4xl mx-auto">
             {activePart.images.map((src, i) => (
               <a
                 key={src}
@@ -496,9 +486,9 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
                 />
               </a>
             ))}
-          </div>
-        )}
+        </div>
       </section>
+      )}
     </div>
   )
 }
