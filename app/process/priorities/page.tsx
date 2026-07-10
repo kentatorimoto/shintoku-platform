@@ -117,7 +117,7 @@ export default function PrioritiesPage() {
           {priorityStats.map((p) => (
             <div
               key={p.goal}
-              className="bg-ink border border-line rounded-xl p-5
+              className="bg-ink border border-line rounded-[3px] p-5
                          hover:border-accent/50 transition-all"
             >
               <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -181,7 +181,7 @@ export default function PrioritiesPage() {
             {disputeSessions.map((session) => (
               <div
                 key={session.id}
-                className="bg-ink border border-line rounded-xl p-5"
+                className="bg-ink border border-line rounded-[3px] p-5"
               >
                 {/* 会議情報 */}
                 <div className="flex items-center justify-between gap-4 mb-3">

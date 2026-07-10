@@ -72,7 +72,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
           <button
             key={tag}
             onClick={() => setSelectedTag(tag)}
-            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
+            className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
               selectedTag === tag
                 ? "bg-accent text-base border-accent"
                 : "bg-ink border-line text-textSub hover:border-accent/50"
@@ -105,7 +105,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
                   <p className="text-xs text-accent font-semibold tracking-wide mb-2">
                     {formatDate(session.date)}
                   </p>
-                  <div className="bg-ink border border-line rounded-xl p-5 hover:border-accent transition-all group">
+                  <div className="bg-ink border border-line rounded-[3px] p-5 hover:border-accent transition-all group">
                     <h3 className="text-base md:text-lg font-semibold text-textMain
                                    group-hover:text-accent/90 transition-colors leading-snug mb-1">
                       {session.narrativeTitle ?? session.officialTitle}

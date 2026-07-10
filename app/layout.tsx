@@ -43,6 +43,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={`${notoSansJP.variable} ${zenOldMincho.variable} ${spaceMono.variable}`}>
       <head>
+        {/* /process 配下は小豆の紙。直接ロード時に FOUC なしで data-paper を立てる。
+            SPA 遷移は components/AzukiPaper.tsx が担う。 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.dataset.paper=location.pathname.startsWith('/process')?'azuki':''`,
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-PTNKSBK9Y7"
           strategy="afterInteractive"
