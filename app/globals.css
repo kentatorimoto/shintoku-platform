@@ -1,15 +1,43 @@
 @import "tailwindcss";
 
-@theme {
-  --color-base: #f5f2ec;
-  --color-ink: #edeae3;
-  --color-line: #d8d3c8;
-  --color-accent: #7a5c1e;
-  --color-accentSoft: #5c4415;
-  --color-textMain: #1a1710;
-  --color-textSub: #6b6355;
+/* ══════════════════════════════════════════════════════════════════════
+   デザイントークン「亜麻×小豆」 — 正は docs/design/atlas-hybrid-warm.html
+   基調（亜麻）を @theme のデフォルト値に置く。既存の bg-base / text-textSub
+   等はすべてこの変数を参照するので、値を差し替えるだけで全ページに波及する。
+   /process 配下は [data-paper="azuki"] で同じ変数を小豆に上書きする。
+   ══════════════════════════════════════════════════════════════════════ */
 
-  --font-sans: var(--font-noto), var(--font-inter), ui-sans-serif, system-ui;
+@theme {
+  /* ── 亜麻（基調）── 桃味の暖灰。黄味クリームとは色相を分ける */
+  --color-base:       #ece6df; /* 紙 */
+  --color-ink:        #e3dbd1; /* 起伏面（カード地・行ホバー）*/
+  --color-line:       #d6ccc1; /* 罫線 */
+  --color-lineStrong: #b3a595; /* 強罫線・タグ枠 */
+  --color-accent:     #b8432c; /* 茜。最新・現在地・ホバーのみ */
+  --color-accentSoft: #9a3826; /* 濃い茜（ホバー状態）*/
+  --color-textMain:   #282019; /* 墨 */
+  --color-textSub:    #6f6257; /* 薄墨（補助テキスト・AA 4.76:1）*/
+  --color-hover:      #e3dbd1; /* 行ホバー地 */
+
+  /* ── 書体 ── */
+  --font-sans:   var(--font-noto), ui-sans-serif, system-ui, sans-serif;
+  --font-mincho: var(--font-zen-mincho), serif;      /* 見出し・narrativeTitle のみ */
+  --font-mono:   var(--font-space-mono), ui-monospace, monospace; /* 数値・日付・SHEET・座標 */
+}
+
+/* ── 小豆（/process 配下のみ反転）──
+   十勝の小豆の焙煎色。差し色はカラマツの黄葉。
+   基調変数を上書きするだけなので、コンポーネントは常に --color-base 等を参照する。 */
+[data-paper="azuki"] {
+  --color-base:       #2a201c;
+  --color-ink:        #342823;
+  --color-line:       #453730;
+  --color-lineStrong: #5c4c42;
+  --color-accent:     #dfa04e;
+  --color-accentSoft: #c88f3f;
+  --color-textMain:   #f0e8de;
+  --color-textSub:    #a5968a; /* AA 5.54:1 */
+  --color-hover:      #342823;
 }
 
 @layer base {
@@ -19,6 +47,13 @@
 
   body {
     @apply font-sans text-textMain antialiased;
+    line-height: 1.8;
+  }
+
+  /* 数値・日付・SHEET番号・座標は等幅＋タブラー数字 */
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
   }
 }
 
