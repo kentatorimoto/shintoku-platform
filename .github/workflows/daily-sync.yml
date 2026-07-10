@@ -23,11 +23,13 @@ jobs:
       - run: npm run sync
       - run: npm run index:newsletters
 
-      # 生成された public/data をコミット
+      # スクレイパが更新するファイルだけを明示的にコミットする。
+      # public/data/gikai_sessions.json と qna/ は content/ からの生成物なので、
+      # このワークフローが触ってはいけない（build:data 以外の経路を作らない）。
       - name: Commit and push if changed
         run: |
           git config user.name "shintoku-atlas-bot"
           git config user.email "actions@users.noreply.github.com"
 
-          git add public/data/*.json
+          git add public/data/lastSync.json public/data/newsletters_index.json
           git diff --cached --quiet || (git commit -m "chore: daily data sync" && git push)
