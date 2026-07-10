@@ -5,11 +5,19 @@
 /** 抽出に使うモデル。変更はこの1行だけで済む。 */
 export const MODEL = "claude-sonnet-4-6"
 
-/** 1リクエストの出力上限。128Kまで指定できるが、抽出MDは長くても数万トークン。 */
-export const MAX_TOKENS = 32000
+/**
+ * 1リクエストの出力上限。adaptive thinking の思考トークンもここに含まれるため、
+ * 本文の想定長よりかなり大きく取る必要がある（32000 では69分の本会議で足りなかった）。
+ * ストリーミングしているのでHTTPタイムアウトの心配はない。
+ */
+export const MAX_TOKENS = 64000
 
-/** 思考の深さ。low | medium | high | max */
-export const EFFORT = "high" as const
+/**
+ * 思考の深さ。low | medium | high | max
+ * 抽出は「字幕の再配置」であって深い推論を要さない。high は1リクエスト9分近くかかり、
+ * 思考トークンが出力枠を圧迫したので medium にしている。
+ */
+export const EFFORT = "medium" as const
 
 /** バリデーションエラーをAPIに返して直させる回数の上限。 */
 export const MAX_SELF_CORRECTION_ROUNDS = 2
