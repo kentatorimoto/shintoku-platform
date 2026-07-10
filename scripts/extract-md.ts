@@ -103,8 +103,9 @@ function buildFrontmatter(meta: Meta): string {
 // ── Claude API ──────────────────────────────────────────────────────────────
 
 interface Usage {
-  input:  number
-  output: number
+  input:     number
+  output:    number
+  cacheRead: number
 }
 
 /** AIが指示に反してコードフェンスで包んだ場合に備えて剥がす。 */
@@ -116,12 +117,17 @@ function stripFences(text: string): string {
 
 function logUsage(label: string, usage: Usage) {
   const price = PRICING[MODEL]
+  // キャッシュ読み出しは入力の約1割の単価
   const cost = price
-    ? (usage.input / 1e6) * price.input + (usage.output / 1e6) * price.output
+    ? (usage.input / 1e6) * price.input +
+      (usage.cacheRead / 1e6) * price.input * 0.1 +
+      (usage.output / 1e6) * price.output
     : null
   const costText = cost === null ? "（単価未登録）" : `約 $${cost.toFixed(3)}`
+  const cacheText = usage.cacheRead > 0 ? ` / キャッシュ読み ${usage.cacheRead.toLocaleString()}` : ""
   console.log(
-    `   ${label}: 入力 ${usage.input.toLocaleString()} / 出力 ${usage.output.toLocaleString()} トークン, ${costText}`,
+    `   ${label}: 入力 ${usage.input.toLocaleString()}${cacheText} / ` +
+    `出力 ${usage.output.toLocaleString()} トークン, ${costText}`,
   )
 }
 
@@ -133,12 +139,13 @@ async function callClaude(
   messages: Message[],
 ): Promise<{ content: Anthropic.ContentBlock[]; text: string; usage: Usage }> {
   // 字幕は長いのでストリーミングする（非ストリーミングだとHTTPタイムアウトに当たる）。
+  // system（スキーマ+glossary）は毎回同じなのでキャッシュする。自己修正ラウンドで効く。
   const stream = client.messages.stream({
     model:      MODEL,
     max_tokens: MAX_TOKENS,
     thinking:   { type: "adaptive" },
     output_config: { effort: EFFORT },
-    system,
+    system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
     messages,
   })
   const message = await stream.finalMessage()
@@ -163,7 +170,11 @@ async function callClaude(
   return {
     content: message.content,
     text,
-    usage: { input: message.usage.input_tokens, output: message.usage.output_tokens },
+    usage: {
+      input:     message.usage.input_tokens,
+      output:    message.usage.output_tokens,
+      cacheRead: message.usage.cache_read_input_tokens ?? 0,
+    },
   }
 }
 
@@ -225,7 +236,7 @@ export async function extractPart(meta: Meta, force = false): Promise<ExtractRes
       `## 字幕（自動生成・固有名詞の誤認識が多い）\n\n${transcript}`,
   }]
 
-  const total: Usage = { input: 0, output: 0 }
+  const total: Usage = { input: 0, output: 0, cacheRead: 0 }
   let lastError: string | null = null
 
   for (let round = 0; round <= MAX_SELF_CORRECTION_ROUNDS; round++) {
@@ -235,6 +246,7 @@ export async function extractPart(meta: Meta, force = false): Promise<ExtractRes
     const { content, text, usage } = await callClaude(client, system, messages)
     total.input += usage.input
     total.output += usage.output
+    total.cacheRead += usage.cacheRead
     logUsage(label, usage)
 
     fs.mkdirSync(sessionDir, { recursive: true })
