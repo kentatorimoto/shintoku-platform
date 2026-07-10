@@ -4,65 +4,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import SessionDetail from "../SessionDetail"
-
-interface QnaItem {
-  speaker_name:      string
-  speaker_role:      string
-  topic_title:       string
-  topic_tags:        string[]
-  question_points:   string[]
-  answer_summary:    string
-  answer_points:     string[]
-  conclusion:        string
-  continuing_issues: string[]
-  mentioned_entities: string[]
-  mentioned_numbers:  string[]
-}
-
-interface QnaData {
-  session_id:   string
-  part_index:   number
-  session_date: string
-  part_type?:   string
-  source_url:   string
-  items:        QnaItem[]
-}
-
-interface BillQuestion {
-  questioner: string
-  content:    string
-  answer:     string
-}
-
-interface BillItem {
-  bill_number:           string
-  bill_title:            string
-  bill_tags:             string[]
-  summary:               string
-  proposer:              string
-  questions:             BillQuestion[]
-  result:                string
-  result_detail:         string
-  referred_to_committee: boolean
-}
-
-interface CommitteeReferral {
-  bill_numbers: string[]
-  committee:    string
-  note:         string
-}
-
-interface HonkaigiData {
-  session_id:           string
-  part_index:           number
-  session_date:         string
-  part_type:            "honkaigi"
-  source_url:           string
-  items:                BillItem[]
-  committee_referrals:  CommitteeReferral[]
-}
-
-type PartData = QnaData | HonkaigiData
+import type { GikaiSession, HonkaigiData, PartData, QnaData } from "@/scripts/lib/schema"
 
 function getPartData(sessionId: string, partIndex: number): PartData | null {
   const candidates = [
@@ -82,29 +24,6 @@ function getPartData(sessionId: string, partIndex: number): PartData | null {
     }
   }
   return null
-}
-
-interface Part {
-  label:     string
-  youtube?:  string
-  pdf?:      string
-  slidesDir?: string
-}
-
-interface Summary {
-  issues:      string
-  conflicts:   string
-  nextActions: string
-}
-
-interface GikaiSession {
-  id:              string
-  officialTitle:   string
-  narrativeTitle?: string
-  date:            string
-  summary?:        Summary
-  tags:            string[]
-  parts:           Part[]
 }
 
 function getSessions(): GikaiSession[] {

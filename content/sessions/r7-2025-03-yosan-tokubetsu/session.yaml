@@ -1,0 +1,28 @@
+id: r7-2025-03-yosan-tokubetsu
+officialTitle: 令和７年３月１７日 予算審査特別委員会
+narrativeTitle: 令和７年度予算の3本柱——医療転換・ゼロカーボン・駅前整備
+date: "2025-03-17"
+tags:
+  - 当初予算
+  - 財政
+  - インフラ
+  - 医療
+  - エネルギー
+  - 特別委員会
+summary:
+  issues: 令和7年度当初予算（議案第19号）の2日間にわたる審査。3本柱は①ゼロカーボンシティの実現②駅前再整備・スマートIC・道の駅③DX推進。物価高騰で人件費+1億超・委託料+7〜8千万。北斗クリニック3月閉院で約600名の患者移行が緊急課題
+  conflicts: 北斗クリニック閉院後の医療空白：リハビリ機器・車椅子患者の移送手段確保（機器はサホロクリニックへの譲渡交渉中）。駅前ロータリーの逆走・冬期排雪スペース不足問題。交流施設「トクトク」のソフト事業継続財源
+  nextActions: 北斗クリニック患者の移行完了状況（移行率70〜80%確認済み）と巡回診療体制を確認。医療機器更新向け新助成制度（10年サイクル）の創設状況を追跡
+parts:
+  - label: 1日目 午前
+    pdf: r7-2025-03-yosan-tokubetsu_morning.pdf
+    slidesDir: morning
+  - label: 1日目 午後
+    pdf: r7-2025-03-yosan-tokubetsu_afternoon.pdf
+    slidesDir: afternoon
+  - label: 2日目 午前
+    pdf: r7-2025-03-yosan-tokubetsu_day2-morning.pdf
+    slidesDir: day2-morning
+  - label: 2日目 午後
+    pdf: r7-2025-03-yosan-tokubetsu_day2-afternoon.pdf
+    slidesDir: day2-afternoon

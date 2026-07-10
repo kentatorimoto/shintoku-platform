@@ -1,0 +1,28 @@
+id: r6-2024-06-regular-2
+officialTitle: 令和６年定例第２回新得町議会（６月）
+narrativeTitle: 産業支援か財政規律か——3億円融資を修正した6月定例会
+date: "2024-06-04"
+tags:
+  - 財政
+  - 観光
+  - 文化
+  - 定例会
+  - 修正可決あり
+  - 争点あり
+summary:
+  issues: 駅前複合施設（総額11億円超）の着工開始と、経営難の新得アユミルクへの3億円融資案（議案第57号）の審議
+  conflicts: アユミルク融資で議会が二分。修正動議で債務返済分を削除、ラグーン整備のみ約1.5億円で可決（賛成6名）
+  nextActions: 削減融資でアユミルクの経営再建が成立するか継続監視。宿泊税（R8目標）の検討状況を確認
+parts:
+  - label: 初日（6/4）
+    youtube: https://www.youtube.com/watch?v=NzixeOvWppo
+    pdf: r6-2024-06-regular-2_day1.pdf
+    slidesDir: day1
+  - label: 一般質問（6/19）
+    youtube: https://www.youtube.com/watch?v=OMtQtIPflCw
+    pdf: r6-2024-06-regular-2_qna.pdf
+    slidesDir: qna
+  - label: 最終日（6/21）
+    youtube: https://www.youtube.com/watch?v=sLpH_X--7Zk
+    pdf: r6-2024-06-regular-2_final.pdf
+    slidesDir: final

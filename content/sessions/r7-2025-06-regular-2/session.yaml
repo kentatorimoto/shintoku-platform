@@ -1,0 +1,25 @@
+id: r7-2025-06-regular-2
+officialTitle: 令和７年定例第２回新得町議会（６月）
+narrativeTitle: 宿泊税が始まる——観光財源と1.9億円の未来投資
+date: "2025-06-02"
+tags:
+  - 宿泊税
+  - 観光
+  - インフラ
+  - 教育
+  - エネルギー
+  - 定例会
+summary:
+  issues: 宿泊税条例制定（地方税法に基づく法定外目的税、年間税収見込み1,100万円）。保育所防音改修・福祉センター空調・スクールバス更新のインフラ整備。教育長の再任。補正予算1.9億円（ゼロカーボン調査・中学校タブレット更新）
+  conflicts: 宿泊税の税率設定（50〜500円）と観光財源としての使途をめぐる議論
+  nextActions: 宿泊税の徴収開始時期と年間税収の実績を確認。ゼロカーボン調査の結果と政策への反映を追跡
+parts:
+  - label: 初日（6/2）
+    pdf: r7-2025-06-regular-2_day1.pdf
+    slidesDir: day1
+  - label: 一般質問
+    pdf: r7-2025-06-regular-2_qna.pdf
+    slidesDir: qna
+  - label: 最終日（6/20）
+    pdf: r7-2025-06-regular-2_final.pdf
+    slidesDir: final

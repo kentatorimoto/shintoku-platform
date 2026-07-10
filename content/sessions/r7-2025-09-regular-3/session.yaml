@@ -1,0 +1,27 @@
+id: r7-2025-09-regular-3
+officialTitle: 令和７年定例第３回新得町議会（９月）
+narrativeTitle: 財政規律と未来投資の狭間——令和７年度の折り返し
+date: "2025-09-01"
+tags:
+  - 補正予算
+  - 財政
+  - 人口政策
+  - 定例会
+summary:
+  issues: 令和7年度折り返し時点の補正予算審議と一般質問（9/17）。「財政規律と未来への投資の狭間で——人口減少社会における持続可能な町づくり」をテーマに各議員が質問
+  conflicts: 大型投資の継続と財政健全化の両立——どの事業を前倒し・縮小するか。人口減少加速への対応策の具体化
+  nextActions: 各事業の執行状況と一般質問で浮上した財政・人口問題への対応を確認
+parts:
+  - label: 初日（9/1）
+    youtube: https://www.youtube.com/watch?v=-04gMRbxbaQ
+    pdf: r7-2025-09-regular-3_day1.pdf
+    slidesDir: day1
+  - label: 一般質問①（9/17）
+    pdf: r7-2025-09-regular-3_qna1.pdf
+    slidesDir: qna1
+  - label: 一般質問②（9/17）
+    pdf: r7-2025-09-regular-3_qna2.pdf
+    slidesDir: qna2
+  - label: 最終日
+    pdf: r7-2025-09-regular-3_final.pdf
+    slidesDir: final

@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build:links": "node tools/build-gikai-links.mjs",
+    "build:data": "tsx scripts/build-data.ts",
+    "test:roundtrip": "tsx scripts/roundtrip-test.ts",
     "suggest:links": "node tools/suggest-gikai-links.mjs",
     "merge:links": "node tools/merge-gikai-links.mjs",
-    "build": "npm run build:links && next build",
+    "build": "npm run build:links && npm run build:data && next build",
     "start": "next start",
     "lint": "eslint",
     "sync": "npx tsx scripts/sync-all.ts",
@@ -40,8 +42,14 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^5.2.1",
+    "remark": "^15.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unified": "^11.0.5"
   }
 }
