@@ -12,8 +12,8 @@ import fs from "fs"
 import os from "os"
 import path from "path"
 import { convertAll } from "./json-to-md"
-import { buildFromContent } from "./build-data"
-import type { GikaiSession, PartData } from "./lib/schema"
+import { buildFromContent } from "../build-data"
+import type { GikaiSession, PartData } from "../lib/schema"
 
 const ROOT          = process.cwd()
 const SESSIONS_JSON = path.join(ROOT, "public", "data", "gikai_sessions.json")

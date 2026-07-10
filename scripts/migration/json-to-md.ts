@@ -15,7 +15,7 @@ import {
   type GikaiSession,
   type PartData,
   type QnaItem,
-} from "./lib/schema"
+} from "../lib/schema"
 
 const ROOT         = process.cwd()
 const SESSIONS_JSON = path.join(ROOT, "public", "data", "gikai_sessions.json")

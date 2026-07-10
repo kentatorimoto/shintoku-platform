@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build:links": "node tools/build-gikai-links.mjs",
     "build:data": "tsx scripts/build-data.ts",
-    "test:roundtrip": "tsx scripts/roundtrip-test.ts",
     "suggest:links": "node tools/suggest-gikai-links.mjs",
     "merge:links": "node tools/merge-gikai-links.mjs",
     "build": "npm run build:links && npm run build:data && next build",
