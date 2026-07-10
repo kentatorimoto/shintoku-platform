@@ -11,6 +11,10 @@
     "build": "npm run build:links && npm run build:data && next build",
     "start": "next start",
     "lint": "eslint",
+    "add-session": "tsx scripts/add-session.ts",
+    "fetch:transcript": "tsx scripts/fetch-transcript.ts",
+    "extract:md": "tsx scripts/extract-md.ts",
+    "watch:council": "tsx scripts/watch-council.ts",
     "sync": "npx tsx scripts/sync-all.ts",
     "scrape:announcements": "npx tsx scripts/scrape-announcements.ts",
     "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts",
@@ -34,6 +38,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
     "@tailwindcss/postcss": "^4",
     "@types/cheerio": "^0.22.35",
     "@types/node": "^20",
@@ -49,6 +54,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "youtube-transcript": "^1.3.1"
   }
 }

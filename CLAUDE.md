@@ -77,17 +77,24 @@ shintoku-platform/
 ├── docs/
 │   └── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
 ├── scripts/                      # Data scripts (run via tsx)
+│   ├── config.ts                 # ★ モデル名・閾値・exit code 規約の一元管理
 │   ├── lib/schema.ts             # ★ 共通型・validateTags・stableStringify
 │   ├── build-data.ts             # ★ content/ → public/data/（恒久ビルド）
-│   ├── json-to-md.ts             #   既存JSON → content/（移行用・使い捨て）
-│   ├── roundtrip-test.ts         #   JSON → MD → JSON の構造一致テスト
+│   ├── add-session.ts            # ★ 字幕→MD→PR のオーケストレータ
+│   ├── fetch-transcript.ts       #   YouTube字幕 → transcripts/（Layer 0）
+│   ├── extract-md.ts             #   字幕 → MD（Claude API + 自己修正ループ）
+│   ├── watch-council.ts          #   RSS監視 → GitHub Issue
+│   ├── prompts/                  #   抽出プロンプト（git履歴で改善を追える）
+│   │   ├── glossary.md           #     固有名詞対訳表（議員名簿・誤認識パターン）
+│   │   ├── extract-qna.md
+│   │   └── extract-honkaigi.md
+│   ├── migration/                #   凍結。移行時の証明ツール（README.md 参照）
 │   ├── sync-all.ts               # Master sync orchestrator
 │   ├── scrape-announcements.ts
 │   ├── scrape-newsletters.ts
 │   ├── scrape-giketsu.ts
 │   ├── index-newsletters.ts      # Full-text index builder
 │   ├── convertSlides.mjs         # PDF → JPEG slides (requires poppler)
-│   ├── addSession.mjs            # Add new session helper
 │   ├── test-scraper.ts           # CI test scraper
 │   └── lib/http.ts               # HTTP utilities
 ├── tools/                        # Build-time tools
@@ -114,7 +121,8 @@ shintoku-platform/
 ├── tasks/                        # Task tracking files
 ├── .github/workflows/            # CI/CD
 │   ├── daily-sync.yml            # npm run sync at 12:00 JST
-│   └── daily-scrape.yml          # test-scraper at 09:00 JST
+│   ├── daily-scrape.yml          # test-scraper at 09:00 JST
+│   └── watch-council.yml         # 新着動画の検知 → Issue at 09:00 JST
 ├── next.config.ts                # Minimal (no custom config)
 ├── tsconfig.json                 # strict: true, @/* path alias
 ├── eslint.config.mjs             # next/core-web-vitals + typescript
@@ -131,7 +139,12 @@ npm run lint             # ESLint
 
 # Content (MD is canonical)
 npm run build:data       # content/sessions/** -> public/data/*.json (validates, exits 1 on error)
-npm run test:roundtrip   # Verify JSON -> MD -> JSON is structurally identical
+
+# Session pipeline (字幕 -> MD -> PR)
+npm run add-session -- --id <id> --url <url> --type qna|honkaigi --part day1 --label "..." --date YYYY-MM-DD
+npm run fetch:transcript -- --url <url> --out <path>
+npm run extract:md -- --session <id> --part day1 --type honkaigi
+npm run watch:council -- [--dry-run]   # RSS監視 -> GitHub Issue
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)
@@ -167,8 +180,9 @@ Next.js App Router pages (app/)
 **直接編集禁止** — 修正は `content/` のMDに対して行う。
 
 GitHub Actions automates:
-- `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `public/data/` changes
+- `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / `newsletters_index.json` （生成物 `gikai_sessions.json` / `qna/` には触れない）
 - `daily-scrape.yml`: Runs `test-scraper.ts` at 09:00 JST, commits `data/scraped/` changes
+- `watch-council.yml`: Runs `watch-council.ts` at 09:00 JST。議会チャンネルのRSSに新着があれば GitHub Issue を立て、`data/watch/known-videos.json` を更新する
 
 ## Coding Conventions
 
@@ -460,29 +474,60 @@ Defined as static data in `app/process/issues/page.tsx`:
    Layer 0・不可侵         正典・人がレビューする      生成物・直接編集禁止
 ```
 
-1. YouTube URLから字幕を取得し `content/sessions/{id}/transcripts/{part}.txt` に保存（Layer 0。誤字があってもここは直さない）
-2. 字幕をソースに構造化抽出し、`docs/content-schema.md` §4/§5 の本文構造でMDを書く
-   （NotebookLM MCP（`notebooklm-mcp`）を使う場合も、出力先はJSONではなくMD）
-3. 議員名は町公式サイトの議員名簿で正式表記を確認して修正
-4. レビューを終えたら frontmatter の `reviewed: true` に変更
-5. `npm run build:data` でJSONを再生成する（`npm run build` にも含まれる）
+人間に残る判断は3つだけ。それ以外は `npm run add-session` が自動化する。
+
+1. **セッションIDと種別**（`r8-2026-06-regular-2` / `qna` か `honkaigi` か）
+2. **narrativeTitle の承認**（AIが3案を `session.yaml` にコメントで残す。人が選ぶか書き直す）
+3. **PRレビュー**（固有名詞・数値・タグ）
+
+```
+[watcher (cron)] ──新着検知──> Issue（URL・タイトル・公開日）
+                                  │ 人間: IDと種別を決めて CLI 起動
+                                  ▼
+[add-session] ─> 字幕取得 ─> Claude抽出 ─> build:data で検証 ─┬─ OK ─> branch + PR
+                                    ▲          │ NG（バリデーションエラー）
+                                    └─自己修正（最大2回）┘
+                                  │ 人間: PRレビュー → reviewed: true → マージ → 自動デプロイ
+```
 
 ### Adding a New Session
 
-1. Copy PDF to `public/pdf/` with naming `{sessionId}_part{n}.pdf`
-2. Run `npm run slides:generate <sessionId> <slideId>` to generate slide images
-3. Create `content/sessions/{sessionId}/session.yaml`（スキーマ §2）
-   - 会期が複数日にわたり `date` が実時間順とずれる場合は `sortDate` に会期初日を入れる（§2.1）
-4. Apply tags following the tagging rules above
-5. (Optional) Add part MD to `content/sessions/{sessionId}/`:
-   - 本会議: `day{n}.md` with `part_type: honkaigi`
-   - 一般質問: `session.md` or `part{n}.md` with `part_type: qna`
-   - `part_index` は `day{n}` / `part{n}` の `n - 1` に一致させる
-6. `npm run build:data` を実行。バリデーションに通らなければJSONは出力されない
+```bash
+npm run add-session -- \
+  --id r8-2026-06-regular-2 \
+  --url "https://www.youtube.com/watch?v=XXXX" \
+  --type honkaigi --part day2 --label "最終日（6/19）" \
+  --date 2026-06-19 \
+  --title-official "令和8年定例第2回新得町議会" \
+  --tags "定例会,補正予算,観光"
+```
+
+冪等。同じ `--id --part` で再実行しても字幕は取り直さない（`--force` で上書き）。抽出だけやり直すなら `--force-extract`。
+
+個別に動かす場合:
+
+```bash
+npm run fetch:transcript -- --url <url> --out content/sessions/<id>/transcripts/day1.txt
+npm run extract:md -- --session <id> --part day1 --type honkaigi
+```
+
+スライドPDFは従来どおり別管理: `public/pdf/{sessionId}_part{n}.pdf` を置いて `npm run slides:generate <sessionId> <slideId>`。
+
+**exit code 規約**（`scripts/config.ts` の `EXIT`。watcher・CLI・CI で共有）
+
+| code | 意味 | 対応 |
+|---|---|---|
+| 0 | 成功 | — |
+| 1 | エラー | 人間が対処（URL不正・動画が視聴不可・API失敗） |
+| 2 | 字幕が未生成 | 数時間おいて再実行 |
+| 3 | 字幕が恒久的に無効 | このセッションは字幕から抽出できない |
+
+会期が複数日にわたり `date` が実時間順とずれる場合は、`session.yaml` に `sortDate`（会期初日）を入れる（スキーマ §2.1）。
 
 ### Known Issues
 
-- `scripts/addSession.mjs` は `public/data/gikai_sessions.json` を直接書き換えるため、MD正典化後は使えない（`npm run build:data` に上書きされる）。`content/sessions/{id}/session.yaml` を作る方式へ要書き換え
+- **既存26パート中15本の YouTube 動画が非公開化されている**（`playabilityStatus: LOGIN_REQUIRED`）。R6全部とR7初期。サイト上のリンクが死んでおり、字幕からの再抽出もできない
+- `content/` の議員名に誤りが4件残っている（`桜田`→`櫻田`、`斎藤`→`齊藤`、`福原 之行`→`福原 智幸`、`松山委員` は名簿に該当者なし）。詳細は `scripts/prompts/glossary.md`
 - `public/data/qna/*.json` の `topics_index` は3種類のスキーマが混在している。現在はMDの `_passthrough` に無加工で退避しているだけで、正規化は未着手
 - Missing parts for some R6 (令和6年) sessions (first/final day not yet added)
 - Mobile display needs review and improvement

@@ -344,15 +344,21 @@ npm scripts への追加：
 ## 7. 運用フロー（新パイプラインとの接続）
 
 ```
-1. RSS監視で新着動画検知（GitHub Actions cron）
-2. 字幕取得 → content/sessions/{id}/transcripts/ に保存（Layer 0）
-3. Claude APIで字幕 → MD抽出（このスキーマを出力仕様として渡す）
-4. 自動PR作成（MD + session.yaml）
-5. 人間レビュー：MDだけを読む・直す（reviewed: true に変更）
-6. マージ → Vercelビルド → build:data がJSON生成 → デプロイ
+1. RSS監視で新着動画検知（watch-council.yml / cron 09:00 JST）→ GitHub Issue
+2. 人間: セッションIDと種別（qna / honkaigi）を決めて npm run add-session を起動
+3. 字幕取得 → content/sessions/{id}/transcripts/ に保存（Layer 0・不可侵）
+4. Claude APIで字幕 → MD抽出（このスキーマの §3+§4 / §3+§5 を出力仕様として渡す）
+   → build:data のバリデータで検証 → 落ちたらエラーをAPIに返して自己修正（最大2回）
+5. 自動PR作成（MD + session.yaml + 【要確認】マークの一覧）
+6. 人間レビュー：MDだけを読む・直す（reviewed: true に変更）
+7. マージ → Vercelビルド → build:data がJSON生成 → デプロイ
 ```
 
-レビュー観点はMDに集約される：固有名詞（議員名・施設名は町公式の名簿と照合）、数値、タグ規則。JSONは見なくてよい。
+レビュー観点はMDに集約される：固有名詞（議員名・施設名は `scripts/prompts/glossary.md` と照合）、数値、タグ規則。JSONは見なくてよい。
+
+**frontmatter は `extract-md.ts` が決定的に生成し、AIには本文だけを書かせる。** 日付・`part_index`・`_passthrough` をAIに触らせないため。`extracted_by` には実際のモデルIDが入る。
+
+字幕から確信をもって読み取れない固有名詞・数値は、AIが創作せず `【要確認: 聞こえたまま】` とマークする。PR本文に集約されるのでレビューの起点になる。
 
 ---
 
