@@ -34,6 +34,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
     "@tailwindcss/postcss": "^4",
     "@types/cheerio": "^0.22.35",
     "@types/node": "^20",
@@ -49,6 +50,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "youtube-transcript": "^1.3.1"
   }
 }
