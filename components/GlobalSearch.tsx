@@ -65,7 +65,7 @@ function highlightTokens(text: string, tokens: string[]): ReactNode[] {
     const isMatch = tokens.some((t) => part.toLowerCase() === t.toLowerCase())
     if (isMatch) {
       return (
-        <mark key={i} className="rounded px-0.5 bg-accent/20 text-textMain">
+        <mark key={i} className="rounded-[2px] px-0.5 bg-accent/20 text-textMain">
           {part}
         </mark>
       )
@@ -233,7 +233,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
 
       {/* パネル */}
       <div className="fixed inset-x-4 top-20 z-[61] mx-auto max-w-xl" ref={panelRef}>
-        <div className="bg-ink border border-line rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-ink border border-line rounded-[3px] shadow-xl overflow-hidden">
           {/* 入力欄 */}
           <div className="flex items-center gap-3 px-5 py-4 border-b border-line">
             <Search size={18} className="text-textSub shrink-0" />
@@ -283,7 +283,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
                       onClick={() => handleSelect(r.href)}
                       className="w-full text-left px-5 py-3 hover:bg-accent/8 transition-colors"
                     >
-                      <span className="inline-block text-[11px] font-medium text-accent bg-accent/10 rounded px-1.5 py-0.5 mr-2">
+                      <span className="inline-block text-[11px] font-medium text-accent bg-accent/10 rounded-[2px] px-1.5 py-0.5 mr-2">
                         {r.category}
                       </span>
                       <span className="text-sm text-textMain">

@@ -32,10 +32,10 @@ const TYPE_COLORS: Record<string, string> = {
   契約: "text-accent border-accent/40",
   議案: "text-accent border-accent/40",
   運営: "text-accent border-accent/40",
-  予算: "text-yellow-400 border-yellow-400/40",
+  予算: "text-accent border-accent/40",
   質問: "text-textSub border-line",
   報告: "text-textSub border-line",
-  設計: "text-blue-400 border-blue-400/40",
+  設計: "text-textSub border-lineStrong",
   開所: "text-textMain border-textMain/40",
 }
 
@@ -87,7 +87,7 @@ export default function TuktukPage() {
         {PHASES.map((phase) => (
           <section
             key={phase.id}
-            className="bg-ink border border-line rounded-xl p-6"
+            className="bg-ink border border-line rounded-[3px] p-6"
           >
             <h2 className="text-sm font-semibold text-textSub tracking-wide mb-5">
               {phase.label}
@@ -137,7 +137,7 @@ export default function TuktukPage() {
       </div>
 
       {/* ── 名称ゆれ ────────────────────────────────────────── */}
-      <section className="mt-10 bg-ink border border-line rounded-xl p-6">
+      <section className="mt-10 bg-ink border border-line rounded-[3px] p-6">
         <h2 className="text-sm font-semibold text-textSub tracking-wide mb-3">
           名称ゆれ（観測用メモ）
         </h2>
@@ -151,7 +151,7 @@ export default function TuktukPage() {
       </section>
 
       {/* ── 施設概要 ────────────────────────────────────────── */}
-      <section className="mt-4 bg-ink border border-line rounded-xl p-6">
+      <section className="mt-4 bg-ink border border-line rounded-[3px] p-6">
         <h2 className="text-sm font-semibold text-textSub tracking-wide mb-3">
           施設概要（{FACILITY.source}より：数値のみ）
         </h2>
@@ -166,7 +166,7 @@ export default function TuktukPage() {
       </section>
 
       {/* ── 未観測 ──────────────────────────────────────────── */}
-      <section className="mt-4 bg-ink border border-line/40 rounded-xl p-6">
+      <section className="mt-4 bg-ink border border-line/40 rounded-[3px] p-6">
         <h2 className="text-sm font-semibold text-textSub tracking-wide mb-3">
           未観測（今後の探索ポイント）
         </h2>

@@ -1,12 +1,16 @@
 import fs from "fs"
 import path from "path"
 import Link from "next/link"
+import PlateFrame from "@/components/PlateFrame"
 
+// gikai_sessions.json はビルド時に sortDate??date 降順で書き出される。
+// 配列先頭が最新、配列順がそのまま表示順（SHEET番号）になる。
 interface GikaiSession {
   id:              string
   narrativeTitle?: string
   officialTitle:   string
   date:            string
+  tags:            string[]
   parts:           { label: string }[]
 }
 
@@ -14,143 +18,173 @@ interface GiketsuSession {
   items: unknown[]
 }
 
-interface LatestInfo {
-  session:   GikaiSession
-  partIndex: number
-  partLabel: string
-  partDate:  string
+const MEETING_TAGS = ["定例会", "臨時会", "特別委員会"]
+
+function getSessions(): GikaiSession[] {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
+    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as GikaiSession[]
+  } catch {
+    return []
+  }
 }
+
+function getGiketsuCount(): number {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "giketsu_index.json")
+    return (JSON.parse(fs.readFileSync(filePath, "utf-8")) as GiketsuSession[])
+      .reduce((sum, s) => sum + s.items.length, 0)
+  } catch {
+    return 0
+  }
+}
+
+// ── 導出ヘルパ ───────────────────────────────────────────────────────────────
 
 function extractDateFromLabel(label: string, sessionDate: string): string {
   const match = label.match(/[（(](\d{1,2})\/(\d{1,2})[）)]/)
   if (!match) return sessionDate
-  const year = new Date(sessionDate).getFullYear()
+  const year  = sessionDate.slice(0, 4)
   const month = match[1].padStart(2, "0")
   const day   = match[2].padStart(2, "0")
   return `${year}-${month}-${day}`
 }
 
-function getLatestInfo(): LatestInfo | null {
-  try {
-    const filePath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
-    const sessions = JSON.parse(fs.readFileSync(filePath, "utf-8")) as GikaiSession[]
-    const session = sessions.sort((a, b) => b.date.localeCompare(a.date))[0]
-    if (!session) return null
-    const partIndex = session.parts.length - 1
-    const lastPart  = session.parts[partIndex]
-    return {
-      session,
-      partIndex,
-      partLabel: lastPart.label,
-      partDate:  extractDateFromLabel(lastPart.label, session.date),
-    }
-  } catch {
-    return null
-  }
+const toDot = (iso: string) => iso.replace(/-/g, ".")
+
+/** 会期の日付範囲。単日なら "2026.06.19"、複数日なら "2026.06.03 — 06.19（会期17日間）"。 */
+function dateRangeDisplay(session: GikaiSession): string {
+  const dates = session.parts.map(p => extractDateFromLabel(p.label, session.date)).sort()
+  const start = dates[0] ?? session.date
+  const end   = dates[dates.length - 1] ?? session.date
+  if (start === end) return toDot(start)
+
+  const spanDays =
+    Math.round((Date.parse(end) - Date.parse(start)) / 86_400_000) + 1
+  const endShort = toDot(end).slice(5) // "06.19"
+  return `${toDot(start)} — ${endShort}（会期${spanDays}日間）`
 }
 
-function getStats(): { sessionCount: number; giketsuCount: number } {
-  try {
-    const sessionsPath = path.join(process.cwd(), "public", "data", "gikai_sessions.json")
-    const sessionCount = (JSON.parse(fs.readFileSync(sessionsPath, "utf-8")) as GikaiSession[]).length
+const meetingTag = (tags: string[]) => tags.find(t => MEETING_TAGS.includes(t)) ?? ""
 
-    const giketsuPath = path.join(process.cwd(), "public", "data", "giketsu_index.json")
-    const giketsuCount = (JSON.parse(fs.readFileSync(giketsuPath, "utf-8")) as GiketsuSession[])
-      .reduce((sum, s) => sum + s.items.length, 0)
+// ── UI 断片 ──────────────────────────────────────────────────────────────────
 
-    return { sessionCount, giketsuCount }
-  } catch {
-    return { sessionCount: 0, giketsuCount: 0 }
-  }
+function IndexRow({ href, num, label, desc }: { href: string; num: string; label: string; desc: string }) {
+  return (
+    <Link
+      href={href}
+      className="group grid grid-cols-[76px_1fr_auto] md:grid-cols-[110px_1fr_auto] items-baseline gap-3 md:gap-5
+                 py-5 px-1 border-b border-line rounded-[3px] transition-colors hover:bg-hover"
+    >
+      <span className="mono font-bold text-2xl md:text-[30px] leading-none">{num}</span>
+      <span className="text-[15px] font-bold">
+        {label}
+        <span className="block md:inline text-textSub font-normal text-[12.5px] md:ml-3.5">{desc}</span>
+      </span>
+      <span className="mono text-textSub transition-colors group-hover:text-accent">→</span>
+    </Link>
+  )
 }
 
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr)
-  return d.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })
-}
+// ── ページ ───────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const latestInfo = getLatestInfo()
-  const { sessionCount, giketsuCount } = getStats()
+  const sessions     = getSessions()
+  const giketsuCount = getGiketsuCount()
+  const total        = sessions.length
+  const latest       = sessions[0]
 
   return (
-    <main className="bg-base text-textMain font-sans px-8 pb-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:gap-16 md:items-start">
+    <div className="max-w-[1040px] mx-auto px-6">
 
-          {/* 左カラム：ヒーロー */}
-          <section className="max-w-3xl md:max-w-none md:flex-1 pt-6 pb-8 md:pt-16 mb-8 md:mb-0">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight break-keep">
-              町を読む。
-            </h2>
-            <p className="text-textMain/60 text-base mt-4 leading-relaxed">
-              ニュースではなく、流れを見る。<br />
-              断片ではなく、構造を見る。
-            </p>
-            <div className="grid grid-cols-3 gap-px bg-line/30 rounded-xl overflow-hidden mt-8 mb-6">
-              <div className="bg-base flex flex-col items-center py-4">
-                <p className="text-2xl font-bold text-textMain">{sessionCount}</p>
-                <p className="text-[10px] text-textSub/50 mt-1">会議</p>
-              </div>
-              <div className="bg-base flex flex-col items-center py-4 border-x border-line/30">
-                <p className="text-2xl font-bold text-textMain">{giketsuCount.toLocaleString()}</p>
-                <p className="text-[10px] text-textSub/50 mt-1">議決</p>
-              </div>
-              <div className="bg-base flex flex-col items-center py-4">
-                <p className="text-2xl font-bold text-textMain">6</p>
-                <p className="text-[10px] text-textSub/50 mt-1">継続論点</p>
-              </div>
+      {/* ── 図版：最新の記録 ─────────────────────────────────────────── */}
+      {latest && (
+        <div className="pt-11">
+          <PlateFrame className="pt-10 px-6 pb-9 md:px-11">
+            <div className="flex justify-between items-baseline text-xs text-textSub mb-6">
+              <span className="text-accent font-bold flex items-center gap-2">
+                <span className="inline-block w-[7px] h-[7px] rounded-full bg-accent" aria-hidden />
+                最新の記録
+              </span>
+              <span className="mono text-[11px] tracking-[0.1em]">SHEET {total} / {total}</span>
             </div>
-            {latestInfo && (
-              <Link
-                href={`/gikai/sessions/${latestInfo.session.id}/${latestInfo.partIndex}`}
-                className="border border-line rounded-xl p-4 flex items-start justify-between gap-3 hover:border-accent/50 transition bg-ink block"
-              >
-                <div className="min-w-0">
-                  <p className="text-[10px] text-textSub/50 tracking-widest uppercase mb-1">
-                    最新 — {formatDate(latestInfo.partDate)}
-                  </p>
-                  <p className="text-sm font-medium text-textMain leading-snug mb-1">
-                    {latestInfo.session.narrativeTitle ?? latestInfo.session.officialTitle}
-                  </p>
-                  <p className="text-xs text-accent/70">{latestInfo.partLabel}</p>
-                </div>
-                <svg className="w-4 h-4 text-textSub/30 shrink-0 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 18l6-6-6-6"/>
-                </svg>
-              </Link>
-            )}
-          </section>
 
-          {/* 右カラム：モジュール */}
-          <section className="md:w-72 md:shrink-0 md:sticky md:top-40">
-            <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
-              <Link
-                href="/gikai/sessions"
-                className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-              >
-                <h3 className="text-sm font-semibold mb-1">議会を読む</h3>
-                <p className="text-xs text-textSub/60 leading-relaxed">会議の記録から議論をたどる</p>
-              </Link>
-              <Link
-                href="/gikai"
-                className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-              >
-                <h3 className="text-sm font-semibold mb-1">決まったこと</h3>
-                <p className="text-xs text-textSub/60 leading-relaxed">町が選んだこと</p>
-              </Link>
-              <Link
-                href="/process"
-                className="bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all"
-              >
-                <h3 className="text-sm font-semibold mb-1">流れを読む</h3>
-                <p className="text-xs text-textSub/60 leading-relaxed">意思決定の構造</p>
-              </Link>
+            <p className="mono text-[13px] text-textSub mb-2.5">{dateRangeDisplay(latest)}</p>
+
+            <h1
+              className="font-mincho font-bold leading-[1.35] mb-2.5 text-textMain"
+              style={{ fontSize: "clamp(28px, 4.6vw, 44px)" }}
+            >
+              {latest.narrativeTitle ?? latest.officialTitle}
+            </h1>
+
+            <p className="text-[13px] text-textSub mb-5">{latest.officialTitle}</p>
+
+            <div className="flex flex-wrap gap-2 mb-7">
+              {latest.tags.map(tag => (
+                <span
+                  key={tag}
+                  className="text-[11.5px] font-medium text-textSub border border-lineStrong rounded-[3px] px-[11px] py-[3px]"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
-          </section>
 
+            <Link
+              href={`/gikai/sessions/${latest.id}`}
+              className="group inline-block text-sm font-bold border-b-2 border-textMain pb-[3px]
+                         transition-colors hover:text-accent hover:border-accent"
+            >
+              この会期を読む
+            </Link>
+          </PlateFrame>
+
+          {/* 機能文 */}
+          <div className="flex flex-wrap justify-between gap-3 pt-[26px] text-[13.5px] text-textSub">
+            <span>新得町議会の記録を、構造のまま公開しています。非公式・個人プロジェクト。</span>
+            <span className="mono text-[11px] tracking-[0.08em]">43°04′N 142°50′E</span>
+          </div>
         </div>
-      </div>
-    </main>
+      )}
+
+      {/* ── 索引 ─────────────────────────────────────────────────────── */}
+      <section className="mt-[52px] border-t-[1.5px] border-textMain">
+        <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub pt-4 pb-1.5">索引</h2>
+        <IndexRow href="/gikai/sessions" num={String(total)}       label="会議" desc="令和6年からの全会期の記録" />
+        <IndexRow href="/gikai"          num={giketsuCount.toLocaleString()} label="議決" desc="町が選んだことの一覧" />
+        <IndexRow href="/process"        num="6"                   label="継続論点" desc="複数の会議をまたいで続く議論" />
+      </section>
+
+      {/* ── 近時の記録 ───────────────────────────────────────────────── */}
+      <section className="mt-[52px] border-t-[1.5px] border-textMain">
+        <div className="flex items-baseline justify-between pt-4 pb-1.5">
+          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">近時の記録</h2>
+          <Link href="/gikai/sessions" className="text-[12.5px] text-textSub transition-colors hover:text-accent">
+            すべての記録 →
+          </Link>
+        </div>
+        {sessions.slice(0, 4).map((s, i) => (
+          <Link
+            key={s.id}
+            href={`/gikai/sessions/${s.id}`}
+            className="group grid grid-cols-[52px_1fr_auto] md:grid-cols-[72px_92px_1fr_auto] items-baseline
+                       gap-3 md:gap-5 py-4 px-1 border-b border-line rounded-[3px] transition-colors hover:bg-hover"
+          >
+            <span className="mono text-textSub text-[13px]">NO.{total - i}</span>
+            <span className="mono text-textSub text-[13px] hidden md:block">{toDot(s.date)}</span>
+            <span className="text-[14px] font-bold leading-snug">
+              {s.narrativeTitle ?? s.officialTitle}
+              <span className="mono block md:hidden text-textSub text-[11px] font-normal mt-0.5">{toDot(s.date)}</span>
+            </span>
+            <span className="text-[11px] text-textSub border border-lineStrong rounded-[3px] px-2 py-[2px] whitespace-nowrap justify-self-end">
+              {meetingTag(s.tags)}
+            </span>
+          </Link>
+        ))}
+      </section>
+
+      <div className="h-16" />
+    </div>
   )
 }

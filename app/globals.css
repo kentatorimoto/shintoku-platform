@@ -1,15 +1,45 @@
 @import "tailwindcss";
 
-@theme {
-  --color-base: #f5f2ec;
-  --color-ink: #edeae3;
-  --color-line: #d8d3c8;
-  --color-accent: #7a5c1e;
-  --color-accentSoft: #5c4415;
-  --color-textMain: #1a1710;
-  --color-textSub: #6b6355;
+/* ══════════════════════════════════════════════════════════════════════
+   デザイントークン「亜麻×小豆」 — 正は docs/design/atlas-hybrid-warm.html
+   基調（亜麻）を @theme のデフォルト値に置く。既存の bg-base / text-textSub
+   等はすべてこの変数を参照するので、値を差し替えるだけで全ページに波及する。
+   /process 配下は [data-paper="azuki"] で同じ変数を小豆に上書きする。
+   ══════════════════════════════════════════════════════════════════════ */
 
-  --font-sans: var(--font-noto), var(--font-inter), ui-sans-serif, system-ui;
+@theme {
+  /* ── 亜麻（基調）── 緑み寄りの暖灰。黄味クリームとは色相を分ける */
+  --color-base:       #e7e8dc; /* 紙 */
+  --color-ink:        #dee0d1; /* 起伏面（カード地・行ホバー）*/
+  --color-line:       #d0d2c2; /* 罫線 */
+  --color-lineStrong: #a9ac97; /* 強罫線・タグ枠 */
+  --color-accent:     #b8432c; /* 茜。最新・現在地・ホバーのみ */
+  --color-accentSoft: #9a3826; /* 濃い茜（ホバー状態）*/
+  --color-onAccent:   #e7e8dc; /* 茜地の上に載る文字（＝紙色）*/
+  --color-textMain:   #23241c; /* 墨 */
+  --color-textSub:    #67685a; /* 薄墨（補助テキスト・AA 4.58:1）*/
+  --color-hover:      #dee0d1; /* 行ホバー地 */
+
+  /* ── 書体 ── */
+  --font-sans:   var(--font-noto), ui-sans-serif, system-ui, sans-serif;
+  --font-mincho: var(--font-zen-mincho), serif;      /* 見出し・narrativeTitle のみ */
+  --font-mono:   var(--font-space-mono), ui-monospace, monospace; /* 数値・日付・SHEET・座標 */
+}
+
+/* ── 小豆（/process 配下のみ反転）──
+   十勝の小豆の焙煎色。差し色はカラマツの黄葉。
+   基調変数を上書きするだけなので、コンポーネントは常に --color-base 等を参照する。 */
+[data-paper="azuki"] {
+  --color-base:       #2a201c;
+  --color-ink:        #342823;
+  --color-line:       #453730;
+  --color-lineStrong: #5c4c42;
+  --color-accent:     #dfa04e;
+  --color-accentSoft: #c88f3f;
+  --color-onAccent:   #2a201c; /* カラマツ地の上に載る文字（＝小豆紙色）*/
+  --color-textMain:   #f0e8de;
+  --color-textSub:    #a5968a; /* AA 5.54:1 */
+  --color-hover:      #342823;
 }
 
 @layer base {
@@ -19,6 +49,13 @@
 
   body {
     @apply font-sans text-textMain antialiased;
+    line-height: 1.8;
+  }
+
+  /* 数値・日付・SHEET番号・座標は等幅＋タブラー数字 */
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
   }
 }
 
@@ -50,10 +87,10 @@
     @apply mt-3 text-base md:text-lg text-textSub;
   }
 
-  /* ===== Card ===== */
+  /* ===== Card ===== 角丸は最大3px。ピル・大きな角丸は使わない */
 
   .card {
-    @apply bg-ink border border-line rounded-2xl p-6;
+    @apply bg-ink border border-line rounded-[3px] p-6;
   }
 
   .cardHover {
@@ -64,26 +101,30 @@
 
   .input {
     /* iOS zoom防止 */
-    @apply w-full bg-base/40 border border-line rounded-xl px-4 py-4 text-[16px] text-textMain placeholder:text-textSub/70 outline-none focus:border-accent transition-colors;
+    @apply w-full bg-base/40 border border-line rounded-[3px] px-4 py-4 text-[16px] text-textMain placeholder:text-textSub/70 outline-none focus:border-accent transition-colors;
   }
 
   /* ===== Buttons ===== */
 
   .btnPrimary {
-    @apply inline-flex items-center justify-center rounded-xl bg-accent px-5 py-3 font-semibold text-base hover:bg-accentSoft transition-colors;
+    @apply inline-flex items-center justify-center rounded-[3px] bg-accent px-5 py-3 font-semibold text-base text-onAccent hover:bg-accentSoft transition-colors;
   }
 
   .btnSecondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-line bg-transparent px-5 py-3 font-semibold text-base text-textMain hover:border-accent transition-colors;
+    @apply inline-flex items-center justify-center rounded-[3px] border border-line bg-transparent px-5 py-3 font-semibold text-base text-textMain hover:border-accent transition-colors;
   }
 
-  /* ===== Chips ===== */
+  /* ===== Tag / Chip ===== 罫線＋3px角。ピル全廃 */
+
+  .tag {
+    @apply inline-flex items-center rounded-[3px] border border-lineStrong px-[11px] py-[3px] text-[11.5px] font-medium text-textSub;
+  }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-line px-3 py-2 text-sm text-textSub hover:text-textMain hover:border-accent transition-colors;
+    @apply inline-flex items-center rounded-[3px] border border-lineStrong px-3 py-2 text-sm text-textSub hover:text-textMain hover:border-accent transition-colors;
   }
 
   .chipActive {
-    @apply bg-base/60 border-accent text-textMain;
+    @apply bg-hover border-accent text-textMain;
   }
 }

@@ -20,7 +20,7 @@ export default function GiketsuCountBadge({ count, sessionName }: Props) {
       className="inline-flex items-center gap-1 text-xs font-medium
                  border border-accent/50 text-accent
                  hover:bg-accent/10 hover:border-accent
-                 rounded-full px-2.5 py-0.5 transition-colors"
+                 rounded-[3px] px-2.5 py-0.5 transition-colors"
     >
       議決 {count} 件 →
     </button>

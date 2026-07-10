@@ -3,42 +3,53 @@ import Script from "next/script"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import BottomNav from "@/components/BottomNav"
-import { Inter, Noto_Sans_JP, IBM_Plex_Sans } from "next/font/google"
+import { Noto_Sans_JP, Zen_Old_Mincho, Space_Mono } from "next/font/google"
 import "./globals.css"
 import "leaflet/dist/leaflet.css"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
+// 本文
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto",
   display: "swap",
 })
 
-const ibmPlexSans = IBM_Plex_Sans({
+// 見出し・narrativeTitle のみ
+const zenOldMincho = Zen_Old_Mincho({
   subsets: ["latin"],
-  weight: ["500"],
-  variable: "--font-ibm-plex",
+  weight: ["400", "600", "700"],
+  variable: "--font-zen-mincho",
+  display: "swap",
+})
+
+// 数値・日付・SHEET番号・座標
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
   display: "swap",
 })
 
 export const metadata: Metadata = {
   title: "Shintoku Atlas",
-  description: "An unofficial public information dashboard.",
+  description: "新得町議会の記録を、構造のまま公開しています",
   openGraph: {
     title: "Shintoku Atlas",
-    description: "An unofficial public information dashboard.",
+    description: "新得町議会の記録を、構造のまま公開しています",
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable} ${ibmPlexSans.variable}`}>
+    <html lang="ja" className={`${notoSansJP.variable} ${zenOldMincho.variable} ${spaceMono.variable}`}>
       <head>
+        {/* /process 配下は小豆の紙。直接ロード時に FOUC なしで data-paper を立てる。
+            SPA 遷移は components/AzukiPaper.tsx が担う。 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.dataset.paper=location.pathname.startsWith('/process')?'azuki':''`,
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-PTNKSBK9Y7"
           strategy="afterInteractive"

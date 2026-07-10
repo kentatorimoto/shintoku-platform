@@ -92,12 +92,12 @@ export default async function AnnouncementsPage() {
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       {a.isNew && (
-                        <span className="inline-flex items-center rounded-full bg-accent text-base px-2.5 py-1 text-xs font-semibold">
+                        <span className="inline-flex items-center rounded-[3px] bg-accent text-base px-2.5 py-1 text-xs font-semibold">
                           NEW
                         </span>
                       )}
                       {a.category && (
-                        <span className="inline-flex items-center rounded-full border border-line px-2.5 py-1 text-xs text-textSub">
+                        <span className="inline-flex items-center rounded-[3px] border border-line px-2.5 py-1 text-xs text-textSub">
                           {a.category}
                         </span>
                       )}

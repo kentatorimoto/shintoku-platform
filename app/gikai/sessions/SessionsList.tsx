@@ -88,10 +88,10 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedTags([])}
-            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
+            className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
               selectedTags.length === 0
-                ? "bg-accent text-base border-accent"
-                : "bg-ink border-line text-textSub hover:border-accent/50"
+                ? "bg-accent text-onAccent border-accent"
+                : "bg-ink border-lineStrong text-textSub hover:border-accent/50"
             }`}
           >
             すべて
@@ -100,10 +100,10 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
             <button
               key={tag}
               onClick={() => toggleTag(tag)}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
+              className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
                 selectedTags.includes(tag)
-                  ? "bg-accent text-base border-accent"
-                  : "bg-ink border-line text-textSub hover:border-accent/50"
+                  ? "bg-accent text-onAccent border-accent"
+                  : "bg-ink border-lineStrong text-textSub hover:border-accent/50"
               }`}
             >
               {tag}
@@ -121,28 +121,28 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
       {filtered.length === 0 ? (
         <p className="text-textSub text-center py-20">該当する会議がありません</p>
       ) : (
-        <div className="space-y-4">
+        <div className="border-t border-line">
           {filtered.map((session) => {
             const g = giketsuMap[session.id]
             return (
               <Link
                 key={session.id}
                 href={`/gikai/sessions/${session.id}`}
-                className="block bg-ink border border-line rounded-xl p-5 hover:border-accent transition-all group"
+                className="block border-b border-line rounded-[3px] px-2 py-5 hover:bg-hover transition-colors group"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     {/* 日付 */}
-                    <p className="text-xs text-accent font-semibold tracking-wide mb-1.5">
+                    <p className="mono text-[12px] text-textSub mb-1.5">
                       {formatDate(session.date)}
                     </p>
                     {/* タイトル */}
-                    <h2 className="text-base md:text-lg font-semibold text-textMain
-                                    group-hover:text-accent/90 transition-colors leading-snug mb-1">
+                    <h2 className="font-mincho text-lg md:text-xl font-bold text-textMain
+                                    group-hover:text-accent transition-colors leading-snug mb-1">
                       {session.narrativeTitle ?? session.officialTitle}
                     </h2>
                     {session.narrativeTitle && (
-                      <p className="text-xs text-textSub/60 mb-2 leading-snug">
+                      <p className="text-xs text-textSub mb-2 leading-snug">
                         {session.officialTitle}
                       </p>
                     )}
@@ -152,10 +152,10 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                         {session.tags.map((tag) => (
                           <span
                             key={tag}
-                            className={`text-[11px] rounded px-1.5 py-0.5 ${
+                            className={`text-[11px] rounded-[3px] px-[9px] py-[2px] border ${
                               selectedTags.includes(tag)
-                                ? "bg-accent/15 text-accent border border-accent/30"
-                                : "bg-line text-textSub/70"
+                                ? "bg-accent/15 text-accent border-accent/40"
+                                : "text-textSub border-lineStrong"
                             }`}
                           >
                             {tag}
@@ -184,7 +184,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                         <span
                           key={part.slidesDir}
                           className="inline-flex items-center gap-1.5 text-xs
-                                     bg-line text-textSub rounded-full px-2.5 py-0.5"
+                                     border border-line text-textSub rounded-[3px] px-2.5 py-0.5"
                         >
                           {part.youtube && (
                             <svg className="w-3 h-3 text-red-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">

@@ -15,7 +15,7 @@ const COL2 = [
 ] as const
 
 function FooterLink({ href, label, external }: { href: string; label: string; external: boolean }) {
-  const cls = "text-sm text-textMain hover:text-accent transition-colors"
+  const cls = "text-sm text-textSub hover:text-accent transition-colors"
   return external ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{label}</a>
   ) : (
@@ -25,34 +25,26 @@ function FooterLink({ href, label, external }: { href: string; label: string; ex
 
 export default function Footer() {
   return (
-    <footer className="mt-16 md:mt-20 border-t border-line/30 bg-ink">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-10">
-          {/* ブランド */}
-          <div>
-            <p className="text-textMain font-semibold mb-2">SHINTOKU ATLAS</p>
-            <p className="text-xs text-textSub/60 leading-relaxed">
-              新得町の公開情報を<br />整理・可視化するプロジェクト
-            </p>
-          </div>
-
-          {/* リンク 2列 */}
-          <div className="flex gap-12">
-            <ul className="space-y-3">
-              {COL1.map((l) => (
-                <li key={l.href}><FooterLink {...l} /></li>
-              ))}
-            </ul>
-            <ul className="space-y-3">
-              {COL2.map((l) => (
-                <li key={l.href}><FooterLink {...l} /></li>
-              ))}
-            </ul>
-          </div>
+    <footer className="mt-20 border-t-[1.5px] border-textMain">
+      <div className="max-w-[1040px] mx-auto px-6 py-7">
+        {/* リンク 2列 */}
+        <div className="flex gap-12 mb-7">
+          <ul className="space-y-3">
+            {COL1.map((l) => (
+              <li key={l.href}><FooterLink {...l} /></li>
+            ))}
+          </ul>
+          <ul className="space-y-3">
+            {COL2.map((l) => (
+              <li key={l.href}><FooterLink {...l} /></li>
+            ))}
+          </ul>
         </div>
 
-        <div className="pt-8 mt-8 border-t border-line/20 text-xs text-textSub/50">
-          © 2026 SHINTOKU ATLAS — 非公式・個人プロジェクト
+        {/* コピーライト ＋ 座標（モック準拠）*/}
+        <div className="flex flex-wrap justify-between gap-4 pt-6 border-t border-line text-[12.5px] text-textSub">
+          <span>© 2026 SHINTOKU ATLAS — 非公式・個人プロジェクト</span>
+          <span className="mono text-[11px]">43°04′N 142°50′E</span>
         </div>
       </div>
     </footer>
