@@ -1,0 +1,22 @@
+id: r6-2024-09-kessan-tokubetsu
+officialTitle: 令和６年９月１３日 決算特別委員会
+narrativeTitle: 財政規律か地域サービスか——令和５年度決算を読む
+date: "2024-09-13"
+tags:
+  - 決算
+  - 財政
+  - 特別委員会
+  - 争点あり
+summary:
+  issues: 令和5年度一般会計・特別会計の決算審査。財政健全化の進捗と地域サービスへの投資判断が焦点
+  conflicts: 財政規律を優先するか、地域サービス水準を維持するか
+  nextActions: 決算で浮上した課題が令和6年度予算にどう反映されたかを確認
+parts:
+  - label: 午前
+    youtube: https://www.youtube.com/watch?v=vrdUGd1Zaeg
+    pdf: r6-2024-09-kessan-tokubetsu_morning.pdf
+    slidesDir: morning
+  - label: 午後
+    youtube: https://www.youtube.com/watch?v=c0pLSDSgOxY
+    pdf: r6-2024-09-kessan-tokubetsu_afternoon.pdf
+    slidesDir: afternoon

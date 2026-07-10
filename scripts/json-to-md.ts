@@ -13,9 +13,7 @@ import {
   isHonkaigi,
   type BillItem,
   type GikaiSession,
-  type HonkaigiData,
   type PartData,
-  type QnaData,
   type QnaItem,
 } from "./lib/schema"
 

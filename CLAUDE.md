@@ -67,7 +67,20 @@ shintoku-platform/
 │       ├── base.ts               #   Abstract BaseScraper (Axios + Cheerio)
 │       ├── announcements.ts      #   Announcements scraper
 │       └── newsletters.ts        #   Newsletters scraper
+├── content/                      # ★ 議会セッションの正典（MD + YAML）
+│   └── sessions/{sessionId}/
+│       ├── session.yaml          #   セッションメタ
+│       ├── day{n}.md             #   本会議（part_type: honkaigi）
+│       ├── part{n}.md            #   パート別（part_type: qna）
+│       ├── session.md            #   単一パート（part_type: qna）
+│       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
+├── docs/
+│   └── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
 ├── scripts/                      # Data scripts (run via tsx)
+│   ├── lib/schema.ts             # ★ 共通型・validateTags・stableStringify
+│   ├── build-data.ts             # ★ content/ → public/data/（恒久ビルド）
+│   ├── json-to-md.ts             #   既存JSON → content/（移行用・使い捨て）
+│   ├── roundtrip-test.ts         #   JSON → MD → JSON の構造一致テスト
 │   ├── sync-all.ts               # Master sync orchestrator
 │   ├── scrape-announcements.ts
 │   ├── scrape-newsletters.ts
@@ -86,7 +99,7 @@ shintoku-platform/
 │   ├── gikai_links.csv           # Source CSV for links
 │   └── process.json              # Process data
 ├── public/
-│   ├── data/                     # Public JSON datasets (served)
+│   ├── data/                     # Public JSON datasets (served) ※gikai_sessions.json と qna/ は生成物
 │   │   ├── gikai_sessions.json   # Core session metadata
 │   │   ├── gikai_links.json      # Session-to-decision links
 │   │   ├── giketsu_index.json    # Decisions full-text index
@@ -113,8 +126,12 @@ shintoku-platform/
 ```bash
 # Development
 npm run dev              # Start Next.js dev server (http://localhost:3000)
-npm run build            # Production build (runs build:links then next build)
+npm run build            # Production build (build:links -> build:data -> next build)
 npm run lint             # ESLint
+
+# Content (MD is canonical)
+npm run build:data       # content/sessions/** -> public/data/*.json (validates, exits 1 on error)
+npm run test:roundtrip   # Verify JSON -> MD -> JSON is structurally identical
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)
@@ -134,15 +151,20 @@ Scripts are run with `tsx` (TypeScript executor). No test framework is configure
 
 ## Data Flow
 
+スクレイピング系（町報・議決・お知らせ）と、議会セッション系（MD正典）の2系統がある。
+
 ```
-Official town website (shintoku-town.jp)
-  ↓  Cheerio + Axios (scripts/)
-Local scraped data (data/scraped/)
-  ↓  Processing & indexing
-Public JSON (public/data/*.json)
-  ↓  fetch() at build/runtime
+Official town website (shintoku-town.jp)      YouTube 字幕
+  ↓  Cheerio + Axios (scripts/)                 ↓  Layer 0（不可侵）
+Local scraped data (data/scraped/)            content/sessions/{id}/transcripts/
+  ↓  Processing & indexing                      ↓  AI抽出 + 人間レビュー
+Public JSON (public/data/*.json)  ←────────  content/sessions/{id}/*.md, session.yaml（正典）
+  ↓  fetch() at build/runtime          build:data
 Next.js App Router pages (app/)
 ```
+
+`public/data/gikai_sessions.json` と `public/data/qna/*.json` は `npm run build:data` の生成物。
+**直接編集禁止** — 修正は `content/` のMDに対して行う。
 
 GitHub Actions automates:
 - `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `public/data/` changes
@@ -316,14 +338,18 @@ Examples: `r7-2025-12-regular-4`, `r8-2026-01-rinji-01`
 
 ### Tagging Rules
 
-1. Always include exactly 1 session type tag
-2. Theme tags limited to topics actually discussed (max 5-6)
-3. 「争点あり」「修正可決あり」 are objective fact tags
+会議の種別と、扱う議案の種別は**別カテゴリ**。両方つく（例: `[定例会, 補正予算, 医療]`）。
+`npm run build:data` が `scripts/lib/schema.ts` の `validateTags()` で検証する。詳細は `docs/content-schema.md` §10。
 
-Available tags:
-- Session types: 定例会, 臨時会, 特別委員会, 当初予算, 補正予算, 決算
+| カテゴリ | 値 | 個数 |
+|---|---|---|
+| 会議種別 | 定例会, 臨時会, 特別委員会 | ちょうど1（違反はエラー） |
+| 議案種別 | 当初予算, 補正予算, 決算 | 0 または 1（違反はエラー） |
+| 属性 | 争点あり, 修正可決あり | 任意（客観的事実フラグ） |
+| テーマ | 下記 | 最大6（違反はエラー） |
+
 - Themes: インフラ, 農業, 観光, 宿泊税, 教育, 文化, 子育て, 財政, 医療, 物価高騰対策, 総合計画, エネルギー, 人口政策
-- Attributes: 争点あり, 修正可決あり
+- テーマは実際に議論された論点のみ。上記にないテーマタグは警告のみで通る（現在 `住民訴訟` `林業` が該当）
 
 ### Issue Cards (/process/issues) — 6 items
 
@@ -426,24 +452,38 @@ Defined as static data in `app/process/issues/page.tsx`:
 
 ### Data Creation Workflow
 
-新しいセッションデータの作成にはNotebookLM MCP（`notebooklm-mcp`）を活用：
-1. NotebookLMでノートブックを作成し、YouTube URLをソースとして追加
-2. 構造化抽出プロンプトで質疑内容を取得
-3. 結果を `public/data/qna/` にJSON形式で保存
-4. 議員名は正式表記を確認して修正
+> **正典は `content/sessions/**` のMarkdownと `session.yaml`。** 仕様は `docs/content-schema.md` が正。
+> `public/data/` は `npm run build:data` の生成物であり、**直接編集禁止**。修正は `content/` のMDに対して行うこと。
+
+```
+字幕 (transcripts/)  →  MD (content/sessions/)  →  JSON (public/data/)
+   Layer 0・不可侵         正典・人がレビューする      生成物・直接編集禁止
+```
+
+1. YouTube URLから字幕を取得し `content/sessions/{id}/transcripts/{part}.txt` に保存（Layer 0。誤字があってもここは直さない）
+2. 字幕をソースに構造化抽出し、`docs/content-schema.md` §4/§5 の本文構造でMDを書く
+   （NotebookLM MCP（`notebooklm-mcp`）を使う場合も、出力先はJSONではなくMD）
+3. 議員名は町公式サイトの議員名簿で正式表記を確認して修正
+4. レビューを終えたら frontmatter の `reviewed: true` に変更
+5. `npm run build:data` でJSONを再生成する（`npm run build` にも含まれる）
 
 ### Adding a New Session
 
 1. Copy PDF to `public/pdf/` with naming `{sessionId}_part{n}.pdf`
 2. Run `npm run slides:generate <sessionId> <slideId>` to generate slide images
-3. Add new session entry to `public/data/gikai_sessions.json`
+3. Create `content/sessions/{sessionId}/session.yaml`（スキーマ §2）
+   - 会期が複数日にわたり `date` が実時間順とずれる場合は `sortDate` に会期初日を入れる（§2.1）
 4. Apply tags following the tagging rules above
-5. (Optional) Add part data to `public/data/qna/`:
-   - 本会議: `{sessionId}_day{n}.json` with `part_type: "honkaigi"`
-   - 一般質問: `{sessionId}.json` or `{sessionId}_part{n}.json`
+5. (Optional) Add part MD to `content/sessions/{sessionId}/`:
+   - 本会議: `day{n}.md` with `part_type: honkaigi`
+   - 一般質問: `session.md` or `part{n}.md` with `part_type: qna`
+   - `part_index` は `day{n}` / `part{n}` の `n - 1` に一致させる
+6. `npm run build:data` を実行。バリデーションに通らなければJSONは出力されない
 
 ### Known Issues
 
+- `scripts/addSession.mjs` は `public/data/gikai_sessions.json` を直接書き換えるため、MD正典化後は使えない（`npm run build:data` に上書きされる）。`content/sessions/{id}/session.yaml` を作る方式へ要書き換え
+- `public/data/qna/*.json` の `topics_index` は3種類のスキーマが混在している。現在はMDの `_passthrough` に無加工で退避しているだけで、正規化は未着手
 - Missing parts for some R6 (令和6年) sessions (first/final day not yet added)
 - Mobile display needs review and improvement
 - Top page module cards not visible without scrolling

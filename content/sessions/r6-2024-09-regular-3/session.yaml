@@ -1,0 +1,29 @@
+id: r6-2024-09-regular-3
+officialTitle: 令和６年定例第３回新得町議会（９月）
+narrativeTitle: ダム道路・PFAS・無縁墓——インフラ整備が問う新得の未来
+date: "2024-09-02"
+tags:
+  - インフラ
+  - 農業
+  - 観光
+  - 宿泊税
+  - エネルギー
+  - 定例会
+  - 争点あり
+summary:
+  issues: サホロダム再生に伴う道路付け替え工事（R7〜R12）とPFAS水質検査を緊急計上。墓地無縁化・防災・バイオガス転換が一般質問の焦点
+  conflicts: 町営墓地の合葬支援：住民の8〜9割が希望するも、町は「私的財産・宗教的観点」を理由に支援しない方針を堅持
+  nextActions: 工事中の観光アクセス確保状況と宿泊税検討委員会（R8目標）の進捗を確認
+parts:
+  - label: 初日（9/2）
+    youtube: https://www.youtube.com/watch?v=8NEaqwBcBeU
+    pdf: r6-2024-09-regular-3_day1.pdf
+    slidesDir: day1
+  - label: 一般質問（9/18）
+    youtube: https://www.youtube.com/watch?v=6P8oYEHDL4E
+    pdf: r6-2024-09-regular-3_qna.pdf
+    slidesDir: qna
+  - label: 最終日（9/20）
+    youtube: https://www.youtube.com/watch?v=B9k-nioE8N8
+    pdf: r6-2024-09-regular-3_final.pdf
+    slidesDir: final

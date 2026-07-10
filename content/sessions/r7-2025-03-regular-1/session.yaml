@@ -1,0 +1,25 @@
+id: r7-2025-03-regular-1
+officialTitle: 令和７年定例第１回新得町議会（３月）
+narrativeTitle: 令和７年度の予算をどう組んだか
+date: "2025-03-03"
+tags:
+  - 当初予算
+  - 財政
+  - インフラ
+  - 観光
+  - 定例会
+summary:
+  issues: 令和7年度当初予算の審議と一般質問。総額・重点施策・各会計の規模を確認。一般質問では観光・インフラ・福祉・資産の4テーマで議員が未来への提言
+  conflicts: 令和7年度当初予算の規模・重点配分をめぐる議論。観光・インフラ・福祉・資産の各分野への配分バランス
+  nextActions: 重点施策の執行状況と補正予算での積み残し対応を確認
+parts:
+  - label: 初日（3/3）
+    youtube: https://www.youtube.com/watch?v=B5Kg1RrmaYA
+    pdf: r7-2025-03-regular-1_day1.pdf
+    slidesDir: day1
+  - label: 一般質問
+    pdf: r7-2025-03-regular-1_qna.pdf
+    slidesDir: qna
+  - label: 最終日
+    pdf: r7-2025-03-regular-1_final.pdf
+    slidesDir: final

@@ -1,0 +1,22 @@
+id: r7-2025-09-kessan-tokubetsu
+officialTitle: 令和７年９月１２日 決算特別委員会（令和６年度）
+narrativeTitle: 貯金が借金を下回った日——令和６年度決算の転換点
+date: "2025-09-12"
+tags:
+  - 決算
+  - 財政
+  - 医療
+  - 人口政策
+  - 特別委員会
+  - 争点あり
+summary:
+  issues: 令和6年度一般会計・特別会計決算審査。町債残高が前年比+29.8%の82億円に増加し、基金（貯金）を下回る借金超過フェーズへ突入。財政の「貯蓄型」から「投資・管理型」へのシフトを確認
+  conflicts: 大型事業（役場・駅前整備）による借金増に「将来にツケを残していないか」——行政は実質公債費率7.8%（前年比1.4%減）・借金の70%が交付税措置と回答。令和10年に町債約30億円のピークを予想
+  nextActions: 令和10年ピーク後の返済計画と財政健全性の実績を追跡。新得クリニック閉院後の巡回診療・オンライン診療への移行状況を確認
+parts:
+  - label: 午前
+    pdf: r7-2025-09-kessan-tokubetsu_morning.pdf
+    slidesDir: morning
+  - label: 午後
+    pdf: r7-2025-09-kessan-tokubetsu_afternoon.pdf
+    slidesDir: afternoon

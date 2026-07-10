@@ -1,0 +1,31 @@
+id: r8-2026-03-regular-1
+officialTitle: 令和８年定例第１回新得町議会（３月）
+narrativeTitle: 新総合計画が始まる——「健康なまちづくり」と組織刷新の一手
+date: "2026-03-18"
+sortDate: "2026-03-02"
+tags:
+  - 当初予算
+  - 総合計画
+  - 子育て
+  - インフラ
+  - 観光
+  - 宿泊税
+  - エネルギー
+  - 定例会
+summary:
+  issues: 第9期総合計画が始動、86億円の当初予算を提案。認定こども園移行・産業課分割・宿泊税導入など大型改革が集中。
+  conflicts: 庁舎渡り廊下建設を中止。費用が8,800万円に膨張し、町長が「将来世代への負担」を理由に断念。
+  nextActions: 当初予算は挙手多数で可決（反対：国保税引上げ・指定管理者問題）。4月の宿泊税・新組織体制の運用状況を確認。
+parts:
+  - label: 初日（3/2）
+    youtube: https://www.youtube.com/watch?v=Dl_bciU4qEs&t=2s
+    pdf: r8-2026-03-regular-1_day1.pdf
+    slidesDir: day1
+  - label: 一般質問（3/12）
+    youtube: https://www.youtube.com/watch?v=Wc1AFR3nkOg&t=33s
+    pdf: r8-2026-03-regular-1_qna.pdf
+    slidesDir: qna
+  - label: 最終日（3/18）
+    youtube: https://www.youtube.com/watch?v=-pgTXnPoSp8&t=2s
+    pdf: r8-2026-03-regular-1_day3.pdf
+    slidesDir: day3

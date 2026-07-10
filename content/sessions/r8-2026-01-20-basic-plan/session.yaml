@@ -1,0 +1,26 @@
+id: r8-2026-01-20-basic-plan
+officialTitle: 令和８年１月２０日 新得町基本構想審査特別委員会
+narrativeTitle: 新得の未来は描けているか？
+date: "2026-01-20"
+tags:
+  - 総合計画
+  - エネルギー
+  - インフラ
+  - 教育
+  - 文化
+  - 人口政策
+  - 特別委員会
+  - 争点あり
+summary:
+  issues: 第9期総合計画（R8〜R17）審査。教育・強靭化・エネルギーの3柱。2070年推計人口3,285人が議論の前提
+  conflicts: 給食センターの早期建替え（議会）vs 慎重検討（行政）。水力・バイオマス等のエネルギー資源活用の遅れを指摘
+  nextActions: 給食センターの整備方針（単独 or 広域連携）と再エネ事業化の具体スケジュールを確認
+parts:
+  - label: 午前
+    youtube: https://www.youtube.com/watch?v=14_23_jU3pc
+    pdf: r8-2026-01-20-basic-plan_morning.pdf
+    slidesDir: morning
+  - label: 午後
+    youtube: https://www.youtube.com/watch?v=3tp-NdwjqmA
+    pdf: r8-2026-01-20-basic-plan_afternoon.pdf
+    slidesDir: afternoon

@@ -1,0 +1,30 @@
+id: r6-2024-12-regular-4
+officialTitle: 令和６年定例第４回新得町議会（１２月）
+narrativeTitle: 令和６年度の積み残しと、来年への布石
+date: "2024-12-02"
+tags:
+  - 補正予算
+  - 財政
+  - インフラ
+  - 定例会
+summary:
+  issues: 令和6年度年度末補正予算と一般質問。進行中事業の進捗確認と令和7年度への引き継ぎ議論
+  conflicts: 進捗が遅れている事業の扱いと令和7年度予算への優先順位づけ
+  nextActions: 令和7年度当初予算に各課題がどう反映されたかを確認
+parts:
+  - label: 初日（12/2）
+    youtube: https://www.youtube.com/watch?v=CmPDOjeqxjs
+    pdf: r6-2024-12-regular-4_day1.pdf
+    slidesDir: day1
+  - label: 一般質問 午前（12/17）
+    youtube: https://www.youtube.com/watch?v=wV7jJihEMdI
+    pdf: r6-2024-12-regular-4_qna-morning.pdf
+    slidesDir: qna-morning
+  - label: 一般質問 午後（12/17）
+    youtube: https://www.youtube.com/watch?v=6E0RWamiDBc
+    pdf: r6-2024-12-regular-4_qna-afternoon.pdf
+    slidesDir: qna-afternoon
+  - label: 最終日（12/20）
+    youtube: https://www.youtube.com/watch?v=LSqNcYmmu7M
+    pdf: r6-2024-12-regular-4_final.pdf
+    slidesDir: final
