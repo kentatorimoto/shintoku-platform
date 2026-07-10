@@ -3,7 +3,7 @@ import Script from "next/script"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import BottomNav from "@/components/BottomNav"
-import { Noto_Sans_JP, Zen_Old_Mincho, Space_Mono, IBM_Plex_Sans } from "next/font/google"
+import { Noto_Sans_JP, Zen_Old_Mincho, Space_Mono } from "next/font/google"
 import "./globals.css"
 import "leaflet/dist/leaflet.css"
 
@@ -30,14 +30,6 @@ const spaceMono = Space_Mono({
   display: "swap",
 })
 
-// ワードマーク（Phase 2 で Space Mono に移行するまでの暫定）
-const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["500"],
-  variable: "--font-ibm-plex",
-  display: "swap",
-})
-
 export const metadata: Metadata = {
   title: "Shintoku Atlas",
   description: "An unofficial public information dashboard.",
@@ -49,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={`${notoSansJP.variable} ${zenOldMincho.variable} ${spaceMono.variable} ${ibmPlexSans.variable}`}>
+    <html lang="ja" className={`${notoSansJP.variable} ${zenOldMincho.variable} ${spaceMono.variable}`}>
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-PTNKSBK9Y7"

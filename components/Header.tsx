@@ -58,17 +58,19 @@ export default function Header() {
     )
   }
 
-  /** Desktop リンクのクラス */
+  /** Desktop リンクのクラス。ホバー/カレントは accent の 2px 下線 */
   function desktopClass(href: string) {
-    if (isActive(href)) return "text-textMain font-medium border-b border-accent pb-0.5 transition"
-    return "text-textSub hover:text-textMain transition"
+    const base = "text-textMain pb-0.5 border-b-2 transition-colors"
+    return isActive(href)
+      ? `${base} border-accent`
+      : `${base} border-transparent hover:border-accent`
   }
 
   /** Mobile リンクのクラス */
   function mobileClass(href: string) {
-    const base = "rounded-lg px-4 py-2.5 text-base font-medium block transition-colors"
+    const base = "rounded-[3px] px-4 py-2.5 text-base font-medium block transition-colors"
     return isActive(href)
-      ? `${base} text-accent bg-accent/8`
+      ? `${base} text-accent bg-hover`
       : `${base} text-textMain hover:text-accent`
   }
 
@@ -76,26 +78,20 @@ export default function Header() {
     <>
       <nav className="sticky top-0 z-50 bg-base/80 backdrop-blur border-b border-line/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* ロゴ */}
-          <Link
-            href="/"
-            onClick={close}
-            style={{
-              fontFamily: "var(--font-ibm-plex), 'IBM Plex Sans', sans-serif",
-              fontWeight: 500,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase" as const,
-              backgroundImage: "linear-gradient(color-mix(in srgb, currentColor 60%, transparent), color-mix(in srgb, currentColor 60%, transparent))",
-              backgroundSize: "80% 1px",
-              backgroundPosition: "center bottom",
-              backgroundRepeat: "no-repeat",
-              paddingBottom: "3px",
-              color: "var(--color-textMain)",
-              textDecoration: "none",
-              fontSize: "14px",
-            }}
-          >
-            SHINTOKU ATLAS
+          {/* ワードマーク：Space Mono ＋ 和文サブ */}
+          <Link href="/" onClick={close} className="flex items-baseline gap-2.5 text-textMain">
+            <span
+              className="mono font-bold text-[15px] uppercase"
+              style={{ letterSpacing: "0.14em" }}
+            >
+              SHINTOKU ATLAS
+            </span>
+            <span
+              className="text-textSub text-[11px] font-normal hidden sm:inline"
+              style={{ letterSpacing: "0.08em" }}
+            >
+              新得町議会記録集
+            </span>
           </Link>
 
           {/* Desktop ナビ */}
@@ -149,7 +145,7 @@ export default function Header() {
           />
 
           {/* パネル */}
-          <div className="fixed top-20 right-4 left-4 z-50 bg-ink border border-line rounded-2xl p-5">
+          <div className="fixed top-20 right-4 left-4 z-50 bg-ink border border-line rounded-[3px] p-5">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
