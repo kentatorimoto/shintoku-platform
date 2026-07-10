@@ -8,16 +8,16 @@
    ══════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* ── 亜麻（基調）── 桃味の暖灰。黄味クリームとは色相を分ける */
-  --color-base:       #ece6df; /* 紙 */
-  --color-ink:        #e3dbd1; /* 起伏面（カード地・行ホバー）*/
-  --color-line:       #d6ccc1; /* 罫線 */
-  --color-lineStrong: #b3a595; /* 強罫線・タグ枠 */
+  /* ── 亜麻（基調）── 緑み寄りの暖灰。黄味クリームとは色相を分ける */
+  --color-base:       #e7e8dc; /* 紙 */
+  --color-ink:        #dee0d1; /* 起伏面（カード地・行ホバー）*/
+  --color-line:       #d0d2c2; /* 罫線 */
+  --color-lineStrong: #a9ac97; /* 強罫線・タグ枠 */
   --color-accent:     #b8432c; /* 茜。最新・現在地・ホバーのみ */
   --color-accentSoft: #9a3826; /* 濃い茜（ホバー状態）*/
-  --color-textMain:   #282019; /* 墨 */
-  --color-textSub:    #6f6257; /* 薄墨（補助テキスト・AA 4.76:1）*/
-  --color-hover:      #e3dbd1; /* 行ホバー地 */
+  --color-textMain:   #23241c; /* 墨 */
+  --color-textSub:    #67685a; /* 薄墨（補助テキスト・AA 4.58:1）*/
+  --color-hover:      #dee0d1; /* 行ホバー地 */
 
   /* ── 書体 ── */
   --font-sans:   var(--font-noto), ui-sans-serif, system-ui, sans-serif;
