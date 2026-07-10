@@ -32,10 +32,10 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: "Shintoku Atlas",
-  description: "An unofficial public information dashboard.",
+  description: "新得町議会の記録を、構造のまま公開しています",
   openGraph: {
     title: "Shintoku Atlas",
-    description: "An unofficial public information dashboard.",
+    description: "新得町議会の記録を、構造のまま公開しています",
   },
 }
 
