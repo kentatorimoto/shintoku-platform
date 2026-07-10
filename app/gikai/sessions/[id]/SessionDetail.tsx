@@ -84,7 +84,7 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
         {visibleItems.map((item, i) => {
           const isOpen = openIndex === i
           return (
-            <div key={item.bill_number} className="bg-ink border border-line rounded-xl overflow-hidden">
+            <div key={item.bill_number} className="bg-ink border border-line rounded-[3px] overflow-hidden">
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-line/20 transition-colors"
@@ -92,15 +92,15 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {item.bill_tags.map(tag => (
-                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-full">
+                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-[3px]">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm font-medium text-textMain mb-1">{item.bill_title}</p>
+                  <p className="font-mincho text-[15px] font-bold text-textMain mb-1">{item.bill_title}</p>
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-textSub/60">{item.bill_number}</span>
-                    <span className={`text-xs px-2 py-0.5 rounded-full border ${
+                    <span className={`text-xs px-2 py-0.5 rounded-[3px] border ${
                       item.result === "可決"
                         ? "border-accent/40 text-accent/70"
                         : "border-line text-textSub/60"
@@ -158,7 +158,7 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
             onClick={() => {
               setShowAll(!showAll)
             }}
-            className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-xl hover:border-accent/50 hover:text-accent transition-colors"
+            className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-[3px] hover:border-accent/50 hover:text-accent transition-colors"
           >
             {showAll
               ? "折りたたむ"
@@ -167,7 +167,7 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
         )}
 
         {data.committee_referrals.length > 0 && (
-          <div className="bg-ink border border-line/30 rounded-xl px-5 py-4">
+          <div className="bg-ink border border-line/30 rounded-[3px] px-5 py-4">
             {data.committee_referrals.map((ref, i) => (
               <div key={i}>
                 <p className="text-xs text-textSub/60 mb-1">{ref.bill_numbers.join("、")} → {ref.committee}に付託</p>
@@ -203,7 +203,7 @@ function QnaSection({ items }: { items: QnaItem[] }) {
         {visibleItems.map((item, i) => {
           const isOpen = openIndex === i
           return (
-            <div key={item.speaker_name + i} className="bg-ink border border-line rounded-xl overflow-hidden">
+            <div key={item.speaker_name + i} className="bg-ink border border-line rounded-[3px] overflow-hidden">
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-line/20 transition-colors"
@@ -211,12 +211,12 @@ function QnaSection({ items }: { items: QnaItem[] }) {
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {item.topic_tags.map(tag => (
-                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-full">
+                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-[3px]">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm font-medium text-textMain mb-1">{item.topic_title}</p>
+                  <p className="font-mincho text-[15px] font-bold text-textMain mb-1">{item.topic_title}</p>
                   <p className="text-xs text-textSub/60">{item.speaker_name} {item.speaker_role}</p>
                 </div>
                 <svg
@@ -273,7 +273,7 @@ function QnaSection({ items }: { items: QnaItem[] }) {
             setShowAll(!showAll)
             setOpenIndex(null)
           }}
-          className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-xl hover:border-accent/50 hover:text-accent transition-colors"
+          className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-[3px] hover:border-accent/50 hover:text-accent transition-colors"
         >
           {showAll
             ? "折りたたむ"
@@ -302,11 +302,11 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
       href={youtube}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-3 bg-ink border border-line rounded-xl p-4
+      className="flex items-center gap-3 bg-ink border border-line rounded-[3px] p-4
                  hover:border-accent/50 transition-all group"
     >
       {/* サムネイル */}
-      <div className="relative w-24 h-14 sm:w-28 sm:h-16 shrink-0 rounded-lg overflow-hidden bg-line">
+      <div className="relative w-24 h-14 sm:w-28 sm:h-16 shrink-0 rounded-[3px] overflow-hidden bg-line">
         {thumbUrl ? (
           <Image
             src={thumbUrl}
@@ -387,7 +387,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
               key={part.slidesDir}
               onClick={() => handleTabChange(i)}
               className={[
-                "px-4 py-2 rounded-lg text-sm font-medium transition-colors border",
+                "px-4 py-2 rounded-[3px] text-sm font-medium transition-colors border",
                 activeIdx === i
                   ? "bg-accent/10 text-accent border-accent font-semibold"
                   : "bg-ink border-line text-textSub hover:border-accent/50",
@@ -433,7 +433,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-textSub/70
                          hover:text-accent transition-colors border border-line/50
-                         rounded-lg px-3 py-2 bg-ink shrink-0"
+                         rounded-[3px] px-3 py-2 bg-ink shrink-0"
             >
               <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9
@@ -451,7 +451,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
                 href={src}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block relative rounded-xl overflow-hidden
+                className="block relative rounded-[3px] overflow-hidden
                            border border-line hover:border-accent/50
                            shadow-sm hover:shadow-md transition-all group"
               >

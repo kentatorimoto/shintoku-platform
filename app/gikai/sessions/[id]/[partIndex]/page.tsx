@@ -112,10 +112,10 @@ export default async function SessionPartPage({
 
       {/* ── ページヘッダー ───────────────────────────────────────────── */}
       <div className="mb-8">
-        <p className="text-accent text-sm font-semibold tracking-wide mb-3">
+        <p className="mono text-textSub text-[13px] mb-3">
           {formatDate(session.date)}
         </p>
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-textMain leading-tight mb-2">
+        <h1 className="font-mincho text-3xl md:text-4xl font-bold tracking-tight text-textMain leading-tight mb-2">
           {session.narrativeTitle ?? session.officialTitle}
         </h1>
         {session.narrativeTitle && (
@@ -126,7 +126,7 @@ export default async function SessionPartPage({
         {session.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
             {session.tags.map(tag => (
-              <span key={tag} className="text-xs border border-line text-textSub px-2 py-1 rounded-full">
+              <span key={tag} className="text-[11.5px] font-medium border border-lineStrong text-textSub px-[11px] py-[3px] rounded-[3px]">
                 {tag}
               </span>
             ))}
@@ -136,7 +136,7 @@ export default async function SessionPartPage({
 
       {/* ── サマリー ──────────────────────────────────────────────────────── */}
       {session.summary && (
-        <div className="bg-ink border border-line rounded-xl p-5 sm:p-6 mb-8">
+        <div className="bg-ink border border-line rounded-[3px] p-5 sm:p-6 mb-8">
           <dl className="space-y-2">
             {([
               { dt: "論点",        dd: session.summary.issues },

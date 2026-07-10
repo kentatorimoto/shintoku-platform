@@ -152,7 +152,7 @@ export default function InsightsPage() {
           セルをクリックすると議決一覧に絞り込み表示します
         </p>
 
-        <div className="bg-ink border border-line rounded-xl overflow-x-auto">
+        <div className="bg-ink border border-line rounded-[3px] overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr>
@@ -211,7 +211,7 @@ export default function InsightsPage() {
 
       {/* ── B. テーマ別ランキング ───────────────────────────── */}
       <section className="mb-14">
-        <div className="bg-ink border border-line rounded-xl p-6">
+        <div className="bg-ink border border-line rounded-[3px] p-6">
           <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
             テーマ別 議決件数
           </h2>
@@ -220,14 +220,14 @@ export default function InsightsPage() {
               <Link
                 key={id}
                 href={`/gikai?theme=${id}`}
-                className="flex items-center gap-4 border border-line/60 rounded-lg px-4 py-3 hover:border-accent hover:bg-accent/5 transition-all group"
+                className="flex items-center gap-4 border border-line/60 rounded-[3px] px-4 py-3 hover:border-accent hover:bg-accent/5 transition-all group"
               >
                 <span className="text-textMain text-sm font-medium w-24 shrink-0">
                   {label}
                 </span>
-                <div className="flex-1 h-1.5 bg-line rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-line rounded-[2px] overflow-hidden">
                   <div
-                    className="h-full bg-accent rounded-full"
+                    className="h-full bg-accent rounded-[2px]"
                     style={{ width: `${(count / maxThemeCount) * 100}%` }}
                   />
                 </div>
@@ -242,7 +242,7 @@ export default function InsightsPage() {
 
       {/* ── D. 会議アーカイブ × テーマ ─────────────────────── */}
       <section className="mb-14">
-        <div className="bg-ink border border-line rounded-xl p-6">
+        <div className="bg-ink border border-line rounded-[3px] p-6">
           <h2 className="text-xs font-semibold text-textSub tracking-widest mb-1">
             会議アーカイブ × テーマ
           </h2>
@@ -254,14 +254,14 @@ export default function InsightsPage() {
               <Link
                 key={tag}
                 href={`/gikai/sessions?tag=${encodeURIComponent(tag)}`}
-                className="flex items-center gap-4 border border-line/60 rounded-lg px-4 py-3 hover:border-accent hover:bg-accent/5 transition-all group"
+                className="flex items-center gap-4 border border-line/60 rounded-[3px] px-4 py-3 hover:border-accent hover:bg-accent/5 transition-all group"
               >
                 <span className="text-textMain text-sm font-medium w-28 shrink-0">
                   {tag}
                 </span>
-                <div className="flex-1 h-1.5 bg-line rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-line rounded-[2px] overflow-hidden">
                   <div
-                    className="h-full bg-accent rounded-full"
+                    className="h-full bg-accent rounded-[2px]"
                     style={{ width: `${(count / maxTagCount) * 100}%` }}
                   />
                 </div>

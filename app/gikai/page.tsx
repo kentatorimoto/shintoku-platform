@@ -96,7 +96,7 @@ function Skeleton() {
       {[...Array(6)].map((_, i) => (
         <div
           key={i}
-          className="bg-ink border border-line rounded-xl p-4 h-[72px] animate-pulse"
+          className="bg-ink border border-line rounded-[3px] p-4 h-[72px] animate-pulse"
         />
       ))}
     </div>
@@ -337,7 +337,7 @@ function GikaiPageContent() {
                   setYear(year === session.eraLabel ? "" : session.eraLabel)
                 }
                 role="button"
-                className={`cursor-pointer text-left bg-ink border rounded-xl p-4 transition-all ${
+                className={`cursor-pointer text-left bg-ink border rounded-[3px] p-4 transition-all ${
                   year === session.eraLabel
                     ? "border-accent"
                     : "border-line hover:border-accent/50"
@@ -384,7 +384,7 @@ function GikaiPageContent() {
             onChange={(e) => handleInputChange(e.target.value)}
             onKeyDown={handleKeyDown}
             style={{ fontSize: "16px" }}
-            className="w-full bg-ink border border-line rounded-xl px-4 py-3 pr-10 text-textMain placeholder-textSub/60 focus:outline-none focus:border-accent transition-colors"
+            className="w-full bg-ink border border-line rounded-[3px] px-4 py-3 pr-10 text-textMain placeholder-textSub/60 focus:outline-none focus:border-accent transition-colors"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
             {inputValue ? (
@@ -406,7 +406,7 @@ function GikaiPageContent() {
         {hasFilter && (
           <div className="flex flex-wrap gap-2 items-center">
             {q && (
-              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
                 検索：{q}
                 <button
                   onClick={() => {
@@ -422,7 +422,7 @@ function GikaiPageContent() {
               </span>
             )}
             {year && (
-              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
                 {year}
                 <button
                   onClick={() => pushParams({ year: "", limit: "" })}
@@ -434,7 +434,7 @@ function GikaiPageContent() {
               </span>
             )}
             {type && (
-              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
                 {type}
                 <button
                   onClick={() => pushParams({ type: "", limit: "" })}
@@ -446,7 +446,7 @@ function GikaiPageContent() {
               </span>
             )}
             {result && (
-              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
                 {result}
                 <button
                   onClick={() => pushParams({ result: "", limit: "" })}
@@ -458,7 +458,7 @@ function GikaiPageContent() {
               </span>
             )}
             {theme && (
-              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
                 テーマ：{THEME_LABELS[theme] ?? theme}
                 <button
                   onClick={() => pushParams({ theme: "", limit: "" })}
@@ -470,7 +470,7 @@ function GikaiPageContent() {
               </span>
             )}
             {issue && (
-              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-full px-3 py-1.5 text-sm">
+              <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
                 論点：{ISSUE_LABELS[issue] ?? issue}
                 <button
                   onClick={() => pushParams({ issue: "", limit: "" })}
@@ -496,7 +496,7 @@ function GikaiPageContent() {
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="bg-ink border border-line text-textSub rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-accent transition-colors"
+            className="bg-ink border border-line text-textSub rounded-[3px] px-3 py-2 text-sm focus:outline-none focus:border-accent transition-colors"
           >
             <option value="">年度：すべて</option>
             {eraLabels.map((era) => (
@@ -511,7 +511,7 @@ function GikaiPageContent() {
             <button
               key={r}
               onClick={() => setResult(r)}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
+              className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
                 result === r
                   ? "bg-accent text-base border-accent"
                   : "bg-ink border-line text-textSub hover:border-accent/50"
@@ -557,7 +557,7 @@ function GikaiPageContent() {
                     href={item.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block bg-ink border border-line rounded-xl p-4 hover:border-accent transition-all group"
+                    className="block bg-ink border border-line rounded-[3px] p-4 hover:border-accent transition-all group"
                   >
                     <div className="flex items-start gap-3">
                       {/* 左：種別+番号 */}
@@ -635,7 +635,7 @@ function GikaiPageContent() {
             <div className="mt-6 text-center">
               <button
                 onClick={loadMore}
-                className="px-6 py-3 border border-line rounded-xl text-textSub hover:border-accent hover:text-textMain transition-colors text-sm"
+                className="px-6 py-3 border border-line rounded-[3px] text-textSub hover:border-accent hover:text-textMain transition-colors text-sm"
               >
                 さらに表示（残り{" "}
                 {(filteredItems.length - visibleItems.length).toLocaleString()}{" "}
