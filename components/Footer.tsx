@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { LABELS } from "@/lib/labels"
 
 const GITHUB_URL = "https://github.com/kentatorimoto/shintoku-platform"
 
@@ -43,7 +44,8 @@ export default function Footer() {
 
         {/* コピーライト ＋ 座標（モック準拠）*/}
         <div className="flex flex-wrap justify-between gap-4 pt-6 border-t border-line text-[12.5px] text-textSub">
-          <span>© 2026 SHINTOKU ATLAS — 非公式・個人プロジェクト</span>
+          {/* ヘッダーから外した正式名称はここに残す（何のサイトかを最後に明示する）*/}
+          <span>© 2026 SHINTOKU ATLAS（{LABELS.siteFormalName}）— 非公式・個人プロジェクト</span>
           <span className="mono text-[11px]">43°04′N 142°50′E</span>
         </div>
       </div>

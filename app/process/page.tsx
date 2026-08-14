@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import PlateFrame from "@/components/PlateFrame"
+import { LABELS } from "@/lib/labels"
 import { ISSUES, computeSpan, isHot } from "./issuesData"
 
 export const metadata: Metadata = {
@@ -76,7 +77,10 @@ export default function ProcessPage() {
       {/* ── 論点の索引 ───────────────────────────────────────────────── */}
       <section className="mt-14 border-t-[1.5px] border-textMain">
         <div className="flex items-baseline justify-between pt-4 pb-1.5">
-          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">継続論点の索引 — {ISSUES.length}件</h2>
+          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">
+            {LABELS.continuingIssues.text}の索引 — {ISSUES.length}件
+            <span className="font-normal ml-2">（{LABELS.continuingIssues.formal}）</span>
+          </h2>
           <Link href="/process/issues" className="text-[12.5px] text-textSub hover:text-accent transition-colors">論点カード →</Link>
         </div>
 

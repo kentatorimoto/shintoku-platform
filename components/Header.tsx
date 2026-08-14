@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X, Search } from "lucide-react"
 import GlobalSearch from "@/components/GlobalSearch"
+import { LABELS } from "@/lib/labels"
 
 const NAV_LINKS = [
   { href: "/",               label: "トップ" },
@@ -90,7 +91,7 @@ export default function Header() {
               className="text-textSub text-[11px] font-normal hidden sm:inline"
               style={{ letterSpacing: "0.08em" }}
             >
-              新得町議会記録集
+              {LABELS.siteTagline}
             </span>
           </Link>
 
