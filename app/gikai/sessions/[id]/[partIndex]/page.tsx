@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import SessionDetail from "../SessionDetail"
+import { ANCHORS, LABELS, qnaLabel } from "@/lib/labels"
 import type { GikaiSession, HonkaigiData, PartData, QnaData } from "@/scripts/lib/schema"
 
 function getPartData(sessionId: string, partIndex: number): PartData | null {
@@ -92,6 +93,16 @@ export default async function SessionPartPage({
   const qnaItems    = partData?.part_type !== "honkaigi" ? (partData as QnaData | null)?.items ?? null : null
   const honkaigiData = partData?.part_type === "honkaigi" ? partData as HonkaigiData : null
 
+  // summary 直下に置くページ内リンク（下部の参照セクションへの導線）
+  const jumpLinks = [
+    honkaigiData && honkaigiData.items.length > 0
+      ? { href: `#${ANCHORS.honkaigi}`, label: LABELS.honkaigi.text, count: honkaigiData.items.length }
+      : null,
+    qnaItems && qnaItems.length > 0
+      ? { href: `#${ANCHORS.qna}`, label: qnaLabel(qnaItems[0]?.speaker_role).text, count: qnaItems.length }
+      : null,
+  ].filter(link => link !== null)
+
   const parts = session.parts.map(part => ({
     label:     part.label,
     youtube:   part.youtube ?? null,
@@ -134,21 +145,42 @@ export default async function SessionPartPage({
         )}
       </div>
 
-      {/* ── サマリー ──────────────────────────────────────────────────────── */}
-      {session.summary && (
+      {/* ── サマリー ＋ 参照セクションへの導線 ─────────────────────────────── */}
+      {(session.summary || jumpLinks.length > 0) && (
         <div className="bg-ink border border-line rounded-[3px] p-5 sm:p-6 mb-8">
-          <dl className="space-y-2">
-            {([
-              { dt: "論点",        dd: session.summary.issues },
-              { dt: "争点",        dd: session.summary.conflicts },
-              { dt: "次アクション", dd: session.summary.nextActions },
-            ] as const).map(({ dt, dd }) => dd && (
-              <div key={dt} className="flex gap-2 items-baseline">
-                <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0">{dt}：</dt>
-                <dd className="text-textMain/80 text-base leading-relaxed break-words">{dd}</dd>
-              </div>
-            ))}
-          </dl>
+          {session.summary && (
+            <dl className="space-y-2">
+              {([
+                { dt: "論点",        dd: session.summary.issues },
+                { dt: "争点",        dd: session.summary.conflicts },
+                { dt: "次アクション", dd: session.summary.nextActions },
+              ] as const).map(({ dt, dd }) => dd && (
+                <div key={dt} className="flex gap-2 items-baseline">
+                  <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0">{dt}：</dt>
+                  <dd className="text-textMain/80 text-base leading-relaxed break-words">{dd}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          {/* 議案審議・一般質問はページ下部の参照資料。ここから1タップで届くようにする */}
+          {jumpLinks.length > 0 && (
+            <div className={`flex flex-wrap gap-2 ${session.summary ? "mt-5 pt-5 border-t border-line" : ""}`}>
+              {jumpLinks.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="inline-flex items-baseline gap-2 border border-lineStrong rounded-[3px]
+                             px-3 py-2 text-[13px] text-textMain
+                             hover:border-accent hover:text-accent transition-colors"
+                >
+                  <span className="font-bold">{link.label}</span>
+                  <span className="mono text-[12px] text-textSub">{link.count}件</span>
+                  <span aria-hidden>↓</span>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

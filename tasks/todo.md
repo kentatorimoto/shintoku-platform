@@ -1,92 +1,70 @@
-# 字幕→MD抽出パイプライン（addSession置き換え＋自動監視）
+# 読者ファースト化（並び替え／翻訳層／要点カード）
 
-前提の PR #1（MD正典化）はマージ済み。`docs/content-schema.md` は v1.2。
+指示書: 「一般の町民が面白く読める → そこから議会の意思決定に興味を持つ」順に設計し直す。
+データ層（`content/`・schema・パイプライン）の正式語彙は変えない。変えるのは **UIの語彙と順序**、
+および **要点カードという新しい表示層**。
 
-## Phase 0: 事前整備
+PR構成: Phase A+B = `feat/reader-first`（UIのみ）／ Phase C = `feat/session-cards`（別PR）。
 
-- [x] 依存: `@anthropic-ai/sdk` `youtube-transcript`
-- [x] `.env.local` に `ANTHROPIC_API_KEY`（`.gitignore` の `.env*` に含まれることを確認済み）
-- [x] `daily-sync.yml` の `git add public/data/*.json` を明示パスに限定
-- [x] 0バイトファイル `を` を削除
-- [x] `json-to-md.ts` / `roundtrip-test.ts` を `scripts/migration/` へ凍結（README.md 添付、`test:roundtrip` を npm scripts から削除）
+---
 
-## Phase 1: `scripts/fetch-transcript.ts`
+## Phase A: セッションページの並び替え（逆ピラミッド）
 
-- [x] `/live/` を含むURL形式から動画IDを自前抽出
-- [x] タイムスタンプ付きプレーンテキスト + `# source:` `# fetched:` メタ行
-- [x] exit規約: 0 成功 / 1 エラー / 2 字幕未生成 / 3 字幕が恒久的に無効
-- [x] `--force` 無しは冪等
+- [x] `SessionDetail.tsx` の並びを summary →（カード/スライド）→ 動画 → 議案審議/一般質問 に変更
+- [x] 各セクションの内部構造は変更なし（並び替えのみ）
+- [x] 議案審議に `#giketsu`・一般質問に `#qna` アンカー（`scroll-mt-20` でヘッダー分を逃がす）
+- [x] summary カード直下にページ内リンク（「この会議で決まったこと 36件 ↓」）を追加
+- [x] スライドなしパートはセクション非表示（PR #6 の実装のまま）
 
-## Phase 2: `scripts/extract-md.ts`
+## Phase B: 翻訳層（UIラベルの生活語化）
 
-- [x] `scripts/prompts/glossary.md`（議員名簿 + 誤認識パターン）
-- [x] `scripts/prompts/extract-{qna,honkaigi}.md`（`docs/content-schema.md` の該当節を実行時に埋め込む）
-- [x] モデルは `scripts/config.ts` で一元管理
-- [x] 自己修正ループ（`build-data` のバリデータ → エラーメッセージをAPIに返す、最大2回）
-- [x] 入出力トークン数と概算コストをログに出す
-- [x] `【要確認: 〜】` マーク
-- [x] system プロンプトにプロンプトキャッシュ
+- [x] `lib/labels.ts` 新設。UI表示ラベルを一元管理（`{ text, formal }`）
+- [x] ヘッダーサブ → 「町のことが、どう決まっているか。」／正式名称はフッターのコピーライト行に残す
+- [x] 議案審議 → 「この会議で決まったこと」（正式併記あり）
+- [x] 一般質問 → 「議員が聞いたこと、町の答え」（正式併記あり）
+- [x] 委員会付託 → 「委員会でくわしく審査することになったもの」（正式併記あり）
+- [x] 継続論点 → 「つづいている話」（トップの索引・`/process` の索引見出し）
+- [x] 動画アーカイブ → 「会議の動画」（正式併記なし）
+- [x] 行政報告 → 「町からの報告」を `labels.ts` に定義（UI未実装のため定義のみ）
+- [x] narrativeTitle・タグ・採決結果チップは変更しない
 
-## Phase 3: `scripts/add-session.ts`
+### 保留（Kenta の判断待ち）
 
-- [x] `session.yaml` の scaffold / parts 追記
-- [x] narrativeTitle をAIに3案出させ、コメントで残して第1案を仮置き
-- [x] Phase 1 → Phase 2 → `npm run build`
-- [x] `feat/session-{id}` ブランチ + `gh pr create`（`--no-pr` でスキップ）
-- [x] `addSession.mjs` を削除、`CLAUDE.md` を新フローに書き換え
+- **SHEET番号・座標などの英字ラベルは今回維持**（デザイン署名のため）。試用判定の際に翻訳層と合わせて再評価する
+- 予算・決算特別委員会パートの見出し「予算審査 — 項目ごとの質疑」は現行文言のまま `labels.ts` へ移送。
+  生活語化するかは未定（`LABELS.qnaCommittee`）
+- QnaItem 詳細の `dt` ラベル（質問／行政の回答／結論／継続課題）は現行維持。
+  「継続課題」は `/process` の「継続論点」とは別語なので、指示書の対応表の対象外と判断した
+- `GlobalSearch` のカテゴリチップ（セッション／一般質問／議決）は短いラベルなので正式語のまま
 
-## Phase 4: `.github/workflows/watch-council.yml`
+## Phase C: 要点カード（スライドの後継）＋ OGP
 
-- [x] cron 09:00 JST、`scripts/watch-council.ts`
-- [x] RSS（`channel_id=UC8YKJ8zgl7CoGL0kapCPMzg`）→ 新着なら Issue
-- [x] 既知リストは `data/watch/known-videos.json`（`daily-sync` のグロブ対象外）
-- [x] `git add` は明示パス指定
+- [ ] `scripts/generate-cards.ts`（`npm run cards:generate -- <sessionId>`）
+      - 全パートMDが `reviewed: true` でなければ exit 1
+      - `scripts/prompts/cards.md` にプロンプト（5〜8枚・MDの事実のみ・評価語禁止・中学生の語彙）
+- [ ] `build-data.ts` に cards.yaml のバリデーション＋ `public/data/cards/{id}.json` 変換
+- [ ] `components/SessionCards.tsx`（summary 直下・横スワイプ・`1/6` 表示）
+- [ ] 旧スライドは、カードがあるセッションでは「過去のスライド」として折りたたみ
+- [ ] `app/gikai/sessions/[id]/opengraph-image.tsx`（next/og）＋ 汎用OG画像
+- [ ] `tasks/add-session.md` に「reviewed:true → cards:generate → 確認 → reviewed:true」を追記
+- [ ] `r8-2026-06-regular-2` でカード生成し、cards.yaml をPRに含める（トーンの基準作り）
+- [ ] 過去セッションへのカード遡及生成はスコープ外
 
-## 受け入れ基準
+---
 
-- [x] 1. 実セッションを `add-session` だけで通せる（`r8-2026-06-regular-2` の初日・最終日）
-- [x] 2. 生成MDが `build:data` を無修正で通過（初日は自己修正0回）
-- [x] 3. `【要確認】` マークがPR本文に集約される
-- [x] 4. watcher が known-videos.json 削除 → 再実行で Issue を作れる
+## レビュー
 
-## Review
+### Phase A+B（`feat/reader-first`）
 
-**実セッション2本を字幕から抽出し、どちらも自己修正0回で `build:data` を通過。** `npm run build` は9パートファイル・80ページのSSGを生成して成功。
+- `npm run build` 成功（80ページSSG、`public/data/` の生成物に差分なし＝データ層は無変更）
+- `npx tsc --noEmit` クリーン。`npm run lint` の既存6エラー（`scripts/test-scraper.ts` 等）以外に新規指摘なし
+- 変更ファイル: `lib/labels.ts`(new), `SessionDetail.tsx`, `[partIndex]/page.tsx`,
+  `components/Header.tsx`, `components/Footer.tsx`, `app/page.tsx`, `app/process/page.tsx`
 
-| セッション | 字幕 | 議案 | 自己修正 | 時間 | コスト |
-|---|---|---|---|---|---|
-| `r8-2026-06-regular-2` 初日 | 69分 / 15,670字 | 36 | 0回 | 7分35秒 | $0.509 |
-| `r8-2026-06-regular-2` 最終日 | 33分 / 7,371字 | 14 | 0回 | 約4分 | $0.204 |
+#### 設計判断
 
-### 指示書から変更した点
-
-| 箇所 | 指示書 | 実際 | 対応 |
-|---|---|---|---|
-| exit 2/3 の判定 | `fetch-transcript` が字幕の有無で判定 | `youtube-transcript` は「投稿者が無効化」「未生成」「動画が非公開」を全部 `DisabledError` に潰す | watchページを自前で検分。`playabilityStatus` と公開日時で分類 |
-| 動画が非公開 | 規定なし | 26本中15本が該当 | exit 1（人間の対処が要る。字幕の問題ではない） |
-| `MAX_TOKENS` | 規定なし | 32000 では69分の本会議で足りない | 64000。adaptive thinking の思考トークンが出力枠を消費する |
-| `EFFORT` | 規定なし | `high` は1リクエスト9分近く | `medium` |
-| frontmatter | AIがMD全体を書く | 日付・`part_index`・`_passthrough` を触らせたくない | スクリプトが決定的に生成し、AIは本文だけ書く |
-| 字幕15万字の分割 | 超えたら対応 | 実データの最長は32,015字（115分） | 未実装。超えたらエラーで止める |
-
-### 設計判断
-
-- **`youtube-transcript` のエラークラスを exit code の判定に使わない。** `captionTracks` が空なだけで `YoutubeTranscriptDisabledError` を投げるので、「字幕が無効」「まだ生成されていない」「動画が非公開」の3つが区別できない。watchページを1回取って `playabilityStatus` / `captionTracks` / `publishDate` を見て分類する
-- **プロンプトは `docs/content-schema.md` の §3+§4（qna）/ §3+§5（honkaigi）を実行時に読み込んで埋め込む。** スキーマを直せばプロンプトも自動で追随する
-- **`【要確認: 聞こえたまま】` は創作を防ぐだけでなく、レビューの起点になる。** 初日28件・最終日5件。「新徳」が本文に残るのはマーク内だけで、glossary の規則どおり
-- **system プロンプト（スキーマ+glossary、約8kトークン）にプロンプトキャッシュ。** 自己修正ラウンドと連続実行で効く
-
-### glossary が実際に効いた例
-
-字幕は最終日の質問者を「福原**友行**議員」と誤認識していたが、名簿の正式表記「福原 智幸」に修正された。既存 `content/` に残る「福原 **之行**」も同じ誤認識の未修正版だと判明した。
-
-### 判明した問題（このPRのスコープ外）
-
-- **既存26パート中15本の YouTube 動画が非公開化されている**（`playabilityStatus: LOGIN_REQUIRED`、oEmbed 403）。R6全部とR7初期。サイト上のリンクが死んでおり、字幕からの再抽出もできない
-- 既存 `content/` の議員名に誤りが4件（`桜田`→`櫻田`、`斎藤`→`齊藤`、`福原 之行`→`福原 智幸`、`松山委員` は名簿に該当者なし）
-- `topics_index` の3スキーマ正規化は未着手（`_passthrough` に退避したまま）
-
-### 未検証
-
-- `add-session` の PR 作成パス（`--no-pr` で回避した。ブランチを切ってPRを出す部分だけコード上の実装のみ）
-- `watch-council.yml` の GitHub Actions 上での実行（ローカルで `--dry-run` と Issue 作成の判定は検証済み）
+- **セクション見出しは `{ text, formal }` の2行組**（生活語15px太字＋正式名称11.5px）。
+  生活語だけに置き換えると正確性が落ちるため、対応が常に画面上で辿れる形にした
+- **`qnaLabel(speakerRole)` を `labels.ts` に置いた。** 見出し（SessionDetail）と導線（page.tsx）で
+  同じ分岐を二重に書くと、予算委員会パートでラベルがずれるため
+- **導線は summary カードの内側に入れた。** 独立カードにすると読者の視線が summary から一度切れる

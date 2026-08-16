@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import Link from "next/link"
 import PlateFrame from "@/components/PlateFrame"
+import { LABELS } from "@/lib/labels"
 
 // gikai_sessions.json はビルド時に sortDate??date 降順で書き出される。
 // 配列先頭が最新、配列順がそのまま表示順（SHEET番号）になる。
@@ -153,7 +154,12 @@ export default function Home() {
         <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub pt-4 pb-1.5">索引</h2>
         <IndexRow href="/gikai/sessions" num={String(total)}       label="会議" desc="令和6年からの全会期の記録" />
         <IndexRow href="/gikai"          num={giketsuCount.toLocaleString()} label="議決" desc="町が選んだことの一覧" />
-        <IndexRow href="/process"        num="6"                   label="継続論点" desc="複数の会議をまたいで続く議論" />
+        <IndexRow
+          href="/process"
+          num="6"
+          label={LABELS.continuingIssues.text}
+          desc={`${LABELS.continuingIssues.formal} — 複数の会議をまたいで続く議論`}
+        />
       </section>
 
       {/* ── 近時の記録 ───────────────────────────────────────────────── */}

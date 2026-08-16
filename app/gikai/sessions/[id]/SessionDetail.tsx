@@ -3,6 +3,7 @@
 import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { ANCHORS, LABELS, qnaLabel, type UiLabel } from "@/lib/labels"
 
 // ── 型定義 ─────────────────────────────────────────────────────────────────
 interface Part {
@@ -67,6 +68,18 @@ interface Props {
   honkaigiData?:     HonkaigiData | null
 }
 
+// ── セクション見出し（生活語 ＋ 正式名称の併記）────────────────────────────────
+function SectionHeading({ label, className = "" }: { label: UiLabel; className?: string }) {
+  return (
+    <div className={`mb-4 ${className}`}>
+      <h2 className="text-[15px] font-bold text-textMain leading-snug">{label.text}</h2>
+      {label.formal && (
+        <p className="text-[11.5px] text-textSub mt-0.5">{label.formal}</p>
+      )}
+    </div>
+  )
+}
+
 // ── 本会議・議案アコーディオン ────────────────────────────────────────────────
 function HonkaigiSection({ data }: { data: HonkaigiData }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -76,10 +89,8 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
   const hasMore = data.items.length > INITIAL_COUNT
 
   return (
-    <section>
-      <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
-        議案審議
-      </h2>
+    <section id={ANCHORS.honkaigi} className="scroll-mt-20">
+      <SectionHeading label={LABELS.honkaigi} />
       <div className="space-y-2">
         {visibleItems.map((item, i) => {
           const isOpen = openIndex === i
@@ -168,6 +179,12 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
 
         {data.committee_referrals.length > 0 && (
           <div className="bg-ink border border-line/30 rounded-[3px] px-5 py-4">
+            <p className="text-[13px] font-bold text-textMain leading-snug">
+              {LABELS.committeeReferral.text}
+            </p>
+            <p className="text-[11.5px] text-textSub mt-0.5 mb-3">
+              {LABELS.committeeReferral.formal}
+            </p>
             {data.committee_referrals.map((ref, i) => (
               <div key={i}>
                 <p className="text-xs text-textSub/60 mb-1">{ref.bill_numbers.join("、")} → {ref.committee}に付託</p>
@@ -190,15 +207,11 @@ function QnaSection({ items }: { items: QnaItem[] }) {
   const visibleItems = showAll ? items : items.slice(0, INITIAL_COUNT)
   const hasMore = items.length > INITIAL_COUNT
 
-  const sectionLabel = items[0]?.speaker_role?.includes("委員")
-    ? "予算審査 — 項目ごとの質疑"
-    : "一般質問 — 議員ごとの質疑"
+  const label = qnaLabel(items[0]?.speaker_role)
 
   return (
-    <section>
-      <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
-        {sectionLabel}
-      </h2>
+    <section id={ANCHORS.qna} className="scroll-mt-20">
+      <SectionHeading label={label} />
       <div className="space-y-2">
         {visibleItems.map((item, i) => {
           const isOpen = openIndex === i
@@ -399,33 +412,13 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
         </div>
       )}
 
-      {/* ── 動画 ─────────────────────────────────────────────────────── */}
-      {activePart.youtube && (
-        <section>
-          <h2 className="text-sm font-semibold text-textSub tracking-widest mb-4">
-            動画アーカイブ
-          </h2>
-          <VideoCard youtube={activePart.youtube} label={activePart.label} />
-        </section>
-      )}
-
-      {/* ── 本会議・議案 ──────────────────────────────────────────── */}
-      {honkaigiData && honkaigiData.items.length > 0 && (
-        <HonkaigiSection data={honkaigiData} />
-      )}
-
-      {/* ── 一般質問 ─────────────────────────────────────────────── */}
-      {qnaItems && qnaItems.length > 0 && (
-        <QnaSection items={qnaItems} />
-      )}
-
-      {/* ── スライド（画像があるパートのみ表示）─────────────────────────── */}
+      {/* ── スライド（画像があるパートのみ表示）─────────────────────────
+          読者の動線は「30秒で分かる（summary）→ 3分で見る（スライド）→
+          動画で確かめる → 全部調べる（議案審議）」。この順にセクションを置く。 */}
       {activePart.images.length > 0 && (
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-textSub tracking-widest">
-            スライド
-          </h2>
+          <SectionHeading label={LABELS.slides} className="mb-0" />
           {activePart.pdfPath && (
             <a
               href={activePart.pdfPath}
@@ -488,6 +481,24 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
             ))}
         </div>
       </section>
+      )}
+
+      {/* ── 動画 ─────────────────────────────────────────────────────── */}
+      {activePart.youtube && (
+        <section>
+          <SectionHeading label={LABELS.video} />
+          <VideoCard youtube={activePart.youtube} label={activePart.label} />
+        </section>
+      )}
+
+      {/* ── 本会議・議案（参照資料としてページ下部に置く。summary からアンカーで飛べる）── */}
+      {honkaigiData && honkaigiData.items.length > 0 && (
+        <HonkaigiSection data={honkaigiData} />
+      )}
+
+      {/* ── 一般質問 ─────────────────────────────────────────────── */}
+      {qnaItems && qnaItems.length > 0 && (
+        <QnaSection items={qnaItems} />
       )}
     </div>
   )
