@@ -5,7 +5,7 @@
 
 import fs from "fs"
 import type { ReactElement } from "react"
-import { OG_FONT_SOURCES, cachedFontPath, downloadFont, isCached } from "@/lib/og-fonts"
+import { OG_FONT_SOURCES, downloadFont, fontPath, isAvailable } from "@/lib/og-fonts"
 
 export const OG_SIZE = { width: 1200, height: 630 }
 export const OG_CONTENT_TYPE = "image/png"
@@ -31,20 +31,21 @@ interface OgFont {
 let fontCache: Promise<OgFont[]> | null = null
 
 /**
- * `.cache/og-fonts/` から和文フォントを読む（`npm run og:fonts` が事前に置く）。
- * dev サーバーなど事前取得を経ていない場合はその場で取りにいく。
+ * 同梱フォント（assets/fonts/）と、取得済みの和文フォント（.cache/og-fonts/）を読む。
+ * dev サーバーなど `npm run og:fonts` を経ていない場合はその場で取りにいく。
  *
- * 取得できなければ空配列を返す。画像は英数字だけになるが、ビルドは止めない。
+ * 明朝が用意できなくても、同梱の Space Mono が1つあれば版面は成立する（和文は既定のゴシックになる）。
+ * **フォントが1つも無いと satori は "No fonts are loaded" で落ちる**ので、同梱フォントは消さないこと。
  */
 export function ogFonts(): Promise<OgFont[]> {
   fontCache ??= (async () => {
     const fonts: OgFont[] = []
     for (const font of OG_FONT_SOURCES) {
       try {
-        if (!isCached(font)) await downloadFont(font)
+        if (!isAvailable(font)) await downloadFont(font)
         fonts.push({
           name:   font.name,
-          data:   fs.readFileSync(cachedFontPath(font)),
+          data:   fs.readFileSync(fontPath(font)),
           weight: 700,
           style:  "normal",
         })

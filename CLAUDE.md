@@ -548,7 +548,8 @@ npm run cards:generate -- r8-2026-06-regular-2   # 全パート reviewed:true �
 - `kind` は `headline`（1枚目・必須）/ `number` / `decision`（議案の採決結果）/ `report`（行政報告由来）/ `question` / `next`
 - カードがあるセッションでは、旧スライドは「過去のスライド」として折りたたまれる
 - OGP画像（`app/gikai/sessions/[id]/opengraph-image.tsx`）は narrativeTitle と1枚目の headline から作る。
-  和文フォント（Zen Old Mincho）はビルド時に Google Fonts から取得し、失敗時は英数字のみで生成する（ビルドは止めない）
+  和文フォント（Zen Old Mincho）は `npm run og:fonts` がビルド前に取得する（`.cache/og-fonts/`）。
+  取得に失敗しても、同梱の `assets/fonts/SpaceMono-Bold.ttf` があるので見出しがゴシックになるだけでビルドは通る
 - 過去セッションへの遡及生成はしていない（旧PDFスライドが役割を果たしているため）
 
 ### Known Issues

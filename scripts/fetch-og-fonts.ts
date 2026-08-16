@@ -2,23 +2,24 @@
 //
 //   npx tsx scripts/fetch-og-fonts.ts
 //
-// 取得できなくてもビルドは止めない（OGP画像が英数字だけになる）。ネットワークの無い環境で
-// サイトのビルド自体が落ちる方が困るため。exit code は常に 0。
+// 取得できなくてもビルドは止めない。同梱の Space Mono（assets/fonts/）が残るので、
+// 見出しが明朝でなく既定のゴシックになるだけで、画像自体は生成できる。exit code は常に 0。
 
 import path from "path"
-import { OG_FONT_SOURCES, downloadFont, isCached } from "../lib/og-fonts"
+import { OG_FONT_SOURCES, downloadFont, isAvailable } from "../lib/og-fonts"
 
 async function main() {
   for (const font of OG_FONT_SOURCES) {
-    if (isCached(font)) {
-      console.log(`   ${font.name}: キャッシュ済み`)
+    if (isAvailable(font)) {
+      console.log(`   ${font.name}: ${font.url ? "キャッシュ済み" : "同梱"}`)
       continue
     }
     try {
       await downloadFont(font)
       console.log(`   ${font.name}: 取得しました`)
     } catch (err) {
-      console.warn(`⚠️  ${font.name} を取得できませんでした（OGPは英数字のみになります）: ${err}`)
+      console.warn(`⚠️  ${font.name} を取得できませんでした: ${err}`)
+      console.warn("   OGPの見出しが明朝でなく既定のゴシックになります（画像は生成されます）。")
     }
   }
   console.log("✅ og:fonts")
