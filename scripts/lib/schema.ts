@@ -107,7 +107,7 @@ export interface GikaiSession {
 // ── 要点カード（スキーマ §11）───────────────────────────────────────────────
 
 /** カードの型。1枚=1メッセージ。先頭は必ず headline。 */
-export const CARD_KINDS = ["headline", "number", "decision", "question", "next"] as const
+export const CARD_KINDS = ["headline", "number", "decision", "report", "question", "next"] as const
 export type CardKind = (typeof CARD_KINDS)[number]
 
 /** `value` が必須になる kind（数値・日付を主役にするカード）。 */

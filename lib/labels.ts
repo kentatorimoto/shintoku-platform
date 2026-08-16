@@ -79,6 +79,7 @@ export const CARD_KIND_LABELS: Record<string, string> = {
   headline: "この会期の要点",
   number:   "数字で見る",
   decision: "決まったこと",
+  report:   "報告",
   question: "議員が聞いたこと",
   next:     "これから",
 }
