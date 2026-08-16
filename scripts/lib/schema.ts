@@ -104,6 +104,145 @@ export interface GikaiSession {
   parts:           Part[]
 }
 
+// ── 要点カード（スキーマ §11）───────────────────────────────────────────────
+
+/** カードの型。1枚=1メッセージ。先頭は必ず headline。 */
+export const CARD_KINDS = ["headline", "number", "decision", "question", "next"] as const
+export type CardKind = (typeof CARD_KINDS)[number]
+
+/** `value` が必須になる kind（数値・日付を主役にするカード）。 */
+const VALUE_REQUIRED_KINDS: readonly CardKind[] = ["number", "next"]
+
+export interface CardItem {
+  kind:   CardKind
+  title:  string
+  /** 金額・日付など1つだけ。kind が number / next のときは必須 */
+  value?: string
+  detail: string
+  /** セッション内のパートへの内部リンク。外部URLは書けない */
+  link?:  string
+}
+
+export interface CardsData {
+  session_id:   string
+  generated_by: string
+  generated_at: string
+  /** カード自体の人間レビュー済みフラグ。false でもビルドは通す（Previewで見て直すため） */
+  reviewed:     boolean
+  cards:        CardItem[]
+}
+
+/** カードの枚数の下限・上限（スキーマ §11）。下限を下回るのは警告、上限超過はエラー。 */
+export const CARDS_MIN = 5
+export const CARDS_MAX = 8
+
+const TITLE_MAX_CHARS  = 30
+const DETAIL_MAX_CHARS = 120
+
+export interface CardsValidation {
+  errors:   string[]
+  warnings: string[]
+}
+
+/**
+ * cards.yaml の構造を検証する。
+ * `partCount` を渡すと link のパート番号が実在するかまで見る（session.yaml の parts 数）。
+ */
+export function validateCards(data: unknown, sessionId: string, partCount?: number): CardsValidation {
+  const errors: string[] = []
+  const warnings: string[] = []
+
+  if (typeof data !== "object" || data === null) {
+    return { errors: ["cards.yaml がオブジェクトではありません"], warnings }
+  }
+  const d = data as Record<string, unknown>
+
+  for (const key of ["generated_by", "generated_at"] as const) {
+    if (typeof d[key] !== "string" || d[key] === "") errors.push(`\`${key}\` が必要です`)
+  }
+  if (typeof d.reviewed !== "boolean") {
+    errors.push("`reviewed` には true / false が必要です")
+  }
+  if (!Array.isArray(d.cards)) {
+    errors.push("`cards` の配列が必要です")
+    return { errors, warnings }
+  }
+
+  const cards = d.cards as unknown[]
+  if (cards.length === 0) errors.push("`cards` が空です")
+  if (cards.length > CARDS_MAX) {
+    errors.push(`カードは最大${CARDS_MAX}枚です。${cards.length}枚見つかりました`)
+  } else if (cards.length > 0 && cards.length < CARDS_MIN) {
+    warnings.push(`カードが${cards.length}枚しかありません（推奨 ${CARDS_MIN}〜${CARDS_MAX}枚）`)
+  }
+
+  cards.forEach((raw, i) => {
+    const at = `cards[${i}]`
+    if (typeof raw !== "object" || raw === null) {
+      errors.push(`${at} がオブジェクトではありません`)
+      return
+    }
+    const c = raw as Record<string, unknown>
+
+    const kind = c.kind
+    if (typeof kind !== "string" || !(CARD_KINDS as readonly string[]).includes(kind)) {
+      errors.push(`${at}.kind は ${CARD_KINDS.join(" / ")} のいずれかです: "${String(kind)}"`)
+    } else if (i === 0 && kind !== "headline") {
+      // OGP画像は1枚目から作る。先頭が見出しでないと会期の要約として成立しない
+      errors.push(`cards[0].kind は headline です: "${kind}"`)
+    }
+
+    for (const key of ["title", "detail"] as const) {
+      if (typeof c[key] !== "string" || (c[key] as string).trim() === "") {
+        errors.push(`${at}.${key} が空です`)
+      }
+    }
+    if (typeof c.title === "string" && c.title.length > TITLE_MAX_CHARS) {
+      warnings.push(`${at}.title が${c.title.length}字あります（推奨 ${TITLE_MAX_CHARS}字以内）`)
+    }
+    if (typeof c.detail === "string" && c.detail.length > DETAIL_MAX_CHARS) {
+      warnings.push(`${at}.detail が${c.detail.length}字あります（推奨 ${DETAIL_MAX_CHARS}字以内）`)
+    }
+
+    if (typeof kind === "string" && VALUE_REQUIRED_KINDS.includes(kind as CardKind)) {
+      if (typeof c.value !== "string" || c.value.trim() === "") {
+        errors.push(`${at}.value は kind: ${kind} では必須です`)
+      }
+    }
+    if (c.value !== undefined && typeof c.value !== "string") {
+      errors.push(`${at}.value は文字列です`)
+    }
+
+    if (c.link !== undefined) {
+      const link = c.link
+      if (typeof link !== "string") {
+        errors.push(`${at}.link は文字列です`)
+      } else {
+        const m = new RegExp(`^/gikai/sessions/${sessionId}/(\\d+)$`).exec(link)
+        if (!m) {
+          errors.push(`${at}.link は "/gikai/sessions/${sessionId}/{パート番号}" 形式です: "${link}"`)
+        } else if (partCount !== undefined && Number(m[1]) >= partCount) {
+          errors.push(`${at}.link のパート番号 ${m[1]} は存在しません（パートは0〜${partCount - 1}）`)
+        }
+      }
+    }
+
+    for (const key of Object.keys(c)) {
+      if (!["kind", "title", "value", "detail", "link"].includes(key)) {
+        errors.push(`${at} に未知のキー「${key}」があります`)
+      }
+    }
+  })
+
+  for (const key of Object.keys(d)) {
+    if (!["generated_by", "generated_at", "reviewed", "cards"].includes(key)) {
+      errors.push(`cards.yaml に未知のキー「${key}」があります`)
+    }
+  }
+
+  return { errors, warnings }
+}
+
 // ── タグ規則（スキーマ §10）─────────────────────────────────────────────────
 
 export const MEETING_TAGS = ["定例会", "臨時会", "特別委員会"] as const
@@ -186,6 +325,8 @@ const KEY_ORDER: Record<string, readonly string[]> = {
   BillQuestion:         ["questioner", "content", "answer"],
   CommitteeReferral:    ["bill_numbers", "committee", "note"],
   AdministrativeReport: ["title", "content"],
+  CardsData:            ["session_id", "generated_by", "generated_at", "reviewed", "cards"],
+  CardItem:             ["kind", "title", "value", "detail", "link"],
 }
 
 type ShapeName = keyof typeof KEY_ORDER

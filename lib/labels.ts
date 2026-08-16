@@ -63,11 +63,25 @@ export const LABELS = {
     text: "スライド",
   },
 
-  /** 要点カード（Phase C） */
+  /** 要点カード */
   cards: {
     text: "この会議の要点",
   },
+
+  /** カードがあるセッションで、旧スライドを折りたたむときの見出し */
+  legacySlides: {
+    text: "過去のスライド",
+  },
 } as const satisfies Record<string, string | UiLabel>
+
+/** カードの種別ラベル（スキーマ §11.1 の kind）。カード左上に小さく出る。 */
+export const CARD_KIND_LABELS: Record<string, string> = {
+  headline: "この会期の要点",
+  number:   "数字で見る",
+  decision: "決まったこと",
+  question: "議員が聞いたこと",
+  next:     "これから",
+}
 
 /**
  * 一般質問セクションのラベル。予算・決算特別委員会のパートは speaker_role が

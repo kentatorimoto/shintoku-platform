@@ -73,6 +73,7 @@ shintoku-platform/
 │       ├── day{n}.md             #   本会議（part_type: honkaigi）
 │       ├── part{n}.md            #   パート別（part_type: qna）
 │       ├── session.md            #   単一パート（part_type: qna）
+│       ├── cards.yaml            #   要点カード（MDの派生物。cards:generate で生成）
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
 ├── docs/
 │   └── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
@@ -83,11 +84,13 @@ shintoku-platform/
 │   ├── add-session.ts            # ★ 字幕→MD→PR のオーケストレータ
 │   ├── fetch-transcript.ts       #   YouTube字幕 → transcripts/（Layer 0）
 │   ├── extract-md.ts             #   字幕 → MD（Claude API + 自己修正ループ）
+│   ├── generate-cards.ts         #   レビュー済みMD → cards.yaml（要点カード）
 │   ├── watch-council.ts          #   RSS監視 → GitHub Issue
 │   ├── prompts/                  #   抽出プロンプト（git履歴で改善を追える）
 │   │   ├── glossary.md           #     固有名詞対訳表（議員名簿・誤認識パターン）
 │   │   ├── extract-qna.md
-│   │   └── extract-honkaigi.md
+│   │   ├── extract-honkaigi.md
+│   │   └── cards.md              #     要点カードの抽出プロンプト
 │   ├── migration/                #   凍結。移行時の証明ツール（README.md 参照）
 │   ├── sync-all.ts               # Master sync orchestrator
 │   ├── scrape-announcements.ts
@@ -115,6 +118,7 @@ shintoku-platform/
 │   │   ├── basin_questions.json
 │   │   ├── lastSync.json
 │   │   ├── qna/                  # Session part data (QNA / honkaigi)
+│   │   ├── cards/                # 要点カード（cards.yaml の生成物）
 │   │   └── *.geojson             # Map layers
 │   ├── pdf/                      # Gikai session PDFs
 │   └── slides/                   # Generated slide images
@@ -144,6 +148,7 @@ npm run build:data       # content/sessions/** -> public/data/*.json (validates,
 npm run add-session -- --id <id> --url <url> --type qna|honkaigi --part day1 --label "..." --date YYYY-MM-DD
 npm run fetch:transcript -- --url <url> --out <path>
 npm run extract:md -- --session <id> --part day1 --type honkaigi
+npm run cards:generate -- <sessionId>  # レビュー済みMD -> cards.yaml（全パート reviewed:true が前提）
 npm run watch:council -- [--dry-run]   # RSS監視 -> GitHub Issue
 
 # Data scraping & sync
@@ -176,8 +181,8 @@ Public JSON (public/data/*.json)  ←────────  content/sessions/
 Next.js App Router pages (app/)
 ```
 
-`public/data/gikai_sessions.json` と `public/data/qna/*.json` は `npm run build:data` の生成物。
-**直接編集禁止** — 修正は `content/` のMDに対して行う。
+`public/data/gikai_sessions.json`・`public/data/qna/*.json`・`public/data/cards/*.json` は
+`npm run build:data` の生成物。**直接編集禁止** — 修正は `content/` のMD / cards.yaml に対して行う。
 
 GitHub Actions automates:
 - `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / `newsletters_index.json` （生成物 `gikai_sessions.json` / `qna/` には触れない）
@@ -455,14 +460,19 @@ Defined as static data in `app/process/issues/page.tsx`:
 
 #### UI コンポーネント構成
 
-`SessionDetail.tsx` 内のセクション表示順：
+`SessionDetail.tsx` 内のセクション表示順（読者の動線「30秒 → 3分 → 確かめる → 全部調べる」）：
 1. タブバー（パート切り替え）
-2. 動画アーカイブ (`VideoCard`)
-3. **本会議・議案** (`HonkaigiSection`) — `honkaigiData` がある場合
-4. **一般質問** (`QnaSection`) — `qnaItems` がある場合
-5. スライド
+2. **要点カード** (`SessionCards`) — `cards` がある場合
+3. スライド (`SlidesSection`) — 画像がある場合。カードがあれば「過去のスライド」として折りたたむ
+4. 会議の動画 (`VideoCard`)
+5. **この会議で決まったこと** (`HonkaigiSection`, `#giketsu`) — `honkaigiData` がある場合
+6. **議員が聞いたこと、町の答え** (`QnaSection`, `#qna`) — `qnaItems` がある場合
 
+議案審議・一般質問は参照資料としてページ下部に置き、summary 直下のページ内リンクから1タップで届くようにしている。
 両セクションともアコーディオン形式。ヘッダーはテーマ主役（タグ → タイトル → 発言者/議案番号）のカードデザイン。
+
+**UI表示ラベルは `lib/labels.ts` に一元管理する。** データ層の正式語彙（議案審議・一般質問・委員会付託…）は
+変えず、UIでは生活語＋正式名称の併記で出す。コピーの調整はこのファイル1つで完結させること。
 
 ### Data Creation Workflow
 
@@ -474,11 +484,12 @@ Defined as static data in `app/process/issues/page.tsx`:
    Layer 0・不可侵         正典・人がレビューする      生成物・直接編集禁止
 ```
 
-人間に残る判断は3つだけ。それ以外は `npm run add-session` が自動化する。
+人間に残る判断は4つだけ。それ以外は `npm run add-session` が自動化する。
 
 1. **セッションIDと種別**（`r8-2026-06-regular-2` / `qna` か `honkaigi` か）
 2. **narrativeTitle の承認**（AIが3案を `session.yaml` にコメントで残す。人が選ぶか書き直す）
 3. **PRレビュー**（固有名詞・数値・タグ）
+4. **要点カードのレビュー**（`reviewed: true` にした後 `npm run cards:generate`。数値とトーンを見て `reviewed: true`）
 
 ```
 [watcher (cron)] ──新着検知──> Issue（URL・タイトル・公開日）
@@ -523,6 +534,22 @@ npm run extract:md -- --session <id> --part day1 --type honkaigi
 | 3 | 字幕が恒久的に無効 | このセッションは字幕から抽出できない |
 
 会期が複数日にわたり `date` が実時間順とずれる場合は、`session.yaml` に `sortDate`（会期初日）を入れる（スキーマ §2.1）。
+
+### 要点カード（cards.yaml）
+
+旧NotebookLMスライドの後継。**レビュー済みMDの派生物**であり、正典ではない。仕様は `docs/content-schema.md` §11。
+
+```bash
+npm run cards:generate -- r8-2026-06-regular-2   # 全パート reviewed:true が前提（違反は exit 1）
+```
+
+- 出力は `content/sessions/{id}/cards.yaml`（5〜8枚・`reviewed: false`）。人が読んで直し、`reviewed: true` にする
+- `build:data` が検証して `public/data/cards/{id}.json` を生成する（スキーマ違反はビルドを止める）
+- `kind` は `headline`（1枚目・必須）/ `number` / `decision` / `question` / `next`
+- カードがあるセッションでは、旧スライドは「過去のスライド」として折りたたまれる
+- OGP画像（`app/gikai/sessions/[id]/opengraph-image.tsx`）は narrativeTitle と1枚目の headline から作る。
+  和文フォント（Zen Old Mincho）はビルド時に Google Fonts から取得し、失敗時は英数字のみで生成する（ビルドは止めない）
+- 過去セッションへの遡及生成はしていない（旧PDFスライドが役割を果たしているため）
 
 ### Known Issues
 

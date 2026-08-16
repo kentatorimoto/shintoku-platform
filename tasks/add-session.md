@@ -121,7 +121,30 @@ URLのみでPDFなしの場合はこのステップをスキップ。
 
 ---
 
-### ステップ7：コミット・プッシュ
+### ステップ7：要点カードの生成
+
+MDのレビューが終わり、**全パートの frontmatter が `reviewed: true` になってから**実行する。
+`reviewed: false` のパートが1つでもあると、スクリプトは何も生成せず exit 1 で止まる（品質ゲート）。
+
+```bash
+npm run cards:generate -- {sessionId}
+```
+
+1. `content/sessions/{sessionId}/cards.yaml` が生成される（5〜8枚・`reviewed: false`）
+2. カードを読み、次を確認する
+   - 数値がMDと一致しているか（カードはMDの派生物。MDに無い数値があってはならない）
+   - 評価語・煽り表現が入っていないか
+   - 議会用語が残っていないか（読者は議会を傍聴したことのない町民）
+   - 1枚目（`kind: headline`）がこの会期のいちばん大きな出来事になっているか（OGP画像にも使われる）
+3. 直すときは cards.yaml を手で編集してよい（作り直すなら `--force`）
+4. 確認できたら `reviewed: true` に変えてコミットする
+
+`npm run build:data` が cards.yaml を検証し、`public/data/cards/{sessionId}.json` を生成する。
+スキーマは `docs/content-schema.md` §11 が正。
+
+---
+
+### ステップ8：コミット・プッシュ
 ```bash
 git add -A
 git commit -m "feat: {officialTitle}追加"

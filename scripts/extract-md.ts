@@ -32,7 +32,7 @@ export type PartType = "qna" | "honkaigi"
 // ── プロンプトの組み立て ────────────────────────────────────────────────────
 
 /** `docs/content-schema.md` から `## {n}.` 節を丸ごと切り出す（`### n.1` 等も含む）。 */
-function extractSchemaSections(doc: string, sections: number[]): string {
+export function extractSchemaSections(doc: string, sections: number[]): string {
   const lines = doc.split("\n")
   const out: string[] = []
 
@@ -102,20 +102,20 @@ function buildFrontmatter(meta: Meta): string {
 
 // ── Claude API ──────────────────────────────────────────────────────────────
 
-interface Usage {
+export interface Usage {
   input:     number
   output:    number
   cacheRead: number
 }
 
 /** AIが指示に反してコードフェンスで包んだ場合に備えて剥がす。 */
-function stripFences(text: string): string {
+export function stripFences(text: string): string {
   const trimmed = text.trim()
   const fenced = /^```(?:markdown|md)?\n([\s\S]*)\n```$/.exec(trimmed)
   return (fenced ? fenced[1] : trimmed).trim()
 }
 
-function logUsage(label: string, usage: Usage) {
+export function logUsage(label: string, usage: Usage) {
   const price = PRICING[MODEL]
   // キャッシュ読み出しは入力の約1割の単価
   const cost = price
@@ -131,9 +131,9 @@ function logUsage(label: string, usage: Usage) {
   )
 }
 
-type Message = Anthropic.MessageParam
+export type Message = Anthropic.MessageParam
 
-async function callClaude(
+export async function callClaude(
   client: Anthropic,
   system: string,
   messages: Message[],

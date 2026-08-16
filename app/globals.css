@@ -127,4 +127,15 @@
   .chipActive {
     @apply bg-hover border-accent text-textMain;
   }
+
+  /* ===== Scroll ===== 横スワイプするカード列。スクロールバーは出さない */
+
+  .scrollbarNone {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbarNone::-webkit-scrollbar {
+    display: none;
+  }
 }
