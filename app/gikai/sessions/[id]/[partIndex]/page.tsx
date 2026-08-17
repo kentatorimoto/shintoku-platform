@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import SessionDetail from "../SessionDetail"
 import { ANCHORS, LABELS, qnaLabel } from "@/lib/labels"
-import type { GikaiSession, HonkaigiData, PartData, QnaData } from "@/scripts/lib/schema"
+import type { CardsData, GikaiSession, HonkaigiData, PartData, QnaData } from "@/scripts/lib/schema"
 
 function getPartData(sessionId: string, partIndex: number): PartData | null {
   const candidates = [
@@ -25,6 +25,17 @@ function getPartData(sessionId: string, partIndex: number): PartData | null {
     }
   }
   return null
+}
+
+/** 要点カード。cards.yaml があるセッションだけ生成される（スキーマ §11）。 */
+function getCards(sessionId: string): CardsData | null {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "cards", `${sessionId}.json`)
+    if (!fs.existsSync(filePath)) return null
+    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as CardsData
+  } catch {
+    return null
+  }
 }
 
 function getSessions(): GikaiSession[] {
@@ -191,6 +202,7 @@ export default async function SessionPartPage({
         initialPartIndex={idx}
         qnaItems={qnaItems}
         honkaigiData={honkaigiData}
+        cards={getCards(session.id)?.cards ?? null}
       />
     </div>
   )

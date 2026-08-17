@@ -15,10 +15,13 @@ import remarkParse from "remark-parse"
 import {
   orderKeys,
   stableStringify,
+  validateCards,
   validateTags,
   type AdministrativeReport,
   type BillItem,
   type BillQuestion,
+  type CardsData,
+  type CardItem,
   type CommitteeReferral,
   type GikaiSession,
   type HonkaigiData,
@@ -73,7 +76,7 @@ const parser = unified().use(remarkParse)
 // CORE_SCHEMA は timestamp 型を持たないため、無クォートの 2026-06-03 も文字列のまま読める。
 const loadYaml = (src: string): unknown => yaml.load(src, { schema: yaml.CORE_SCHEMA })
 
-function readFrontmatter(raw: string): { data: Record<string, unknown>; body: string; bodyStartLine: number } {
+export function readFrontmatter(raw: string): { data: Record<string, unknown>; body: string; bodyStartLine: number } {
   const parsed = matter(raw, { engines: { yaml: loadYaml as (s: string) => object } })
   const bodyOffset = raw.length - parsed.content.length
   const bodyStartLine = raw.slice(0, bodyOffset).split("\n").length - 1
@@ -564,12 +567,47 @@ function parseSessionYaml(filePath: string, sessionId: string, log: IssueLog): G
   return session
 }
 
+// ── cards.yaml → CardsData（スキーマ §11）───────────────────────────────────
+
+/** カードはMDの派生物。正典ではないので、無ければ何も出力しないだけで正常。 */
+function parseCardsYaml(
+  filePath: string,
+  sessionId: string,
+  partCount: number,
+  log: IssueLog,
+): CardsData | null {
+  const file = path.relative(ROOT, filePath)
+  let parsed: unknown
+  try {
+    parsed = loadYaml(fs.readFileSync(filePath, "utf-8"))
+  } catch (err) {
+    log.error(file, 1, `YAMLが壊れています: ${err instanceof Error ? err.message : err}`)
+    return null
+  }
+
+  const { errors, warnings } = validateCards(parsed, sessionId, partCount)
+  errors.forEach(e => log.error(file, 1, e))
+  warnings.forEach(w => log.warn(file, 1, w))
+  if (errors.length > 0) return null
+
+  const data = parsed as CardsData
+  return orderKeys({
+    session_id:   sessionId,
+    generated_by: data.generated_by,
+    generated_at: data.generated_at,
+    reviewed:     data.reviewed,
+    cards:        data.cards.map(c => orderKeys(c, "CardItem") as CardItem),
+  }, "CardsData")
+}
+
 // ── ビルド本体 ──────────────────────────────────────────────────────────────
 
 export interface BuildResult {
   sessions: GikaiSession[]
   /** JSON ファイル名 → パートデータ */
   parts:    Map<string, PartData>
+  /** セッションID → 要点カード（cards.yaml があるセッションのみ） */
+  cards:    Map<string, CardsData>
 }
 
 /** `sortDate ?? date` の降順、同値なら id 昇順（スキーマ §2.1）。 */
@@ -591,6 +629,7 @@ export function buildFromContent(contentDir: string): BuildResult {
 
   const sessions: GikaiSession[] = []
   const parts = new Map<string, PartData>()
+  const cards = new Map<string, CardsData>()
 
   const sessionIds = fs.readdirSync(sessionsDir, { withFileTypes: true })
     .filter(d => d.isDirectory())
@@ -612,6 +651,12 @@ export function buildFromContent(contentDir: string): BuildResult {
       const data = parsePartFile(path.join(dir, mdName), sessionId, log)
       if (data) parts.set(mdToJsonName(mdName, sessionId), data)
     }
+
+    const cardsPath = path.join(dir, "cards.yaml")
+    if (fs.existsSync(cardsPath)) {
+      const data = parseCardsYaml(cardsPath, sessionId, session?.parts.length ?? 0, log)
+      if (data) cards.set(sessionId, data)
+    }
   }
 
   for (const w of log.warnings) console.warn(`⚠️  ${w.file}:${w.line} ${w.message}`)
@@ -627,7 +672,7 @@ export function buildFromContent(contentDir: string): BuildResult {
     parts:   s.parts.map(p => orderKeys(p, "Part")),
   }, "GikaiSession"))
 
-  return { sessions: ordered, parts }
+  return { sessions: ordered, parts, cards }
 }
 
 // ── エントリポイント ────────────────────────────────────────────────────────
@@ -635,16 +680,24 @@ export function buildFromContent(contentDir: string): BuildResult {
 async function main() {
   const result = buildFromContent(path.join(ROOT, "content"))
 
-  const dataDir = path.join(ROOT, "public", "data")
-  const qnaDir  = path.join(dataDir, "qna")
+  const dataDir  = path.join(ROOT, "public", "data")
+  const qnaDir   = path.join(dataDir, "qna")
+  const cardsDir = path.join(dataDir, "cards")
   fs.mkdirSync(qnaDir, { recursive: true })
+  fs.mkdirSync(cardsDir, { recursive: true })
 
   fs.writeFileSync(path.join(dataDir, "gikai_sessions.json"), stableStringify(result.sessions))
   for (const [name, data] of result.parts) {
     fs.writeFileSync(path.join(qnaDir, name), stableStringify(data))
   }
+  for (const [sessionId, data] of result.cards) {
+    fs.writeFileSync(path.join(cardsDir, `${sessionId}.json`), stableStringify(data))
+  }
 
-  console.log(`✅ build:data: ${result.sessions.length} sessions, ${result.parts.size} part files → public/data/`)
+  console.log(
+    `✅ build:data: ${result.sessions.length} sessions, ${result.parts.size} part files, ` +
+    `${result.cards.size} card files → public/data/`,
+  )
 }
 
 if (path.basename(process.argv[1] ?? "") === "build-data.ts") {

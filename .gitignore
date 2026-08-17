@@ -42,3 +42,6 @@ next-env.d.ts
 
 # generated – edit data/gikai_links.csv instead
 public/data/gikai_links.json
+
+# OGP画像用フォントのキャッシュ（npm run og:fonts が作る）
+/.cache

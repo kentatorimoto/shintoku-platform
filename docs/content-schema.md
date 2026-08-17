@@ -6,6 +6,8 @@
 > **v1.1 変更点**: §5に行政報告（administrative_reports）の本文構造を追加／§3に不透明フィールド退避（topics_index）を追加／§6にgray-matterのYAML日付自動変換対策を明記。
 >
 > **v1.2 変更点**（既存18セッションの実データ検証を反映）: §2に `sortDate` を追加／§4に見出しの厳密パース規則と空値の扱いを追加／§5の `bill_numbers` 区切りとメタ行の省略規則を明記／§6にJSON出力時のデフォルト値規則を追加／§10としてタグ規則を実データに合わせて再定義。
+>
+> **v1.3 変更点**: §11として `cards.yaml`（要点カード）を追加。レビュー済みMDの派生物であり、正典そのものではない。kind は `decision`（議案の採決結果）と `report`（行政報告由来）を分ける。
 
 ---
 
@@ -399,3 +401,67 @@ CLAUDE.md は「種別タグをちょうど1つ」と記していたが、実デ
 - **警告のみ**: 既知テーマ一覧にないテーマタグ（将来の追加を塞がないため）。現在 `住民訴訟` `林業` が該当
 
 > タグの並び順は `session.yaml` の記述順をそのまま保持する（カテゴリ順への正規化はしない）。
+
+---
+
+## 11. cards.yaml（要点カード）
+
+`content/sessions/{id}/cards.yaml`。旧NotebookLMスライドの後継で、**レビュー済みMDの派生物**。
+正典はあくまでMD本文であり、カードはそれを読者向けに要約した表示層にすぎない。
+
+```
+生成:  npm run cards:generate -- {sessionId}
+入力:  content/sessions/{id}/*.md（全パートが reviewed: true であること）
+出力:  content/sessions/{id}/cards.yaml
+変換:  build:data → public/data/cards/{sessionId}.json
+```
+
+```yaml
+generated_by: claude-sonnet-4-6      # 生成モデル（監査用）
+generated_at: "2026-08-16"
+reviewed: false                      # カード自体の人間レビュー済みフラグ
+cards:
+  - kind: headline                   # headline | number | decision | report | question | next
+    title: 温浴施設の開業がまた延期に  # 30字以内
+    detail: 資材調達の遅れが理由。既存の温浴施設は営業を延長する。   # 120字以内
+    link: /gikai/sessions/r8-2026-06-regular-2/0
+  - kind: number
+    value: "3.6億円"                 # kind が number / next のときは必須。1つだけ
+    title: 補正予算はインフラと福祉へ
+    detail: 一般会計補正予算（第2号）の総額。道路・除雪と子育て支援に配分される。
+```
+
+### 11.1 kind の使い分け
+
+| kind | 何を1枚にするか | `value` |
+|---|---|---|
+| `headline` | この会期でいちばん大きな出来事。**必ず1枚目**（OGP画像はここから作る） | 任意 |
+| `number` | 1つの数字が語ること（金額・人数・年度） | **必須** |
+| `decision` | 決まったこと。**議案の採決結果に限る** | 任意 |
+| `report` | 行政報告に由来する事実（採決を経ていないもの） | 任意 |
+| `question` | 議員が投げかけた問いと、町の答え | 任意 |
+| `next` | これから起きること・次の節目（日付・時期） | **必須** |
+
+### 11.2 検証規則（`validateCards()`）
+
+- **エラー（exit 1）**: `cards` が空／9枚以上／1枚目が `headline` でない／未知の `kind`／`title`・`detail` が空／
+  `number`・`next` で `value` が無い／`link` が `/gikai/sessions/{sessionId}/{パート番号}` 形式でない、
+  またはパート番号が存在しない／未知のキー
+- **警告のみ**: 5枚未満／`title` が30字超／`detail` が120字超
+
+`reviewed: false` でもビルドは通す。Preview で見てから直す運用のため、表示自体は止めない。
+
+### 11.3 内容の規律
+
+- **MDに書かれている事実のみ。** 数値はMDから転記し、創作しない
+- 評価語・煽り表現を書かない。「〜が決まった」「〜が延期に」等の事実文で止める
+- 「新」「刷新」「大幅」等の程度・新規性を示す修飾語は、MD本文にその語がある場合のみ使う
+- 読者は議会用語を知らない一般町民。中学生が読める語彙で書く
+- `【要確認: 〜】` が付いた箇所はカードにしない（未確認の情報を要約の主役にしない）
+
+### 11.4 キー順（`stableStringify`）
+
+| ファイル | キー順 | 省略可 |
+|---|---|---|
+| `public/data/cards/{id}.json` | `session_id, generated_by, generated_at, reviewed, cards` | なし |
+| `cards[]` | `kind, title, value, detail, link` | `value`, `link` |

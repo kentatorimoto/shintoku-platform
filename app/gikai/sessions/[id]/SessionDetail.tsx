@@ -3,7 +3,9 @@
 import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import SessionCards from "@/components/SessionCards"
 import { ANCHORS, LABELS, qnaLabel, type UiLabel } from "@/lib/labels"
+import type { CardItem } from "@/scripts/lib/schema"
 
 // ── 型定義 ─────────────────────────────────────────────────────────────────
 interface Part {
@@ -66,6 +68,8 @@ interface Props {
   initialPartIndex?: number
   qnaItems?:         QnaItem[] | null
   honkaigiData?:     HonkaigiData | null
+  /** 要点カード（セッション単位。パートを切り替えても同じものを出す） */
+  cards?:            CardItem[] | null
 }
 
 // ── セクション見出し（生活語 ＋ 正式名称の併記）────────────────────────────────
@@ -368,9 +372,107 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
   )
 }
 
+// ── スライド ────────────────────────────────────────────────────────────────
+/** `collapsed` のときは「過去のスライド」として畳む（要点カードが役割を引き継いだセッション）。 */
+function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) {
+  const pdfLink = part.pdfPath && (
+    <a
+      href={part.pdfPath}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-1.5 text-xs text-textSub/70
+                 hover:text-accent transition-colors border border-line/50
+                 rounded-[3px] px-3 py-2 bg-ink shrink-0"
+    >
+      <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9
+                 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/>
+      </svg>
+      PDF を開く
+    </a>
+  )
+
+  const images = (
+    <div className="space-y-3 max-w-4xl mx-auto">
+      {part.images.map((src, i) => (
+        <a
+          key={src}
+          href={src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block relative rounded-[3px] overflow-hidden
+                     border border-line hover:border-accent/50
+                     shadow-sm hover:shadow-md transition-all group"
+        >
+          {/* ページ番号バッジ */}
+          <div className="absolute top-2 left-2 z-10
+                          bg-ink/80 backdrop-blur-sm rounded-md
+                          px-2 py-0.5 text-[10px] font-mono text-textSub/70">
+            {i + 1} / {part.images.length}
+          </div>
+
+          {/* 拡大アイコン：モバイルは常時表示、desktop はホバーで表示 */}
+          <div className="absolute top-2 right-2 z-10
+                          opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+                          transition-opacity
+                          bg-ink/80 backdrop-blur-sm rounded-md px-2 py-1">
+            <svg className="w-3.5 h-3.5 text-textSub" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" strokeWidth="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </div>
+
+          <Image
+            src={src}
+            alt={`スライド ${i + 1} ページ目`}
+            width={2867}
+            height={1600}
+            className="w-full h-auto block"
+            unoptimized
+            priority={!collapsed && i < 2}
+          />
+        </a>
+      ))}
+    </div>
+  )
+
+  if (collapsed) {
+    return (
+      <details className="group">
+        <summary className="flex items-center justify-between gap-4 cursor-pointer list-none
+                            border-t border-line pt-4">
+          <span className="text-[13px] font-bold text-textSub group-open:text-textMain transition-colors">
+            {LABELS.legacySlides.text}
+            <span className="mono text-[11px] font-normal text-textSub/70 ml-2">
+              {part.images.length}枚
+            </span>
+          </span>
+          <span className="mono text-[11px] text-textSub">開く ↓</span>
+        </summary>
+        <div className="mt-4 flex justify-end mb-4">{pdfLink}</div>
+        {images}
+      </details>
+    )
+  }
+
+  return (
+    <section>
+      <div className="flex items-center justify-between mb-4">
+        <SectionHeading label={LABELS.slides} className="mb-0" />
+        {pdfLink}
+      </div>
+      {images}
+    </section>
+  )
+}
+
 // ──────────────────────────────────────────────────────────────────────────────
 
-export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, qnaItems, honkaigiData }: Props) {
+export default function SessionDetail({
+  sessionId, parts, initialPartIndex = 0, qnaItems, honkaigiData, cards,
+}: Props) {
   const [activeIdx, setActiveIdx] = useState(initialPartIndex)
   const topRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -380,6 +482,7 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
   }
 
   const activePart = parts[activeIdx]
+  const hasCards = (cards?.length ?? 0) > 0
 
   function handleTabChange(i: number) {
     setActiveIdx(i)
@@ -412,75 +515,14 @@ export default function SessionDetail({ sessionId, parts, initialPartIndex = 0, 
         </div>
       )}
 
-      {/* ── スライド（画像があるパートのみ表示）─────────────────────────
-          読者の動線は「30秒で分かる（summary）→ 3分で見る（スライド）→
+      {/* ── 要点カード ─────────────────────────────────────────────
+          読者の動線は「30秒で分かる（summary）→ 3分で見る（カード/スライド）→
           動画で確かめる → 全部調べる（議案審議）」。この順にセクションを置く。 */}
+      {cards && cards.length > 0 && <SessionCards cards={cards} />}
+
+      {/* ── スライド（画像があるパートのみ。カードがあれば折りたたむ）──────── */}
       {activePart.images.length > 0 && (
-      <section>
-        <div className="flex items-center justify-between mb-4">
-          <SectionHeading label={LABELS.slides} className="mb-0" />
-          {activePart.pdfPath && (
-            <a
-              href={activePart.pdfPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-textSub/70
-                         hover:text-accent transition-colors border border-line/50
-                         rounded-[3px] px-3 py-2 bg-ink shrink-0"
-            >
-              <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9
-                         2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/>
-              </svg>
-              PDF を開く
-            </a>
-          )}
-        </div>
-
-        <div className="space-y-3 max-w-4xl mx-auto">
-            {activePart.images.map((src, i) => (
-              <a
-                key={src}
-                href={src}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block relative rounded-[3px] overflow-hidden
-                           border border-line hover:border-accent/50
-                           shadow-sm hover:shadow-md transition-all group"
-              >
-                {/* ページ番号バッジ */}
-                <div className="absolute top-2 left-2 z-10
-                                bg-ink/80 backdrop-blur-sm rounded-md
-                                px-2 py-0.5 text-[10px] font-mono text-textSub/70">
-                  {i + 1} / {activePart.images.length}
-                </div>
-
-                {/* 拡大アイコン：モバイルは常時表示、desktop はホバーで表示 */}
-                <div className="absolute top-2 right-2 z-10
-                                opacity-100 sm:opacity-0 sm:group-hover:opacity-100
-                                transition-opacity
-                                bg-ink/80 backdrop-blur-sm rounded-md px-2 py-1">
-                  <svg className="w-3.5 h-3.5 text-textSub" viewBox="0 0 24 24" fill="none"
-                       stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                    <polyline points="15 3 21 3 21 9"/>
-                    <line x1="10" y1="14" x2="21" y2="3"/>
-                  </svg>
-                </div>
-
-                <Image
-                  src={src}
-                  alt={`スライド ${i + 1} ページ目`}
-                  width={2867}
-                  height={1600}
-                  className="w-full h-auto block"
-                  unoptimized
-                  priority={i < 2}
-                />
-              </a>
-            ))}
-        </div>
-      </section>
+        <SlidesSection part={activePart} collapsed={hasCards} />
       )}
 
       {/* ── 動画 ─────────────────────────────────────────────────────── */}
