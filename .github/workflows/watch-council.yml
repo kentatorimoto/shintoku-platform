@@ -27,6 +27,8 @@ jobs:
       - run: npx tsx scripts/watch-council.ts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # RSSがランナーから弾かれたときのフォールバック。未設定ならスキップされる。
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 
       # daily-sync の教訓: グロブではなく明示パスでコミットする。
       - name: Commit known-videos.json if changed
