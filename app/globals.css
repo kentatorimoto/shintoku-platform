@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
 /* ══════════════════════════════════════════════════════════════════════
-   デザイントークン「亜麻×小豆」 — 正は docs/design/atlas-hybrid-warm.html
-   基調（亜麻）を @theme のデフォルト値に置く。既存の bg-base / text-textSub
-   等はすべてこの変数を参照するので、値を差し替えるだけで全ページに波及する。
-   /process 配下は [data-paper="azuki"] で同じ変数を小豆に上書きする。
+   デザイントークン「亜麻」 — 正は docs/design/atlas-hybrid-warm.html
+   全ページ共通の単一パレット。bg-base / text-textSub 等はすべてこの変数を
+   参照するので、値を差し替えるだけで全ページに波及する。
+
+   2026-09: /process 配下だけを小豆（暗色）に反転する仕組みを廃止した。
+   「意思決定の流れ＝別の紙」という例外が、セクションの増加（/shiseki 等）で
+   成立しなくなったため。詳細は tasks/todo.md。
    ══════════════════════════════════════════════════════════════════════ */
 
 @theme {
@@ -24,22 +27,6 @@
   --font-sans:   var(--font-noto), ui-sans-serif, system-ui, sans-serif;
   --font-mincho: var(--font-zen-mincho), serif;      /* 見出し・narrativeTitle のみ */
   --font-mono:   var(--font-space-mono), ui-monospace, monospace; /* 数値・日付・SHEET・座標 */
-}
-
-/* ── 小豆（/process 配下のみ反転）──
-   十勝の小豆の焙煎色。差し色はカラマツの黄葉。
-   基調変数を上書きするだけなので、コンポーネントは常に --color-base 等を参照する。 */
-[data-paper="azuki"] {
-  --color-base:       #2a201c;
-  --color-ink:        #342823;
-  --color-line:       #453730;
-  --color-lineStrong: #5c4c42;
-  --color-accent:     #dfa04e;
-  --color-accentSoft: #c88f3f;
-  --color-onAccent:   #2a201c; /* カラマツ地の上に載る文字（＝小豆紙色）*/
-  --color-textMain:   #f0e8de;
-  --color-textSub:    #a5968a; /* AA 5.54:1 */
-  --color-hover:      #342823;
 }
 
 @layer base {
