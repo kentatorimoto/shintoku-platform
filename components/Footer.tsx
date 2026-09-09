@@ -7,6 +7,7 @@ const COL1 = [
   { href: "/gikai/sessions", label: "議会を読む",          external: false },
   { href: "/gikai",          label: "町の決定を読む",       external: false },
   { href: "/process",        label: "意思決定の流れを読む", external: false },
+  { href: "/shiseki",        label: LABELS.shiseki.text,   external: false },
 ] as const
 
 const COL2 = [

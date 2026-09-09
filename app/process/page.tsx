@@ -130,6 +130,8 @@ export default function ProcessPage() {
           { href: "/process/timeline",   label: "意思決定タイムライン", desc: "計画策定の節目と流れ" },
           { href: "/process/priorities", label: "重点テーマ",         desc: "政策議論の焦点・優先度" },
           { href: "/insights",           label: "データで見る",       desc: "会議・議決の集計" },
+          // 意思決定の構造を、時間の深さ方向へ延長したもの
+          { href: "/shiseki", label: LABELS.shiseki.text, desc: "町がどうしてこうなったか — 史跡の記録" },
         ].map((l) => (
           <Link
             key={l.href}

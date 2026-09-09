@@ -1,4 +1,4 @@
-# SHINTOKU ATLAS — コンテンツ正典スキーマ v1.3
+# SHINTOKU ATLAS — コンテンツ正典スキーマ v1.4
 
 > このドキュメントは、セッション記録の**正典（canonical source）をMarkdownに置く**ための仕様。
 > リポジトリの `docs/content-schema.md` に配置し、抽出プロンプト・変換スクリプト・レビュー基準はすべてここから導出する。
@@ -6,6 +6,8 @@
 > **v1.1 変更点**: §5に行政報告（administrative_reports）の本文構造を追加／§3に不透明フィールド退避（topics_index）を追加／§6にgray-matterのYAML日付自動変換対策を明記。
 >
 > **v1.2 変更点**（既存18セッションの実データ検証を反映）: §2に `sortDate` を追加／§4に見出しの厳密パース規則と空値の扱いを追加／§5の `bill_numbers` 区切りとメタ行の省略規則を明記／§6にJSON出力時のデフォルト値規則を追加／§10としてタグ規則を実データに合わせて再定義。
+>
+> **v1.4 変更点**: §12として郷土資料（archive）を追加。権利ガードレール（概要レベル公開）・史跡スキーマ・議会記録との接続規律を明記。
 >
 > **v1.3 変更点**: §11として `cards.yaml`（要点カード）を追加。レビュー済みMDの派生物であり、正典そのものではない。kind は `decision`（議案の採決結果）と `report`（行政報告由来）を分ける／§9の個人情報の規則を強化（生年の記載禁止・住所は地区名まで）。
 
@@ -465,3 +467,139 @@ cards:
 |---|---|---|
 | `public/data/cards/{id}.json` | `session_id, generated_by, generated_at, reviewed, cards` | なし |
 | `cards[]` | `kind, title, value, detail, link` | `value`, `link` |
+
+---
+
+## 12. 郷土資料（archive）
+
+`content/archive/` は、町の刊行物・郷土資料をOCRして正典化したもの。議会記録が「町がいま何を決めているか」
+なら、こちらは「町がどうしてこうなったか」を担う。素材の原本（PDF・OCRパイプライン）は別リポジトリ
+`ryuiki-archive` に残し、ATLAS 側は**正典MDのみ**を持つ。
+
+```
+content/archive/
+  shintoku-shiseki/           # 『しんとくの史跡』新得町郷土研究会・1994
+    book.yaml                 #   書誌・権利（各MDから外出しした共通メタ）
+    site_map.yaml             #   全町略図の凡例に基づく史跡インデックス
+    s01.md 〜 s27.md          #   1史跡1ファイル（s24 は欠番。後述 12.5）
+    front.md / tsuiki.md / atogaki.md   # 前付け・追記・あとがき（非公開）
+  kuttari-kyodo-tokuhon/      # 『郷土読本くったり』上巻・屈足小学校・1991
+    book.yaml
+    ch01.md 〜 ch10.md / matome.md / sanko.md / front.md
+```
+
+### 12.1 権利ガードレール（**全実装に優先する**）
+
+原本は著作権が存続しており、発行元への確認は継続検討中。したがって
+**許諾がなくても守れる範囲＝概要レベル**に公開を限定する。
+
+1. **本文全文をUIに出力しない。** 公開してよいのは「所在地・年代・2〜3文の概要・原本ページ番号」まで
+2. **概要は要約であって引用ではない。** 原文の語順・言い回しをなぞらず、事実を自分の言葉で再構成する。
+   固有名詞・数値・年代は原文どおり
+3. **各ページに必ず出典表記**（`book.yaml` の `citation` / `citation_note`）:
+   『しんとくの史跡』新得町郷土研究会・1994年・p.◯／新得町図書館蔵 ＋「原本は新得町図書館で読めます」
+4. **OCR全文を `public/` に出力しない。** `build-data.ts` の `buildShiseki()` が本文を捨てる設計で、
+   `ShisekiItem` に本文フィールドを足してはならない
+5. **図版は掲載しない。** `visual_elements` はメタとして正典に残すが、画像も説明も公開しない
+
+### 12.2 book.yaml
+
+```yaml
+id: shintoku-shiseki-v1
+title: しんとくの史跡
+publisher: 新得町郷土研究会
+publication_date: "1994-03-31"
+copy_provenance: 新得町図書館 蔵書(バーコード 0110366911)
+editors: { ... }              # 公開しない（JSONには出さない）
+rights:
+  license_status: unverified
+  ai_use_policy: anthropic_api_ok   # 処理系への送信は可。公開は概要レベルのみ
+  publication_scope: summary_only   # ← この3つは検証で固定値を要求する
+  full_text_public: false
+  figures_public: false
+citation: "『しんとくの史跡』新得町郷土研究会・1994年・p.{page}／新得町図書館蔵"
+citation_note: 原本は新得町図書館で読めます。
+```
+
+`citation` には `{page}` の差し込み位置が必須（無ければ exit 1）。
+
+### 12.3 史跡MDの frontmatter
+
+書誌・編纂者・権利は `book.yaml` に集約し、各MDは `source_ref` で参照する。
+
+```yaml
+---
+source_ref: shintoku-shiseki-v1
+id: s14
+doc_type: shiseki
+title: 旧狩勝トンネル
+order: 14                      # site_map.yaml の掲載順。UIの並び順
+map_no: 22                     # 全町略図の凡例番号
+page_start: 22
+page_end: 24
+confidence: confirmed          # confirmed | check（check は「原本と照合中」と表示する）
+reviewed: false                # 概要の人間確認フラグ。true にするには summary が要る
+ocr_reviewed: true             # OCR時点の人間確認（移送前の human_reviewed）
+location: 国道三十八号線六合目付近南側(新内トンネル)   # 番地は書かない
+era: 明治〜平成
+entities: [狩勝峠, 旧狩勝線, 新内トンネル]   # 議会記録との接続キー（完全一致のみ）
+summary: null                  # 公開する2〜3文。未作成なら null
+visual_elements: [...]         # 保持するが公開しない
+marginal_notes: [...]
+---
+```
+
+OCR注記（`> [!note] OCR注記`）と校異の記録は**本文にそのまま残す**。
+議会側の `【要確認: 〜】` と同じ役割で、確度を隠さないための装置。
+
+### 12.4 検証規則（`validateBook` / `validateShiseki`）
+
+- **エラー（exit 1）**: `book.yaml` の必須フィールド欠落／`citation` に `{page}` が無い／
+  `rights.publication_scope` が `summary_only` でない／`full_text_public` または `figures_public` が false でない／
+  `source_ref` の不一致／`id`・`title` が空／`order`・`page_start` が数値でない／`confidence` が列挙値でない／
+  `reviewed: true` なのに `summary` が無い／`location` に「番地」が残っている
+- **警告のみ**: `summary` が200字超
+
+### 12.5 掲載件数について
+
+全町略図の凡例は27件だが、本文に独立記事があるのは**26件**。
+凡例 `map_no: 2`「伊藤伝五郎住居跡」（p.40-41）は独立した見出しを持たず、
+「悲願桜と碑」（`s23`）に内包されている可能性が高い（`site_map.yaml` 冒頭の注記(B)）。
+このため `order` は 1〜23・25〜27 で、**`s24` は欠番**。原本照合で確定するまで推定で埋めない。
+
+`confidence: check` は現在2件（`s12` ペンケ沢駅逓所跡／`s13` 広内尋常小学校跡地）。
+学校群の境界が原本未確認のため、UIでは「原本と照合中」と明示する。
+
+### 12.6 キー順（`stableStringify`）
+
+| ファイル | キー順 | 省略可 |
+|---|---|---|
+| `public/data/archive/shiseki.json` | `book, items` | なし |
+| `book` | `id, title, publisher, year, citation, citation_note` | なし |
+| `items[]` | `id, title, order, page_start, page_end, confidence, reviewed, location, era, entities, summary, sessions` | `page_end`, `location`, `era`, `summary`, `sessions` |
+| `items[].sessions[]` | `id, title, date, entity` | なし |
+
+### 12.7 議会記録との接続
+
+史跡の `entities` が議会記録にそのまま現れる会期を、最大3件リンクする（`items[].sessions`）。
+`entity` に一致の根拠となった語を持たせ、UIでも「「トムラウシ」に触れています」と根拠を示す。
+
+**接続は語の完全一致のみ。** あいまい一致・語幹の切り出し・意味の近さによる推論はしない。
+誤った関連付けは、観測装置としての信頼を損なうため。
+
+接続キーから外すもの（`ENTITY_STOPWORDS` / `ADMIN_AREA`）:
+
+| 種類 | 例 | 理由 |
+|---|---|---|
+| 町全体・広域 | 新得、新得町、十勝、十勝川、北海道 | ほぼ全ての議事に出るので、一致しても何も意味しない |
+| 町外の地名 | 帯広、釧路、旭川、音更、鹿追、落合 | 史跡側の文脈（鉄道の行き先・隣町）と議会側の文脈が別 |
+| 都道府県・市 | 山形県、宮城県、帯広市 | 史跡側では「入植元」として出る語で、議会側の同じ語とは別の話 |
+| 2文字以下 | — | 偶然の一致が多い |
+
+この規律により、現在つながっているのは26件中2件（`s10` 菅野光民殉難之碑 →「トムラウシ」で3会期、
+`s23` 悲願桜と碑 →「新得山」で1会期）。**接続が少ないことは設計どおり**で、
+広域地名で機械的につなぐと26件中21件が同じ3会期に張り付き、意味を失う。
+
+> 原本は1994年の刊行で、現在の議会が扱う施設名（例「狩勝ポッポの道」）を持たない。
+> 史跡側の `entities` に現代の呼称を足せば接続は増えるが、それは原本にない語の追加になる。
+> 足すかどうかは資料の性格に関わる判断なので、推定では行わない。

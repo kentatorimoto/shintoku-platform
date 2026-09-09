@@ -104,6 +104,158 @@ export interface GikaiSession {
   parts:           Part[]
 }
 
+// ── 郷土資料（スキーマ §12）─────────────────────────────────────────────────
+//
+// 権利ガードレール（docs/claude-code-archive-shiseki.md）:
+//   公開するのは「所在地・年代・2〜3文の概要・原本ページ番号」まで。
+//   OCR全文と図版は public/ に出さない。ここの型に本文フィールドを足さないこと。
+
+export const SHISEKI_CONFIDENCES = ["confirmed", "check"] as const
+export type ShisekiConfidence = (typeof SHISEKI_CONFIDENCES)[number]
+
+/** 公開する書誌。出典表記に必要なものだけを持つ（編纂者一覧などは公開しない）。 */
+export interface BookMeta {
+  id:            string
+  title:         string
+  publisher:     string
+  /** 出典表記に使う発行年（西暦4桁） */
+  year:          string
+  /** `p.{page}` を含むテンプレート。UI がページ番号を差し込む */
+  citation:      string
+  citation_note: string
+}
+
+/** 史跡と議会セッションの接続。`entity` は一致の根拠になった語（§12.7）。 */
+export interface ShisekiSessionLink {
+  id:     string
+  title:  string
+  date:   string
+  entity: string
+}
+
+/** 公開する史跡1件。**本文は持たない。** */
+export interface ShisekiItem {
+  id:          string
+  title:       string
+  order:       number
+  page_start:  number
+  page_end?:   number
+  confidence:  ShisekiConfidence
+  reviewed:    boolean
+  location?:   string
+  era?:        string
+  /** 議会記録との接続キー（完全一致でのみ使う） */
+  entities:    string[]
+  /** 公開する2〜3文の概要。未作成なら省略 */
+  summary?:    string
+  /** 議会記録との接続（最大3件）。無ければ省略 */
+  sessions?:   ShisekiSessionLink[]
+}
+
+export interface ShisekiData {
+  book:  BookMeta
+  items: ShisekiItem[]
+}
+
+/** 概要の長さの目安。超過は警告（読者が1画面で読み切れる量に保つ）。 */
+const SUMMARY_MAX_CHARS = 200
+
+export interface ArchiveValidation {
+  errors:   string[]
+  warnings: string[]
+}
+
+const BOOK_REQUIRED = ["id", "title", "publisher", "publication_date", "citation", "citation_note"] as const
+
+/** book.yaml を検証する。 */
+export function validateBook(data: unknown, bookId: string): ArchiveValidation {
+  const errors: string[] = []
+  const warnings: string[] = []
+
+  if (typeof data !== "object" || data === null) {
+    return { errors: ["book.yaml がオブジェクトではありません"], warnings }
+  }
+  const d = data as Record<string, unknown>
+
+  for (const key of BOOK_REQUIRED) {
+    if (typeof d[key] !== "string" || d[key] === "") errors.push(`book.yaml に \`${key}\` が必要です`)
+  }
+  if (d.id !== bookId) {
+    errors.push(`book.yaml の id は "${bookId}"（ディレクトリ名に対応）です: "${String(d.id)}"`)
+  }
+  if (typeof d.citation === "string" && !d.citation.includes("{page}")) {
+    errors.push("book.yaml の `citation` には `p.{page}` の差し込み位置が必要です")
+  }
+
+  // 権利ガードレール: 公開範囲の宣言が落ちていないか
+  const rights = d.rights as Record<string, unknown> | undefined
+  if (!rights) {
+    errors.push("book.yaml に `rights` が必要です")
+  } else {
+    if (rights.publication_scope !== "summary_only") {
+      errors.push(`book.yaml の rights.publication_scope は "summary_only" です: "${String(rights.publication_scope)}"`)
+    }
+    if (rights.full_text_public !== false) errors.push("book.yaml の rights.full_text_public は false です")
+    if (rights.figures_public !== false) errors.push("book.yaml の rights.figures_public は false です")
+  }
+
+  return { errors, warnings }
+}
+
+/** 史跡MDの frontmatter を検証する。`reviewed: true` なら概要が要る。 */
+export function validateShiseki(fm: unknown, file: string, bookId: string): ArchiveValidation {
+  const errors: string[] = []
+  const warnings: string[] = []
+
+  if (typeof fm !== "object" || fm === null) {
+    return { errors: [`${file}: frontmatter がオブジェクトではありません`], warnings }
+  }
+  const d = fm as Record<string, unknown>
+
+  if (d.source_ref !== bookId) {
+    errors.push(`source_ref は "${bookId}" です: "${String(d.source_ref)}"`)
+  }
+  for (const key of ["id", "title"] as const) {
+    if (typeof d[key] !== "string" || d[key] === "") errors.push(`\`${key}\` が空です`)
+  }
+  for (const key of ["order", "page_start"] as const) {
+    if (typeof d[key] !== "number") errors.push(`\`${key}\` には数値が必要です: "${String(d[key])}"`)
+  }
+  if (typeof d.reviewed !== "boolean") errors.push("`reviewed` には true / false が必要です")
+
+  const confidence = d.confidence
+  if (typeof confidence !== "string" || !(SHISEKI_CONFIDENCES as readonly string[]).includes(confidence)) {
+    errors.push(`\`confidence\` は ${SHISEKI_CONFIDENCES.join(" / ")} のいずれかです: "${String(confidence)}"`)
+  }
+
+  if (d.entities !== undefined && !Array.isArray(d.entities)) {
+    errors.push("`entities` は配列です")
+  }
+
+  const summary = d.summary
+  if (summary !== undefined && summary !== null && typeof summary !== "string") {
+    errors.push("`summary` は文字列です")
+  }
+  const summaryText = typeof summary === "string" ? summary.trim() : ""
+  if (d.reviewed === true && summaryText === "") {
+    errors.push("`reviewed: true` なら `summary` が必要です")
+  }
+  if (summaryText.length > SUMMARY_MAX_CHARS) {
+    warnings.push(`${file}: summary が${summaryText.length}字あります（推奨 ${SUMMARY_MAX_CHARS}字以内）`)
+  }
+
+  // 権利ガードレール: 番地は書かない。location だけでなく概要本文も見る
+  if (typeof d.location === "string" && /番地/.test(d.location)) {
+    errors.push(`\`location\` に番地が残っています（地区名までにする）: "${d.location}"`)
+  }
+  if (/番地/.test(summaryText)) {
+    const m = /[^、。]{0,14}番地[一二三四五六七八九十\d]*/.exec(summaryText)
+    errors.push(`\`summary\` に番地が残っています（地区名までにする）: "${m?.[0] ?? ""}"`)
+  }
+
+  return { errors, warnings }
+}
+
 // ── 要点カード（スキーマ §11）───────────────────────────────────────────────
 
 /** カードの型。1枚=1メッセージ。先頭は必ず headline。 */
@@ -327,6 +479,12 @@ const KEY_ORDER: Record<string, readonly string[]> = {
   AdministrativeReport: ["title", "content"],
   CardsData:            ["session_id", "generated_by", "generated_at", "reviewed", "cards"],
   CardItem:             ["kind", "title", "value", "detail", "link"],
+  // 郷土資料（§12）。本文フィールドをここに足さないこと（権利ガードレール4）
+  ShisekiData:          ["book", "items"],
+  BookMeta:             ["id", "title", "publisher", "year", "citation", "citation_note"],
+  ShisekiItem:          ["id", "title", "order", "page_start", "page_end", "confidence", "reviewed",
+                         "location", "era", "entities", "summary", "sessions"],
+  ShisekiSessionLink:   ["id", "title", "date", "entity"],
 }
 
 type ShapeName = keyof typeof KEY_ORDER
