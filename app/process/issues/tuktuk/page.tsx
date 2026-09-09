@@ -62,9 +62,9 @@ function Source({ event }: { event: TuktukEvent }) {
 /* ── ページ ────────────────────────────────────────────────────── */
 export default function TuktukPage() {
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1040px] mx-auto px-6">
       {/* ── パンくず ─────────────────────────────────────────── */}
-      <div className="mb-10">
+      <div className="pt-12 pb-2 mb-8">
         <Link
           href="/process/issues"
           className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"

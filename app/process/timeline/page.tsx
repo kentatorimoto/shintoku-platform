@@ -28,20 +28,24 @@ export default function TimelinePage({
   const initialTag = searchParams?.tag ?? "エネルギー"
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1040px] mx-auto px-6">
       {/* ── ヘッダー ───────────────────────────────────────────────────── */}
-      <div className="mb-10">
+      <div className="pt-12 pb-2 mb-8">
         <Link
           href="/process"
           className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
           ← 意思決定の流れを読む
         </Link>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          意思決定タイムライン
+        <p className="text-[12px] font-bold tracking-[0.14em] text-accent mb-3">意思決定タイムライン</p>
+        <h1
+          className="font-mincho font-bold leading-[1.4] text-textMain"
+          style={{ fontSize: "clamp(26px, 4vw, 38px)" }}
+        >
+          議論のたどりかた
         </h1>
-        <p className="text-textMain/70 text-lg">
-          テーマを選んで、町の議論の流れを読む
+        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+          テーマを選ぶと、その話題がどの会期をどう渡っていったかが並びます。
         </p>
       </div>
 

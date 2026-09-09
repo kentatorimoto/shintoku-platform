@@ -90,27 +90,31 @@ export default function PrioritiesPage() {
     .sort((a, b) => b.date.localeCompare(a.date))
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1040px] mx-auto px-6">
 
       {/* ── ヘッダー ───────────────────────────────────────────────────── */}
-      <div className="mb-10">
+      <div className="pt-12 pb-2 mb-8">
         <Link
           href="/process"
           className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
           ← 意思決定の流れを読む
         </Link>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          重点テーマ
+        <p className="text-[12px] font-bold tracking-[0.14em] text-accent mb-3">重点テーマ</p>
+        <h1
+          className="font-mincho font-bold leading-[1.4] text-textMain"
+          style={{ fontSize: "clamp(26px, 4vw, 38px)" }}
+        >
+          町の目標と、議会の議論
         </h1>
-        <p className="text-textMain/70 text-lg">
-          町が掲げる目標と、議会で実際に議論されていること
+        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+          町が掲げる目標と、議会で実際に議論されていること。
         </p>
       </div>
 
       {/* ── セクション1：重点テーマ対照表 ─────────────────────────────── */}
       <section className="mb-14">
-        <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
+        <h2 className="text-[12.5px] font-bold text-textSub tracking-[0.1em] mb-4">
           第9期総合計画 基本目標 × 議会での議論
         </h2>
         <div className="space-y-3">
@@ -168,7 +172,7 @@ export default function PrioritiesPage() {
 
       {/* ── セクション2：議会で浮上している未解決の争点 ─────────────────── */}
       <section>
-        <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
+        <h2 className="text-[12.5px] font-bold text-textSub tracking-[0.1em] mb-4">
           議会で浮上している未解決の争点
         </h2>
 

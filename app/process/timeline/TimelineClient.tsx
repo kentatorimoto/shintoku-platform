@@ -96,7 +96,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
               <div key={session.id} className="flex gap-5">
                 {/* ── 左レール ── */}
                 <div className="flex flex-col items-center pt-1 shrink-0">
-                  <div className="w-2.5 h-2.5 rounded-full bg-accent ring-2 ring-accent/20 shrink-0" />
+                  <div className="w-[11px] h-[11px] rounded-full bg-accent border-[1.5px] border-accent shrink-0" />
                   {!isLast && <div className="w-px flex-1 bg-line mt-2 mb-0" />}
                 </div>
 
