@@ -125,6 +125,14 @@ export interface BookMeta {
   citation_note: string
 }
 
+/** 史跡と議会セッションの接続。`entity` は一致の根拠になった語（§12.7）。 */
+export interface ShisekiSessionLink {
+  id:     string
+  title:  string
+  date:   string
+  entity: string
+}
+
 /** 公開する史跡1件。**本文は持たない。** */
 export interface ShisekiItem {
   id:          string
@@ -140,6 +148,8 @@ export interface ShisekiItem {
   entities:    string[]
   /** 公開する2〜3文の概要。未作成なら省略 */
   summary?:    string
+  /** 議会記録との接続（最大3件）。無ければ省略 */
+  sessions?:   ShisekiSessionLink[]
 }
 
 export interface ShisekiData {
@@ -473,7 +483,8 @@ const KEY_ORDER: Record<string, readonly string[]> = {
   ShisekiData:          ["book", "items"],
   BookMeta:             ["id", "title", "publisher", "year", "citation", "citation_note"],
   ShisekiItem:          ["id", "title", "order", "page_start", "page_end", "confidence", "reviewed",
-                         "location", "era", "entities", "summary"],
+                         "location", "era", "entities", "summary", "sessions"],
+  ShisekiSessionLink:   ["id", "title", "date", "entity"],
 }
 
 type ShapeName = keyof typeof KEY_ORDER

@@ -612,12 +612,91 @@ function parseCardsYaml(
 const SHISEKI_BOOK_ID = "shintoku-shiseki-v1"
 
 /**
+ * 議会記録との接続に使わない語（スキーマ §12.7）。
+ *
+ * 町全体を指す語と町外の地名は、一致しても「その場所が議論された」ことにならない。
+ * 例: 「新得」はほぼ全ての議事に出るし、「山形県」は入植元として史跡に出るだけで、
+ * 議会側の「山形県」とは別の話をしている。**誤った関連付けは観測装置の信頼を損なう。**
+ */
+const ENTITY_STOPWORDS = new Set([
+  // 町全体・広域
+  "新得", "新得町", "十勝", "十勝川", "北海道", "本州", "蝦夷地",
+  // 町外の地名
+  "帯広", "釧路", "旭川", "札幌", "小樽", "函館", "音更", "鹿追", "清水", "清水町",
+  "芽室", "幕別", "上富良野", "落合", "常紋トンネル", "真駒内", "石山", "東京",
+])
+
+/** 接続キーとして短すぎる語は使わない（2文字以下は偶然の一致が多い）。 */
+const ENTITY_MIN_LENGTH = 3
+
+/**
+ * 都道府県・市の名は接続キーにしない。
+ * 史跡側では「入植元」として出てくる語（山形県・宮城県）で、議会側の同じ語とは別の話をしている。
+ */
+const ADMIN_AREA = /(都|道|府|県|市)$/
+
+/** 史跡1件と議会セッションの接続。**完全一致した語だけ**を根拠として持つ。 */
+interface SessionLink {
+  id:     string
+  title:  string
+  date:   string
+  entity: string
+}
+
+const MAX_SESSION_LINKS = 3
+
+/**
+ * 史跡の `entities` が議会記録に現れるかを、**部分一致ではなく語の完全一致**で調べる。
+ * あいまい一致・語幹の切り出し・推論はしない（仕様書 Phase 4-4）。
+ */
+function linkSessions(
+  entities: string[],
+  sessions: GikaiSession[],
+  parts: Map<string, PartData>,
+): SessionLink[] {
+  const keys = entities.filter(e =>
+    e.length >= ENTITY_MIN_LENGTH && !ENTITY_STOPWORDS.has(e) && !ADMIN_AREA.test(e),
+  )
+  if (keys.length === 0) return []
+
+  // セッションごとの検索対象テキスト（メタ＋そのセッションのパート本文）
+  const haystack = new Map<string, string>()
+  for (const s of sessions) {
+    const summary = s.summary
+    haystack.set(s.id, [
+      s.narrativeTitle ?? "", s.officialTitle, s.tags.join(" "),
+      summary?.issues ?? "", summary?.conflicts ?? "", summary?.nextActions ?? "",
+    ].join(" "))
+  }
+  for (const data of parts.values()) {
+    const prev = haystack.get(data.session_id) ?? ""
+    haystack.set(data.session_id, `${prev} ${JSON.stringify(data)}`)
+  }
+
+  const links: SessionLink[] = []
+  for (const s of sessions) {
+    const text = haystack.get(s.id) ?? ""
+    const hit = keys.find(k => text.includes(k))
+    if (hit) {
+      links.push({ id: s.id, title: s.narrativeTitle ?? s.officialTitle, date: s.date, entity: hit })
+    }
+  }
+  // セッションは既に新しい順。近い会期から最大3件
+  return links.slice(0, MAX_SESSION_LINKS)
+}
+
+/**
  * `content/archive/shintoku-shiseki/` を読んで公開用データを組み立てる。
  *
  * **本文（OCR全文）はここで捨てる。** 返すのはメタと概要だけで、
  * 呼び出し側が本文を JSON に混ぜられないようにする（権利ガードレール1・4）。
  */
-function buildShiseki(archiveDir: string, log: IssueLog): ShisekiData | null {
+function buildShiseki(
+  archiveDir: string,
+  log: IssueLog,
+  sessions: GikaiSession[],
+  parts: Map<string, PartData>,
+): ShisekiData | null {
   const dir = path.join(archiveDir, "shintoku-shiseki")
   if (!fs.existsSync(dir)) return null
 
@@ -668,6 +747,9 @@ function buildShiseki(archiveDir: string, log: IssueLog): ShisekiData | null {
     if (check.errors.length > 0) continue
 
     const summary = typeof fm.summary === "string" ? fm.summary.trim() : ""
+    const entities = Array.isArray(fm.entities) ? fm.entities as string[] : []
+    const sessionLinks = linkSessions(entities, sessions, parts)
+
     items.push(orderKeys({
       id:         String(fm.id),
       title:      String(fm.title),
@@ -678,9 +760,10 @@ function buildShiseki(archiveDir: string, log: IssueLog): ShisekiData | null {
       reviewed:   fm.reviewed as boolean,
       location:   typeof fm.location === "string" ? fm.location : undefined,
       era:        typeof fm.era === "string" ? fm.era : undefined,
-      entities:   Array.isArray(fm.entities) ? fm.entities as string[] : [],
+      entities,
       // 未作成なら出力しない。本文は**渡さない**
       summary:    summary === "" ? undefined : summary,
+      sessions:   sessionLinks.length > 0 ? sessionLinks : undefined,
     }, "ShisekiItem") as ShisekiItem)
   }
 
@@ -754,7 +837,7 @@ export function buildFromContent(contentDir: string): BuildResult {
     }
   }
 
-  const shiseki = buildShiseki(path.join(contentDir, "archive"), log)
+  const shiseki = buildShiseki(path.join(contentDir, "archive"), log, sortSessions(sessions), parts)
 
   for (const w of log.warnings) console.warn(`⚠️  ${w.file}:${w.line} ${w.message}`)
 

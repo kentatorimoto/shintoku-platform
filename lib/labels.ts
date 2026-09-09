@@ -72,6 +72,22 @@ export const LABELS = {
   legacySlides: {
     text: "過去のスライド",
   },
+
+  /** 郷土資料（史跡）。「流れを読む」の系列＝意思決定の構造を時間の深さ方向へ延ばしたもの */
+  shiseki: {
+    text:   "土地の記憶",
+    formal: "しんとくの史跡",
+  },
+
+  /** 史跡ページから議会記録への導線 */
+  shisekiSessions: {
+    text: "この場所は議会でも議論されています",
+  },
+
+  /** confidence: check の史跡に添える注記 */
+  shisekiChecking: {
+    text: "原本と照合中",
+  },
 } as const satisfies Record<string, string | UiLabel>
 
 /** カードの種別ラベル（スキーマ §11.1 の kind）。カード左上に小さく出る。 */

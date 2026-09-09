@@ -15,7 +15,7 @@
       "page_start": 1,
       "page_end": 2,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新内西五線(狩勝高原遊園地)",
       "era": "明治〜昭和",
       "entities": [
@@ -36,7 +36,7 @@
       "page_start": 3,
       "page_end": 4,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字屈足東二線(屈足二十三号十勝川河川敷)",
       "era": "大正〜昭和",
       "entities": [
@@ -58,7 +58,7 @@
       "page_start": 5,
       "page_end": 6,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町西一線(新得神社第一鳥居西側)",
       "era": "明治〜昭和",
       "entities": [
@@ -80,7 +80,7 @@
       "page_start": 7,
       "page_end": 7,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字上佐幌基線一号",
       "era": "明治",
       "entities": [
@@ -104,7 +104,7 @@
       "page_start": 8,
       "page_end": 9,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新得西六線",
       "era": "明治〜平成",
       "entities": [
@@ -122,7 +122,7 @@
       "page_start": 9,
       "page_end": 10,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新内 梅林内旧国道沿い",
       "era": "昭和",
       "entities": [
@@ -143,7 +143,7 @@
       "page_start": 11,
       "page_end": 12,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字屈足西二線",
       "era": "明治〜平成",
       "entities": [
@@ -166,7 +166,7 @@
       "page_start": 12,
       "page_end": 13,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新内西三線",
       "era": "明治〜平成",
       "entities": [
@@ -186,7 +186,7 @@
       "page_start": 13,
       "page_end": 15,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "岩松、町道三十八号地先、十勝川右岸",
       "era": "大正〜昭和",
       "entities": [
@@ -207,7 +207,7 @@
       "page_start": 15,
       "page_end": 18,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "屈足字トムラウシ 道道清水線沿い",
       "era": "明治〜昭和",
       "entities": [
@@ -220,7 +220,27 @@
         "ペンケキナウシ",
         "キナウシ"
       ],
-      "summary": "大正七年六月、十勝川上流のトムラウシ地域を踏査中だった北海道議会の議員・菅野光民が、帰り道で手負いの熊に襲われ、四十一歳で亡くなった。菅野は大正二年に十勝毎日新聞社を創刊し、トムラウシ開発を持論としていた人物である。昭和六十年十一月、新得町郷土研究会の主催で現在地に碑が建立され、翌十二月に除幕式が行われた。"
+      "summary": "大正七年六月、十勝川上流のトムラウシ地域を踏査中だった北海道議会の議員・菅野光民が、帰り道で手負いの熊に襲われ、四十一歳で亡くなった。菅野は大正二年に十勝毎日新聞社を創刊し、トムラウシ開発を持論としていた人物である。昭和六十年十一月、新得町郷土研究会の主催で現在地に碑が建立され、翌十二月に除幕式が行われた。",
+      "sessions": [
+        {
+          "id": "r8-2026-06-regular-2",
+          "title": "温浴延期と3.6億の投資、町の現在地",
+          "date": "2026-06-03",
+          "entity": "トムラウシ"
+        },
+        {
+          "id": "r8-2026-03-yosan-tokubetsu",
+          "title": "大型事業の持続性と指定管理の透明性を問う",
+          "date": "2026-03-16",
+          "entity": "トムラウシ"
+        },
+        {
+          "id": "r7-2025-08-rinji-2",
+          "title": "20年ぶりの新体制——岩牧新町長と「オール新得」の始動",
+          "date": "2025-08-06",
+          "entity": "トムラウシ"
+        }
+      ]
     },
     {
       "id": "s11",
@@ -229,7 +249,7 @@
       "page_start": 19,
       "page_end": 20,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新内西六線",
       "era": "明治〜昭和",
       "entities": [
@@ -252,7 +272,7 @@
       "page_start": 20,
       "page_end": 21,
       "confidence": "check",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字屈足東一線",
       "era": "明治〜昭和",
       "entities": [
@@ -273,7 +293,7 @@
       "page_start": 21,
       "page_end": 22,
       "confidence": "check",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新得西六線",
       "era": "明治〜昭和",
       "entities": [
@@ -292,7 +312,7 @@
       "page_start": 22,
       "page_end": 24,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "国道三十八号線六合目付近南側(新内トンネル)",
       "era": "明治〜平成",
       "entities": [
@@ -315,7 +335,7 @@
       "page_start": 24,
       "page_end": 26,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "entities": [],
       "summary": "明治四十年頃、森口茂吉が屈足での水田開発を計画し、二代目の森口忍夫妻が労務者とともに屈足西一線で造田作業を始めた。当初は品種や技術が不十分で米が実らなかったが、大正二〜三年頃に旭川の永山から宮越惣太郎を招いて指導を受け、収穫できるようになった。昭和六十一年八月二十八日、新得町郷土研究会が二代にわたる開田を記録する標柱を立てた。"
     },
@@ -326,7 +346,7 @@
       "page_start": 27,
       "page_end": 29,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字屈足 町道二十二号坂下",
       "era": "大正〜平成",
       "entities": [
@@ -347,7 +367,7 @@
       "page_start": 29,
       "page_end": 31,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字屈足三十四号(トムラ登山学校レイク・イン駐車場のダム湖畔)",
       "era": "平成",
       "entities": [
@@ -367,7 +387,7 @@
       "page_start": 31,
       "page_end": 32,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "国道三十八号線狩勝六号目付近山側",
       "era": "明治〜昭和",
       "entities": [
@@ -391,7 +411,7 @@
       "page_start": 33,
       "page_end": 34,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字北新内西六線(一ノ沢)",
       "era": "明治",
       "entities": [
@@ -416,7 +436,7 @@
       "page_start": 35,
       "page_end": 35,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町西四線",
       "era": "昭和",
       "entities": [
@@ -433,7 +453,7 @@
       "page_start": 36,
       "page_end": 37,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町西十線(旧石狩道路)と八号道路合流点",
       "era": "明治〜昭和",
       "entities": [
@@ -457,7 +477,7 @@
       "page_start": 37,
       "page_end": 38,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新内西一線",
       "era": "昭和〜平成",
       "entities": [
@@ -478,7 +498,7 @@
       "page_start": 39,
       "page_end": 41,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得神社境内(碑)・西一線(案内板)・伊藤傳五郎住居跡(標柱)",
       "era": "明治〜昭和",
       "entities": [
@@ -489,7 +509,15 @@
         "ペンケオタソイ川",
         "狩勝峠"
       ],
-      "summary": "大正五年（一九一六）十二月、開拓者・伊藤傳五郎は火災で妻子六人を一夜のうちに失った。傳五郎はその後、亡き家族の霊を慰めようと大正七年春から新得神社境内にエゾヤマザクラを植え始め、昭和十年ごろには「悲願桜」と呼ばれる桜の名所になった。昭和三十八年五月に新得町観光協会が「悲願桜伊藤傳五郎之碑」を境内に建立し、昭和六十年六月には住居跡に標柱、西一線道路沿いに案内板が設置された。"
+      "summary": "大正五年（一九一六）十二月、開拓者・伊藤傳五郎は火災で妻子六人を一夜のうちに失った。傳五郎はその後、亡き家族の霊を慰めようと大正七年春から新得神社境内にエゾヤマザクラを植え始め、昭和十年ごろには「悲願桜」と呼ばれる桜の名所になった。昭和三十八年五月に新得町観光協会が「悲願桜伊藤傳五郎之碑」を境内に建立し、昭和六十年六月には住居跡に標柱、西一線道路沿いに案内板が設置された。",
+      "sessions": [
+        {
+          "id": "r8-2026-03-yosan-tokubetsu",
+          "title": "大型事業の持続性と指定管理の透明性を問う",
+          "date": "2026-03-16",
+          "entity": "新得山"
+        }
+      ]
     },
     {
       "id": "s25",
@@ -498,7 +526,7 @@
       "page_start": 42,
       "page_end": 44,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "entities": [],
       "summary": "香川県綾歌郡出身の脇タネが弘法大師のお告げにより発起し、昭和六年八月四日、新得山中腹に石仏八十八体を安置した霊場「新四国新得八十八ヶ所」が開山した。参道は新得山を縫う延長約二キロメートルで、石仏は札幌近郊の石山から運んだ軟石を用いて彫られた。由来板は昭和六十二年十月、新得町郷土研究会が霊場入口に設置した。"
     },
@@ -509,7 +537,7 @@
       "page_start": 45,
       "page_end": 47,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "字新内西四・五線間(下新内川鉄橋)",
       "era": "昭和",
       "entities": [
@@ -527,7 +555,7 @@
       "page_start": 47,
       "page_end": 50,
       "confidence": "confirmed",
-      "reviewed": false,
+      "reviewed": true,
       "location": "新得町字新内西二線~三線帯",
       "era": "明治〜昭和",
       "entities": [

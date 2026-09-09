@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/gikai/sessions", label: "議会を読む" },
   { href: "/gikai",          label: "決まったこと" },
   { href: "/process",        label: "流れを読む" },
+  { href: "/shiseki",        label: LABELS.shiseki.text },
   { href: "/sources",        label: "ソース" },
   { href: "/about",          label: "About" },
 ] as const
