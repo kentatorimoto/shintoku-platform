@@ -234,9 +234,13 @@ export function validateShiseki(fm: unknown, file: string, bookId: string): Arch
     warnings.push(`${file}: summary が${summaryText.length}字あります（推奨 ${SUMMARY_MAX_CHARS}字以内）`)
   }
 
-  // 権利ガードレール: 番地は書かない
+  // 権利ガードレール: 番地は書かない。location だけでなく概要本文も見る
   if (typeof d.location === "string" && /番地/.test(d.location)) {
     errors.push(`\`location\` に番地が残っています（地区名までにする）: "${d.location}"`)
+  }
+  if (/番地/.test(summaryText)) {
+    const m = /[^、。]{0,14}番地[一二三四五六七八九十\d]*/.exec(summaryText)
+    errors.push(`\`summary\` に番地が残っています（地区名までにする）: "${m?.[0] ?? ""}"`)
   }
 
   return { errors, warnings }
