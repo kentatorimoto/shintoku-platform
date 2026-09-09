@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useMemo, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
+import { LABELS } from "@/lib/labels"
 
 // ─────────────────────────── Types ────────────────────────────────
 
@@ -61,29 +62,34 @@ const ISSUE_LABELS: Record<string, string> = {
 
 // ─────────────────────────── Helpers ──────────────────────────────
 
+/**
+ * 採決結果の見せ方。**色に意味を負わせず、結果名のテキストで区別する。**
+ * 茜は「原案どおり通ったもの」だけに使い、それ以外は墨の濃淡で差をつける
+ * （デザイントークン「亜麻×小豆」— 差し色の茜は最新・現在地・ホバーのみ）。
+ */
 function resultStyle(result: string): string {
   switch (result) {
     case "原案可決":
-      return "bg-accent/15 text-accent"
+      return "border-accent/40 text-accent"
     case "修正可決":
-      return "bg-amber-400/15 text-amber-400"
+      return "border-lineStrong text-textMain"
     case "否決":
-      return "bg-red-400/15 text-red-400"
+      return "border-textMain text-textMain"
     case "継続審査":
-      return "bg-sky-400/15 text-sky-400"
+      return "border-line text-textSub"
     default:
-      return "bg-line text-textSub"
+      return "border-line text-textSub/70"
   }
 }
 
 const RESULT_ORDER = ["原案可決", "修正可決", "否決", "継続審査"]
 
-/** 凡例ドット色（Tailwind クラス） */
+/** 凡例ドット。図の凡例としての丸は残す（/process のトレース図と同じ扱い）。 */
 const RESULT_DOT: Record<string, string> = {
   "原案可決": "bg-accent",
-  "修正可決": "bg-amber-400",
-  "否決":     "bg-red-400",
-  "継続審査": "bg-sky-400",
+  "修正可決": "bg-lineStrong",
+  "否決":     "bg-textMain",
+  "継続審査": "bg-line border border-lineStrong",
 }
 
 const PAGE_SIZE = 100
@@ -309,26 +315,36 @@ function GikaiPageContent() {
 
   // ── JSX ──────────────────────────────────────────────────────
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-base md:text-lg">
+    <div className="max-w-[1040px] mx-auto px-6">
       {/* ── ヘッダー ─────────────────────────────────────── */}
-      <div className="mb-10">
-        <h1 className="!text-4xl md:!text-5xl font-bold tracking-tight mb-4 text-textMain">
-          町の決定を読む
-        </h1>
-        <p className="text-textMain/70 text-lg">
-          何が決まり、何が見送られたか
+      <div className="pt-12 pb-2 mb-8">
+        <p className="text-[12px] font-bold tracking-[0.14em] text-accent mb-3">
+          {LABELS.giketsu.formal}の索引
         </p>
-        <Link href="/gikai/sessions" className="text-sm text-accent hover:text-accent/80 transition-colors mt-2 inline-block">
-          議会を読む →
+        <h1
+          className="font-mincho font-bold leading-[1.4] text-textMain"
+          style={{ fontSize: "clamp(26px, 4vw, 38px)" }}
+        >
+          {LABELS.giketsu.text}
+        </h1>
+        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+          何が決まり、何が見送られたか。令和6年からの議案を、会期をまたいで一覧にしています。
+        </p>
+        <Link
+          href="/gikai/sessions"
+          className="group inline-block text-[13px] font-bold border-b-2 border-textMain pb-[2px] mt-4
+                     transition-colors hover:text-accent hover:border-accent"
+        >
+          会議の記録を読む →
         </Link>
       </div>
 
       {/* ── 直近セッション（top 3） ───────────────────────── */}
       {!loading && activeSessions.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-sm font-semibold text-textSub tracking-widest mb-3">
-  最近の会議
-</h2>
+          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub mb-3">
+            最近の会議
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {activeSessions.slice(0, 3).map((session) => (
               <div
@@ -490,6 +506,19 @@ function GikaiPageContent() {
           </div>
         )}
 
+        {/* ── 絞り込み ────────────────────────────────────
+            記録（リスト）を先に見せ、条件は畳んでおく。
+            検索窓とアクティブフィルタは畳まない（いま何で絞っているかは常に見える）。 */}
+        <details className="group">
+          <summary className="flex items-center gap-2 cursor-pointer list-none py-1
+                              text-[12.5px] font-bold text-textSub hover:text-textMain transition-colors">
+            <span>絞り込み</span>
+            {hasFilter && <span className="mono text-[11px] text-accent">条件あり</span>}
+            <span className="mono text-[11px] text-textSub/70 group-open:hidden">開く ↓</span>
+            <span className="mono text-[11px] text-textSub/70 hidden group-open:inline">閉じる ↑</span>
+          </summary>
+
+          <div className="mt-3 space-y-3">
         {/* ── フィルタ操作行 ──────────────────────────────── */}
         <div className="flex flex-wrap gap-2 items-center">
           {/* 年度セレクト */}
@@ -531,12 +560,29 @@ function GikaiPageContent() {
             </span>
           ))}
         </div>
+          </div>
+        </details>
       </section>
 
-      {/* ── 件数 ─────────────────────────────────────────── */}
-      <p className="text-textSub text-sm mb-4">
-        {loading || waitingLinks ? "読み込み中…" : `${filteredItems.length.toLocaleString()} 件`}
-      </p>
+      {/* ── 件数 ──────────────────────────────────────────
+          トップの索引と同じく、まず「何件あるか」を数で示してからリストに入る。 */}
+      <div className="flex items-baseline justify-between border-t-[1.5px] border-textMain pt-4 pb-3 mb-1">
+        <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">
+          {hasFilter ? "絞り込んだ結果" : `${LABELS.giketsu.formal}の一覧`}
+        </h2>
+        <p className="text-textSub text-[13px]">
+          {loading || waitingLinks ? (
+            "読み込み中…"
+          ) : (
+            <>
+              <span className="mono font-bold text-2xl md:text-[26px] text-textMain leading-none">
+                {filteredItems.length.toLocaleString()}
+              </span>
+              <span className="ml-1.5">件</span>
+            </>
+          )}
+        </p>
+      </div>
 
       {/* ── リスト ───────────────────────────────────────── */}
       {loading || waitingLinks ? (
@@ -562,9 +608,9 @@ function GikaiPageContent() {
                     <div className="flex items-start gap-3">
                       {/* 左：種別+番号 */}
                       <div className="shrink-0 pt-0.5">
-                        <span className="inline-flex items-baseline gap-1 text-xs font-mono bg-line rounded px-2 py-1 text-textSub">
+                        <span className="inline-flex items-baseline gap-1 text-xs border border-line rounded-[3px] px-2 py-1 text-textSub">
                           {item.caseType}
-                          <span className="text-textMain font-semibold">
+                          <span className="mono text-textMain font-bold">
                             {item.num}
                           </span>
                         </span>
@@ -581,8 +627,8 @@ function GikaiPageContent() {
                         >
                           {item.title || "（件名なし）"}
                         </p>
-                        <p className="text-textSub text-sm mt-1.5">
-                          {item.decisionDate}
+                        <p className="text-textSub text-[12.5px] mt-1.5">
+                          <span className="mono">{item.decisionDate}</span>
                           <span className="mx-1.5 opacity-40">·</span>
                           {item.sessionName}
                         </p>
@@ -591,7 +637,7 @@ function GikaiPageContent() {
                       {/* 右：結果バッジ */}
                       <div className="shrink-0">
                         <span
-                          className={`inline-block text-xs font-medium rounded-md px-2 py-0.5 whitespace-nowrap ${resultStyle(item.result)}`}
+                          className={`inline-block text-xs font-medium border rounded-[3px] px-2 py-0.5 whitespace-nowrap ${resultStyle(item.result)}`}
                         >
                           {item.result || "—"}
                         </span>

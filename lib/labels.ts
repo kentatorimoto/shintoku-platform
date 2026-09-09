@@ -73,6 +73,15 @@ export const LABELS = {
     text: "過去のスライド",
   },
 
+  /**
+   * 議決一覧（/gikai）。ヘッダー・トップの索引・ページ見出しで呼称が3つに割れていたので
+   * 「決まったこと」＋正式併記「議決」に統一する。
+   */
+  giketsu: {
+    text:   "決まったこと",
+    formal: "議決",
+  },
+
   /** 郷土資料（史跡）。「流れを読む」の系列＝意思決定の構造を時間の深さ方向へ延ばしたもの */
   shiseki: {
     text:   "土地の記憶",
@@ -89,6 +98,24 @@ export const LABELS = {
     text: "原本と照合中",
   },
 } as const satisfies Record<string, string | UiLabel>
+
+/**
+ * 全文検索の結果につくカテゴリチップ。
+ *
+ * ここだけは正式語のまま短く出す（結果一覧では見出しではなく分類の目印なので、
+ * ナビの「土地の記憶」ではなく「史跡」の方が何の結果か分かりやすい）。
+ */
+export const SEARCH_CATEGORIES = {
+  session: "セッション",
+  qna:     "一般質問",
+  giketsu: "議決",
+  shiseki: "史跡",
+} as const
+
+export type SearchCategory = (typeof SEARCH_CATEGORIES)[keyof typeof SEARCH_CATEGORIES]
+
+/** 検索モーダルの空状態に出す、探せる対象の並び。 */
+export const SEARCH_SCOPE_TEXT = Object.values(SEARCH_CATEGORIES).join("・") + "を横断検索"
 
 /** カードの種別ラベル（スキーマ §11.1 の kind）。カード左上に小さく出る。 */
 export const CARD_KIND_LABELS: Record<string, string> = {
