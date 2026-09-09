@@ -506,6 +506,19 @@ function GikaiPageContent() {
           </div>
         )}
 
+        {/* ── 絞り込み ────────────────────────────────────
+            記録（リスト）を先に見せ、条件は畳んでおく。
+            検索窓とアクティブフィルタは畳まない（いま何で絞っているかは常に見える）。 */}
+        <details className="group">
+          <summary className="flex items-center gap-2 cursor-pointer list-none py-1
+                              text-[12.5px] font-bold text-textSub hover:text-textMain transition-colors">
+            <span>絞り込み</span>
+            {hasFilter && <span className="mono text-[11px] text-accent">条件あり</span>}
+            <span className="mono text-[11px] text-textSub/70 group-open:hidden">開く ↓</span>
+            <span className="mono text-[11px] text-textSub/70 hidden group-open:inline">閉じる ↑</span>
+          </summary>
+
+          <div className="mt-3 space-y-3">
         {/* ── フィルタ操作行 ──────────────────────────────── */}
         <div className="flex flex-wrap gap-2 items-center">
           {/* 年度セレクト */}
@@ -547,18 +560,29 @@ function GikaiPageContent() {
             </span>
           ))}
         </div>
+          </div>
+        </details>
       </section>
 
-      {/* ── 件数 ─────────────────────────────────────────── */}
-      <p className="text-textSub text-[13px] mb-4">
-        {loading || waitingLinks ? (
-          "読み込み中…"
-        ) : (
-          <>
-            <span className="mono font-bold text-textMain">{filteredItems.length.toLocaleString()}</span> 件
-          </>
-        )}
-      </p>
+      {/* ── 件数 ──────────────────────────────────────────
+          トップの索引と同じく、まず「何件あるか」を数で示してからリストに入る。 */}
+      <div className="flex items-baseline justify-between border-t-[1.5px] border-textMain pt-4 pb-3 mb-1">
+        <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">
+          {hasFilter ? "絞り込んだ結果" : `${LABELS.giketsu.formal}の一覧`}
+        </h2>
+        <p className="text-textSub text-[13px]">
+          {loading || waitingLinks ? (
+            "読み込み中…"
+          ) : (
+            <>
+              <span className="mono font-bold text-2xl md:text-[26px] text-textMain leading-none">
+                {filteredItems.length.toLocaleString()}
+              </span>
+              <span className="ml-1.5">件</span>
+            </>
+          )}
+        </p>
+      </div>
 
       {/* ── リスト ───────────────────────────────────────── */}
       {loading || waitingLinks ? (
