@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo, useRef, useCallback, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
 import { X, Search } from "lucide-react"
+import { SEARCH_CATEGORIES, SEARCH_SCOPE_TEXT, type SearchCategory } from "@/lib/labels"
+import type { ShisekiData, ShisekiItem } from "@/scripts/lib/schema"
 
 // ── 型定義 ─────────────────────────────────────────────────────────────────
 
@@ -39,7 +41,7 @@ interface GiketsuSession {
 }
 
 interface SearchResult {
-  category: "セッション" | "一般質問" | "議決"
+  category: SearchCategory
   title: string
   subtitle: string
   href: string
@@ -90,7 +92,7 @@ function searchSessions(sessions: GikaiSession[], tokens: string[]): SearchResul
     })
     .slice(0, 5)
     .map((s) => ({
-      category: "セッション" as const,
+      category: SEARCH_CATEGORIES.session,
       title: s.narrativeTitle ?? s.officialTitle,
       subtitle: s.officialTitle,
       href: `/gikai/sessions/${s.id}`,
@@ -105,7 +107,7 @@ function searchQna(entries: QnaSearchEntry[], tokens: string[]): SearchResult[] 
     })
     .slice(0, 5)
     .map((e) => ({
-      category: "一般質問" as const,
+      category: SEARCH_CATEGORIES.qna,
       title: e.type === "honkaigi" ? `${e.billNumber} ${e.title}` : e.title,
       subtitle: e.type === "honkaigi" ? "本会議議案" : `${e.speaker ?? ""} — ${e.tags.join("・")}`,
       href: `/gikai/sessions/${e.sessionId}/${e.partIndex}`,
@@ -120,7 +122,7 @@ function searchGiketsu(sessions: GiketsuSession[], tokens: string[]): SearchResu
       const haystack = `${item.caseNumber} ${item.title} ${session.sessionName}`
       if (matchesAll(haystack, tokens)) {
         results.push({
-          category: "議決" as const,
+          category: SEARCH_CATEGORIES.giketsu,
           title: `${item.caseNumber} ${item.title}`,
           subtitle: `${session.sessionName} — ${item.result}`,
           href: `/gikai?q=${encodeURIComponent(item.title.slice(0, 30))}`,
@@ -129,6 +131,35 @@ function searchGiketsu(sessions: GiketsuSession[], tokens: string[]): SearchResu
     }
   }
   return results
+}
+
+/**
+ * 史跡は「概要どまり」で検索する。`shiseki.json` には本文が入っていないので、
+ * ここを広げても原本の全文が検索対象になることはない（権利ガードレール4）。
+ */
+function searchShiseki(items: ShisekiItem[], tokens: string[]): SearchResult[] {
+  return items
+    .filter((item) => {
+      const haystack = [
+        item.title,
+        item.summary ?? "",
+        item.location ?? "",
+        item.era ?? "",
+        item.entities.join(" "),
+      ].join(" ")
+      return matchesAll(haystack, tokens)
+    })
+    // 「狩勝」で「旧狩勝トンネル」が掲載順の都合で溢れないよう、史跡名に当たったものを先に出す
+    .sort((a, b) => Number(matchesAll(b.title, tokens)) - Number(matchesAll(a.title, tokens)))
+    .slice(0, 5)
+    .map((item) => ({
+      category: SEARCH_CATEGORIES.shiseki,
+      title: item.title,
+      subtitle: [item.location, item.era, `原本 p.${item.page_start}`]
+        .filter((s) => s)
+        .join(" — "),
+      href: `/shiseki/${item.id}`,
+    }))
 }
 
 // ── コンポーネント ─────────────────────────────────────────────────────────
@@ -149,6 +180,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
   const [sessions, setSessions] = useState<GikaiSession[]>([])
   const [qnaEntries, setQnaEntries] = useState<QnaSearchEntry[]>([])
   const [giketsuSessions, setGiketsuSessions] = useState<GiketsuSession[]>([])
+  const [shiseki, setShiseki] = useState<ShisekiItem[]>([])
   const [loading, setLoading] = useState(false)
 
   // モーダルが開いたらデータをフェッチ
@@ -159,11 +191,16 @@ export default function GlobalSearch({ open, onClose }: Props) {
       fetch("/data/gikai_sessions.json").then((r) => r.json()),
       fetch("/data/qna_search_index.json").then((r) => r.json()),
       fetch("/data/giketsu_index.json").then((r) => r.json()),
+      // 史跡はメタと概要だけのファイル（本文は入っていない）
+      fetch("/data/archive/shiseki.json")
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null),
     ])
-      .then(([s, q, g]) => {
+      .then(([s, q, g, a]) => {
         setSessions(s)
         setQnaEntries(q)
         setGiketsuSessions(g)
+        setShiseki((a as ShisekiData | null)?.items ?? [])
       })
       .catch((err) => console.error("Failed to load search data:", err))
       .finally(() => setLoading(false))
@@ -209,8 +246,9 @@ export default function GlobalSearch({ open, onClose }: Props) {
     const s = searchSessions(sessions, tokens)
     const q = searchQna(qnaEntries, tokens)
     const g = searchGiketsu(giketsuSessions, tokens)
-    return [...s, ...q, ...g].slice(0, 10)
-  }, [tokens, sessions, qnaEntries, giketsuSessions])
+    const a = searchShiseki(shiseki, tokens)
+    return [...s, ...q, ...g, ...a].slice(0, 12)
+  }, [tokens, sessions, qnaEntries, giketsuSessions, shiseki])
 
   const handleSelect = useCallback(
     (href: string) => {
@@ -265,7 +303,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
 
             {!loading && tokens.length === 0 && (
               <div className="px-5 py-8 text-center text-textSub text-sm">
-                セッション・一般質問・議決を横断検索
+                {SEARCH_SCOPE_TEXT}
               </div>
             )}
 

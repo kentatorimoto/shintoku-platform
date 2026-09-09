@@ -90,6 +90,24 @@ export const LABELS = {
   },
 } as const satisfies Record<string, string | UiLabel>
 
+/**
+ * 全文検索の結果につくカテゴリチップ。
+ *
+ * ここだけは正式語のまま短く出す（結果一覧では見出しではなく分類の目印なので、
+ * ナビの「土地の記憶」ではなく「史跡」の方が何の結果か分かりやすい）。
+ */
+export const SEARCH_CATEGORIES = {
+  session: "セッション",
+  qna:     "一般質問",
+  giketsu: "議決",
+  shiseki: "史跡",
+} as const
+
+export type SearchCategory = (typeof SEARCH_CATEGORIES)[keyof typeof SEARCH_CATEGORIES]
+
+/** 検索モーダルの空状態に出す、探せる対象の並び。 */
+export const SEARCH_SCOPE_TEXT = Object.values(SEARCH_CATEGORIES).join("・") + "を横断検索"
+
 /** カードの種別ラベル（スキーマ §11.1 の kind）。カード左上に小さく出る。 */
 export const CARD_KIND_LABELS: Record<string, string> = {
   headline: "この会期の要点",
