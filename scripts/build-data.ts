@@ -15,9 +15,12 @@ import remarkParse from "remark-parse"
 import {
   orderKeys,
   stableStringify,
+  validateBook,
   validateCards,
+  validateShiseki,
   validateTags,
   type AdministrativeReport,
+  type BookMeta,
   type BillItem,
   type BillQuestion,
   type CardsData,
@@ -28,6 +31,9 @@ import {
   type PartData,
   type QnaData,
   type QnaItem,
+  type ShisekiConfidence,
+  type ShisekiData,
+  type ShisekiItem,
 } from "./lib/schema"
 
 const ROOT = process.cwd()
@@ -600,6 +606,93 @@ function parseCardsYaml(
   }, "CardsData")
 }
 
+// ── 郷土資料 archive（スキーマ §12）─────────────────────────────────────────
+
+/** 郷土資料の1冊分。史跡の一覧を持つ本だけが公開対象になる。 */
+const SHISEKI_BOOK_ID = "shintoku-shiseki-v1"
+
+/**
+ * `content/archive/shintoku-shiseki/` を読んで公開用データを組み立てる。
+ *
+ * **本文（OCR全文）はここで捨てる。** 返すのはメタと概要だけで、
+ * 呼び出し側が本文を JSON に混ぜられないようにする（権利ガードレール1・4）。
+ */
+function buildShiseki(archiveDir: string, log: IssueLog): ShisekiData | null {
+  const dir = path.join(archiveDir, "shintoku-shiseki")
+  if (!fs.existsSync(dir)) return null
+
+  const bookPath = path.join(dir, "book.yaml")
+  const bookFile = path.relative(ROOT, bookPath)
+  if (!fs.existsSync(bookPath)) {
+    log.error(path.relative(ROOT, dir), 1, "book.yaml がありません")
+    return null
+  }
+
+  let bookRaw: unknown
+  try {
+    bookRaw = loadYaml(fs.readFileSync(bookPath, "utf-8"))
+  } catch (err) {
+    log.error(bookFile, 1, `YAMLが壊れています: ${err instanceof Error ? err.message : err}`)
+    return null
+  }
+
+  const bookCheck = validateBook(bookRaw, SHISEKI_BOOK_ID)
+  bookCheck.errors.forEach(e => log.error(bookFile, 1, e))
+  bookCheck.warnings.forEach(w => log.warn(bookFile, 1, w))
+  if (bookCheck.errors.length > 0) return null
+
+  const raw = bookRaw as Record<string, string>
+  const book = orderKeys({
+    id:            raw.id,
+    title:         raw.title,
+    publisher:     raw.publisher,
+    year:          String(raw.publication_date).slice(0, 4),
+    citation:      raw.citation,
+    citation_note: raw.citation_note,
+  }, "BookMeta") as BookMeta
+
+  const items: ShisekiItem[] = []
+  for (const name of fs.readdirSync(dir).filter(f => /^s\d+\.md$/.test(f)).sort()) {
+    const file = path.relative(ROOT, path.join(dir, name))
+    let fm: Record<string, unknown>
+    try {
+      ({ data: fm } = readFrontmatter(fs.readFileSync(path.join(dir, name), "utf-8")))
+    } catch (err) {
+      log.error(file, 1, `frontmatter のYAMLが壊れています: ${err instanceof Error ? err.message : err}`)
+      continue
+    }
+
+    const check = validateShiseki(fm, name, SHISEKI_BOOK_ID)
+    check.errors.forEach(e => log.error(file, 1, e))
+    check.warnings.forEach(w => log.warn(file, 1, w))
+    if (check.errors.length > 0) continue
+
+    const summary = typeof fm.summary === "string" ? fm.summary.trim() : ""
+    items.push(orderKeys({
+      id:         String(fm.id),
+      title:      String(fm.title),
+      order:      fm.order as number,
+      page_start: fm.page_start as number,
+      page_end:   typeof fm.page_end === "number" ? fm.page_end : undefined,
+      confidence: fm.confidence as ShisekiConfidence,
+      reviewed:   fm.reviewed as boolean,
+      location:   typeof fm.location === "string" ? fm.location : undefined,
+      era:        typeof fm.era === "string" ? fm.era : undefined,
+      entities:   Array.isArray(fm.entities) ? fm.entities as string[] : [],
+      // 未作成なら出力しない。本文は**渡さない**
+      summary:    summary === "" ? undefined : summary,
+    }, "ShisekiItem") as ShisekiItem)
+  }
+
+  if (items.length === 0) {
+    log.error(path.relative(ROOT, dir), 1, "史跡（s*.md）が1件もありません")
+    return null
+  }
+
+  items.sort((a, b) => a.order - b.order)
+  return orderKeys({ book, items }, "ShisekiData") as ShisekiData
+}
+
 // ── ビルド本体 ──────────────────────────────────────────────────────────────
 
 export interface BuildResult {
@@ -608,6 +701,8 @@ export interface BuildResult {
   parts:    Map<string, PartData>
   /** セッションID → 要点カード（cards.yaml があるセッションのみ） */
   cards:    Map<string, CardsData>
+  /** 郷土資料（史跡）。content/archive/ が無ければ null */
+  shiseki:  ShisekiData | null
 }
 
 /** `sortDate ?? date` の降順、同値なら id 昇順（スキーマ §2.1）。 */
@@ -659,6 +754,8 @@ export function buildFromContent(contentDir: string): BuildResult {
     }
   }
 
+  const shiseki = buildShiseki(path.join(contentDir, "archive"), log)
+
   for (const w of log.warnings) console.warn(`⚠️  ${w.file}:${w.line} ${w.message}`)
 
   if (log.errors.length > 0) {
@@ -672,7 +769,7 @@ export function buildFromContent(contentDir: string): BuildResult {
     parts:   s.parts.map(p => orderKeys(p, "Part")),
   }, "GikaiSession"))
 
-  return { sessions: ordered, parts, cards }
+  return { sessions: ordered, parts, cards, shiseki }
 }
 
 // ── エントリポイント ────────────────────────────────────────────────────────
@@ -694,9 +791,18 @@ async function main() {
     fs.writeFileSync(path.join(cardsDir, `${sessionId}.json`), stableStringify(data))
   }
 
+  // 郷土資料はメタと概要のみ（権利ガードレール4。本文は buildShiseki が捨てている）
+  let shisekiCount = 0
+  if (result.shiseki) {
+    const archiveDir = path.join(dataDir, "archive")
+    fs.mkdirSync(archiveDir, { recursive: true })
+    fs.writeFileSync(path.join(archiveDir, "shiseki.json"), stableStringify(result.shiseki))
+    shisekiCount = result.shiseki.items.length
+  }
+
   console.log(
     `✅ build:data: ${result.sessions.length} sessions, ${result.parts.size} part files, ` +
-    `${result.cards.size} card files → public/data/`,
+    `${result.cards.size} card files, ${shisekiCount} 史跡 → public/data/`,
   )
 }
 

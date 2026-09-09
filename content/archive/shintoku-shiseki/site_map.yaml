@@ -1,0 +1,43 @@
+# site_map.yaml — 『しんとくの史跡』本文の史跡境界(本文掲載順)
+#
+# ・start_page : その史跡が始まる本文ページ。各 staging ページは
+#   「自分の book_page 以下で最大の start_page」の史跡に割り当てられる。
+# ・confidence : confirmed = 見出し＋所在地で確定 / check = 現物確認が必要
+# ・map_no     : 全町略図 凡例番号。
+#
+# ページのグルーピング(範囲)は目次番号＋OCR見出しでほぼ確定。confidence: check は
+# 主に「名前(どの史跡か)」が未確定なので、現物で name / map_no を直してから assemble。
+#
+# 残る確認点(check 6行):
+#  (A) 学校群: #26南新内(p.12) と #23新内尋常(p.37) の入れ替わり、#9広内(p.21)/#11ペンケ沢(p.20)の境界。
+#  (B) #2 伊藤伝五郎住居跡(p.40-41): 独立見出しが無く、悲願桜#3 に内包の可能性。
+#  (注) order01 苦闘之碑は p.1 が前付け側で処理済。staging には p.2 の碑銘・由来のみ。
+
+sites:
+  - {order: 1,  start_page: 1,  map_no: 18, name: "苦闘之碑",                     slug: kuto_hi,            confidence: confirmed, note: "p.2の碑銘・由来を手動の01_kuto_hi.mdへマージ。p.2末の渡船場標柱はorder2へ"}
+  - {order: 2,  start_page: 3,  map_no: 12, name: "十勝川渡船場跡",               slug: tokachigawa_tosenba, confidence: confirmed}
+  - {order: 3,  start_page: 5,  map_no: 15, name: "新得小学校開校之地",           slug: shintoku_kaiko,     confidence: confirmed}
+  - {order: 4,  start_page: 7,  map_no: 16, name: "佐幌原野開拓発祥之地",         slug: sahoro_genya,       confidence: confirmed}
+  - {order: 5,  start_page: 8,  map_no: 21, name: "福山小学校跡",                 slug: fukuyama_shogakko,  confidence: confirmed}
+  - {order: 6,  start_page: 9,  map_no: 8,  name: "狩勝旧国道桜並木の由来",       slug: karikachi_sakura,   confidence: confirmed, note: "ところ:梅林内旧国道沿い"}
+  - {order: 7,  start_page: 11, map_no: 10, name: "屈足発祥之地",                 slug: kuttari_hassho,     confidence: confirmed}
+  - {order: 8,  start_page: 12, map_no: 26, name: "南新内小学校跡",               slug: minami_niinai,      confidence: confirmed,     note: "(A) 新内西三線一三八/入植・湿地。#23と入替の可能性"}
+  - {order: 9,  start_page: 13, map_no: 17, name: "上川灌漑溝十勝川水門跡",       slug: kamikawa_suimon,    confidence: confirmed, note: "記念碑 p.14"}
+  - {order: 10, start_page: 15, map_no: 19, name: "菅野光民殉難之碑",             slug: sugano_junnan,      confidence: confirmed, note: "記念碑 p.15。p.16-18(佐幌岳探検＋トムラウシ地図p.17＋碑銘p.18)を含む"}
+  - {order: 11, start_page: 19, map_no: 14, name: "北新内小学校跡",               slug: kita_niinai,        confidence: confirmed}
+  - {order: 12, start_page: 20, map_no: 11, name: "ペンケ沢(岩松)駅逓所跡",       slug: penkezawa_ekitei,   confidence: check,     note: "(A) p.20駅逓所標柱。広内#9と隣接、境界要確認"}
+  - {order: 13, start_page: 21, map_no: 9,  name: "広内尋常小学校跡地",           slug: hironai_jinjo,      confidence: check,     note: "(A) p.21広内標柱"}
+  - {order: 14, start_page: 22, map_no: 22, name: "旧狩勝トンネル",               slug: kyu_karikachi_tunnel, confidence: confirmed, note: "由来板p.22/鉄道国有p.23"}
+  - {order: 15, start_page: 24, map_no: 13, name: "屈足水田発祥之地",             slug: kuttari_suiden,     confidence: confirmed, note: "ところ:屈足西一線六十五"}
+  - {order: 16, start_page: 27, map_no: 20, name: "王子馬車軌道(馬てつ)跡",       slug: oji_basha_kido,     confidence: confirmed}
+  - {order: 17, start_page: 29, map_no: 25, name: "カムイロキの由来",             slug: kamuiroki,          confidence: confirmed, note: "表示板p.29 ところ:屈足三十四号"}
+  - {order: 18, start_page: 31, map_no: 5,  name: "石切山の由来",                 slug: ishikiriyama,       confidence: confirmed, note: "由来板p.32"}
+  - {order: 19, start_page: 33, map_no: 6,  name: "松浦武四郎野宿之地",           slug: matsuura_nojuku,    confidence: confirmed, note: "案内板及び碑p.33 ところ:北新内西六線一八五(一ノ沢)"}
+  - {order: 20, start_page: 35, map_no: 27, name: "道立新得畜産試験場の軟石サイロ", slug: nanseki_silo,     confidence: confirmed}
+  - {order: 21, start_page: 36, map_no: 1,  name: "新得駅逓所跡",                 slug: shintoku_ekitei,    confidence: confirmed, note: "由来板p.36 ところ:西十線(旧石狩道路)"}
+  - {order: 22, start_page: 37, map_no: 23, name: "新内尋常小学校跡",             slug: niinai_jinjo,       confidence: confirmed,     note: "(A) 新内西一線一四二/南北併合p.38。#26と入替の可能性"}
+  - {order: 23, start_page: 39, map_no: 3,  name: "悲願桜と碑",                   slug: higanzakura,        confidence: confirmed, note: "案内板・標柱・碑p.39"}
+  - {order: 25, start_page: 42, map_no: 7,  name: "新四国新得八十八ヶ所の由来",   slug: shinshikoku_88,     confidence: confirmed, note: "霊場p.42 ところ:新得神社社務所東側"}
+  - {order: 26, start_page: 45, map_no: 4,  name: "急行まりも号事件",             slug: marimo_jiken,       confidence: confirmed,     note: "由来板p.45/捜査本部p.46/時効・転覆p.47"}
+  - {order: 27, start_page: 47, map_no: 24, name: "バッタ塚の由来",               slug: batta_zuka,         confidence: confirmed, note: "標柱p.47 ところ:新内西二~三線一三〇一帯"}
+  - {order: 28, start_page: 51, map_no: null, name: "あとがき", slug: atogaki, doc_type: appendix, confidence: confirmed, note: "後付け(back matter)。同範囲のp.49古地図は図版"}

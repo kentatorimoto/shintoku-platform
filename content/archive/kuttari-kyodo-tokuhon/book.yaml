@@ -1,0 +1,37 @@
+id: kuttari-kyodo-tokuhon-v1
+title: 郷土読本くったり
+volume: 1
+volume_label: 上巻
+publisher: 新得町立屈足小学校
+publisher_status: 廃校(2026年5月時点で消滅)
+publication_date: "1991-04-01"
+era_date: 平成3年4月1日
+printer: 橘井印刷
+editors:
+  teachers:
+    - 園部信二
+    - 三好力
+    - 田中信宏
+    - 莊司和子
+    - 原田淳
+    - 東原美紀
+    - 土居直哉
+    - 佐藤敬示
+  children:
+    description: 屈足小児童二十八名
+    note: うち1名が鳥本健太(当時小学5年生)
+  contributors:
+    - 若原茂勝
+    - 若原幸雄
+    - 松浦実
+    - 上原巌
+    - 屈足小PTA
+rights:
+  license_status: unverified
+  ai_use_policy: anthropic_api_ok # 処理系への送信は可。公開は概要レベルのみ（2026-09-09 改訂）
+  internal_use_only: true
+  publication_scope: summary_only
+  full_text_public: false
+  figures_public: false
+citation: 『郷土読本くったり』上巻・新得町立屈足小学校・1991年・p.{page}
+citation_note: 下巻（1992年）は未スキャン。上巻のみメタを整備している。

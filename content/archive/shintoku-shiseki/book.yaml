@@ -1,0 +1,39 @@
+id: shintoku-shiseki-v1
+title: しんとくの史跡
+publisher: 新得町郷土研究会
+publication_date: "1994-03-31"
+era_date: 平成6年3月31日
+printer: 矢戸印刷株式会社
+not_for_sale: true
+total_pages: 52
+copy_provenance: 新得町図書館 蔵書(バーコード 0110366911)
+editors:
+  publisher_person: 野呂己之松
+  committee:
+    - 野呂己之松
+    - 田近正俊
+    - 若原幸雄
+    - 秋山秀敏
+    - 金村優(故)
+    - 小笠原知新
+    - 川久保功
+    - 片桐直
+    - 鈴木貞
+    - 大多優子
+    - 仙庭勉
+    - 佐々木昇
+    - 林義範
+    - 斉木信道
+    - 千葉林平
+  advisors:
+    - 小森俊雄
+    - 斎藤仁
+rights:
+  license_status: unverified
+  ai_use_policy: anthropic_api_ok # 処理系への送信は可。公開は概要レベルのみ（2026-09-09 改訂）
+  internal_use_only: true
+  publication_scope: summary_only
+  full_text_public: false
+  figures_public: false
+citation: 『しんとくの史跡』新得町郷土研究会・1994年・p.{page}／新得町図書館蔵
+citation_note: 原本は新得町図書館で読めます。

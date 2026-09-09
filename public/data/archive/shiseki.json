@@ -1,0 +1,527 @@
+{
+  "book": {
+    "id": "shintoku-shiseki-v1",
+    "title": "しんとくの史跡",
+    "publisher": "新得町郷土研究会",
+    "year": "1994",
+    "citation": "『しんとくの史跡』新得町郷土研究会・1994年・p.{page}／新得町図書館蔵",
+    "citation_note": "原本は新得町図書館で読めます。"
+  },
+  "items": [
+    {
+      "id": "s01",
+      "title": "苦闘之碑",
+      "order": 1,
+      "page_start": 1,
+      "page_end": 2,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新内西五線(狩勝高原遊園地)",
+      "era": "明治〜昭和",
+      "entities": [
+        "狩勝高原遊園地",
+        "狩勝峠",
+        "旧狩勝線",
+        "北新得墓地",
+        "新内沢",
+        "落合",
+        "新得"
+      ],
+      "summary": "明治三十四年に着工した旧狩勝線の鉄道工事では常時一千余名が働き、タコと呼ばれた土工労働者が亡くなり沿線に埋められたと語り継がれている。昭和五十六年に発足した新得町郷土研究会が調査を進め、北新得墓地で明治三十七年建立の土工十名の墓碑を発見したことなどをきっかけに、狩勝高原遊園地にこの碑が建てられた。"
+    },
+    {
+      "id": "s02",
+      "title": "十勝川渡船場跡",
+      "order": 2,
+      "page_start": 3,
+      "page_end": 4,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字屈足東二線(屈足二十三号十勝川河川敷)",
+      "era": "大正〜昭和",
+      "entities": [
+        "屈足",
+        "十勝川",
+        "クテクウシ(現鹿追町)",
+        "ウリマク",
+        "ホロナイ",
+        "音更村",
+        "新得千間坂",
+        "幌内高台"
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "新得小学校開校之地",
+      "order": 3,
+      "page_start": 5,
+      "page_end": 6,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町西一線(新得神社第一鳥居西側)",
+      "era": "明治〜昭和",
+      "entities": [
+        "新得西一線",
+        "串内",
+        "日高山脈",
+        "旧石狩国道",
+        "狩勝トンネル",
+        "鹿追",
+        "上士幌",
+        "山形県高崎村関山"
+      ]
+    },
+    {
+      "id": "s04",
+      "title": "佐幌原野開拓発祥之地",
+      "order": 4,
+      "page_start": 7,
+      "page_end": 7,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字上佐幌基線一号",
+      "era": "明治",
+      "entities": [
+        "佐幌高台",
+        "佐幌川",
+        "屈足",
+        "芽室",
+        "落合",
+        "狩勝峠",
+        "上富良野",
+        "福井県",
+        "香川県",
+        "宮城県"
+      ]
+    },
+    {
+      "id": "s05",
+      "title": "福山小学校跡",
+      "order": 5,
+      "page_start": 8,
+      "page_end": 9,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新得西六線",
+      "era": "明治〜平成",
+      "entities": [
+        "トンネル沢",
+        "佐幌二十三区",
+        "福島県相馬",
+        "山形県"
+      ]
+    },
+    {
+      "id": "s06",
+      "title": "狩勝旧国道桜並木の由来",
+      "order": 6,
+      "page_start": 9,
+      "page_end": 10,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新内 梅林内旧国道沿い",
+      "era": "昭和",
+      "entities": [
+        "狩勝峠",
+        "旧国道",
+        "新内",
+        "落合",
+        "屈足",
+        "岩松",
+        "佐幌"
+      ]
+    },
+    {
+      "id": "s07",
+      "title": "屈足発祥之地",
+      "order": 7,
+      "page_start": 11,
+      "page_end": 12,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字屈足西二線",
+      "era": "明治〜平成",
+      "entities": [
+        "屈足",
+        "新得",
+        "佐幌高台",
+        "十勝川",
+        "鹿児島県贈於郡財部村",
+        "クシナイ",
+        "日高山脈",
+        "落合",
+        "新得駅逓所"
+      ]
+    },
+    {
+      "id": "s08",
+      "title": "南新内小学校跡",
+      "order": 8,
+      "page_start": 12,
+      "page_end": 13,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新内西三線",
+      "era": "明治〜平成",
+      "entities": [
+        "新内",
+        "南新内",
+        "北新内",
+        "東新内",
+        "佐幌岳",
+        "狩勝薬草温泉"
+      ]
+    },
+    {
+      "id": "s09",
+      "title": "上川灌漑溝十勝川水門跡",
+      "order": 9,
+      "page_start": 13,
+      "page_end": 15,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "岩松、町道三十八号地先、十勝川右岸",
+      "era": "大正〜昭和",
+      "entities": [
+        "岩松",
+        "屈足",
+        "人舞",
+        "十勝川",
+        "ペンケニコロ川",
+        "パンケニコロ川",
+        "上川大幹線"
+      ]
+    },
+    {
+      "id": "s10",
+      "title": "菅野光民殉難之碑",
+      "order": 10,
+      "page_start": 15,
+      "page_end": 18,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "屈足字トムラウシ 道道清水線沿い",
+      "era": "明治〜昭和",
+      "entities": [
+        "トムラウシ",
+        "屈足",
+        "ニペソツ川",
+        "十勝川",
+        "岩松ベンケナイ",
+        "佐幌岳",
+        "ペンケキナウシ",
+        "キナウシ"
+      ]
+    },
+    {
+      "id": "s11",
+      "title": "北新内小学校跡",
+      "order": 11,
+      "page_start": 19,
+      "page_end": 20,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新内西六線",
+      "era": "明治〜昭和",
+      "entities": [
+        "北新内",
+        "新内",
+        "南新内",
+        "佐幌岳",
+        "大雪山系",
+        "狩勝トンネル",
+        "新内トンネル",
+        "落合",
+        "新得駅"
+      ]
+    },
+    {
+      "id": "s12",
+      "title": "ペンケ沢(岩松)駅逓所跡",
+      "order": 12,
+      "page_start": 20,
+      "page_end": 21,
+      "confidence": "check",
+      "reviewed": false,
+      "location": "新得町字屈足東一線",
+      "era": "明治〜昭和",
+      "entities": [
+        "岩松",
+        "ペンケ沢",
+        "屈足",
+        "十勝川",
+        "御影村",
+        "幌別村",
+        "音更村駒場"
+      ]
+    },
+    {
+      "id": "s13",
+      "title": "広内尋常小学校跡地",
+      "order": 13,
+      "page_start": 21,
+      "page_end": 22,
+      "confidence": "check",
+      "reviewed": false,
+      "location": "新得町字新得西六線",
+      "era": "明治〜昭和",
+      "entities": [
+        "広内",
+        "新得",
+        "福島団体",
+        "秋田",
+        "畜産試験場"
+      ]
+    },
+    {
+      "id": "s14",
+      "title": "旧狩勝トンネル",
+      "order": 14,
+      "page_start": 22,
+      "page_end": 24,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "国道三十八号線六合目付近南側(新内トンネル)",
+      "era": "明治〜平成",
+      "entities": [
+        "狩勝峠",
+        "旧狩勝線",
+        "新内トンネル",
+        "落合",
+        "帯広",
+        "釧路",
+        "旭川",
+        "常紋トンネル",
+        "北新得墓地"
+      ],
+      "summary": "明治三十四年に着工した狩勝トンネル（九五四メートル）は、硬い岩盤と大量の湧き水に阻まれながら約六年をかけて完成し、明治四十年九月八日の旭川〜釧路間全通につながった。工事では多くの労働者が過酷な環境で働かされ、命を落とした者もいたと伝えられている。旧狩勝線は昭和四十一年十月一日に廃線となり、平成二年十月に新得町郷土研究会が新内トンネル入口前に由来板を設置した。"
+    },
+    {
+      "id": "s15",
+      "title": "屈足水田発祥之地",
+      "order": 15,
+      "page_start": 24,
+      "page_end": 26,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "entities": []
+    },
+    {
+      "id": "s16",
+      "title": "王子馬車軌道(馬てつ)跡",
+      "order": 16,
+      "page_start": 27,
+      "page_end": 29,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字屈足 町道二十二号坂下",
+      "era": "大正〜平成",
+      "entities": [
+        "屈足",
+        "佐幌高台",
+        "新得",
+        "岩松",
+        "ペンケニコロ川",
+        "パンケニコロ川",
+        "屈足基線"
+      ]
+    },
+    {
+      "id": "s17",
+      "title": "カムイロキの由来",
+      "order": 17,
+      "page_start": 29,
+      "page_end": 31,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字屈足三十四号(トムラ登山学校レイク・イン駐車場のダム湖畔)",
+      "era": "平成",
+      "entities": [
+        "屈足",
+        "狩勝峠",
+        "十勝川",
+        "屈足ガンケ",
+        "パンケ山",
+        "レイク・イン"
+      ]
+    },
+    {
+      "id": "s18",
+      "title": "石切山の由来",
+      "order": 18,
+      "page_start": 31,
+      "page_end": 32,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "国道三十八号線狩勝六号目付近山側",
+      "era": "明治〜昭和",
+      "entities": [
+        "佐幌岳",
+        "狩勝峠",
+        "石切山",
+        "釧路",
+        "幣舞橋",
+        "札幌",
+        "小樽",
+        "旭川",
+        "北海道神宮",
+        "パンケシントク川"
+      ]
+    },
+    {
+      "id": "s19",
+      "title": "松浦武四郎野宿之地",
+      "order": 19,
+      "page_start": 33,
+      "page_end": 34,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字北新内西六線(一ノ沢)",
+      "era": "明治",
+      "entities": [
+        "北新内",
+        "一ノ沢",
+        "サホロ川",
+        "パンケシントク",
+        "十勝川",
+        "カムイロキ",
+        "大津",
+        "知床",
+        "樺太",
+        "神居古潭",
+        "空知川"
+      ]
+    },
+    {
+      "id": "s20",
+      "title": "道立新得畜産試験場の軟石サイロ",
+      "order": 20,
+      "page_start": 35,
+      "page_end": 35,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町西四線",
+      "era": "昭和",
+      "entities": [
+        "新得西四線",
+        "真駒内",
+        "真駒内穴の沢石山"
+      ]
+    },
+    {
+      "id": "s21",
+      "title": "新得駅逓所跡",
+      "order": 21,
+      "page_start": 36,
+      "page_end": 37,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町西十線(旧石狩道路)と八号道路合流点",
+      "era": "明治〜昭和",
+      "entities": [
+        "新得西十線",
+        "石狩国道",
+        "大津街道",
+        "帯広",
+        "串内",
+        "清水",
+        "オダッシュ山",
+        "落合",
+        "ペケレベツ",
+        "芽室西士狩"
+      ]
+    },
+    {
+      "id": "s22",
+      "title": "新内尋常小学校跡",
+      "order": 22,
+      "page_start": 37,
+      "page_end": 38,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新内西一線",
+      "era": "昭和〜平成",
+      "entities": [
+        "新内",
+        "北新内",
+        "南新内",
+        "東新内",
+        "下新内",
+        "石切山",
+        "佐幌岳"
+      ]
+    },
+    {
+      "id": "s23",
+      "title": "悲願桜と碑",
+      "order": 23,
+      "page_start": 39,
+      "page_end": 41,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得神社境内(碑)・西一線(案内板)・伊藤傳五郎住居跡(標柱)",
+      "era": "明治〜昭和",
+      "entities": [
+        "新得神社",
+        "新得山",
+        "新得寺",
+        "涌谷町(宮城県)",
+        "ペンケオタソイ川",
+        "狩勝峠"
+      ]
+    },
+    {
+      "id": "s25",
+      "title": "新四国新得八十八ヶ所の由来",
+      "order": 25,
+      "page_start": 42,
+      "page_end": 44,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "entities": []
+    },
+    {
+      "id": "s26",
+      "title": "急行まりも号事件",
+      "order": 26,
+      "page_start": 45,
+      "page_end": 47,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "字新内西四・五線間(下新内川鉄橋)",
+      "era": "昭和",
+      "entities": [
+        "下新内川鉄橋",
+        "新得駅",
+        "北新得",
+        "旧狩勝線"
+      ],
+      "summary": "昭和二十六年五月二十七日午前一時十六分頃、釧路発函館行きの上り急行列車（まりも号）が字新内西四・五線間の下新内川鉄橋で脱線転覆した。レールの継目板が切断され、レールが意図的にずらされていたことが判明し、列車妨害と断定されたが、犯人は特定されないまま時効となった。昭和六十二年六月、新得町郷土研究会と新得町が現場に史跡銘板を、九〇〇メートル新得寄りの踏切付近に案内板を設置した。"
+    },
+    {
+      "id": "s27",
+      "title": "バッタ塚の由来",
+      "order": 27,
+      "page_start": 47,
+      "page_end": 50,
+      "confidence": "confirmed",
+      "reviewed": false,
+      "location": "新得町字新内西二線~三線帯",
+      "era": "明治〜昭和",
+      "entities": [
+        "新内",
+        "佐幌岳",
+        "佐幌川",
+        "大津",
+        "浦幌",
+        "美里別",
+        "士幌",
+        "然別",
+        "本別町チエトイ",
+        "足寄",
+        "札幌手稲山口",
+        "伊達市"
+      ]
+    }
+  ]
+}

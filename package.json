@@ -15,6 +15,7 @@
     "fetch:transcript": "tsx scripts/fetch-transcript.ts",
     "extract:md": "tsx scripts/extract-md.ts",
     "cards:generate": "tsx scripts/generate-cards.ts",
+    "shiseki:summary": "tsx scripts/generate-shiseki-summary.ts",
     "og:fonts": "tsx scripts/fetch-og-fonts.ts",
     "watch:council": "tsx scripts/watch-council.ts",
     "sync": "npx tsx scripts/sync-all.ts",
