@@ -154,7 +154,7 @@ export default function NewsletterSearch({ entries }: { entries: Entry[] }) {
           inputMode="search"
         />
 
-        <div className="text-sm text-textSub">
+        <div className="text-sm text-textMuted">
           {isSearching ? (
             display.length > 0 ? (
               <>
@@ -176,14 +176,14 @@ export default function NewsletterSearch({ entries }: { entries: Entry[] }) {
       <div className="space-y-4">
         {display.map((r, i) => (
           <div key={i} className="card">
-            <div className="text-xs text-textSub">{r.entry.date}</div>
+            <div className="text-xs text-textMuted">{r.entry.date}</div>
 
             <div className="mt-2 text-lg md:text-xl font-semibold text-textMain">
               {isSearching ? highlightTokens(r.entry.title, tokens) : r.entry.title}
             </div>
 
             {r.snippet && (
-              <p className="mt-3 text-sm text-textSub leading-relaxed">
+              <p className="mt-3 text-sm text-textMuted leading-relaxed">
                 {r.matchedPage != null && (
                   <span className="text-accent mr-2">p.{r.matchedPage}</span>
                 )}
@@ -211,7 +211,7 @@ export default function NewsletterSearch({ entries }: { entries: Entry[] }) {
 
         {isSearching && display.length === 0 && (
           <div className="card">
-            <p className="text-textSub">
+            <p className="text-textMuted">
               「<span className="text-textMain">{debouncedQuery.trim()}</span>」は見つかりませんでした。別のキーワードを試してください。
             </p>
           </div>

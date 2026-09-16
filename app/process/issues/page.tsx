@@ -21,7 +21,7 @@ export default function IssuesPage() {
       <div className="pt-12 pb-2 mb-8">
         <Link
           href="/process"
-          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
+          className="text-textMuted text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
           ← 流れを読む
         </Link>
@@ -32,7 +32,7 @@ export default function IssuesPage() {
         >
           {LABELS.continuingIssues.text}
         </h1>
-        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+        <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
           複数の会議をまたいで繰り返されている争点（{LABELS.continuingIssues.formal}）。
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function IssuesPage() {
                 className={`shrink-0 text-[11.5px] font-semibold px-[9px] py-[2px] rounded-[3px] border ${
                   isHot(issue.status)
                     ? "text-accent border-accent/50"
-                    : "text-textSub border-lineStrong"
+                    : "text-textMuted border-lineStrong"
                 }`}
               >
                 {issue.status}
@@ -61,7 +61,7 @@ export default function IssuesPage() {
             </div>
 
             {/* サマリー */}
-            <p className="text-sm leading-relaxed text-textMain/80 mb-6">
+            <p className="text-sm leading-relaxed text-textSub mb-6">
               {issue.summary}
             </p>
 
@@ -73,13 +73,13 @@ export default function IssuesPage() {
                   className="flex gap-4 items-start border-l-2 border-line pl-4"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="mono text-[12px] text-textSub mb-0.5">
+                    <p className="mono text-[12px] text-textMuted mb-0.5">
                       {formatDate(s.date)}
                     </p>
                     <p className="text-sm font-medium text-textMain leading-snug mb-1">
                       {s.title}
                     </p>
-                    <p className="text-xs text-textSub leading-relaxed">
+                    <p className="text-xs text-textMuted leading-relaxed">
                       {s.conflict}
                     </p>
                   </div>

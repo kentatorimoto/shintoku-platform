@@ -56,15 +56,15 @@ export default async function AnnouncementsPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="card">
-          <div className="text-textSub text-xs">TOTAL</div>
+          <div className="text-textMuted text-xs">TOTAL</div>
           <div className="mt-2 text-2xl font-semibold">{total}</div>
         </div>
         <div className="card">
-          <div className="text-textSub text-xs">NEW</div>
+          <div className="text-textMuted text-xs">NEW</div>
           <div className="mt-2 text-2xl font-semibold">{newCount}</div>
         </div>
         <div className="card">
-          <div className="text-textSub text-xs">SOURCE</div>
+          <div className="text-textMuted text-xs">SOURCE</div>
           <div className="mt-2 text-base text-textMain">shintoku-town.jp</div>
         </div>
       </div>
@@ -72,7 +72,7 @@ export default async function AnnouncementsPage() {
       <section className="mt-8">
         <div className="flex items-baseline justify-between">
           <h2 className="text-lg md:text-xl font-semibold">一覧</h2>
-          <div className="text-sm text-textSub">
+          <div className="text-sm text-textMuted">
             最新データ：announcements-*.json
           </div>
         </div>
@@ -80,7 +80,7 @@ export default async function AnnouncementsPage() {
         {announcements.length === 0 ? (
           <div className="card mt-4">
             <p className="text-textMain font-semibold">データがありません</p>
-            <p className="text-textSub mt-2 text-sm">
+            <p className="text-textMuted mt-2 text-sm">
               スクレイピングスクリプトの実行を確認してください。
             </p>
           </div>
@@ -97,11 +97,11 @@ export default async function AnnouncementsPage() {
                         </span>
                       )}
                       {a.category && (
-                        <span className="inline-flex items-center rounded-[3px] border border-line px-2.5 py-1 text-xs text-textSub">
+                        <span className="inline-flex items-center rounded-[3px] border border-line px-2.5 py-1 text-xs text-textMuted">
                           {a.category}
                         </span>
                       )}
-                      <span className="text-xs text-textSub">
+                      <span className="text-xs text-textMuted">
                         {formatDate(a.date)}
                       </span>
                     </div>

@@ -33,7 +33,7 @@ export default function TimelinePage({
       <div className="pt-12 pb-2 mb-8">
         <Link
           href="/process"
-          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
+          className="text-textMuted text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
           ← 意思決定の流れを読む
         </Link>
@@ -44,16 +44,16 @@ export default function TimelinePage({
         >
           議論のたどりかた
         </h1>
-        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+        <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
           テーマを選ぶと、その話題がどの会期をどう渡っていったかが並びます。
         </p>
       </div>
 
       {/* ── タグ選択・タイムライン（Client Component） ───────────────── */}
       {sessions.length === 0 ? (
-        <p className="text-textSub text-center py-20">会議データがありません</p>
+        <p className="text-textMuted text-center py-20">会議データがありません</p>
       ) : (
-        <Suspense fallback={<p className="text-textSub text-center py-20">読み込み中…</p>}>
+        <Suspense fallback={<p className="text-textMuted text-center py-20">読み込み中…</p>}>
           <TimelineClient sessions={sessions} initialTag={initialTag} />
         </Suspense>
       )}

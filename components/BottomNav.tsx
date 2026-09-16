@@ -47,7 +47,7 @@ export default function BottomNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-base/95 backdrop-blur border-t border-line">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-paper/95 backdrop-blur border-t border-line">
       <div className="flex items-stretch">
         {items.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
@@ -58,7 +58,7 @@ export default function BottomNav() {
               className={`flex-1 flex flex-col items-center justify-center gap-1 py-3 text-[10px] tracking-wide transition-colors ${
                 isActive
                   ? "text-accent"
-                  : "text-textSub/50 hover:text-textSub"
+                  : "text-textMuted hover:text-textMuted"
               }`}
             >
               {item.icon}

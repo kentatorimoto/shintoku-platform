@@ -555,7 +555,7 @@ export default function MapView() {
 
         {/* Opacity コントロール */}
         <div className="bg-ink/90 border border-line rounded-xl p-4 w-52 shadow-lg backdrop-blur-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-3">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-textMuted mb-3">
             透過度
           </p>
           <div className="space-y-4">
@@ -567,7 +567,7 @@ export default function MapView() {
         {/* 問いカード */}
         {questions.length > 0 && (
           <div className="bg-ink/90 border border-line rounded-xl p-4 w-52 shadow-lg backdrop-blur-sm">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-3">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-textMuted mb-3">
               問いの地図
             </p>
             <ul className="space-y-1.5">
@@ -578,8 +578,8 @@ export default function MapView() {
                     className={[
                       "w-full text-left text-xs px-2 py-1.5 rounded-lg transition-colors leading-snug",
                       activeQuestion?.id === q.id
-                        ? "bg-accent/20 text-accent border border-accent/30"
-                        : "text-textMain/80 hover:bg-white/5 border border-transparent",
+                        ? "bg-hover text-accent border border-accent"
+                        : "text-textSub hover:bg-white/5 border border-transparent",
                     ].join(" ")}
                   >
                     {q.title}
@@ -597,7 +597,7 @@ export default function MapView() {
           {statusMsgs.map(msg => (
             <div key={msg}
               className="text-[11px] leading-none rounded px-2 py-1
-                         text-textSub/80 bg-ink/80 pointer-events-none select-none animate-pulse">
+                         text-textMuted bg-ink/80 pointer-events-none select-none animate-pulse">
               {msg}
             </div>
           ))}
@@ -613,11 +613,11 @@ export default function MapView() {
 
       {/* 出典表記（右下）*/}
       <div className="absolute bottom-2 right-2 z-[1000]
-                      text-[11px] leading-snug text-textSub/70 bg-ink/80
+                      text-[11px] leading-snug text-textMuted bg-ink/80
                       rounded px-2 py-1 pointer-events-none select-none">
         出典：地理院タイル（国土地理院）
         <br />
-        <span className="text-textSub/50 text-[10px]">淡色地図 / 色別標高図 / 陰影起伏図</span>
+        <span className="text-textMuted text-[10px]">淡色地図 / 色別標高図 / 陰影起伏図</span>
       </div>
 
       {/* サイドパネル（右から slide-in）*/}
@@ -648,8 +648,8 @@ function OpacitySlider({
   return (
     <div>
       <div className="flex justify-between items-baseline text-xs mb-1.5">
-        <span className="text-textMain/80">{label}</span>
-        <span className="text-textSub/60 tabular-nums w-8 text-right">{value}%</span>
+        <span className="text-textSub">{label}</span>
+        <span className="text-textMuted tabular-nums w-8 text-right">{value}%</span>
       </div>
       <input type="range" min={0} max={100} value={value}
         onChange={e => onChange(Number(e.target.value))}
@@ -674,7 +674,7 @@ const LINK_TYPE_COLOR: Record<string, string> = {
 
 function LinkTypeBadge({ type }: { type: string }) {
   return (
-    <span className={`text-[10px] font-semibold shrink-0 ${LINK_TYPE_COLOR[type] ?? "text-textSub/60"}`}>
+    <span className={`text-[10px] font-semibold shrink-0 ${LINK_TYPE_COLOR[type] ?? "text-textMuted"}`}>
       {LINK_TYPE_LABEL[type] ?? type}
     </span>
   )
@@ -713,7 +713,7 @@ function SidePanel({
           {/* ヘッダー：問いモード */}
           <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-line/40 shrink-0">
             <div className="flex-1 mr-2 min-w-0">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-1">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-textMuted mb-1">
                 問い
               </p>
               <h3 className="text-sm font-semibold text-textMain leading-snug">
@@ -722,7 +722,7 @@ function SidePanel({
             </div>
             <button
               onClick={onClose}
-              className="text-textSub/60 hover:text-textMain transition shrink-0 p-0.5 -mr-0.5"
+              className="text-textMuted hover:text-textMain transition shrink-0 p-0.5 -mr-0.5"
               aria-label="パネルを閉じる"
             >
               <X size={15} />
@@ -731,7 +731,7 @@ function SidePanel({
 
           {/* 手がかりリスト */}
           <div className="flex-1 overflow-y-auto px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-3">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-textMuted mb-3">
               手がかり
             </p>
             <ul className="space-y-2">
@@ -745,12 +745,12 @@ function SidePanel({
                         "w-full text-left rounded-lg p-3 border transition-colors",
                         isActive
                           ? "bg-amber-500/10 border-amber-500/40 text-amber-300"
-                          : "border-line/40 text-textMain/80 hover:border-accent/40 hover:bg-white/5",
+                          : "border-line/40 text-textSub hover:border-accent/40 hover:bg-white/5",
                       ].join(" ")}
                     >
                       <p className="text-xs font-medium leading-snug">{clue.label}</p>
                       {isActive && (
-                        <p className="text-[11px] text-textSub/70 leading-relaxed mt-1.5">
+                        <p className="text-[11px] text-textMuted leading-relaxed mt-1.5">
                           {clue.note}
                         </p>
                       )}
@@ -766,7 +766,7 @@ function SidePanel({
           {/* ヘッダー：地物モード */}
           <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-line/40 shrink-0">
             <div className="flex-1 mr-2 min-w-0">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-1">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-textMuted mb-1">
                 地物情報
               </p>
               <h3 className="text-sm font-semibold text-textMain leading-snug truncate">
@@ -775,7 +775,7 @@ function SidePanel({
             </div>
             <button
               onClick={onClose}
-              className="text-textSub/60 hover:text-textMain transition shrink-0 p-0.5 -mr-0.5"
+              className="text-textMuted hover:text-textMain transition shrink-0 p-0.5 -mr-0.5"
               aria-label="パネルを閉じる"
             >
               <X size={15} />
@@ -785,7 +785,7 @@ function SidePanel({
           {/* 説明 */}
           {feature?.description && (
             <div className="px-4 py-3 border-b border-line/40 shrink-0">
-              <p className="text-xs text-textSub/80 leading-relaxed">
+              <p className="text-xs text-textMuted leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -793,11 +793,11 @@ function SidePanel({
 
           {/* 関連ログ */}
           <div className="flex-1 overflow-y-auto px-4 py-3">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-textSub/50 mb-3">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-textMuted mb-3">
               関連ログ
             </p>
             {links.length === 0 ? (
-              <p className="text-xs text-textSub/40 italic">関連リンクはありません</p>
+              <p className="text-xs text-textMuted italic">関連リンクはありません</p>
             ) : (
               <ul className="space-y-2">
                 {links.map(link => (
@@ -816,10 +816,10 @@ function SidePanel({
                                         group-hover:text-accent transition-colors mb-1 truncate">
                             {link.title}
                           </p>
-                          <p className="text-[11px] text-textSub/60 leading-snug line-clamp-2">
+                          <p className="text-[11px] text-textMuted leading-snug line-clamp-2">
                             {link.note}
                           </p>
-                          <p className="text-[10px] text-textSub/40 mt-1">{link.date}</p>
+                          <p className="text-[10px] text-textMuted mt-1">{link.date}</p>
                         </div>
                       </div>
                     </a>

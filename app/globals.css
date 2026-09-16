@@ -2,7 +2,7 @@
 
 /* ══════════════════════════════════════════════════════════════════════
    デザイントークン「亜麻」 — 正は docs/design/atlas-hybrid-warm.html
-   全ページ共通の単一パレット。bg-base / text-textSub 等はすべてこの変数を
+   全ページ共通の単一パレット。bg-paper / text-textSub 等はすべてこの変数を
    参照するので、値を差し替えるだけで全ページに波及する。
 
    2026-09: /process 配下だけを小豆（暗色）に反転する仕組みを廃止した。
@@ -12,16 +12,30 @@
 
 @theme {
   /* ── 亜麻（基調）── 緑み寄りの暖灰。黄味クリームとは色相を分ける */
-  --color-base:       #e7e8dc; /* 紙 */
+  /* 紙。Tailwind の text-base（文字サイズ）と衝突するため base という名前は使えない。
+     --color-base があると .text-base が color 指定になり、文字サイズの指定が消える。 */
+  --color-paper:      #e7e8dc; /* 紙 */
   --color-ink:        #dee0d1; /* 起伏面（カード地・行ホバー）*/
   --color-line:       #d0d2c2; /* 罫線 */
   --color-lineStrong: #a9ac97; /* 強罫線・タグ枠 */
-  --color-accent:     #b8432c; /* 茜。最新・現在地・ホバーのみ */
-  --color-accentSoft: #9a3826; /* 濃い茜（ホバー状態）*/
+  /* 茜。最新・現在地・ホバーのみ。2026-09 に #b8432c から一段濃くした。
+     旧値は文字として 紙 4.38 / カード地 4.05、btnPrimary のラベルも 4.38 で
+     いずれも AA 未達だった。薄める方向には振らない（規律を空洞化させるため）。 */
+  --color-accent:     #ae3b25; /* 茜   (紙 4.92 / カード 4.55 / ラベル 4.92) */
+  --color-accentSoft: #9a3826; /* 濃い茜（ホバー状態） (紙 5.72 / ラベル 5.72) */
   --color-onAccent:   #e7e8dc; /* 茜地の上に載る文字（＝紙色）*/
-  --color-textMain:   #23241c; /* 墨 */
-  --color-textSub:    #67685a; /* 薄墨（補助テキスト・AA 4.58:1）*/
   --color-hover:      #dee0d1; /* 行ホバー地 */
+
+  /* ── 文字の階調 ── 3段。これ以外の階調は作らない。
+     透過（text-textSub に 70% 等の不透明度を付ける）で階調を作るのは禁止。透過は紙にもカード地にも
+     溶けるので、実測不能な色が無数に増える。弱い階調が要るときは
+     font-size と余白で差をつける（docs/design/text-scale.md）。
+
+     括弧内は 紙(base #e7e8dc) / カード地(ink #dee0d1) の実測コントラスト比。
+     最弱の textMuted でも両方の面で AA（4.5:1）を満たす。 */
+  --color-textMain:   #23241c; /* 墨。本文・見出し        (12.66 / 11.70) */
+  --color-textSub:    #4a4b40; /* 中墨。リード文・説明文   ( 7.16 /  6.62) */
+  --color-textMuted:  #5f6052; /* 淡墨。ラベル・注記・メタ ( 5.17 /  4.78) */
 
   /* ── 書体 ── */
   --font-sans:   var(--font-noto), ui-sans-serif, system-ui, sans-serif;
@@ -31,7 +45,7 @@
 
 @layer base {
   html {
-    background: var(--color-base);
+    background: var(--color-paper);
   }
 
   body {
@@ -88,7 +102,7 @@
 
   .input {
     /* iOS zoom防止 */
-    @apply w-full bg-base/40 border border-line rounded-[3px] px-4 py-4 text-[16px] text-textMain placeholder:text-textSub/70 outline-none focus:border-accent transition-colors;
+    @apply w-full bg-paper border border-line rounded-[3px] px-4 py-4 text-[16px] text-textMain placeholder:text-textMuted outline-none focus:border-accent transition-colors;
   }
 
   /* ===== Buttons ===== */
@@ -104,7 +118,7 @@
   /* ===== Tag / Chip ===== 罫線＋3px角。ピル全廃 */
 
   .tag {
-    @apply inline-flex items-center rounded-[3px] border border-lineStrong px-[11px] py-[3px] text-[11.5px] font-medium text-textSub;
+    @apply inline-flex items-center rounded-[3px] border border-lineStrong px-[11px] py-[3px] text-[11.5px] font-medium text-textMuted;
   }
 
   .chip {

@@ -96,7 +96,7 @@ export default function PrioritiesPage() {
       <div className="pt-12 pb-2 mb-8">
         <Link
           href="/process"
-          className="text-textSub text-sm hover:text-textMain transition-colors mb-4 inline-block"
+          className="text-textMuted text-sm hover:text-textMain transition-colors mb-4 inline-block"
         >
           ← 意思決定の流れを読む
         </Link>
@@ -107,14 +107,14 @@ export default function PrioritiesPage() {
         >
           町の目標と、議会の議論
         </h1>
-        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+        <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
           町が掲げる目標と、議会で実際に議論されていること。
         </p>
       </div>
 
       {/* ── セクション1：重点テーマ対照表 ─────────────────────────────── */}
       <section className="mb-14">
-        <h2 className="text-[12.5px] font-bold text-textSub tracking-[0.1em] mb-4">
+        <h2 className="text-[12.5px] font-bold text-textMuted tracking-[0.1em] mb-4">
           第9期総合計画 基本目標 × 議会での議論
         </h2>
         <div className="space-y-3">
@@ -128,34 +128,34 @@ export default function PrioritiesPage() {
                 {/* 左：公式目標 */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-xs font-semibold text-accent/80 tracking-wide">
+                    <span className="text-xs font-semibold text-accent tracking-wide">
                       【{p.goal}】
                     </span>
-                    <span className="text-sm text-textSub">{p.desc}</span>
+                    <span className="text-sm text-textMuted">{p.desc}</span>
                   </div>
                   {p.latest ? (
-                    <p className="text-sm text-textMain/70 mt-1 leading-snug">
+                    <p className="text-sm text-textSub mt-1 leading-snug">
                       {p.latest.narrativeTitle ?? p.latest.officialTitle}
                       {p.count > 1 && (
-                        <span className="text-textSub/50 ml-1">
+                        <span className="text-textMuted ml-1">
                           ほか {p.count - 1} 件
                         </span>
                       )}
                     </p>
                   ) : (
-                    <p className="text-sm text-textSub/40 mt-1 italic">記録なし</p>
+                    <p className="text-sm text-textMuted mt-1 italic">記録なし</p>
                   )}
                 </div>
 
                 {/* 右：件数＋タイムラインリンク */}
                 <div className="flex flex-col items-end gap-2 shrink-0">
-                  <span className="text-xs text-textSub">
+                  <span className="text-xs text-textMuted">
                     議論：<span className="text-textMain font-semibold">{p.count}</span> 件
                   </span>
                   {p.count > 0 && (
                     <Link
                       href={`/process/timeline?tag=${encodeURIComponent(p.tags[0])}`}
-                      className="text-xs text-accent hover:text-accent/70 transition-colors whitespace-nowrap"
+                      className="text-xs text-accent hover:text-accent transition-colors whitespace-nowrap"
                     >
                       → タイムラインで見る
                     </Link>
@@ -165,19 +165,19 @@ export default function PrioritiesPage() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-textSub/50 mt-3">
+        <p className="text-xs text-textMuted mt-3">
           ※ 出典：新得町第9期総合計画（R8〜R17）。議論件数は会議アーカイブに基づく。
         </p>
       </section>
 
       {/* ── セクション2：議会で浮上している未解決の争点 ─────────────────── */}
       <section>
-        <h2 className="text-[12.5px] font-bold text-textSub tracking-[0.1em] mb-4">
+        <h2 className="text-[12.5px] font-bold text-textMuted tracking-[0.1em] mb-4">
           議会で浮上している未解決の争点
         </h2>
 
         {disputeSessions.length === 0 ? (
-          <p className="text-textSub text-center py-12">
+          <p className="text-textMuted text-center py-12">
             争点データがありません
           </p>
         ) : (
@@ -199,17 +199,17 @@ export default function PrioritiesPage() {
                   </div>
                   <Link
                     href={`/gikai/sessions/${session.id}`}
-                    className="text-xs text-accent hover:text-accent/70 transition-colors shrink-0 whitespace-nowrap"
+                    className="text-xs text-accent hover:text-accent transition-colors shrink-0 whitespace-nowrap"
                   >
                     会議を読む →
                   </Link>
                 </div>
                 {/* 争点本文 */}
                 <div className="flex gap-1.5 items-baseline">
-                  <span className="text-[11px] text-textSub/50 whitespace-nowrap shrink-0">
+                  <span className="text-[11px] text-textMuted whitespace-nowrap shrink-0">
                     争点：
                   </span>
-                  <p className="text-sm leading-relaxed text-textMain/80">
+                  <p className="text-sm leading-relaxed text-textSub">
                     {session.summary!.conflicts}
                   </p>
                 </div>

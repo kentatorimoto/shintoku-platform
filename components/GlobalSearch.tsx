@@ -264,7 +264,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
     <>
       {/* オーバーレイ */}
       <div
-        className="fixed inset-0 z-[60] bg-base/70 backdrop-blur-sm"
+        className="fixed inset-0 z-[60] bg-paper/70 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -274,19 +274,19 @@ export default function GlobalSearch({ open, onClose }: Props) {
         <div className="bg-ink border border-line rounded-[3px] shadow-xl overflow-hidden">
           {/* 入力欄 */}
           <div className="flex items-center gap-3 px-5 py-4 border-b border-line">
-            <Search size={18} className="text-textSub shrink-0" />
+            <Search size={18} className="text-textMuted shrink-0" />
             <input
               ref={inputRef}
               type="text"
               placeholder="キーワードで検索（例：農業 補正予算）"
-              className="flex-1 bg-transparent text-textMain placeholder:text-textSub/60 outline-none text-base"
+              className="flex-1 bg-transparent text-textMain placeholder:text-textMuted outline-none text-base"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               inputMode="search"
             />
             <button
               onClick={onClose}
-              className="text-textSub hover:text-textMain transition p-1"
+              className="text-textMuted hover:text-textMain transition p-1"
               aria-label="閉じる"
             >
               <X size={18} />
@@ -296,19 +296,19 @@ export default function GlobalSearch({ open, onClose }: Props) {
           {/* 結果 */}
           <div className="max-h-[60vh] overflow-y-auto">
             {loading && (
-              <div className="px-5 py-8 text-center text-textSub text-sm">
+              <div className="px-5 py-8 text-center text-textMuted text-sm">
                 データを読み込み中...
               </div>
             )}
 
             {!loading && tokens.length === 0 && (
-              <div className="px-5 py-8 text-center text-textSub text-sm">
+              <div className="px-5 py-8 text-center text-textMuted text-sm">
                 {SEARCH_SCOPE_TEXT}
               </div>
             )}
 
             {!loading && tokens.length > 0 && results.length === 0 && (
-              <div className="px-5 py-8 text-center text-textSub text-sm">
+              <div className="px-5 py-8 text-center text-textMuted text-sm">
                 「{debouncedQuery.trim()}」に一致する結果はありません
               </div>
             )}
@@ -321,13 +321,13 @@ export default function GlobalSearch({ open, onClose }: Props) {
                       onClick={() => handleSelect(r.href)}
                       className="w-full text-left px-5 py-3 hover:bg-accent/8 transition-colors"
                     >
-                      <span className="inline-block text-[11px] font-medium text-accent bg-accent/10 rounded-[2px] px-1.5 py-0.5 mr-2">
+                      <span className="inline-block text-[11px] font-medium text-accent bg-hover rounded-[2px] px-1.5 py-0.5 mr-2">
                         {r.category}
                       </span>
                       <span className="text-sm text-textMain">
                         {highlightTokens(r.title, tokens)}
                       </span>
-                      <div className="mt-1 text-xs text-textSub truncate">
+                      <div className="mt-1 text-xs text-textMuted truncate">
                         {highlightTokens(r.subtitle, tokens)}
                       </div>
                     </button>
@@ -339,7 +339,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
 
           {/* フッター */}
           {!loading && tokens.length > 0 && results.length > 0 && (
-            <div className="px-5 py-2.5 border-t border-line text-[11px] text-textSub">
+            <div className="px-5 py-2.5 border-t border-line text-[11px] text-textMuted">
               {results.length} 件表示（最大10件）
             </div>
           )}
