@@ -542,7 +542,7 @@ function GikaiPageContent() {
               onClick={() => setResult(r)}
               className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
                 result === r
-                  ? "bg-accent text-base border-accent"
+                  ? "bg-accent text-onAccent border-accent"
                   : "bg-ink border-line text-textMuted hover:border-accent/50"
               }`}
             >

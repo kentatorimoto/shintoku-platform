@@ -1,9 +1,11 @@
 /**
  * 文字色のコントラスト検査。回帰防止用。
  *
- * 2つのことを見る。
+ * 3つのことを見る。
  *   1. 透過による文字の階調（text-textSub/70 等）が1件も無いこと
- *   2. 使われている「文字色 × 地色」の組み合わせがすべて WCAG AA（4.5:1）を満たすこと
+ *   2. 茜の面（bg-accent）を敷いた要素に文字色の指定があること
+ *      — 書き忘れると親から textMain を継承し、茜の上で 2.58:1 になる
+ *   3. 使われている「文字色 × 地色」の組み合わせがすべて WCAG AA（4.5:1）を満たすこと
  *
  * 階調の設計は docs/design/text-scale.md、値は app/globals.css の @theme が正。
  * このスクリプトは値を持たない（globals.css を読んで検査する）ので、
@@ -122,6 +124,7 @@ async function main() {
   const alphaText: Finding[] = []
   const aaFail: Finding[] = []
   const exempt: Finding[] = []
+  const bareSurface: Finding[] = []
   const combos = new Map<string, { ratio: number; count: number }>()
 
   // className 文字列を行単位で見る。bg と text が同じ行に並ぶのがこの配色の書き癖。
@@ -149,6 +152,21 @@ async function main() {
 
       // 例外の申告は同じ行か直前の行に書く
       const optOut = OPT_OUT.exec(raw) ?? OPT_OUT.exec(lines[i - 1] ?? "")
+
+      // 茜の面を敷いて文字色を書いていない要素は、親から textMain を継承して 2.58:1 になる。
+      // 地が中立（paper/ink）なら継承した textMain で問題ないので、強い面だけを見る。
+      const strongSurface = surfaces.find(s => s.name === "accent" || s.name === "accentSoft")
+      const hasTextColor = [...line.matchAll(TEXT_RE)].some(m => tokens[m[1]])
+      if (strongSurface && !hasTextColor) {
+        if (optOut) {
+          exempt.push({ file, line: i + 1, detail: `bg-${strongSurface.name} — ${optOut[1]}` })
+        } else {
+          bareSurface.push({
+            file, line: i + 1,
+            detail: `bg-${strongSurface.name} に文字色の指定が無い（textMain を継承すると 2.58:1）`,
+          })
+        }
+      }
 
       for (const m of line.matchAll(TEXT_RE)) {
         const [, name, alpha] = m
@@ -205,7 +223,15 @@ async function main() {
     console.log(`  ${alphaText.length}件`)
   }
 
-  console.log(`\n── 2. AA（${AA}:1）未達 ──`)
+  console.log(`\n── 2. 茜の面に文字色の指定が無い要素 ──`)
+  if (bareSurface.length === 0) {
+    console.log("  0件")
+  } else {
+    for (const f of bareSurface) console.log(`  ${f.file}:${f.line}  ${f.detail}`)
+    console.log(`  ${bareSurface.length}件`)
+  }
+
+  console.log(`\n── 3. AA（${AA}:1）未達 ──`)
   if (aaFail.length === 0) {
     console.log("  0件")
   } else {
@@ -219,7 +245,7 @@ async function main() {
     console.log(`  ${seen.size}件`)
   }
 
-  if (alphaText.length > 0 || aaFail.length > 0) {
+  if (alphaText.length > 0 || aaFail.length > 0 || bareSurface.length > 0) {
     console.error("\nコントラスト検査に失敗しました。")
     process.exit(EXIT.ERROR)
   }
