@@ -8,18 +8,26 @@ import "./globals.css"
 import "leaflet/dist/leaflet.css"
 
 // 本文
+//
+// preload: false は必須。和文フォントは unicode-range で細かく分割されるので、
+// preload を有効にすると <link rel="preload" as="font"> が242本・woff2 が133本
+// （2.06MB）同時に走り、コネクションを食い潰す。HTML も個々のファイルも1秒前後で
+// 返るのに load イベントが20〜30秒かかっていた。
+// display: "swap" があるので、先に代替書体で描いてから差し替わる。
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto",
   display: "swap",
+  preload: false,
 })
 
-// 見出し・narrativeTitle のみ
+// 見出し・narrativeTitle のみ。本文よりさらに使用箇所が少ないので当然 preload しない
 const zenOldMincho = Zen_Old_Mincho({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   variable: "--font-zen-mincho",
   display: "swap",
+  preload: false,
 })
 
 // 数値・日付・SHEET番号・座標
