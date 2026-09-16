@@ -271,3 +271,20 @@ ryuiki-archive の原則と、ATLAS の「事実の再配置のみ」の規律�
 透過の使用は `/process` 以外（`/gikai`・`SessionDetail` 等）にも広がっているので、
 **翻訳層（`lib/labels.ts`）と同じように、階調も一箇所で決める**方が筋がよい。
 別PRで、パレットの階調設計として扱う。
+
+## 積み残し: /newsletters（広報誌検索）
+
+**3.29 MB の HTML が出ていて、しかもどこからもリンクされていない。**
+
+- `app/newsletters/page.tsx` が `public/data/newsletters_index.json`（3.26MB）を
+  `fs` で読み、**まるごと props でクライアントコンポーネントに渡している**。
+  そのため RSC ペイロードとして 3.26MB が HTML に直列化される
+- 内部リンクは0件（Header・Footer・BottomNav・本文いずれからも辿れない）
+- デザインも旧世代のまま（`.pageWrap` / `.pageTitle` / `.pageDesc`）
+
+直し方は `/gikai/sessions`（PR #22）と同じ形にできるが、**その前に位置づけを決める。**
+全文検索はすでに `GlobalSearch`（ヘッダーの虫眼鏡）が町報・議決・史跡・一般質問を
+横断で持っている。`/newsletters` を残すのか、`GlobalSearch` に吸収するのか、
+ナビに載せるのか——を決めてから対処する。
+
+（2026-09-16 の性能調査で発見。PR #22 / #23 では触っていない）

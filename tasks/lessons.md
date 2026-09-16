@@ -159,3 +159,43 @@ Suspense 境界のフォールバックがHTMLに出る。`/gikai/sessions` は�
 注意: worktree の `node_modules` をプロジェクト外への絶対パスでシンボリックリンクすると
 Turbopack が "Symlink is invalid, it points out of the filesystem root" で落ちる。
 worktree はプロジェクト内に作って相対リンクにする。
+
+## 2026-09-16 Suspense のフォールバックに「本物」を置く
+
+`useSearchParams()` を使うコンポーネントは、静的プリレンダ時に最寄りの Suspense 境界の
+**フォールバックがHTMLに出る**。/gikai はページ全体がその内側にあり、静的HTMLが
+21KB のスケルトンだけだった（729件の一覧が1行も入っていない）。
+
+一覧をサーバー描画に戻そうとすると、「サーバーが描いた一覧」と「クライアントが描く一覧」が
+二重になり、どちらを隠すかという面倒が出る。
+
+→ **フォールバックそのものをサーバー描画版の一覧にする。**
+
+```tsx
+<Suspense fallback={<GiketsuStatic sessions={sessions} links={links} />}>
+  <GiketsuBrowser sessions={sessions} links={links} />
+</Suspense>
+```
+
+ハイドレーション前は本物の先頭100件が見え、後は同じ markup の対話版に置き換わる。
+隠す処理も、ズレも要らない。行の markup は `GiketsuRow` に切り出して両方から使う
+（片方だけ直すと入れ替わった瞬間に見た目が変わる）。
+
+## 2026-09-16 props に「導出できるもの」を渡さない
+
+`sessions` と、そこから導出した `items` の両方を props で渡していたら、
+**同じ中身がRSCペイロードに2回直列化**され、HTMLが 844KB になった。
+`items` を渡すのをやめて `useMemo` で導出したら 523KB（gzip 58KB → 37KB）。
+
+## 2026-09-16 「状態」がURLから来るなら、ボタンではなくリンクにする
+
+/process/timeline のテーマ選択は `useState` だったが、入口の3ページはすべて
+`?tag=` を付けてリンクしていた。つまり状態はもともとURLにあった。
+
+`<button onClick={setState}>` を `<Link href="?tag=...">` に替えると、
+クライアントコンポーネントごと不要になり、Suspense も消え、ディープリンクが
+素直に効くようになった。
+
+**なお、マウント後に `window.location` を読んで `setState` する回避策は取らない。**
+`react-hooks/set-state-in-effect` に引っかかるし、そもそも2回描くことになる。
+URLが状態ならサーバーで読む。
