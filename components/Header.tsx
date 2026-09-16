@@ -78,7 +78,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-base/80 backdrop-blur border-b border-line/40">
+      <nav className="sticky top-0 z-50 bg-paper/80 backdrop-blur border-b border-line/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* ワードマーク：Space Mono ＋ 和文サブ */}
           <Link href="/" onClick={close} className="flex items-baseline gap-2.5 text-textMain">
@@ -89,7 +89,7 @@ export default function Header() {
               SHINTOKU ATLAS
             </span>
             <span
-              className="text-textSub text-[11px] font-normal hidden sm:inline"
+              className="text-textMuted text-[11px] font-normal hidden sm:inline"
               style={{ letterSpacing: "0.08em" }}
             >
               {LABELS.siteTagline}
@@ -106,7 +106,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="text-textSub hover:text-textMain transition p-1.5"
+              className="text-textMuted hover:text-textMain transition p-1.5"
               aria-label="検索"
             >
               <Search size={18} />
@@ -118,7 +118,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="text-textSub hover:text-textMain transition p-2"
+              className="text-textMuted hover:text-textMain transition p-2"
               aria-label="検索"
             >
               <Search size={22} />
@@ -126,7 +126,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="text-textSub hover:text-textMain transition p-2 -mr-2"
+              className="text-textMuted hover:text-textMain transition p-2 -mr-2"
               aria-label={open ? "メニューを閉じる" : "メニューを開く"}
             >
               {open ? <X size={24} /> : <Menu size={24} />}
@@ -140,7 +140,7 @@ export default function Header() {
         <>
           {/* オーバーレイ */}
           <div
-            className="fixed inset-0 z-40 bg-base/80 backdrop-blur"
+            className="fixed inset-0 z-40 bg-paper/80 backdrop-blur"
             onClick={close}
             onTouchStart={close}
             aria-hidden="true"

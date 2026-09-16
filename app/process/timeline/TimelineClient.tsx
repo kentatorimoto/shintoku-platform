@@ -75,7 +75,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
             className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
               selectedTag === tag
                 ? "bg-accent text-base border-accent"
-                : "bg-ink border-line text-textSub hover:border-accent/50"
+                : "bg-ink border-line text-textMuted hover:border-accent/50"
             }`}
           >
             {tag}
@@ -85,7 +85,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
 
       {/* ── タイムライン ─────────────────────────────────────────────── */}
       {filtered.length === 0 ? (
-        <p className="text-textSub text-center py-20">
+        <p className="text-textMuted text-center py-20">
           このテーマの記録はまだありません
         </p>
       ) : (
@@ -107,11 +107,11 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
                   </p>
                   <div className="bg-ink border border-line rounded-[3px] p-5 hover:border-accent transition-all group">
                     <h3 className="text-base md:text-lg font-semibold text-textMain
-                                   group-hover:text-accent/90 transition-colors leading-snug mb-1">
+                                   group-hover:text-accent transition-colors leading-snug mb-1">
                       {session.narrativeTitle ?? session.officialTitle}
                     </h3>
                     {session.narrativeTitle && (
-                      <p className="text-xs text-textSub/60 mb-3 leading-snug">
+                      <p className="text-xs text-textMuted mb-3 leading-snug">
                         {session.officialTitle}
                       </p>
                     )}
@@ -123,10 +123,10 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
                           { dt: "次アクション", dd: session.summary.nextActions },
                         ] as const).map(({ dt, dd }) => dd && (
                           <div key={dt} className="flex gap-1.5 items-baseline">
-                            <dt className="text-[11px] text-textSub/50 whitespace-nowrap shrink-0">
+                            <dt className="text-[11px] text-textMuted whitespace-nowrap shrink-0">
                               {dt}：
                             </dt>
-                            <dd className="text-sm leading-relaxed text-textMain/70 break-words">
+                            <dd className="text-sm leading-relaxed text-textSub break-words">
                               {dd}
                             </dd>
                           </div>
@@ -136,7 +136,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
                     <Link
                       href={`/gikai/sessions/${session.id}`}
                       className="inline-flex items-center text-xs text-accent
-                                 hover:text-accent/70 transition-colors"
+                                 hover:text-accent transition-colors"
                     >
                       会議を読む →
                     </Link>

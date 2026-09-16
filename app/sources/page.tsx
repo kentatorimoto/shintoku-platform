@@ -38,7 +38,7 @@ function SourceCard({ item }: { item: SourceItem }) {
           </h3>
 
           {item.note && (
-            <p className="text-textMain/70 text-sm mt-2 leading-relaxed">
+            <p className="text-textSub text-sm mt-2 leading-relaxed">
               {item.note}
             </p>
           )}
@@ -71,7 +71,7 @@ function SourceCard({ item }: { item: SourceItem }) {
 
 export default function SourcesPage() {
   return (
-    <main className="min-h-screen bg-base text-textMain font-sans px-8 py-16 md:py-24">
+    <main className="min-h-screen bg-paper text-textMain font-sans px-8 py-16 md:py-24">
       <div className="max-w-5xl mx-auto">
         {/* Title */}
         <header className="mb-12">
@@ -83,7 +83,7 @@ export default function SourcesPage() {
         {/* Primary */}
         <section className="mb-12">
           <div className="flex items-baseline justify-between gap-4 mb-4">
-            <h2 className="text-xs font-semibold text-textSub tracking-widest">
+            <h2 className="text-xs font-semibold text-textMuted tracking-widest">
               一次情報
             </h2>
           </div>
@@ -99,10 +99,10 @@ export default function SourcesPage() {
         {DERIVED_MATERIALS.length > 0 && (
           <section>
             <div className="flex items-baseline justify-between gap-4 mb-4">
-              <h2 className="text-xs font-semibold text-textSub uppercase tracking-widest">
+              <h2 className="text-xs font-semibold text-textMuted uppercase tracking-widest">
                 Derived Materials
               </h2>
-              <span className="text-textSub text-xs">二次資料（内部作成）</span>
+              <span className="text-textMuted text-xs">二次資料（内部作成）</span>
             </div>
 
             <div className="grid grid-cols-1 gap-4">
@@ -114,7 +114,7 @@ export default function SourcesPage() {
             {/* Note */}
             <div className="mt-8 bg-ink border border-line rounded-xl p-6">
               <h3 className="text-lg font-semibold">注意</h3>
-              <p className="text-textMain/70 text-sm mt-2 leading-relaxed">
+              <p className="text-textSub text-sm mt-2 leading-relaxed">
                 二次資料は、公開情報の理解を助けるための要約・整理です。正確な内容は必ず一次情報をご確認ください。
               </p>
             </div>

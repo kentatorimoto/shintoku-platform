@@ -127,28 +127,28 @@ export default async function SessionPartPage({
       {/* ── 戻りリンク ───────────────────────────────────────────────── */}
       <Link
         href="/gikai/sessions"
-        className="text-textSub text-sm hover:text-textMain transition-colors mb-8 inline-block"
+        className="text-textMuted text-sm hover:text-textMain transition-colors mb-8 inline-block"
       >
         ← 議会を読む
       </Link>
 
       {/* ── ページヘッダー ───────────────────────────────────────────── */}
       <div className="mb-8">
-        <p className="mono text-textSub text-[13px] mb-3">
+        <p className="mono text-textMuted text-[13px] mb-3">
           {formatDate(session.date)}
         </p>
         <h1 className="font-mincho text-3xl md:text-4xl font-bold tracking-tight text-textMain leading-tight mb-2">
           {session.narrativeTitle ?? session.officialTitle}
         </h1>
         {session.narrativeTitle && (
-          <p className="text-sm text-textSub leading-snug" style={{ fontFeatureSettings: '"palt"' }}>
+          <p className="text-sm text-textMuted leading-snug" style={{ fontFeatureSettings: '"palt"' }}>
             {session.officialTitle}
           </p>
         )}
         {session.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
             {session.tags.map(tag => (
-              <span key={tag} className="text-[11.5px] font-medium border border-lineStrong text-textSub px-[11px] py-[3px] rounded-[3px]">
+              <span key={tag} className="text-[11.5px] font-medium border border-lineStrong text-textMuted px-[11px] py-[3px] rounded-[3px]">
                 {tag}
               </span>
             ))}
@@ -167,8 +167,8 @@ export default async function SessionPartPage({
                 { dt: "次アクション", dd: session.summary.nextActions },
               ] as const).map(({ dt, dd }) => dd && (
                 <div key={dt} className="flex gap-2 items-baseline">
-                  <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0">{dt}：</dt>
-                  <dd className="text-textMain/80 text-base leading-relaxed break-words">{dd}</dd>
+                  <dt className="text-xs text-textMuted whitespace-nowrap shrink-0">{dt}：</dt>
+                  <dd className="text-textSub text-base leading-relaxed break-words">{dd}</dd>
                 </div>
               ))}
             </dl>
@@ -186,7 +186,7 @@ export default async function SessionPartPage({
                              hover:border-accent hover:text-accent transition-colors"
                 >
                   <span className="font-bold">{link.label}</span>
-                  <span className="mono text-[12px] text-textSub">{link.count}件</span>
+                  <span className="mono text-[12px] text-textMuted">{link.count}件</span>
                   <span aria-hidden>↓</span>
                 </a>
               ))}

@@ -17,7 +17,7 @@ const COL2 = [
 ] as const
 
 function FooterLink({ href, label, external }: { href: string; label: string; external: boolean }) {
-  const cls = "text-sm text-textSub hover:text-accent transition-colors"
+  const cls = "text-sm text-textMuted hover:text-accent transition-colors"
   return external ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{label}</a>
   ) : (
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         {/* コピーライト ＋ 座標（モック準拠）*/}
-        <div className="flex flex-wrap justify-between gap-4 pt-6 border-t border-line text-[12.5px] text-textSub">
+        <div className="flex flex-wrap justify-between gap-4 pt-6 border-t border-line text-[12.5px] text-textMuted">
           {/* ヘッダーから外した正式名称はここに残す（何のサイトかを最後に明示する）*/}
           <span>© 2026 SHINTOKU ATLAS（{LABELS.siteFormalName}）— 非公式・個人プロジェクト</span>
           <span className="mono text-[11px]">43°04′N 142°50′E</span>

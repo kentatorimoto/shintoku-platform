@@ -19,7 +19,7 @@ Key features:
 |-------|-----------|
 | Framework | Next.js 16 (App Router) |
 | UI | React 19, TypeScript 5 (strict mode) |
-| Styling | TailwindCSS 4 with custom dark theme |
+| Styling | TailwindCSS 4 with custom light theme「亜麻」 |
 | Scraping | Cheerio + Axios |
 | Maps | Leaflet |
 | Icons | lucide-react |
@@ -76,9 +76,12 @@ shintoku-platform/
 │       ├── cards.yaml            #   要点カード（MDの派生物。cards:generate で生成）
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
 ├── docs/
-│   └── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
+│   ├── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
+│   └── design/
+│       └── text-scale.md         # ★ 文字の階調の使い分け（3段。透過で階調を作らない）
 ├── scripts/                      # Data scripts (run via tsx)
 │   ├── config.ts                 # ★ モデル名・閾値・exit code 規約の一元管理
+│   ├── check-contrast.ts         # ★ 文字色のコントラスト検査（globals.css を読む）
 │   ├── lib/schema.ts             # ★ 共通型・validateTags・stableStringify
 │   ├── build-data.ts             # ★ content/ → public/data/（恒久ビルド）
 │   ├── add-session.ts            # ★ 字幕→MD→PR のオーケストレータ
@@ -138,8 +141,9 @@ shintoku-platform/
 ```bash
 # Development
 npm run dev              # Start Next.js dev server (http://localhost:3000)
-npm run build            # Production build (build:links -> build:data -> next build)
+npm run build            # Production build (build:links -> build:data -> check:contrast -> og:fonts -> next build)
 npm run lint             # ESLint
+npm run check:contrast   # 文字色のコントラスト検査（透過0件・AA 4.5:1。build から呼ばれる）
 
 # Content (MD is canonical)
 npm run build:data       # content/sessions/** -> public/data/*.json (validates, exits 1 on error)
@@ -225,23 +229,35 @@ GitHub Actions automates:
 
 ### Styling
 
-- **Dark theme** with custom TailwindCSS 4 variables in `app/globals.css`
+- 配色「亜麻」（暖灰の紙）の TailwindCSS 4 変数を `app/globals.css` に定義
 - Custom utility classes: `.pageWrap`, `.card`, `.btnPrimary`, `.btnSecondary`, `.chip`, `.input`
 - Responsive modifiers: `md:`, `sm:`, `lg:`
-- Opacity shorthand: `bg-accent/20`, `text-textSub/60`
+- Opacity shorthand は**面と罫線だけ**（`bg-accent/20`, `border-line/50`）。
+  **文字には使わない**（`text-textSub/60` は禁止 — `npm run check:contrast` が落とす）
 - No CSS modules — all Tailwind inline classes + custom `@apply` utilities
 
 **Color variables:**
 
+配色「亜麻」。正は `app/globals.css` の `@theme`。
+
 | Variable | Usage |
 |----------|-------|
-| `base` (#0B0F14) | Page background |
-| `ink` (#0E141B) | Card background |
-| `line` (#1F2A36) | Borders |
-| `accent` (#2BD1A3) | Green accent (links, buttons) |
-| `accentSoft` (#1AA37E) | Softer green (hover states) |
-| `textMain` (#E6EEF7) | Primary text |
-| `textSub` (#8FA3B8) | Secondary text |
+| `paper` (#e7e8dc) | 紙（ページ地）。`base` という名前は Tailwind の `text-base` と衝突するので使わない |
+| `ink` (#dee0d1) | カード地・行ホバー |
+| `line` (#d0d2c2) | 罫線 |
+| `lineStrong` (#a9ac97) | 強罫線・タグ枠 |
+| `accent` (#ae3b25) | 茜。最新・現在地・ホバーのみ。**薄めない** |
+| `accentSoft` (#9a3826) | 濃い茜（ホバー状態） |
+| `onAccent` (#e7e8dc) | 茜地の上に載る文字 |
+
+**文字の階調は3段だけ。** 透過（`text-textSub/70` 等）で階調を作らない。
+弱い階調が要るときは font-size と余白で差をつける。詳細は `docs/design/text-scale.md`。
+
+| Variable | 紙 | カード地 | Usage |
+|----------|----|----------|-------|
+| `textMain` (#23241c) | 12.66:1 | 11.70:1 | 本文・見出し |
+| `textSub` (#4a4b40) | 7.16:1 | 6.62:1 | リード文・説明文 |
+| `textMuted` (#5f6052) | 5.17:1 | 4.78:1 | ラベル・注記・メタ |
 
 ### Scripts
 

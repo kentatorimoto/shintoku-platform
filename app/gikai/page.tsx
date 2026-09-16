@@ -76,9 +76,9 @@ function resultStyle(result: string): string {
     case "否決":
       return "border-textMain text-textMain"
     case "継続審査":
-      return "border-line text-textSub"
+      return "border-line text-textMuted"
     default:
-      return "border-line text-textSub/70"
+      return "border-line text-textMuted"
   }
 }
 
@@ -327,7 +327,7 @@ function GikaiPageContent() {
         >
           {LABELS.giketsu.text}
         </h1>
-        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+        <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
           何が決まり、何が見送られたか。令和6年からの議案を、会期をまたいで一覧にしています。
         </p>
         <Link
@@ -342,7 +342,7 @@ function GikaiPageContent() {
       {/* ── 直近セッション（top 3） ───────────────────────── */}
       {!loading && activeSessions.length > 0 && (
         <section className="mb-10">
-          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub mb-3">
+          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textMuted mb-3">
             最近の会議
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -366,18 +366,18 @@ function GikaiPageContent() {
                   {session.sessionLabel}
                 </div>
                 {session.sessionRange && (
-                  <div className="text-textSub text-sm mt-1">
+                  <div className="text-textMuted text-sm mt-1">
                     {session.sessionRange}
                   </div>
                 )}
-                <div className="text-textSub text-sm mt-2">
+                <div className="text-textMuted text-sm mt-2">
                   {session.items.length} 件
                 </div>
                 {session.sessionId && (
                   <Link
                     href={`/gikai/sessions/${session.sessionId}`}
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-block mt-3 text-xs text-accent hover:text-accent/70 transition-colors"
+                    className="inline-block mt-3 text-xs text-accent hover:text-accent transition-colors"
                   >
                     論点・争点を読む →
                   </Link>
@@ -408,12 +408,12 @@ function GikaiPageContent() {
                 type="button"
                 onClick={handleClear}
                 aria-label="検索をクリア"
-                className="text-textSub hover:text-textMain transition-colors p-1 leading-none"
+                className="text-textMuted hover:text-textMain transition-colors p-1 leading-none"
               >
                 ×
               </button>
             ) : isPending ? (
-              <span className="text-textSub text-sm select-none" aria-hidden="true">…</span>
+              <span className="text-textMuted text-sm select-none" aria-hidden="true">…</span>
             ) : null}
           </div>
         </div>
@@ -431,7 +431,7 @@ function GikaiPageContent() {
                     pushParams({ q: "", limit: "" })
                   }}
                   aria-label="検索条件を解除"
-                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                  className="text-textMuted hover:text-textMain transition-colors leading-none"
                 >
                   ×
                 </button>
@@ -443,7 +443,7 @@ function GikaiPageContent() {
                 <button
                   onClick={() => pushParams({ year: "", limit: "" })}
                   aria-label="年度フィルタを解除"
-                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                  className="text-textMuted hover:text-textMain transition-colors leading-none"
                 >
                   ×
                 </button>
@@ -455,7 +455,7 @@ function GikaiPageContent() {
                 <button
                   onClick={() => pushParams({ type: "", limit: "" })}
                   aria-label="種別フィルタを解除"
-                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                  className="text-textMuted hover:text-textMain transition-colors leading-none"
                 >
                   ×
                 </button>
@@ -467,7 +467,7 @@ function GikaiPageContent() {
                 <button
                   onClick={() => pushParams({ result: "", limit: "" })}
                   aria-label="結果フィルタを解除"
-                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                  className="text-textMuted hover:text-textMain transition-colors leading-none"
                 >
                   ×
                 </button>
@@ -479,7 +479,7 @@ function GikaiPageContent() {
                 <button
                   onClick={() => pushParams({ theme: "", limit: "" })}
                   aria-label="テーマフィルタを解除"
-                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                  className="text-textMuted hover:text-textMain transition-colors leading-none"
                 >
                   ×
                 </button>
@@ -491,7 +491,7 @@ function GikaiPageContent() {
                 <button
                   onClick={() => pushParams({ issue: "", limit: "" })}
                   aria-label="論点フィルタを解除"
-                  className="text-textSub hover:text-textMain transition-colors leading-none"
+                  className="text-textMuted hover:text-textMain transition-colors leading-none"
                 >
                   ×
                 </button>
@@ -499,7 +499,7 @@ function GikaiPageContent() {
             )}
             <button
               onClick={resetFilters}
-              className="text-textSub underline hover:text-textMain text-sm py-1.5 transition-colors"
+              className="text-textMuted underline hover:text-textMain text-sm py-1.5 transition-colors"
             >
               すべてリセット
             </button>
@@ -511,11 +511,11 @@ function GikaiPageContent() {
             検索窓とアクティブフィルタは畳まない（いま何で絞っているかは常に見える）。 */}
         <details className="group">
           <summary className="flex items-center gap-2 cursor-pointer list-none py-1
-                              text-[12.5px] font-bold text-textSub hover:text-textMain transition-colors">
+                              text-[12.5px] font-bold text-textMuted hover:text-textMain transition-colors">
             <span>絞り込み</span>
             {hasFilter && <span className="mono text-[11px] text-accent">条件あり</span>}
-            <span className="mono text-[11px] text-textSub/70 group-open:hidden">開く ↓</span>
-            <span className="mono text-[11px] text-textSub/70 hidden group-open:inline">閉じる ↑</span>
+            <span className="mono text-[11px] text-textMuted group-open:hidden">開く ↓</span>
+            <span className="mono text-[11px] text-textMuted hidden group-open:inline">閉じる ↑</span>
           </summary>
 
           <div className="mt-3 space-y-3">
@@ -525,7 +525,7 @@ function GikaiPageContent() {
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="bg-ink border border-line text-textSub rounded-[3px] px-3 py-2 text-sm focus:outline-none focus:border-accent transition-colors"
+            className="bg-ink border border-line text-textMuted rounded-[3px] px-3 py-2 text-sm focus:outline-none focus:border-accent transition-colors"
           >
             <option value="">年度：すべて</option>
             {eraLabels.map((era) => (
@@ -543,7 +543,7 @@ function GikaiPageContent() {
               className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
                 result === r
                   ? "bg-accent text-base border-accent"
-                  : "bg-ink border-line text-textSub hover:border-accent/50"
+                  : "bg-ink border-line text-textMuted hover:border-accent/50"
               }`}
             >
               {r}
@@ -552,7 +552,7 @@ function GikaiPageContent() {
         </div>
 
         {/* ── 凡例 ─────────────────────────────────────── */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-textSub pt-1">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-textMuted pt-1">
           {RESULT_ORDER.map((r) => (
             <span key={r} className="inline-flex items-center gap-1.5">
               <span className={`w-2 h-2 rounded-full shrink-0 ${RESULT_DOT[r]}`} />
@@ -567,10 +567,10 @@ function GikaiPageContent() {
       {/* ── 件数 ──────────────────────────────────────────
           トップの索引と同じく、まず「何件あるか」を数で示してからリストに入る。 */}
       <div className="flex items-baseline justify-between border-t-[1.5px] border-textMain pt-4 pb-3 mb-1">
-        <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">
+        <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textMuted">
           {hasFilter ? "絞り込んだ結果" : `${LABELS.giketsu.formal}の一覧`}
         </h2>
-        <p className="text-textSub text-[13px]">
+        <p className="text-textMuted text-[13px]">
           {loading || waitingLinks ? (
             "読み込み中…"
           ) : (
@@ -588,7 +588,7 @@ function GikaiPageContent() {
       {loading || waitingLinks ? (
         <Skeleton />
       ) : filteredItems.length === 0 ? (
-        <div className="text-center text-textSub py-20">
+        <div className="text-center text-textMuted py-20">
           該当する議案がありません
         </div>
       ) : (
@@ -608,7 +608,7 @@ function GikaiPageContent() {
                     <div className="flex items-start gap-3">
                       {/* 左：種別+番号 */}
                       <div className="shrink-0 pt-0.5">
-                        <span className="inline-flex items-baseline gap-1 text-xs border border-line rounded-[3px] px-2 py-1 text-textSub">
+                        <span className="inline-flex items-baseline gap-1 text-xs border border-line rounded-[3px] px-2 py-1 text-textMuted">
                           {item.caseType}
                           <span className="mono text-textMain font-bold">
                             {item.num}
@@ -621,13 +621,13 @@ function GikaiPageContent() {
                         <p
                           className={`text-base md:text-lg line-clamp-2 transition-colors ${
                             item.title
-                              ? "text-textMain group-hover:text-accent/90"
-                              : "text-textSub italic"
+                              ? "text-textMain group-hover:text-accent"
+                              : "text-textMuted italic"
                           }`}
                         >
                           {item.title || "（件名なし）"}
                         </p>
-                        <p className="text-textSub text-[12.5px] mt-1.5">
+                        <p className="text-textMuted text-[12.5px] mt-1.5">
                           <span className="mono">{item.decisionDate}</span>
                           <span className="mx-1.5 opacity-40">·</span>
                           {item.sessionName}
@@ -646,7 +646,7 @@ function GikaiPageContent() {
                   </a>
                   {refs.length > 0 && (
                     <div className="flex flex-wrap items-center gap-1.5 px-2 py-1.5">
-                      <span className="text-xs text-textSub shrink-0">関連：</span>
+                      <span className="text-xs text-textMuted shrink-0">関連：</span>
                       {refs.map((ref) => {
                         const sep = ref.indexOf(":")
                         const kind = ref.slice(0, sep)
@@ -663,7 +663,7 @@ function GikaiPageContent() {
                           <Link
                             key={ref}
                             href={href}
-                            className="inline-flex items-center text-xs border border-line bg-ink rounded px-2 py-0.5 text-textSub hover:text-accent hover:border-accent transition-colors"
+                            className="inline-flex items-center text-xs border border-line bg-ink rounded px-2 py-0.5 text-textMuted hover:text-accent hover:border-accent transition-colors"
                           >
                             {label}
                           </Link>
@@ -681,7 +681,7 @@ function GikaiPageContent() {
             <div className="mt-6 text-center">
               <button
                 onClick={loadMore}
-                className="px-6 py-3 border border-line rounded-[3px] text-textSub hover:border-accent hover:text-textMain transition-colors text-sm"
+                className="px-6 py-3 border border-line rounded-[3px] text-textMuted hover:border-accent hover:text-textMain transition-colors text-sm"
               >
                 さらに表示（残り{" "}
                 {(filteredItems.length - visibleItems.length).toLocaleString()}{" "}

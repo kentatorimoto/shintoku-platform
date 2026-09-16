@@ -91,7 +91,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
             className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
               selectedTags.length === 0
                 ? "bg-accent text-onAccent border-accent"
-                : "bg-ink border-lineStrong text-textSub hover:border-accent/50"
+                : "bg-ink border-lineStrong text-textMuted hover:border-accent/50"
             }`}
           >
             すべて
@@ -103,7 +103,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
               className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
                 selectedTags.includes(tag)
                   ? "bg-accent text-onAccent border-accent"
-                  : "bg-ink border-lineStrong text-textSub hover:border-accent/50"
+                  : "bg-ink border-lineStrong text-textMuted hover:border-accent/50"
               }`}
             >
               {tag}
@@ -111,7 +111,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
           ))}
         </div>
         {selectedTags.length > 0 && (
-          <p className="text-xs text-textSub mt-2">
+          <p className="text-xs text-textMuted mt-2">
             {filtered.length} 件ヒット（AND 条件）
           </p>
         )}
@@ -119,7 +119,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
 
       {/* ── セッション一覧 ─────────────────────────────────────────────── */}
       {filtered.length === 0 ? (
-        <p className="text-textSub text-center py-20">該当する会議がありません</p>
+        <p className="text-textMuted text-center py-20">該当する会議がありません</p>
       ) : (
         <div className="border-t border-line">
           {filtered.map((session) => {
@@ -133,7 +133,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     {/* 日付 */}
-                    <p className="mono text-[12px] text-textSub mb-1.5">
+                    <p className="mono text-[12px] text-textMuted mb-1.5">
                       {formatDate(session.date)}
                     </p>
                     {/* タイトル */}
@@ -142,7 +142,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                       {session.narrativeTitle ?? session.officialTitle}
                     </h2>
                     {session.narrativeTitle && (
-                      <p className="text-xs text-textSub mb-2 leading-snug">
+                      <p className="text-xs text-textMuted mb-2 leading-snug">
                         {session.officialTitle}
                       </p>
                     )}
@@ -154,8 +154,8 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                             key={tag}
                             className={`text-[11px] rounded-[3px] px-[9px] py-[2px] border ${
                               selectedTags.includes(tag)
-                                ? "bg-accent/15 text-accent border-accent/40"
-                                : "text-textSub border-lineStrong"
+                                ? "bg-hover text-accent border-accent"
+                                : "text-textMuted border-lineStrong"
                             }`}
                           >
                             {tag}
@@ -172,8 +172,8 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                           { dt: "次アクション", dd: session.summary.nextActions },
                         ] as const).map(({ dt, dd }) => dd && (
                           <div key={dt} className="flex gap-1.5 items-baseline">
-                            <dt className="text-[11px] text-textSub/50 whitespace-nowrap shrink-0">{dt}：</dt>
-                            <dd className="text-sm leading-relaxed text-textMain/70 break-words line-clamp-1">{dd}</dd>
+                            <dt className="text-[11px] text-textMuted whitespace-nowrap shrink-0">{dt}：</dt>
+                            <dd className="text-sm leading-relaxed text-textSub break-words line-clamp-1">{dd}</dd>
                           </div>
                         ))}
                       </dl>
@@ -184,7 +184,7 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                         <span
                           key={part.slidesDir}
                           className="inline-flex items-center gap-1.5 text-xs
-                                     border border-line text-textSub rounded-[3px] px-2.5 py-0.5"
+                                     border border-line text-textMuted rounded-[3px] px-2.5 py-0.5"
                         >
                           {part.youtube && (
                             <svg className="w-3 h-3 text-red-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -210,8 +210,8 @@ export default function SessionsList({ sessions, giketsuMap }: Props) {
                       </div>
                     )}
                   </div>
-                  <span className="text-textSub/40 text-xl shrink-0 mt-1
-                                    group-hover:text-accent/60 transition-colors">
+                  <span className="text-textMuted text-xl shrink-0 mt-1
+                                    group-hover:text-accent transition-colors">
                     →
                   </span>
                 </div>

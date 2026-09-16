@@ -14,7 +14,7 @@ export default function ShisekiIndexPage() {
   if (!data) {
     return (
       <div className="max-w-[1040px] mx-auto px-6 py-20">
-        <p className="text-textSub text-center">史跡データがありません</p>
+        <p className="text-textMuted text-center">史跡データがありません</p>
       </div>
     )
   }
@@ -30,7 +30,7 @@ export default function ShisekiIndexPage() {
         <h1 className="font-mincho font-bold leading-[1.4] text-textMain" style={{ fontSize: "clamp(26px, 4vw, 38px)" }}>
           {LABELS.shiseki.text}
         </h1>
-        <p className="text-[13.5px] text-textSub mt-2.5 max-w-[560px]">
+        <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
           町のあちこちに、碑や標柱が立っています。そこで何があった場所なのかを、
           郷土研究会が調べた記録から{items.length}件ぶん読めるようにしました。
         </p>
@@ -39,11 +39,11 @@ export default function ShisekiIndexPage() {
       {/* ── 出典（権利ガードレール3。一覧にも必ず置く）─────────────────── */}
       <div className="mt-9">
         <PlateFrame className="px-6 py-6 md:px-9">
-          <p className="text-[12.5px] text-textSub leading-relaxed">
+          <p className="text-[12.5px] text-textMuted leading-relaxed">
             出典 —『{book.title}』{book.publisher}・{book.year}年／新得町図書館蔵
           </p>
           <p className="text-[12.5px] text-textMain mt-2 font-bold">{book.citation_note}</p>
-          <p className="text-[12px] text-textSub mt-3 leading-relaxed">
+          <p className="text-[12px] text-textMuted mt-3 leading-relaxed">
             ここに載せているのは、場所・年代と、原本をもとにまとめた概要だけです。
             本文と図版は掲載していません。
           </p>
@@ -53,10 +53,10 @@ export default function ShisekiIndexPage() {
       {/* ── 一覧（掲載順）──────────────────────────────────────────── */}
       <section className="mt-12 border-t-[1.5px] border-textMain">
         <div className="flex items-baseline justify-between pt-4 pb-1.5">
-          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textSub">
+          <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textMuted">
             史跡の索引 — {items.length}件
           </h2>
-          <span className="mono text-[11.5px] text-textSub">原本 p.1 — p.{book ? items[items.length - 1].page_start : ""}</span>
+          <span className="mono text-[11.5px] text-textMuted">原本 p.1 — p.{book ? items[items.length - 1].page_start : ""}</span>
         </div>
 
         {items.map(item => (
@@ -66,7 +66,7 @@ export default function ShisekiIndexPage() {
             className="group grid grid-cols-[44px_1fr] md:grid-cols-[60px_1fr_120px] items-baseline gap-3 md:gap-5
                        py-[18px] px-1 border-b border-line rounded-[3px] transition-colors hover:bg-hover"
           >
-            <span className="mono font-bold text-[15px] md:text-[17px] text-textSub leading-none">
+            <span className="mono font-bold text-[15px] md:text-[17px] text-textMuted leading-none">
               {String(item.order).padStart(2, "0")}
             </span>
 
@@ -78,15 +78,15 @@ export default function ShisekiIndexPage() {
                 </span>
               )}
               {/* 一覧では1文目だけ。全文は個別ページで読む */}
-              <span className="block text-[12.5px] text-textSub font-normal mt-1 leading-relaxed">
+              <span className="block text-[12.5px] text-textMuted font-normal mt-1 leading-relaxed">
                 {leadSentence(item.summary)}
               </span>
-              <span className="mono block md:hidden text-[11px] text-textSub/80 mt-1">
+              <span className="mono block md:hidden text-[11px] text-textMuted mt-1">
                 p.{item.page_start}{item.era ? `　${item.era}` : ""}
               </span>
             </span>
 
-            <span className="mono text-[11.5px] text-textSub text-right whitespace-nowrap justify-self-end hidden md:block">
+            <span className="mono text-[11.5px] text-textMuted text-right whitespace-nowrap justify-self-end hidden md:block">
               p.{item.page_start}
               {item.era && <span className="block text-[11px] mt-0.5">{item.era}</span>}
             </span>
@@ -94,7 +94,7 @@ export default function ShisekiIndexPage() {
         ))}
       </section>
 
-      <p className="text-[11.5px] text-textSub/80 mt-6 leading-relaxed">
+      <p className="text-[11.5px] text-textMuted mt-6 leading-relaxed">
         原本の全町略図には27件の凡例がありますが、本文に独立した記事があるのは{items.length}件です。
         凡例2番「伊藤傳五郎住居跡」は独立した見出しを持たないため、原本と照合できるまで欠番にしています。
       </p>

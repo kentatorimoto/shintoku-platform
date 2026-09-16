@@ -10,14 +10,26 @@ import { OG_FONT_SOURCES, downloadFont, fontPath, isAvailable } from "@/lib/og-f
 export const OG_SIZE = { width: 1200, height: 630 }
 export const OG_CONTENT_TYPE = "image/png"
 
-/** app/globals.css の @theme（亜麻）と同じ値。片方だけ変えないこと。 */
-export const OG_COLORS = {
-  base:       "#e7e8dc",
-  line:       "#d0d2c2",
-  accent:     "#b8432c",
-  textMain:   "#23241c",
-  textSub:    "#67685a",
-} as const
+/**
+ * 配色は app/globals.css の @theme から読む。satori は Tailwind を通らないので
+ * 値そのものが要るが、ここに書き写すと二重管理になり片方だけ古くなる。
+ * 走るのはビルド時（SSG）だけなので fs で読んで構わない。
+ */
+function readThemeColors(): Record<string, string> {
+  const css = fs.readFileSync("app/globals.css", "utf8")
+  const colors: Record<string, string> = {}
+  for (const m of css.matchAll(/--color-([A-Za-z0-9]+):\s*(#[0-9a-fA-F]{6})/g)) {
+    colors[m[1]] = m[2]
+  }
+  for (const key of ["paper", "line", "accent", "textMain", "textSub"]) {
+    if (!colors[key]) throw new Error(`OGP: app/globals.css に --color-${key} が見つからない`)
+  }
+  return colors
+}
+
+export const OG_COLORS = readThemeColors() as Record<string, string> & {
+  paper: string; line: string; accent: string; textMain: string; textSub: string
+}
 
 // ── フォント ────────────────────────────────────────────────────────────────
 
@@ -108,7 +120,7 @@ export function OgPlate({ eyebrow, stamp, title, lede, footnote }: OgPlateProps)
         width: "100%",
         height: "100%",
         display: "flex",
-        backgroundColor: OG_COLORS.base,
+        backgroundColor: OG_COLORS.paper,
         padding: 56,
         fontFamily: MINCHO,
       }}

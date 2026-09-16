@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body className="font-sans antialiased bg-base text-textMain min-h-screen flex flex-col">
+      <body className="font-sans antialiased bg-paper text-textMain min-h-screen flex flex-col">
         <Header />
         <main className="pt-16 pb-16 md:pb-0 flex-1">
           {children}

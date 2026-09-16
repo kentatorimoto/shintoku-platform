@@ -78,7 +78,7 @@ function SectionHeading({ label, className = "" }: { label: UiLabel; className?:
     <div className={`mb-4 ${className}`}>
       <h2 className="text-[15px] font-bold text-textMain leading-snug">{label.text}</h2>
       {label.formal && (
-        <p className="text-[11.5px] text-textSub mt-0.5">{label.formal}</p>
+        <p className="text-[11.5px] text-textMuted mt-0.5">{label.formal}</p>
       )}
     </div>
   )
@@ -107,25 +107,25 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {item.bill_tags.map(tag => (
-                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-[3px]">
+                      <span key={tag} className="text-xs border border-line text-textMuted px-2 py-0.5 rounded-[3px]">
                         {tag}
                       </span>
                     ))}
                   </div>
                   <p className="font-mincho text-[15px] font-bold text-textMain mb-1">{item.bill_title}</p>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs text-textSub/60">{item.bill_number}</span>
+                    <span className="text-xs text-textMuted">{item.bill_number}</span>
                     <span className={`text-xs px-2 py-0.5 rounded-[3px] border ${
                       item.result === "可決"
-                        ? "border-accent/40 text-accent/70"
-                        : "border-line text-textSub/60"
+                        ? "border-accent/40 text-accent"
+                        : "border-line text-textMuted"
                     }`}>
                       {item.result}
                     </span>
                   </div>
                 </div>
                 <svg
-                  className={`w-4 h-4 text-textSub/40 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 text-textMuted shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                 >
                   <polyline points="6 9 12 15 18 9" />
@@ -136,30 +136,30 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
                 <div className="px-5 pb-5 border-t border-line/50">
                   <dl className="space-y-3 mt-4">
                     <div className="flex gap-3">
-                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">概要</dt>
-                      <dd className="text-sm text-textMain/80 leading-relaxed">{item.summary}</dd>
+                      <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">概要</dt>
+                      <dd className="text-sm text-textSub leading-relaxed">{item.summary}</dd>
                     </div>
                     <div className="border-t border-line/50 pt-3 flex gap-3">
-                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">提案者</dt>
-                      <dd className="text-sm text-textMain/80">{item.proposer}</dd>
+                      <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">提案者</dt>
+                      <dd className="text-sm text-textSub">{item.proposer}</dd>
                     </div>
                     {item.questions.length > 0 && (
                       <div className="border-t border-line/50 pt-3 flex gap-3">
-                        <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">質疑</dt>
+                        <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">質疑</dt>
                         <dd className="space-y-3 flex-1">
                           {item.questions.map((q, j) => (
                             <div key={j} className="text-sm">
-                              <p className="text-textSub/70 text-xs mb-1">{q.questioner}</p>
-                              <p className="text-textMain/80 leading-relaxed mb-1">{q.content}</p>
-                              <p className="text-textSub/60 leading-relaxed text-xs border-l border-line/50 pl-3">{q.answer}</p>
+                              <p className="text-textMuted text-xs mb-1">{q.questioner}</p>
+                              <p className="text-textSub leading-relaxed mb-1">{q.content}</p>
+                              <p className="text-textMuted leading-relaxed text-xs border-l border-line/50 pl-3">{q.answer}</p>
                             </div>
                           ))}
                         </dd>
                       </div>
                     )}
                     <div className="border-t border-line/50 pt-3 flex gap-3">
-                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">採決</dt>
-                      <dd className="text-sm text-textMain/80">{item.result}（{item.result_detail}）</dd>
+                      <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">採決</dt>
+                      <dd className="text-sm text-textSub">{item.result}（{item.result_detail}）</dd>
                     </div>
                   </dl>
                 </div>
@@ -173,7 +173,7 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
             onClick={() => {
               setShowAll(!showAll)
             }}
-            className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-[3px] hover:border-accent/50 hover:text-accent transition-colors"
+            className="mt-4 w-full py-3 text-sm text-textMuted border border-line rounded-[3px] hover:border-accent/50 hover:text-accent transition-colors"
           >
             {showAll
               ? "折りたたむ"
@@ -186,13 +186,14 @@ function HonkaigiSection({ data }: { data: HonkaigiData }) {
             <p className="text-[13px] font-bold text-textMain leading-snug">
               {LABELS.committeeReferral.text}
             </p>
-            <p className="text-[11.5px] text-textSub mt-0.5 mb-3">
+            <p className="text-[11.5px] text-textMuted mt-0.5 mb-3">
               {LABELS.committeeReferral.formal}
             </p>
             {data.committee_referrals.map((ref, i) => (
-              <div key={i}>
-                <p className="text-xs text-textSub/60 mb-1">{ref.bill_numbers.join("、")} → {ref.committee}に付託</p>
-                <p className="text-xs text-textSub/40">{ref.note}</p>
+              /* 付託先と注記は同じ淡墨。強弱はサイズと字下げで付ける */
+              <div key={i} className="mt-2 first:mt-0">
+                <p className="text-xs text-textMuted">{ref.bill_numbers.join("、")} → {ref.committee}に付託</p>
+                <p className="text-[11px] text-textMuted mt-0.5 pl-3">{ref.note}</p>
               </div>
             ))}
           </div>
@@ -228,16 +229,16 @@ function QnaSection({ items }: { items: QnaItem[] }) {
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {item.topic_tags.map(tag => (
-                      <span key={tag} className="text-xs border border-line text-textSub/70 px-2 py-0.5 rounded-[3px]">
+                      <span key={tag} className="text-xs border border-line text-textMuted px-2 py-0.5 rounded-[3px]">
                         {tag}
                       </span>
                     ))}
                   </div>
                   <p className="font-mincho text-[15px] font-bold text-textMain mb-1">{item.topic_title}</p>
-                  <p className="text-xs text-textSub/60">{item.speaker_name} {item.speaker_role}</p>
+                  <p className="text-xs text-textMuted">{item.speaker_name} {item.speaker_role}</p>
                 </div>
                 <svg
-                  className={`w-4 h-4 text-textSub/40 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 text-textMuted shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                 >
                   <polyline points="6 9 12 15 18 9" />
@@ -248,12 +249,12 @@ function QnaSection({ items }: { items: QnaItem[] }) {
                 <div className="px-5 pb-5 border-t border-line/50">
                   <dl className="space-y-3 mt-4">
                     <div className="flex gap-3">
-                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">質問</dt>
-                      <dd className="text-sm text-textMain/80 leading-relaxed">
+                      <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">質問</dt>
+                      <dd className="text-sm text-textSub leading-relaxed">
                         <ul className="space-y-1">
                           {item.question_points.map((p, j) => (
                             <li key={j} className="flex gap-2">
-                              <span className="text-textSub/40 shrink-0">·</span>
+                              <span className="text-textMuted shrink-0">·</span>
                               <span>{p}</span>
                             </li>
                           ))}
@@ -261,17 +262,17 @@ function QnaSection({ items }: { items: QnaItem[] }) {
                       </dd>
                     </div>
                     <div className="border-t border-line/50 pt-3 flex gap-3">
-                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">行政の回答</dt>
-                      <dd className="text-sm text-textMain/80 leading-relaxed">{item.answer_summary}</dd>
+                      <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">行政の回答</dt>
+                      <dd className="text-sm text-textSub leading-relaxed">{item.answer_summary}</dd>
                     </div>
                     <div className="border-t border-line/50 pt-3 flex gap-3">
-                      <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">結論</dt>
-                      <dd className="text-sm text-textMain/80 leading-relaxed">{item.conclusion}</dd>
+                      <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">結論</dt>
+                      <dd className="text-sm text-textSub leading-relaxed">{item.conclusion}</dd>
                     </div>
                     {item.continuing_issues.length > 0 && (
                       <div className="border-t border-line/50 pt-3 flex gap-3">
-                        <dt className="text-xs text-textSub/60 whitespace-nowrap shrink-0 pt-0.5 w-16">継続課題</dt>
-                        <dd className="text-sm text-textSub/70 leading-relaxed">
+                        <dt className="text-xs text-textMuted whitespace-nowrap shrink-0 pt-0.5 w-16">継続課題</dt>
+                        <dd className="text-sm text-textMuted leading-relaxed">
                           {item.continuing_issues.join("　")}
                         </dd>
                       </div>
@@ -290,7 +291,7 @@ function QnaSection({ items }: { items: QnaItem[] }) {
             setShowAll(!showAll)
             setOpenIndex(null)
           }}
-          className="mt-4 w-full py-3 text-sm text-textSub/60 border border-line rounded-[3px] hover:border-accent/50 hover:text-accent transition-colors"
+          className="mt-4 w-full py-3 text-sm text-textMuted border border-line rounded-[3px] hover:border-accent/50 hover:text-accent transition-colors"
         >
           {showAll
             ? "折りたたむ"
@@ -334,14 +335,15 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
           />
         ) : (
           <div className="flex items-center justify-center h-full">
-            <svg className="w-8 h-8 text-textSub/40" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-8 h-8 text-textMuted" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
           </div>
         )}
         {/* 再生ボタンオーバーレイ */}
         <div className="absolute inset-0 flex items-center justify-center
-                        bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                        bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity">
+          {/* contrast-ok: 親の bg-black/55 の上に載る非テキストのアイコン */}
           <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5v14l11-7z"/>
           </svg>
@@ -350,19 +352,19 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
 
       {/* テキスト */}
       <div className="flex-1 min-w-0">
-        <p className="text-[11px] font-semibold tracking-widest text-accent/70 mb-0.5">
+        <p className="text-[11px] font-semibold tracking-widest text-accent mb-0.5">
           YouTube
         </p>
         <p className="text-sm font-semibold text-textMain group-hover:text-accent transition-colors">
           {label}
         </p>
-        <p className="text-[11px] text-textSub/50 mt-0.5">
+        <p className="text-[11px] text-textMuted mt-0.5">
           YouTube で見る →
         </p>
       </div>
 
       {/* 外部リンクアイコン */}
-      <svg className="w-4 h-4 text-textSub/30 shrink-0 group-hover:text-accent/50 transition-colors"
+      <svg className="w-4 h-4 text-textMuted shrink-0 group-hover:text-accent transition-colors"
            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
         <polyline points="15 3 21 3 21 9"/>
@@ -380,7 +382,7 @@ function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) 
       href={part.pdfPath}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-1.5 text-xs text-textSub/70
+      className="flex items-center gap-1.5 text-xs text-textMuted
                  hover:text-accent transition-colors border border-line/50
                  rounded-[3px] px-3 py-2 bg-ink shrink-0"
     >
@@ -407,7 +409,7 @@ function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) 
           {/* ページ番号バッジ */}
           <div className="absolute top-2 left-2 z-10
                           bg-ink/80 backdrop-blur-sm rounded-md
-                          px-2 py-0.5 text-[10px] font-mono text-textSub/70">
+                          px-2 py-0.5 text-[10px] font-mono text-textMuted">
             {i + 1} / {part.images.length}
           </div>
 
@@ -416,7 +418,7 @@ function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) 
                           opacity-100 sm:opacity-0 sm:group-hover:opacity-100
                           transition-opacity
                           bg-ink/80 backdrop-blur-sm rounded-md px-2 py-1">
-            <svg className="w-3.5 h-3.5 text-textSub" viewBox="0 0 24 24" fill="none"
+            <svg className="w-3.5 h-3.5 text-textMuted" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" strokeWidth="2">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               <polyline points="15 3 21 3 21 9"/>
@@ -443,13 +445,13 @@ function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) 
       <details className="group">
         <summary className="flex items-center justify-between gap-4 cursor-pointer list-none
                             border-t border-line pt-4">
-          <span className="text-[13px] font-bold text-textSub group-open:text-textMain transition-colors">
+          <span className="text-[13px] font-bold text-textMuted group-open:text-textMain transition-colors">
             {LABELS.legacySlides.text}
-            <span className="mono text-[11px] font-normal text-textSub/70 ml-2">
+            <span className="mono text-[11px] font-normal text-textMuted ml-2">
               {part.images.length}枚
             </span>
           </span>
-          <span className="mono text-[11px] text-textSub">開く ↓</span>
+          <span className="mono text-[11px] text-textMuted">開く ↓</span>
         </summary>
         <div className="mt-4 flex justify-end mb-4">{pdfLink}</div>
         {images}
@@ -478,7 +480,7 @@ export default function SessionDetail({
   const router = useRouter()
 
   if (parts.length === 0) {
-    return <p className="text-textSub/50 text-sm">コンテンツがありません</p>
+    return <p className="text-textMuted text-sm">コンテンツがありません</p>
   }
 
   const activePart = parts[activeIdx]
@@ -505,8 +507,8 @@ export default function SessionDetail({
               className={[
                 "px-4 py-2 rounded-[3px] text-sm font-medium transition-colors border",
                 activeIdx === i
-                  ? "bg-accent/10 text-accent border-accent font-semibold"
-                  : "bg-ink border-line text-textSub hover:border-accent/50",
+                  ? "bg-hover text-accent border-accent font-semibold"
+                  : "bg-ink border-line text-textMuted hover:border-accent/50",
               ].join(" ")}
             >
               {part.label}

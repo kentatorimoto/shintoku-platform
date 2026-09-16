@@ -34,7 +34,7 @@ export default function SessionCards({ cards }: Props) {
     <section>
       <div className="flex items-baseline justify-between mb-4">
         <h2 className="text-[15px] font-bold text-textMain leading-snug">{LABELS.cards.text}</h2>
-        <span className="mono text-[11px] tracking-[0.1em] text-textSub tabular-nums">
+        <span className="mono text-[11px] tracking-[0.1em] text-textMuted tabular-nums">
           {index + 1} / {cards.length}
         </span>
       </div>
@@ -63,7 +63,7 @@ export default function SessionCards({ cards }: Props) {
                 {card.title}
               </h3>
 
-              <p className="text-[13px] text-textSub leading-relaxed flex-1">{card.detail}</p>
+              <p className="text-[13px] text-textMuted leading-relaxed flex-1">{card.detail}</p>
 
               {card.link && (
                 <Link

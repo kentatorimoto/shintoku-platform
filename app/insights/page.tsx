@@ -57,7 +57,7 @@ function heatClass(count: number): string {
   if (count === 0) return ""
   if (count <= 2)  return "bg-accent/20 text-textMain"
   if (count <= 5)  return "bg-accent/45 text-textMain"
-  return                  "bg-accent/70 text-base font-semibold"
+  return                  "bg-accent text-onAccent font-semibold"
 }
 
 // ─────────────────────────── Page ─────────────────────────────────
@@ -138,17 +138,17 @@ export default function InsightsPage() {
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           データで見る
         </h1>
-        <p className="text-textMain/70 text-lg">
+        <p className="text-textSub text-lg">
           議決の分布・タグ・年別推移を読む。
         </p>
       </div>
 
       {/* ── A. ヒートマップ ────────────────────────────────── */}
       <section className="mb-14">
-        <h2 className="text-xs font-semibold text-textSub tracking-widest mb-1">
+        <h2 className="text-xs font-semibold text-textMuted tracking-widest mb-1">
           年度 × テーマ ヒートマップ
         </h2>
-        <p className="text-xs text-textSub mb-4">
+        <p className="text-xs text-textMuted mb-4">
           セルをクリックすると議決一覧に絞り込み表示します
         </p>
 
@@ -156,13 +156,13 @@ export default function InsightsPage() {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr>
-                <th className="sticky left-0 bg-ink text-left px-4 py-3 text-textSub text-xs font-medium border-b border-line w-28">
+                <th className="sticky left-0 bg-ink text-left px-4 py-3 text-textMuted text-xs font-medium border-b border-line w-28">
                   テーマ
                 </th>
                 {sortedEras.map((era) => (
                   <th
                     key={era}
-                    className="px-2 py-3 text-textSub text-xs font-medium border-b border-line text-center whitespace-nowrap min-w-[3rem]"
+                    className="px-2 py-3 text-textMuted text-xs font-medium border-b border-line text-center whitespace-nowrap min-w-[3rem]"
                   >
                     {eraYearMap.get(era)}
                   </th>
@@ -194,7 +194,7 @@ export default function InsightsPage() {
                         ) : (
                           <span
                             title={tipLabel}
-                            className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] text-xs text-textSub/20"
+                            className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] text-xs text-textMuted"
                           >
                             —
                           </span>
@@ -212,7 +212,7 @@ export default function InsightsPage() {
       {/* ── B. テーマ別ランキング ───────────────────────────── */}
       <section className="mb-14">
         <div className="bg-ink border border-line rounded-[3px] p-6">
-          <h2 className="text-xs font-semibold text-textSub tracking-widest mb-4">
+          <h2 className="text-xs font-semibold text-textMuted tracking-widest mb-4">
             テーマ別 議決件数
           </h2>
           <div className="space-y-2">
@@ -231,7 +231,7 @@ export default function InsightsPage() {
                     style={{ width: `${(count / maxThemeCount) * 100}%` }}
                   />
                 </div>
-                <span className="text-textSub text-xs w-10 text-right shrink-0 tabular-nums">
+                <span className="text-textMuted text-xs w-10 text-right shrink-0 tabular-nums">
                   {count}件
                 </span>
               </Link>
@@ -243,10 +243,10 @@ export default function InsightsPage() {
       {/* ── D. 会議アーカイブ × テーマ ─────────────────────── */}
       <section className="mb-14">
         <div className="bg-ink border border-line rounded-[3px] p-6">
-          <h2 className="text-xs font-semibold text-textSub tracking-widest mb-1">
+          <h2 className="text-xs font-semibold text-textMuted tracking-widest mb-1">
             会議アーカイブ × テーマ
           </h2>
-          <p className="text-xs text-textSub mb-4">
+          <p className="text-xs text-textMuted mb-4">
             論点・争点アーカイブのテーマ分布
           </p>
           <div className="space-y-2">
@@ -265,7 +265,7 @@ export default function InsightsPage() {
                     style={{ width: `${(count / maxTagCount) * 100}%` }}
                   />
                 </div>
-                <span className="text-textSub text-xs w-10 text-right shrink-0 tabular-nums">
+                <span className="text-textMuted text-xs w-10 text-right shrink-0 tabular-nums">
                   {count}件
                 </span>
               </Link>

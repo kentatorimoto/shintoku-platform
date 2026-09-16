@@ -56,20 +56,20 @@ export default function GikaiSessionsPage() {
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
           議会を読む
         </h1>
-        <p className="text-textMain/70 text-lg">
+        <p className="text-textSub text-lg">
           新得町議会のライブ配信を要約・構造化し、<br className="hidden sm:inline" />
           意思決定の記録としてアーカイブ
         </p>
-        <p className="text-xs text-textSub/50 mt-2">
+        <p className="text-xs text-textMuted mt-2">
           AIによる要約を含むため、内容に誤りがある場合があります。
         </p>
       </div>
 
       {/* ── フィルター＆一覧（Client Component） ────────────────────────── */}
       {sessions.length === 0 ? (
-        <p className="text-textSub text-center py-20">会議データがありません</p>
+        <p className="text-textMuted text-center py-20">会議データがありません</p>
       ) : (
-        <Suspense fallback={<p className="text-textSub text-center py-20">読み込み中…</p>}>
+        <Suspense fallback={<p className="text-textMuted text-center py-20">読み込み中…</p>}>
           <SessionsList sessions={sessions} giketsuMap={giketsuMap} />
         </Suspense>
       )}
