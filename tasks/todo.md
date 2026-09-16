@@ -272,19 +272,37 @@ ryuiki-archive の原則と、ATLAS の「事実の再配置のみ」の規律�
 **翻訳層（`lib/labels.ts`）と同じように、階調も一箇所で決める**方が筋がよい。
 別PRで、パレットの階調設計として扱う。
 
-## 積み残し: /newsletters（広報誌検索）
+## 積み残し: /newsletters と /announcements の位置づけ
 
-**3.29 MB の HTML が出ていて、しかもどこからもリンクされていない。**
+**どちらもナビからも本文からも辿れない。** それぞれデータ収集の仕組みだけが動き続けている。
 
+### /newsletters（広報誌検索）
+
+- 内部リンク **0件**（Header・Footer・BottomNav・本文いずれからも辿れない）
 - `app/newsletters/page.tsx` が `public/data/newsletters_index.json`（3.26MB）を
   `fs` で読み、**まるごと props でクライアントコンポーネントに渡している**。
-  そのため RSC ペイロードとして 3.26MB が HTML に直列化される
-- 内部リンクは0件（Header・Footer・BottomNav・本文いずれからも辿れない）
+  そのため RSC ペイロードとして 3.26MB が HTML に直列化され、**HTMLが 3.29 MB**
 - デザインも旧世代のまま（`.pageWrap` / `.pageTitle` / `.pageDesc`）
+- 全文検索はすでに `GlobalSearch`（ヘッダーの虫眼鏡）が町報・議決・史跡・一般質問を
+  横断で持っている
 
-直し方は `/gikai/sessions`（PR #22）と同じ形にできるが、**その前に位置づけを決める。**
-全文検索はすでに `GlobalSearch`（ヘッダーの虫眼鏡）が町報・議決・史跡・一般質問を
-横断で持っている。`/newsletters` を残すのか、`GlobalSearch` に吸収するのか、
-ナビに載せるのか——を決めてから対処する。
+### /announcements（町政ニュース）
 
-（2026-09-16 の性能調査で発見。PR #22 / #23 では触っていない）
+- 内部リンク **0件**
+- `data/scraped/announcements-YYYY-MM-DD.json` の最新1本を読む
+- 町サイトのお知らせは**20件のローリング窓**。`daily-scrape` が毎日スナップショットを
+  取っているので、頻度を落とすと窓から流れ落ちた項目を永久に取り逃す
+- 2026-09 の対策で、`data/scraped/` へのコミットでは**本番ビルドを起こさない**ように
+  した（`vercel.json` の `ignoreCommand`）。データは毎日 git に入るので**取りこぼしは
+  無い**が、**公開ページへの反映は次のビルドまで遅れる**。
+  いまは誰も辿れないページなので実害は無い、という前提の割り切り
+
+### 決めること
+
+残すのか、`GlobalSearch` に吸収するのか、ナビに載せるのか。
+**ナビに載せるなら `/announcements` の反映遅れを解消する必要がある**
+（`ignoreCommand` の除外から外すか、別の反映経路を作る）。
+
+直し方自体は `/gikai/sessions`（PR #22）と同じ形にできる。
+
+（2026-09-16 の性能調査とビルド削減で発見・整理）

@@ -1,9 +1,12 @@
-name: Daily Sync
+name: Weekly Sync
 
+# 町報の全文索引を作り直す。町報は月刊なので毎日走らせる意味がない。
+# 毎日動かしていたときは、過去30日で実質的な内容変更が2回だけなのに
+# コミットは30回（＝本番ビルド30回）だった。
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 3 * * *" # UTC 03:00 = JST 12:00
+    - cron: "0 3 * * 1" # UTC 月曜 03:00 = JST 月曜 12:00
 
 jobs:
   sync:
@@ -26,10 +29,13 @@ jobs:
       # スクレイパが更新するファイルだけを明示的にコミットする。
       # public/data/gikai_sessions.json と qna/ は content/ からの生成物なので、
       # このワークフローが触ってはいけない（build:data 以外の経路を作らない）。
+      #
+      # lastSync.json はコミットしない（そもそも書かなくなった）。
+      # 画面から読まれていないのに日付1行が毎日変わり、ビルドの引き金になっていた。
       - name: Commit and push if changed
         run: |
           git config user.name "shintoku-atlas-bot"
           git config user.email "actions@users.noreply.github.com"
 
-          git add public/data/lastSync.json public/data/newsletters_index.json
-          git diff --cached --quiet || (git commit -m "chore: daily data sync" && git push)
+          git add public/data/newsletters_index.json
+          git diff --cached --quiet || (git commit -m "chore: weekly newsletter index" && git push)
