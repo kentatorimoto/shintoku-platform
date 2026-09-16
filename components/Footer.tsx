@@ -3,11 +3,15 @@ import { LABELS } from "@/lib/labels"
 
 const GITHUB_URL = "https://github.com/kentatorimoto/shintoku-platform"
 
+// 呼称はすべて翻訳層から引く。ここに文字列を戻さない
+// （「町の決定を読む」「意思決定の流れを読む」という旧称がフッターだけに残っていた）。
 const COL1 = [
-  { href: "/gikai/sessions", label: "議会を読む",          external: false },
-  { href: "/gikai",          label: "町の決定を読む",       external: false },
-  { href: "/process",        label: "意思決定の流れを読む", external: false },
-  { href: "/shiseki",        label: LABELS.shiseki.text,   external: false },
+  { href: "/gikai/sessions", label: LABELS.sessions.text, external: false },
+  { href: "/gikai",          label: LABELS.giketsu.text,  external: false },
+  { href: "/process",        label: LABELS.process.text,  external: false },
+  { href: "/shiseki",        label: LABELS.shiseki.text,  external: false },
+  // 主要導線ではないのでヘッダーには置かない。調べ物の入口としてここから辿る
+  { href: "/insights",       label: LABELS.insights.text, external: false },
 ] as const
 
 const COL2 = [

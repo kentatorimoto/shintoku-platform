@@ -82,6 +82,28 @@ export const LABELS = {
     formal: "議決",
   },
 
+  /**
+   * 会議の記録（/gikai/sessions）。ナビ・h1・metadata で4箇所に直書きされていたので
+   * ここに集約する。formal「会議」はトップの索引で使う（件数と並ぶ体言止めの列）。
+   */
+  sessions: {
+    text:   "議会を読む",
+    formal: "会議",
+  },
+
+  /**
+   * 集計ページ（/insights）。主要導線ではないのでヘッダーには載せない。
+   * フッターと /gikai からの導線で辿る「調べ物の入口」。
+   */
+  insights: {
+    text: "データで見る",
+  },
+
+  /** 意思決定の流れ（/process）。フッターだけ旧称「意思決定の流れを読む」が残っていた */
+  process: {
+    text: "流れを読む",
+  },
+
   /** 郷土資料（史跡）。「流れを読む」の系列＝意思決定の構造を時間の深さ方向へ延ばしたもの */
   shiseki: {
     text:   "土地の記憶",
@@ -116,6 +138,36 @@ export type SearchCategory = (typeof SEARCH_CATEGORIES)[keyof typeof SEARCH_CATE
 
 /** 検索モーダルの空状態に出す、探せる対象の並び。 */
 export const SEARCH_SCOPE_TEXT = Object.values(SEARCH_CATEGORIES).join("・") + "を横断検索"
+
+/**
+ * セッション一覧・詳細の要約3項目。
+ *
+ * データ層（gikai_sessions.json の summary）のキーは issues / conflicts / nextActions のまま。
+ * 画面に出す言葉だけ生活語にして、正式名称を formal として併記する。
+ *
+ * 語の選定は「評価の匂いを消す」方針。「議論された」より「話し合われた」、
+ * 「割れた」より「分かれた」。「次にやること」は主語が読者に読めてしまうので
+ * （やるのは町と議会）「この次に起きること」にしてある。
+ */
+export const SESSION_SUMMARY_LABELS = {
+  issues:      { text: "何が話し合われたか",   formal: "論点" },
+  conflicts:   { text: "意見が分かれたところ", formal: "争点" },
+  nextActions: { text: "この次に起きること",   formal: "次アクション" },
+} as const satisfies Record<string, UiLabel>
+
+/**
+ * /insights のヒートマップ・ランキングのテーマ名。
+ * gikai_links.json の theme ID に対応する。ページ内に置くと翻訳層の外に語彙が増えるのでここに置く。
+ */
+export const INSIGHT_THEME_LABELS = {
+  agriculture: "農業・産業",
+  tourism:     "観光",
+  health:      "健康・福祉",
+  community:   "地域・参加",
+  finance:     "財政",
+} as const
+
+export type InsightThemeId = keyof typeof INSIGHT_THEME_LABELS
 
 /** カードの種別ラベル（スキーマ §11.1 の kind）。カード左上に小さく出る。 */
 export const CARD_KIND_LABELS: Record<string, string> = {

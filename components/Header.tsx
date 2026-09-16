@@ -9,9 +9,9 @@ import { LABELS } from "@/lib/labels"
 
 const NAV_LINKS = [
   { href: "/",               label: "トップ" },
-  { href: "/gikai/sessions", label: "議会を読む" },
-  { href: "/gikai",          label: "決まったこと" },
-  { href: "/process",        label: "流れを読む" },
+  { href: "/gikai/sessions", label: LABELS.sessions.text },
+  { href: "/gikai",          label: LABELS.giketsu.text },
+  { href: "/process",        label: LABELS.process.text },
   { href: "/shiseki",        label: LABELS.shiseki.text },
   { href: "/sources",        label: "ソース" },
   { href: "/about",          label: "About" },

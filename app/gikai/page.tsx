@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
-import { LABELS } from "@/lib/labels"
+import { LABELS, INSIGHT_THEME_LABELS } from "@/lib/labels"
 
 // ─────────────────────────── Types ────────────────────────────────
 
@@ -38,14 +38,6 @@ interface FlatItem extends GiketsuItem {
 type GikaiLinks = Record<string, string[]>
 
 // ─────────────────────────── Label maps ───────────────────────────
-
-const THEME_LABELS: Record<string, string> = {
-  agriculture: "農業・産業",
-  tourism: "観光",
-  health: "健康・福祉",
-  community: "地域・参加",
-  finance: "財政",
-}
 
 const ISSUE_LABELS: Record<string, string> = {
   "agri-conservative-target": "農業は年1%成長で町を支え続けられるか？",
@@ -86,7 +78,7 @@ const RESULT_ORDER = ["原案可決", "修正可決", "否決", "継続審査"]
 
 /** 凡例ドット。図の凡例としての丸は残す（/process のトレース図と同じ扱い）。 */
 const RESULT_DOT: Record<string, string> = {
-  "原案可決": "bg-accent",
+  "原案可決": "bg-accent", // contrast-ok: 図の凡例の丸。文字は載らない
   "修正可決": "bg-lineStrong",
   "否決":     "bg-textMain",
   "継続審査": "bg-line border border-lineStrong",
@@ -330,13 +322,23 @@ function GikaiPageContent() {
         <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
           何が決まり、何が見送られたか。令和6年からの議案を、会期をまたいで一覧にしています。
         </p>
-        <Link
-          href="/gikai/sessions"
-          className="group inline-block text-[13px] font-bold border-b-2 border-textMain pb-[2px] mt-4
-                     transition-colors hover:text-accent hover:border-accent"
-        >
-          会議の記録を読む →
-        </Link>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+          <Link
+            href="/gikai/sessions"
+            className="group inline-block text-[13px] font-bold border-b-2 border-textMain pb-[2px]
+                       transition-colors hover:text-accent hover:border-accent"
+          >
+            {LABELS.sessions.formal}の記録を読む →
+          </Link>
+          {/* 主要導線ではないので、ヘッダーではなくここと フッターから辿らせる */}
+          <Link
+            href="/insights"
+            className="group inline-block text-[13px] font-bold border-b-2 border-textMain pb-[2px]
+                       transition-colors hover:text-accent hover:border-accent"
+          >
+            {LABELS.insights.text} →
+          </Link>
+        </div>
       </div>
 
       {/* ── 直近セッション（top 3） ───────────────────────── */}
@@ -475,7 +477,7 @@ function GikaiPageContent() {
             )}
             {theme && (
               <span className="inline-flex items-center gap-2 bg-ink border border-line text-textMain rounded-[3px] px-3 py-1.5 text-sm">
-                テーマ：{THEME_LABELS[theme] ?? theme}
+                テーマ：{INSIGHT_THEME_LABELS[theme as keyof typeof INSIGHT_THEME_LABELS] ?? theme}
                 <button
                   onClick={() => pushParams({ theme: "", limit: "" })}
                   aria-label="テーマフィルタを解除"
@@ -653,7 +655,7 @@ function GikaiPageContent() {
                         const id = ref.slice(sep + 1)
                         const label =
                           kind === "theme"
-                            ? (THEME_LABELS[id] ?? id)
+                            ? (INSIGHT_THEME_LABELS[id as keyof typeof INSIGHT_THEME_LABELS] ?? id)
                             : (ISSUE_LABELS[id] ?? id)
                         const href =
                           kind === "theme"
