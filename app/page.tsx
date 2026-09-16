@@ -104,7 +104,7 @@ export default function Home() {
           <PlateFrame className="pt-10 px-6 pb-9 md:px-11">
             <div className="flex justify-between items-baseline text-xs text-textMuted mb-6">
               <span className="text-accent font-bold flex items-center gap-2">
-                <span className="inline-block w-[7px] h-[7px] rounded-full bg-accent" aria-hidden />
+                <span className="inline-block w-[7px] h-[7px] rounded-full bg-accent" aria-hidden /> {/* contrast-ok: 見出し脇の丸。文字は載らない */}
                 最新の記録
               </span>
               <span className="mono text-[11px] tracking-[0.1em]">SHEET {total} / {total}</span>
@@ -152,8 +152,8 @@ export default function Home() {
       {/* ── 索引 ─────────────────────────────────────────────────────── */}
       <section className="mt-[52px] border-t-[1.5px] border-textMain">
         <h2 className="text-[12.5px] font-bold tracking-[0.1em] text-textMuted pt-4 pb-1.5">索引</h2>
-        <IndexRow href="/gikai/sessions" num={String(total)}       label="会議" desc="令和6年からの全会期の記録" />
-        <IndexRow href="/gikai"          num={giketsuCount.toLocaleString()} label="議決" desc="町が選んだことの一覧" />
+        <IndexRow href="/gikai/sessions" num={String(total)}       label={LABELS.sessions.formal} desc="令和6年からの全会期の記録" />
+        <IndexRow href="/gikai"          num={giketsuCount.toLocaleString()} label={LABELS.giketsu.formal} desc="町が選んだことの一覧" />
         <IndexRow
           href="/process"
           num="6"

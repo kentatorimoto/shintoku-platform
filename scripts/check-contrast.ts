@@ -89,32 +89,65 @@ function walk(dir: string, out: string[] = []): string[] {
 type Finding = { file: string; line: number; detail: string }
 
 /**
+ * 文字色に地色が明示されていないときに想定する面。
+ * .card が bg-ink なので、同じユーティリティが紙にもカードにも載る。両方で通す必要がある。
+ */
+const DEFAULT_SURFACES = ["paper", "ink"]
+
+/**
  * 申告済みの例外。
  *
- * 地色が親要素にある（または画像の上に載る）場合、行単位の走査では追えない。
+ * 地色が親要素にある（または画像の上に載る）場合、静的解析では追えない。
  * そういう箇所はソース側に `contrast-ok: 理由` と書いて除外する。理由を書かせるのは、
  * 黙って消せる抜け穴にしないため。文字ではない装飾・アイコンにも使う（AA は文字の規定）。
  */
 const OPT_OUT = /contrast-ok:\s*(.+?)\s*(?:\*\/|$)/
 
 /**
- * 文字色に地色が明示されていないときに想定する面。
- * .card が bg-ink なので、同じユーティリティが紙にもカードにも載る。両方で通す必要がある。
+ * クラスのかたまりを1単位として取り出す。
+ *
+ * 行単位で見ると `className` が複数行に折り返されたときに破綻する。
+ * 実際 GiketsuCountBadge は `text-accent` と `hover:bg-accent/10` が別の行にあり、
+ * 行単位の検査では 3.97:1 を見逃していた。
+ *
+ * Tailwind のクラスは必ず文字列リテラル（tsx）か @apply（css）の中にあるので、
+ * そこを1単位として切り出す。
  */
-const DEFAULT_SURFACES = ["paper", "ink"]
+function classChunks(src: string, isCss: boolean): { text: string; line: number }[] {
+  const chunks: { text: string; line: number }[] = []
 
-/** 地色ユーティリティ（bg-xxx / bg-xxx/NN）を面の実色に解決する。 */
-function resolveSurface(
-  token: string,
-  alpha: number | null,
-  tokens: Record<string, string>,
-): Rgb | null {
-  const hex = tokens[token]
-  if (!hex) return null
-  const color = parseHex(hex)
-  if (alpha === null) return color
-  // 半透明の地は紙の上に合成する（カード地より紙の方が明るく、文字には不利な側）
-  return composite(color, parseHex(tokens.paper), alpha / 100)
+  if (isCss) {
+    for (const m of src.matchAll(/@apply\s+([^;]+);/g)) {
+      chunks.push({ text: m[1], line: src.slice(0, m.index).split("\n").length })
+    }
+    return chunks
+  }
+
+  // 行コメントを落としてから文字列リテラルを拾う（説明文の例示を拾わないため）
+  const cleaned = src
+    .replace(/\/\*[\s\S]*?\*\//g, m => m.replace(/[^\n]/g, " "))
+    .replace(/\/\/[^\n]*/g, m => m.replace(/[^\n]/g, " "))
+
+  let line = 1
+  for (let i = 0; i < cleaned.length; i++) {
+    const c = cleaned[i]
+    if (c === "\n") { line++; continue }
+    if (c !== '"' && c !== "'" && c !== "`") continue
+    const quote = c
+    const start = line
+    let buf = ""
+    i++
+    for (; i < cleaned.length; i++) {
+      const d = cleaned[i]
+      if (d === "\\") { i++; continue }
+      if (d === quote) break
+      if (d === "\n") line++
+      // テンプレートリテラルの ${...} は中身が式なので区切りとして扱う
+      buf += d === "$" && cleaned[i + 1] === "{" ? " " : d
+    }
+    if (buf.includes("text-") || buf.includes("bg-")) chunks.push({ text: buf, line: start })
+  }
+  return chunks
 }
 
 async function main() {
@@ -127,125 +160,157 @@ async function main() {
   const bareSurface: Finding[] = []
   const combos = new Map<string, { ratio: number; count: number }>()
 
-  // className 文字列を行単位で見る。bg と text が同じ行に並ぶのがこの配色の書き癖。
-  const TEXT_RE = /(?:^|[\s"'`{])(?:(?:hover|focus|group-hover|active|placeholder|md|sm|lg|dark):)*text-([A-Za-z][A-Za-z0-9]*)(?:\/(\d+))?(?=[\s"'`}]|$)/g
-  const BG_RE = /(?:^|[\s"'`{])(?:(?:hover|focus|group-hover|active|md|sm|lg|dark):)*bg-([A-Za-z][A-Za-z0-9]*)(?:\/(\d+))?(?=[\s"'`}]|$)/g
+  // variant（hover: / focus: …）は捨てずに拾う。捨てると「hover で地と文字が同時に変わる」
+  // 指定が総当たりになり、実在しない組み合わせを未達として報告してしまう。
+  const TEXT_RE = /(?:^|[\s])((?:(?:hover|focus|group-hover|active|placeholder|md|sm|lg|dark):)*)text-([A-Za-z][A-Za-z0-9]*)(?:\/(\d+))?(?=\s|$)/g
+  const BG_RE = /(?:^|[\s])((?:(?:hover|focus|group-hover|active|md|sm|lg|dark):)*)bg-([A-Za-z][A-Za-z0-9]*)(?:\/(\d+))?(?=\s|$)/g
+
+  /** レスポンシブ修飾子は状態ではないので、状態だけを取り出す（md:hover: → hover:）。 */
+  const stateOf = (variants: string) =>
+    variants.split(":").filter(v => ["hover", "focus", "group-hover", "active"].includes(v)).join(":")
+
+  const resolveSurface = (token: string, alpha: number | null): Rgb | null => {
+    const hex = tokens[token]
+    if (!hex) return null
+    const color = parseHex(hex)
+    if (alpha === null) return color
+    // 半透明の地は紙の上に合成する（カード地より紙の方が明るく、文字には不利な側）
+    return composite(color, parseHex(tokens.paper), alpha / 100)
+  }
 
   for (const abs of files) {
     const file = relative(ROOT, abs)
-    const lines = readFileSync(abs, "utf8").split("\n")
+    const src = readFileSync(abs, "utf8")
+    const lines = src.split("\n")
 
-    lines.forEach((raw, i) => {
-      // CSS/JS のコメント行は検査しない（説明文に例示が書かれるため）
-      const line = raw.replace(/\/\*.*?\*\//g, "").replace(/^\s*(\/\/|\*|\/\*).*$/, "")
-      if (!line.includes("text-")) return
+    for (const chunk of classChunks(src, abs.endsWith(".css"))) {
+      const text = " " + chunk.text.replace(/\s+/g, " ") + " "
+      const i = chunk.line - 1
 
-      // この行で使える地色。無ければ紙とカード地の両方を想定する。
-      const surfaces: { name: string; color: Rgb }[] = []
-      for (const m of line.matchAll(BG_RE)) {
-        const c = resolveSurface(m[1], m[2] ? Number(m[2]) : null, tokens)
-        if (c) surfaces.push({ name: m[2] ? `${m[1]}/${m[2]}` : m[1], color: c })
+      // 地色を状態ごとに集める（"" が通常状態）
+      const surfaceByState = new Map<string, { name: string; color: Rgb }>()
+      for (const m of text.matchAll(BG_RE)) {
+        const c = resolveSurface(m[2], m[3] ? Number(m[3]) : null)
+        if (c) surfaceByState.set(stateOf(m[1]), { name: m[3] ? `${m[2]}/${m[3]}` : m[2], color: c })
       }
-      if (surfaces.length === 0) {
-        for (const n of DEFAULT_SURFACES) surfaces.push({ name: n, color: parseHex(tokens[n]) })
+      const baseSurfaces = surfaceByState.has("")
+        ? [surfaceByState.get("")!]
+        : DEFAULT_SURFACES.map(n => ({ name: n, color: parseHex(tokens[n]) }))
+
+      // 文字色も状態ごとに集める
+      const textByState = new Map<string, { name: string; alpha?: string }>()
+      for (const m of text.matchAll(TEXT_RE)) {
+        if (!tokens[m[2]] && !m[3]) continue
+        textByState.set(stateOf(m[1]), { name: m[2], alpha: m[3] })
       }
 
-      // 例外の申告は同じ行か直前の行に書く
-      const optOut = OPT_OUT.exec(raw) ?? OPT_OUT.exec(lines[i - 1] ?? "")
+      // 例外の申告は、かたまりの開始行かその直前の行にだけ書ける。
+      // 窓を広げると隣の要素まで巻き込んで、本物のテキストを黙って除外してしまう。
+      const optOut = OPT_OUT.exec(lines[i] ?? "") ?? OPT_OUT.exec(lines[i - 1] ?? "")
 
-      // 茜の面を敷いて文字色を書いていない要素は、親から textMain を継承して 2.58:1 になる。
-      // 地が中立（paper/ink）なら継承した textMain で問題ないので、強い面だけを見る。
-      const strongSurface = surfaces.find(s => s.name === "accent" || s.name === "accentSoft")
-      const hasTextColor = [...line.matchAll(TEXT_RE)].some(m => tokens[m[1]])
-      if (strongSurface && !hasTextColor) {
-        if (optOut) {
-          exempt.push({ file, line: i + 1, detail: `bg-${strongSurface.name} — ${optOut[1]}` })
-        } else {
-          bareSurface.push({
-            file, line: i + 1,
-            detail: `bg-${strongSurface.name} に文字色の指定が無い（textMain を継承すると 2.58:1）`,
-          })
+      // 茜の面を敷いて文字色を書いていない要素は、親から textMain を継承して 2.58:1 になる
+      const strong = [...surfaceByState.values()].find(s => s.name === "accent" || s.name === "accentSoft")
+      if (strong && textByState.size === 0) {
+        if (optOut) exempt.push({ file, line: chunk.line, detail: `bg-${strong.name} — ${optOut[1]}` })
+        else bareSurface.push({
+          file, line: chunk.line,
+          detail: `bg-${strong.name} に文字色の指定が無い（textMain を継承すると 2.58:1）`,
+        })
+      }
+
+      // 実際に画面に並ぶ組み合わせだけを作る。
+      //   通常状態 … 通常の文字 × 通常の地
+      //   hover 等 … その状態の文字（無ければ通常の文字）× その状態の地
+      // 「地だけ hover で変わり、文字はそのまま」を拾えるのが肝。
+      type Pair = {
+        text: { name: string; alpha?: string }
+        surface: { name: string; color: Rgb }
+        /** 文字にその状態の指定があるか。無ければ通常状態の文字が持ち越される */
+        textState: string
+        surfaceState: string
+      }
+      const pairs: Pair[] = []
+      const baseText = textByState.get("")
+      if (baseText) {
+        for (const s of baseSurfaces) pairs.push({ text: baseText, surface: s, textState: "", surfaceState: "" })
+      }
+      for (const [state, surface] of surfaceByState) {
+        if (state === "") continue
+        const own = textByState.get(state)
+        const t = own ?? baseText
+        if (t) pairs.push({ text: t, surface, textState: own ? state : "", surfaceState: state })
+      }
+      // 地は変わらないが文字だけ変わる状態（hover:text-accent 等）
+      for (const [state, t] of textByState) {
+        if (state === "" || surfaceByState.has(state)) continue
+        for (const s of baseSurfaces) pairs.push({ text: t, surface: s, textState: state, surfaceState: "" })
+      }
+
+      for (const { text: t, surface, textState, surfaceState } of pairs) {
+        const hex = tokens[t.name]
+        const fg = `${textState ? `${textState}:` : ""}text-${t.name}`
+
+        if (t.alpha) {
+          alphaText.push({ file, line: chunk.line, detail: `${fg}/${t.alpha}` })
+          continue // 透過は 1. で落とすので比は測らない
         }
-      }
-
-      for (const m of line.matchAll(TEXT_RE)) {
-        const [, name, alpha] = m
-        const hex = tokens[name]
         if (!hex) continue // text-sm 等のサイズ指定・未定義トークンは対象外
-
-        if (optOut && !alpha) {
-          exempt.push({ file, line: i + 1, detail: `text-${name} — ${optOut[1]}` })
+        if (optOut) {
+          exempt.push({ file, line: chunk.line, detail: `${fg} — ${optOut[1]}` })
           continue
         }
 
-        if (alpha) {
-          alphaText.push({ file, line: i + 1, detail: `text-${name}/${alpha}` })
-          continue // 透過は 1. で落とすので比は測らない
-        }
-
-        for (const s of surfaces) {
-          const ratio = contrast(parseHex(hex), s.color)
-          const key = `text-${name} on ${s.name}`
-          const prev = combos.get(key)
-          combos.set(key, { ratio, count: (prev?.count ?? 0) + 1 })
-          if (ratio < AA) {
-            aaFail.push({
-              file,
-              line: i + 1,
-              detail: `text-${name} (${hex}) on ${s.name} = ${ratio.toFixed(2)}:1`,
-            })
-          }
+        const ratio = contrast(parseHex(hex), surface.color)
+        const label = `${fg} on ${surfaceState ? `${surfaceState}:` : ""}${surface.name}`
+        const prev = combos.get(label)
+        combos.set(label, { ratio, count: (prev?.count ?? 0) + 1 })
+        if (ratio < AA) {
+          aaFail.push({ file, line: chunk.line, detail: `${label} (${hex}) = ${ratio.toFixed(2)}:1` })
         }
       }
-    })
+    }
   }
 
   // ── 報告 ──
+  const uniq = (rows: Finding[]) => {
+    const seen = new Set<string>()
+    return rows.filter(f => {
+      const k = `${f.file}:${f.line}:${f.detail}`
+      if (seen.has(k)) return false
+      seen.add(k)
+      return true
+    })
+  }
+
   console.log(`走査: ${files.length} ファイル（${SCAN_DIRS.join(", ")}）\n`)
 
   console.log("── 使用中の 文字色 × 地色 ──")
-  const rows = [...combos.entries()].sort((a, b) => a[1].ratio - b[1].ratio)
-  for (const [key, { ratio, count }] of rows) {
-    const mark = ratio >= AA ? "OK  " : "NG  "
-    console.log(`  ${mark}${ratio.toFixed(2).padStart(6)}:1  ${key}  (${count}箇所)`)
+  for (const [key, { ratio, count }] of [...combos.entries()].sort((a, b) => a[1].ratio - b[1].ratio)) {
+    console.log(`  ${ratio >= AA ? "OK  " : "NG  "}${ratio.toFixed(2).padStart(6)}:1  ${key}  (${count}箇所)`)
   }
 
-  if (exempt.length > 0) {
+  const exemptRows = uniq(exempt)
+  if (exemptRows.length > 0) {
     console.log("\n── 申告済みの例外（地色が親要素・画像の上）──")
-    for (const f of exempt) console.log(`  ${f.file}:${f.line}  ${f.detail}`)
+    for (const f of exemptRows) console.log(`  ${f.file}:${f.line}  ${f.detail}`)
   }
 
-  console.log(`\n── 1. 透過による文字の階調 ──`)
-  if (alphaText.length === 0) {
-    console.log("  0件")
-  } else {
-    for (const f of alphaText) console.log(`  ${f.file}:${f.line}  ${f.detail}`)
-    console.log(`  ${alphaText.length}件`)
-  }
-
-  console.log(`\n── 2. 茜の面に文字色の指定が無い要素 ──`)
-  if (bareSurface.length === 0) {
-    console.log("  0件")
-  } else {
-    for (const f of bareSurface) console.log(`  ${f.file}:${f.line}  ${f.detail}`)
-    console.log(`  ${bareSurface.length}件`)
-  }
-
-  console.log(`\n── 3. AA（${AA}:1）未達 ──`)
-  if (aaFail.length === 0) {
-    console.log("  0件")
-  } else {
-    const seen = new Set<string>()
-    for (const f of aaFail) {
-      const k = `${f.file}:${f.line}:${f.detail}`
-      if (seen.has(k)) continue
-      seen.add(k)
-      console.log(`  ${f.file}:${f.line}  ${f.detail}`)
+  const report = (title: string, rows: Finding[]) => {
+    const r = uniq(rows)
+    console.log(`\n── ${title} ──`)
+    if (r.length === 0) console.log("  0件")
+    else {
+      for (const f of r) console.log(`  ${f.file}:${f.line}  ${f.detail}`)
+      console.log(`  ${r.length}件`)
     }
-    console.log(`  ${seen.size}件`)
+    return r.length
   }
 
-  if (alphaText.length > 0 || aaFail.length > 0 || bareSurface.length > 0) {
+  const n1 = report("1. 透過による文字の階調", alphaText)
+  const n2 = report("2. 茜の面に文字色の指定が無い要素", bareSurface)
+  const n3 = report(`3. AA（${AA}:1）未達`, aaFail)
+
+  if (n1 + n2 + n3 > 0) {
     console.error("\nコントラスト検査に失敗しました。")
     process.exit(EXIT.ERROR)
   }

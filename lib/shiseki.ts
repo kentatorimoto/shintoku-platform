@@ -24,15 +24,9 @@ export function findShiseki(id: string): { data: ShisekiData; item: ShisekiItem 
   return data && item ? { data, item } : null
 }
 
-/**
- * 一覧に出す1文目だけを取り出す。
- * 26件を通して読むと3文構造の反復が目立つため、一覧では冒頭の一文に絞る。
- */
-export function leadSentence(summary: string | undefined): string {
-  if (!summary) return ""
-  const end = summary.indexOf("。")
-  return end === -1 ? summary : summary.slice(0, end + 1)
-}
+// 一覧に出す1文目の切り出しは /gikai/sessions と共用するので lib/text.ts にある。
+// このモジュールは fs を読むためクライアントから import できない。
+export { leadSentence } from "@/lib/text"
 
 /** `p.{page}` を実際のページ番号に差し替える。 */
 export function citationFor(citation: string, item: ShisekiItem): string {

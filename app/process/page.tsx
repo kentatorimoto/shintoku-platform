@@ -117,7 +117,7 @@ export default function ProcessPage() {
         })}
 
         <div className="flex flex-wrap gap-5 text-[11px] text-textMuted pt-3 px-1">
-          <span className="flex items-center gap-1.5"><span className="inline-block w-3.5 h-1 rounded-[2px] bg-accent" />継続中</span>
+          <span className="flex items-center gap-1.5"><span className="inline-block w-3.5 h-1 rounded-[2px] bg-accent" />継続中{/* contrast-ok: 凡例の帯。文字は載らない */}</span>
           <span className="flex items-center gap-1.5"><span className="inline-block w-3.5 h-1 rounded-[2px] bg-textSub" />一区切り</span>
           <span>横軸 — 2024.06 → 現在</span>
         </div>

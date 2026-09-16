@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { LABELS } from "@/lib/labels"
 
 const items = [
   {
-    label: "議会を読む",
+    label: LABELS.sessions.text,
     href:  "/gikai/sessions",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
@@ -14,7 +15,7 @@ const items = [
     ),
   },
   {
-    label: "決まったこと",
+    label: LABELS.giketsu.text,
     href:  "/gikai",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
@@ -23,7 +24,7 @@ const items = [
     ),
   },
   {
-    label: "流れを読む",
+    label: LABELS.process.text,
     href:  "/process",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">

@@ -3,10 +3,11 @@ import path from "path"
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
+import { LABELS } from "@/lib/labels"
 import SessionsList, { type GikaiSession } from "./SessionsList"
 
 export const metadata: Metadata = {
-  title: "議会を読む | Shintoku Atlas",
+  title: `${LABELS.sessions.text} | Shintoku Atlas`,
   description: "新得町議会のライブ配信を要約・構造化し、意思決定の記録としてアーカイブしています。",
 }
 
@@ -46,26 +47,37 @@ function getGiketsuMap(): Record<string, { count: number; sessionName: string }>
 // ──────────────────────────────────────────────────────────────────────────────
 
 export default function GikaiSessionsPage() {
-  const sessions    = getSessions()
-  const giketsuMap  = getGiketsuMap()
+  const sessions   = getSessions()
+  const giketsuMap = getGiketsuMap()
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-[1040px] mx-auto px-6">
+
       {/* ── ヘッダー ───────────────────────────────────────────────────── */}
-      <div className="mb-10">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          議会を読む
-        </h1>
-        <p className="text-textSub text-lg">
-          新得町議会のライブ配信を要約・構造化し、<br className="hidden sm:inline" />
-          意思決定の記録としてアーカイブ
+      <div className="pt-12 pb-2 mb-8">
+        <p className="text-[12px] font-bold tracking-[0.14em] text-accent mb-3">
+          {LABELS.sessions.formal}の索引
         </p>
-        <p className="text-xs text-textMuted mt-2">
+        <h1
+          className="font-mincho font-bold leading-[1.4] text-textMain"
+          style={{ fontSize: "clamp(26px, 4vw, 38px)" }}
+        >
+          {LABELS.sessions.text}
+        </h1>
+        <p className="text-[13.5px] text-textMuted mt-2.5 max-w-[560px]">
+          新得町議会のライブ配信を要約・構造化し、意思決定の記録としてアーカイブしています。
           AIによる要約を含むため、内容に誤りがある場合があります。
         </p>
+        <Link
+          href="/gikai"
+          className="group inline-block text-[13px] font-bold border-b-2 border-textMain pb-[2px] mt-4
+                     transition-colors hover:text-accent hover:border-accent"
+        >
+          {LABELS.giketsu.text}を読む →
+        </Link>
       </div>
 
-      {/* ── フィルター＆一覧（Client Component） ────────────────────────── */}
+      {/* ── 一覧＆絞り込み（Client Component） ──────────────────────────── */}
       {sessions.length === 0 ? (
         <p className="text-textMuted text-center py-20">会議データがありません</p>
       ) : (
@@ -73,6 +85,8 @@ export default function GikaiSessionsPage() {
           <SessionsList sessions={sessions} giketsuMap={giketsuMap} />
         </Suspense>
       )}
+
+      <div className="h-16" />
     </div>
   )
 }
