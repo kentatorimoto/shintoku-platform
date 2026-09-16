@@ -1,9 +1,8 @@
 import fs from "fs"
 import path from "path"
-import { Suspense } from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
-import TimelineClient, { type GikaiSession } from "./TimelineClient"
+import Timeline, { type GikaiSession } from "./Timeline"
 
 export const metadata: Metadata = {
   title: "意思決定タイムライン | Shintoku Atlas",
@@ -19,13 +18,21 @@ function getSessions(): GikaiSession[] {
   }
 }
 
-export default function TimelinePage({
+/**
+ * `?tag=` はサーバーで解決する。/process・/process/issues・/process/priorities から
+ * タグ付きで入ってくるので、URLが状態を持つ形の方がもともと素直だった。
+ *
+ * このページは searchParams を読むので静的プリレンダではなくリクエストごとの描画になる。
+ * データはビルド時に読んだJSONなので描画自体は一瞬で、以前のように
+ * Suspense のフォールバック（「読み込み中…」）がHTMLに出ることはなくなる。
+ */
+export default async function TimelinePage({
   searchParams,
 }: {
-  searchParams?: { tag?: string }
+  searchParams: Promise<{ tag?: string }>
 }) {
-  const sessions  = getSessions()
-  const initialTag = searchParams?.tag ?? "エネルギー"
+  const { tag } = await searchParams
+  const sessions = getSessions()
 
   return (
     <div className="max-w-[1040px] mx-auto px-6">
@@ -49,13 +56,12 @@ export default function TimelinePage({
         </p>
       </div>
 
-      {/* ── タグ選択・タイムライン（Client Component） ───────────────── */}
+      {/* ── テーマ選択・タイムライン ─────────────────────────────────
+          Suspense で包まない。包むとフォールバックが静的HTMLに出てしまう。 */}
       {sessions.length === 0 ? (
         <p className="text-textMuted text-center py-20">会議データがありません</p>
       ) : (
-        <Suspense fallback={<p className="text-textMuted text-center py-20">読み込み中…</p>}>
-          <TimelineClient sessions={sessions} initialTag={initialTag} />
-        </Suspense>
+        <Timeline sessions={sessions} tag={tag} />
       )}
     </div>
   )

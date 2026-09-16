@@ -159,3 +159,89 @@ Suspense 境界のフォールバックがHTMLに出る。`/gikai/sessions` は�
 注意: worktree の `node_modules` をプロジェクト外への絶対パスでシンボリックリンクすると
 Turbopack が "Symlink is invalid, it points out of the filesystem root" で落ちる。
 worktree はプロジェクト内に作って相対リンクにする。
+
+## 2026-09-16 Suspense のフォールバックに「本物」を置く
+
+`useSearchParams()` を使うコンポーネントは、静的プリレンダ時に最寄りの Suspense 境界の
+**フォールバックがHTMLに出る**。/gikai はページ全体がその内側にあり、静的HTMLが
+21KB のスケルトンだけだった（729件の一覧が1行も入っていない）。
+
+一覧をサーバー描画に戻そうとすると、「サーバーが描いた一覧」と「クライアントが描く一覧」が
+二重になり、どちらを隠すかという面倒が出る。
+
+→ **フォールバックそのものをサーバー描画版の一覧にする。**
+
+```tsx
+<Suspense fallback={<GiketsuStatic sessions={sessions} links={links} />}>
+  <GiketsuBrowser sessions={sessions} links={links} />
+</Suspense>
+```
+
+ハイドレーション前は本物の先頭100件が見え、後は同じ markup の対話版に置き換わる。
+隠す処理も、ズレも要らない。行の markup は `GiketsuRow` に切り出して両方から使う
+（片方だけ直すと入れ替わった瞬間に見た目が変わる）。
+
+## 2026-09-16 props に「導出できるもの」を渡さない
+
+`sessions` と、そこから導出した `items` の両方を props で渡していたら、
+**同じ中身がRSCペイロードに2回直列化**され、HTMLが 844KB になった。
+`items` を渡すのをやめて `useMemo` で導出したら 523KB（gzip 58KB → 37KB）。
+
+## 2026-09-16 「状態」がURLから来るなら、ボタンではなくリンクにする
+
+/process/timeline のテーマ選択は `useState` だったが、入口の3ページはすべて
+`?tag=` を付けてリンクしていた。つまり状態はもともとURLにあった。
+
+`<button onClick={setState}>` を `<Link href="?tag=...">` に替えると、
+クライアントコンポーネントごと不要になり、Suspense も消え、ディープリンクが
+素直に効くようになった。
+
+**なお、マウント後に `window.location` を読んで `setState` する回避策は取らない。**
+`react-hooks/set-state-in-effect` に引っかかるし、そもそも2回描くことになる。
+URLが状態ならサーバーで読む。
+
+## 2026-09-16 fs のパスを変数で組み立てると、そのディレクトリごと関数に入る
+
+Vercel のデプロイが `The Vercel Function "gikai" is 727mb uncompressed which
+exceeds the maximum uncompressed size limit of 250mb.` で落ちた。
+ローカルの `npm run build` は通るので、ビルド成果物を見るまで分からない。
+
+原因は、データ読み込みのヘルパをこう書いたこと。
+
+```ts
+function loadJSON<T>(...segments: string[]) {
+  return JSON.parse(fs.readFileSync(path.join(process.cwd(), ...segments), "utf-8"))
+}
+```
+
+`path.join` の引数が変数だと next の file tracing が参照先を決められず、**保険として
+その下をまるごと引き込む**。`public/` は pdf 546MB・slides 160MB あるので 727MB になった。
+
+| ルート | files | うち public/ | サイズ |
+|---|---|---|---|
+| /gikai（修正前） | 1114 | 628（slides 553・pdf 45） | **727 MB** |
+| /gikai（修正後） | 88 | 2 | 9.6 MB |
+| /gikai/sessions（元から literal） | 88 | 2 | 9.6 MB |
+
+**`path.join` の引数はすべて文字列リテラルにする。** 1つでも変数が混ざると、
+そのディレクトリ全部がトレースされる（`"public","data",file` でも `public/data/*`
+24本が入った）。
+
+確かめ方——`npm run build` のあと `.next/server/app/**/page.js.nft.json` の
+`files` を見る。`public/` が何本入っているかで一目で分かる。
+
+→ 積み残し: `gikai/sessions/[id]/[partIndex]` は `path.join(cwd, "public", "slides",
+sessionId, slidesDir)` ＋ `readdirSync` で **172MB**（public/slides 163MB）を
+引き込んでいる。上限には届いていないが、slides は会期ごとに増える。
+
+## 2026-09-16 force-static は Suspense の中身までプリレンダする
+
+`export const dynamic = "force-static"` を付けると、`useSearchParams()` を使う
+クライアントコンポーネントもビルド時に描かれ、**中身が素のHTMLに入る**
+（JSを切っても一覧が読める）。
+
+そのため「フォールバックに本物を置く」工夫（GiketsuStatic）は不要になった。
+両方あると同じ内容がHTMLに2回入る（644KB → 345KB、gzip 43KB → 32KB）。
+
+代わりに **force-static への依存が強くなる**ので、外すと一覧がHTMLから消える。
+その旨をコードのコメントに書いた。確認は「JSを切って読めるか」がいちばん速い。
