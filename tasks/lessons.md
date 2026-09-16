@@ -120,3 +120,42 @@ Tailwind 4 の不透明度は `color-mix(in oklab, …)` なので、`getCompute
 `contrast-ok:` の有効範囲を前後2行にしたら、隣の要素の `text-accent` や
 `text-textMuted` まで黙って除外された。窓が広い除外は、意図しないものを通す。
 → 「その行」と「直前の行」だけに限定した。申告は該当行に書く。
+
+## 2026-09-16 和文フォントは preload: false
+
+`next/font/google` は Noto Sans JP / Zen Old Mincho を unicode-range で細かく分割する。
+既定では**その全部に `<link rel="preload" as="font">` を張る**。実測で preload 242本・
+woff2 133本（2.06MB）が同時に走り、コネクションを食い潰していた。
+
+HTML も個々のファイルも1秒前後で返るのに、`load` イベントが本番で20〜30秒。
+`preload: false` にして 242本 → 2本（Space Mono のみ）、load は 11.8秒 → 2.3秒になった。
+`display: "swap"` があるので、先に代替書体で描いてから差し替わる。
+
+→ **和文フォントを next/font で入れるときは `preload: false` を既定にする。**
+
+## 2026-09-16 useSearchParams は「その場所から下」を Suspense に沈める
+
+`useSearchParams()` を使うクライアントコンポーネントは、静的プリレンダ時に最寄りの
+Suspense 境界のフォールバックがHTMLに出る。`/gikai/sessions` は一覧ごとその内側に
+あったので、**記録が最初のHTMLに1行も入っていなかった**。
+ハイドレーションがフォント待ちで遅れると、本番で7〜56秒「読み込み中…」のままだった。
+
+→ **境界は「URLを読む必要がある部品」だけに縮める。**
+一覧はサーバーで描き、絞り込みは `<style>` を1枚差し込んで CSS で行う形にした
+（`[data-session-row]:not([data-tags~="観光"]){display:none}` を選択タグの数だけ）。
+1タグ＝1ルールなので重ねると自然に AND になる。
+
+計測（5Mbps/120ms でスロットリング、各3回）: 本体が出るまで 11.57秒 → 0.22秒。
+
+→ 「記録が先」のような情報設計は、**出てくるのが30秒後なら成立しない**。
+情報構成を変えたら、実際に出るまでの時間も測る。
+
+## 2026-09-16 性能の前後比較は worktree で並べて測る
+
+`git worktree add .perf-before main` で変更前を別ポートに立て、同一のスロットリング条件で
+交互に測った。本番と手元では条件が違いすぎて比較にならない（手元は遅延ゼロなので
+フォントの輻輳が再現しない）。**同じ機械・同じ条件で新旧を並べる**のがいちばん速い。
+
+注意: worktree の `node_modules` をプロジェクト外への絶対パスでシンボリックリンクすると
+Turbopack が "Symlink is invalid, it points out of the filesystem root" で落ちる。
+worktree はプロジェクト内に作って相対リンクにする。
