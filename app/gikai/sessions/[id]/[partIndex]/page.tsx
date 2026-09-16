@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import SessionDetail from "../SessionDetail"
-import { ANCHORS, LABELS, qnaLabel } from "@/lib/labels"
+import { ANCHORS, LABELS, SESSION_SUMMARY_LABELS, qnaLabel } from "@/lib/labels"
 import type { CardsData, GikaiSession, HonkaigiData, PartData, QnaData } from "@/scripts/lib/schema"
 
 function getPartData(sessionId: string, partIndex: number): PartData | null {
@@ -160,15 +160,19 @@ export default async function SessionPartPage({
       {(session.summary || jumpLinks.length > 0) && (
         <div className="bg-ink border border-line rounded-[3px] p-5 sm:p-6 mb-8">
           {session.summary && (
-            <dl className="space-y-2">
+            <dl className="space-y-4">
               {([
-                { dt: "論点",        dd: session.summary.issues },
-                { dt: "争点",        dd: session.summary.conflicts },
-                { dt: "次アクション", dd: session.summary.nextActions },
-              ] as const).map(({ dt, dd }) => dd && (
-                <div key={dt} className="flex gap-2 items-baseline">
-                  <dt className="text-xs text-textMuted whitespace-nowrap shrink-0">{dt}：</dt>
-                  <dd className="text-textSub text-base leading-relaxed break-words">{dd}</dd>
+                { key: "issues",      label: SESSION_SUMMARY_LABELS.issues,      dd: session.summary.issues },
+                { key: "conflicts",   label: SESSION_SUMMARY_LABELS.conflicts,   dd: session.summary.conflicts },
+                { key: "nextActions", label: SESSION_SUMMARY_LABELS.nextActions, dd: session.summary.nextActions },
+              ] as const).map(({ key, label, dd }) => dd && (
+                <div key={key}>
+                  {/* 生活語を主役に、正式名称を小さく併記する（翻訳層の原則） */}
+                  <dt className="text-[12.5px] font-bold text-textMuted">
+                    {label.text}
+                    <span className="font-normal ml-1.5">— {label.formal}</span>
+                  </dt>
+                  <dd className="text-textSub text-[15px] leading-relaxed break-words mt-1">{dd}</dd>
                 </div>
               ))}
             </dl>
