@@ -74,7 +74,7 @@ export default function TimelineClient({ sessions, initialTag = "エネルギー
             onClick={() => setSelectedTag(tag)}
             className={`px-3 py-2 rounded-[3px] text-sm font-medium transition-colors border ${
               selectedTag === tag
-                ? "bg-accent text-base border-accent"
+                ? "bg-accent text-onAccent border-accent"
                 : "bg-ink border-line text-textMuted hover:border-accent/50"
             }`}
           >
