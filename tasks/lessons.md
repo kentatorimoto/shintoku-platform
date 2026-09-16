@@ -199,3 +199,49 @@ worktree はプロジェクト内に作って相対リンクにする。
 **なお、マウント後に `window.location` を読んで `setState` する回避策は取らない。**
 `react-hooks/set-state-in-effect` に引っかかるし、そもそも2回描くことになる。
 URLが状態ならサーバーで読む。
+
+## 2026-09-16 fs のパスを変数で組み立てると、そのディレクトリごと関数に入る
+
+Vercel のデプロイが `The Vercel Function "gikai" is 727mb uncompressed which
+exceeds the maximum uncompressed size limit of 250mb.` で落ちた。
+ローカルの `npm run build` は通るので、ビルド成果物を見るまで分からない。
+
+原因は、データ読み込みのヘルパをこう書いたこと。
+
+```ts
+function loadJSON<T>(...segments: string[]) {
+  return JSON.parse(fs.readFileSync(path.join(process.cwd(), ...segments), "utf-8"))
+}
+```
+
+`path.join` の引数が変数だと next の file tracing が参照先を決められず、**保険として
+その下をまるごと引き込む**。`public/` は pdf 546MB・slides 160MB あるので 727MB になった。
+
+| ルート | files | うち public/ | サイズ |
+|---|---|---|---|
+| /gikai（修正前） | 1114 | 628（slides 553・pdf 45） | **727 MB** |
+| /gikai（修正後） | 88 | 2 | 9.6 MB |
+| /gikai/sessions（元から literal） | 88 | 2 | 9.6 MB |
+
+**`path.join` の引数はすべて文字列リテラルにする。** 1つでも変数が混ざると、
+そのディレクトリ全部がトレースされる（`"public","data",file` でも `public/data/*`
+24本が入った）。
+
+確かめ方——`npm run build` のあと `.next/server/app/**/page.js.nft.json` の
+`files` を見る。`public/` が何本入っているかで一目で分かる。
+
+→ 積み残し: `gikai/sessions/[id]/[partIndex]` は `path.join(cwd, "public", "slides",
+sessionId, slidesDir)` ＋ `readdirSync` で **172MB**（public/slides 163MB）を
+引き込んでいる。上限には届いていないが、slides は会期ごとに増える。
+
+## 2026-09-16 force-static は Suspense の中身までプリレンダする
+
+`export const dynamic = "force-static"` を付けると、`useSearchParams()` を使う
+クライアントコンポーネントもビルド時に描かれ、**中身が素のHTMLに入る**
+（JSを切っても一覧が読める）。
+
+そのため「フォールバックに本物を置く」工夫（GiketsuStatic）は不要になった。
+両方あると同じ内容がHTMLに2回入る（644KB → 345KB、gzip 43KB → 32KB）。
+
+代わりに **force-static への依存が強くなる**ので、外すと一覧がHTMLから消える。
+その旨をコードのコメントに書いた。確認は「JSを切って読めるか」がいちばん速い。
