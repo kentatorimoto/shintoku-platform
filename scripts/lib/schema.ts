@@ -104,6 +104,20 @@ export interface GikaiSession {
   parts:           Part[]
 }
 
+/** session.yaml / JSON のキー順をスキーマ §2 の並びに揃える。書き戻しで順序が崩れるのを防ぐ。 */
+export function orderSessionKeys(s: GikaiSession): GikaiSession {
+  return {
+    id:            s.id,
+    officialTitle: s.officialTitle,
+    ...(s.narrativeTitle ? { narrativeTitle: s.narrativeTitle } : {}),
+    date:          s.date,
+    ...(s.sortDate ? { sortDate: s.sortDate } : {}),
+    tags:          s.tags,
+    ...(s.summary ? { summary: s.summary } : {}),
+    parts:         s.parts,
+  }
+}
+
 // ── 郷土資料（スキーマ §12）─────────────────────────────────────────────────
 //
 // 権利ガードレール（docs/claude-code-archive-shiseki.md）:

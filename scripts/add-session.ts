@@ -20,22 +20,26 @@ import yaml from "js-yaml"
 import { EXIT, MODEL } from "./config"
 import { collectNeedsReview, extractPart, partIndexOf, type PartType } from "./extract-md"
 import { fetchTranscriptToFile } from "./fetch-transcript"
-import { validateTags, type GikaiSession, type Part } from "./lib/schema"
+import { orderSessionKeys, validateTags, type GikaiSession, type Part } from "./lib/schema"
 
 const ROOT        = process.cwd()
 const CONTENT_DIR = path.join(ROOT, "content")
 
 // ── CLI ─────────────────────────────────────────────────────────────────────
 
-interface Args {
-  id:            string
-  url:           string
-  type:          PartType
-  part:          string
-  label:         string
+/** session.yaml の scaffold に要る分だけ。auto-ingest.ts からも同じ関数を使う。 */
+export interface ScaffoldInput {
+  id:             string
+  url:            string
+  part:           string
+  label:          string
+  date:           string
   titleOfficial?: string
-  date:          string
-  tags?:         string[]
+  tags?:          string[]
+}
+
+interface Args extends ScaffoldInput {
+  type:          PartType
   noPr:          boolean
   force:         boolean
   forceExtract:  boolean
@@ -87,7 +91,7 @@ function guessMeetingTag(sessionId: string): string | null {
   return null
 }
 
-function scaffoldSession(args: Args): { session: GikaiSession; created: boolean } {
+export function scaffoldSession(args: ScaffoldInput): { session: GikaiSession; created: boolean } {
   const dir = path.join(CONTENT_DIR, "sessions", args.id)
   const yamlPath = path.join(dir, "session.yaml")
   const partIndex = partIndexOf(args.part)
@@ -139,7 +143,7 @@ function scaffoldSession(args: Args): { session: GikaiSession; created: boolean 
 
 // ── narrativeTitle の3案 ────────────────────────────────────────────────────
 
-async function proposeNarrativeTitles(mdPath: string): Promise<string[]> {
+export async function proposeNarrativeTitles(mdPath: string): Promise<string[]> {
   const body = fs.readFileSync(mdPath, "utf-8").slice(0, 20_000)
   const client = new Anthropic()
 
@@ -163,21 +167,12 @@ async function proposeNarrativeTitles(mdPath: string): Promise<string[]> {
 }
 
 /** 3案をコメントとして残し、第1案を仮置きする。PRレビューで人が選ぶ。 */
-function writeNarrativeTitle(sessionId: string, titles: string[]) {
+export function writeNarrativeTitle(sessionId: string, titles: string[]) {
   if (titles.length === 0) return
   const yamlPath = path.join(CONTENT_DIR, "sessions", sessionId, "session.yaml")
   const session = loadYaml(fs.readFileSync(yamlPath, "utf-8")) as GikaiSession
 
-  const ordered: GikaiSession = {
-    id: session.id,
-    officialTitle: session.officialTitle,
-    narrativeTitle: titles[0],
-    date: session.date,
-    ...(session.sortDate ? { sortDate: session.sortDate } : {}),
-    tags: session.tags,
-    ...(session.summary ? { summary: session.summary } : {}),
-    parts: session.parts,
-  }
+  const ordered = orderSessionKeys({ ...session, narrativeTitle: titles[0] })
 
   const comments = [
     "# narrativeTitle の候補（AI提案・レビューで選ぶか書き直す）:",

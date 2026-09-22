@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "eslint",
     "add-session": "tsx scripts/add-session.ts",
+    "auto-ingest": "tsx scripts/auto-ingest.ts",
     "fetch:transcript": "tsx scripts/fetch-transcript.ts",
     "extract:md": "tsx scripts/extract-md.ts",
     "cards:generate": "tsx scripts/generate-cards.ts",

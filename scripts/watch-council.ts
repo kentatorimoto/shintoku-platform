@@ -2,13 +2,13 @@
 //
 //   npx tsx scripts/watch-council.ts [--dry-run]
 //
-// 責務は「見逃し防止」だけ。字幕の有無は見ない（add-session.ts 実行時に判定する）。
-// 抽出まで自動でやらないのは、セッションIDと種別（qna / honkaigi）の判断が人間の仕事だから。
+// 責務は「見逃し防止」だけ。字幕の有無は見ない（auto-ingest.ts 実行時に判定する）。
+// Issue を立てたあとの取り込みは auto-ingest.yml が続けて走らせる（同ワークフローの ingest ジョブ）。
 
 import { execFileSync } from "child_process"
 import fs from "fs"
 import path from "path"
-import { COUNCIL_CHANNEL_ID, EXIT } from "./config"
+import { COUNCIL_CHANNEL_ID, EXIT, TRANSCRIPT_RETRY_DAYS } from "./config"
 
 const ROOT = process.cwd()
 // daily-sync.yml のグロブ（public/data/*.json）の対象外に置く
@@ -201,26 +201,29 @@ function issueBody(video: Video): string {
 | 公開日 | ${video.published} |
 | URL | ${video.url} |
 
-## 取り込み手順
+## 取り込み
 
-セッションIDと種別（\`qna\` / \`honkaigi\`）を決めて、次のコマンドを実行してください。
+この Issue は **auto-ingest ワークフローが自動で取り込みます**（この直後と、以後は毎日12:00 JST）。
+セッションIDとパートはタイトルから \`scripts/lib/session-id-rules.ts\` の対応表で推定します。
+
+- 取り込めたら \`auto/session-{セッションID}\` ブランチのPRに載り、この Issue はマージ時に閉じます
+- 字幕が未生成なら保留し、翌日以降に再試行します（${TRANSCRIPT_RETRY_DAYS}日で諦めてここに報告）
+- 対応表に無いパターンなら、推定せずここにコメントして止まります
+
+## 自動で止まったときの手動取り込み
 
 \`\`\`bash
 npm run add-session -- \\
   --id <セッションID> \\
   --url "${video.url}" \\
   --type <qna|honkaigi> \\
-  --part <day1|part1|session> \\
+  --part <day1|part1> \\
   --label "<初日（6/3）など>" \\
   --date <YYYY-MM-DD> \\
-  --title-official "<令和8年定例第2回新得町議会>"
+  --title-official "<令和8年第2回新得町議会定例会>"
 \`\`\`
 
-セッションIDの規則: \`r{元号年}-{西暦年}-{月}-{種別}\`（例: \`r8-2026-06-regular-2\`）
-
-## 字幕がまだ生成されていない場合
-
-\`add-session\` が exit 2 で止まったら、公開直後で自動字幕が未生成です。数時間おいて再実行してください。
+セッションIDの規則と対応表は \`docs/auto-ingest.md\` を見てください。
 `
 }
 

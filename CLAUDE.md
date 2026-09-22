@@ -77,18 +77,23 @@ shintoku-platform/
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
 ├── docs/
 │   ├── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
+│   ├── auto-ingest.md            # ★ 自動取り込みの対応表と運用
 │   └── design/
 │       └── text-scale.md         # ★ 文字の階調の使い分け（3段。透過で階調を作らない）
 ├── scripts/                      # Data scripts (run via tsx)
 │   ├── config.ts                 # ★ モデル名・閾値・exit code 規約の一元管理
 │   ├── check-contrast.ts         # ★ 文字色のコントラスト検査（globals.css を読む）
 │   ├── lib/schema.ts             # ★ 共通型・validateTags・stableStringify
+│   ├── lib/session-id-rules.ts   # ★ Issueタイトル → セッションID/part の対応表
+│   ├── lib/ingest-state.ts       #   自動取り込みの状態（字幕待ち・諦め・済み）
+│   ├── lib/telegram.ts           #   通知3種（PR作成／字幕待ち保留／推定不能で停止）
 │   ├── build-data.ts             # ★ content/ → public/data/（恒久ビルド）
 │   ├── add-session.ts            # ★ 字幕→MD→PR のオーケストレータ
 │   ├── fetch-transcript.ts       #   YouTube字幕 → transcripts/（Layer 0）
 │   ├── extract-md.ts             #   字幕 → MD（Claude API + 自己修正ループ）
 │   ├── generate-cards.ts         #   レビュー済みMD → cards.yaml（要点カード）
 │   ├── watch-council.ts          #   RSS監視 → GitHub Issue
+│   ├── auto-ingest.ts            # ★ Issue → 字幕 → MD → PR（Actions上の自動取り込み）
 │   ├── prompts/                  #   抽出プロンプト（git履歴で改善を追える）
 │   │   ├── glossary.md           #     固有名詞対訳表（議員名簿・誤認識パターン）
 │   │   ├── extract-qna.md
@@ -129,7 +134,8 @@ shintoku-platform/
 ├── .github/workflows/            # CI/CD
 │   ├── daily-sync.yml            # npm run sync at 12:00 JST
 │   ├── daily-scrape.yml          # test-scraper at 09:00 JST
-│   └── watch-council.yml         # 新着動画の検知 → Issue at 09:00 JST
+│   ├── watch-council.yml         # 新着動画の検知 → Issue at 09:00 JST → auto-ingest
+│   └── auto-ingest.yml           # Issue → PR（watch-council から / 毎日12:00 JST / 手動）
 ├── next.config.ts                # Minimal (no custom config)
 ├── tsconfig.json                 # strict: true, @/* path alias
 ├── eslint.config.mjs             # next/core-web-vitals + typescript
@@ -154,6 +160,7 @@ npm run fetch:transcript -- --url <url> --out <path>
 npm run extract:md -- --session <id> --part day1 --type honkaigi
 npm run cards:generate -- <sessionId>  # レビュー済みMD -> cards.yaml（全パート reviewed:true が前提）
 npm run watch:council -- [--dry-run]   # RSS監視 -> GitHub Issue
+npm run auto-ingest -- [--dry-run] [--issue 17]  # Issue -> 字幕 -> MD -> PR（Actions上で自動実行）
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)
@@ -191,7 +198,8 @@ Next.js App Router pages (app/)
 GitHub Actions automates:
 - `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / `newsletters_index.json` （生成物 `gikai_sessions.json` / `qna/` には触れない）
 - `daily-scrape.yml`: Runs `test-scraper.ts` at 09:00 JST, commits `data/scraped/` changes
-- `watch-council.yml`: Runs `watch-council.ts` at 09:00 JST。議会チャンネルのRSSに新着があれば GitHub Issue を立て、`data/watch/known-videos.json` を更新する
+- `watch-council.yml`: Runs `watch-council.ts` at 09:00 JST。議会チャンネルのRSSに新着があれば GitHub Issue を立て、`data/watch/known-videos.json` を更新する。続けて `auto-ingest.yml` を呼ぶ
+- `auto-ingest.yml`: Issue のタイトルからセッションID・パートを推定し、字幕 → MD → PR まで作る（12:00 JST の再試行 + 手動実行）。詳細は `docs/auto-ingest.md`
 
 ## Coding Conventions
 
@@ -500,22 +508,27 @@ Defined as static data in `app/process/issues/page.tsx`:
    Layer 0・不可侵         正典・人がレビューする      生成物・直接編集禁止
 ```
 
-人間に残る判断は4つだけ。それ以外は `npm run add-session` が自動化する。
+人間に残る判断は3つだけ。セッションIDと種別の推定も含めて、それ以外は `auto-ingest` が自動化する。
 
-1. **セッションIDと種別**（`r8-2026-06-regular-2` / `qna` か `honkaigi` か）
+1. **PRレビュー**（推定の根拠・固有名詞・数値・タグ）
 2. **narrativeTitle の承認**（AIが3案を `session.yaml` にコメントで残す。人が選ぶか書き直す）
-3. **PRレビュー**（固有名詞・数値・タグ）
-4. **要点カードのレビュー**（`reviewed: true` にした後 `npm run cards:generate`。数値とトーンを見て `reviewed: true`）
+3. **要点カードのレビュー**（`reviewed: true` にした後 `npm run cards:generate`。数値とトーンを見て `reviewed: true`）
+
+セッションIDとパートは Issue タイトルから `scripts/lib/session-id-rules.ts` の対応表で推定する。
+**表に無いパターンは推定せず、Issue にコメントして止まる**（`docs/auto-ingest.md`）。
 
 ```
 [watcher (cron)] ──新着検知──> Issue（URL・タイトル・公開日）
-                                  │ 人間: IDと種別を決めて CLI 起動
+                                  │ 対応表でID・part・種別を推定（表に無ければ停止）
                                   ▼
-[add-session] ─> 字幕取得 ─> Claude抽出 ─> build:data で検証 ─┬─ OK ─> branch + PR
-                                    ▲          │ NG（バリデーションエラー）
-                                    └─自己修正（最大2回）┘
+[auto-ingest] ─> 字幕取得 ─> Claude抽出 ─> build:data で検証 ─┬─ OK ─> auto/session-{id} + PR
+                    │               ▲          │ NG（バリデーションエラー）
+                    │               └─自己修正（最大2回）┘
+                    └─ 字幕が未生成 ─> 翌日以降に再試行（5日で諦めて Issue に報告）
                                   │ 人間: PRレビュー → reviewed: true → マージ → 自動デプロイ
 ```
+
+`npm run add-session` は手動取り込み用に残してある（自動が止まったときの逃げ道）。
 
 ### Adding a New Session
 
