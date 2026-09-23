@@ -1,0 +1,160 @@
+{
+  "session_id": "r8-2026-09-regular-3",
+  "part_index": 3,
+  "session_date": "2026-09-18",
+  "part_type": "honkaigi",
+  "source_url": "https://www.youtube.com/watch?v=igK2MirgtK8",
+  "items": [
+    {
+      "bill_number": "議案第71号",
+      "bill_title": "令和8年度新得町一般会計補正予算（第6号）",
+      "bill_tags": [
+        "財政",
+        "観光",
+        "廃棄物処理"
+      ],
+      "summary": "歳入歳出それぞれ726万円を追加し、歳入歳出予算の総額をそれぞれ92億84万8000円とするものと説明された。主な補正内容として3点が示された。第1に、駅前地域交流センターへの金融機関増設の当初計画撤回に伴い、町営浴場撤去箇所に整備する駐車場の詳細設計委託料が新規計上された。第2に、一般廃棄物中継施設の高圧ケーブルが法定点検により経年劣化による著しい損傷が判明したため、高圧受変電設備更新工事費が新規計上された。第3に、日本航空による十勝帯広空港大阪伊丹線の定期就航に伴い、宿泊者1人当たり5,000円を助成する大阪伊丹線利用促進事業補助金が新規計上され、財源として宿泊税基金積立金を減額するとして説明された。財源調整として財政調整基金繰入金の増額および公共施設繰入金の増額が示された。",
+      "proposer": "町長",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "議案第72号",
+      "bill_title": "令和8年度新得町国民健康保険事業特別会計補正予算（第1号）",
+      "bill_tags": [
+        "医療",
+        "財政"
+      ],
+      "summary": "歳入歳出それぞれ79万9000円を追加し、歳入歳出予算の総額をそれぞれ5億6763万3000円とするものと説明された。主な補正内容として、出産育児一時金の実績見込みによる予算不足への増額、および国民健康保険税の還付金の予算不足への増額が示された。財源として出産育児一時金に係る普通交付金の増額および基金繰入金の増額が示された。",
+      "proposer": "町長",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "議案第73号",
+      "bill_title": "議員派遣の件",
+      "bill_tags": [],
+      "summary": "会議則第39条第2項の規定により提案理由の説明が省略された。原案の通り実施することとし、これにかかる議員の出張ならびに諸般の取り扱いについてはあらかじめ議長に一任することとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "認定第1号",
+      "bill_title": "令和7年度新得町各会計歳入歳出決算認定について",
+      "bill_tags": [
+        "財政"
+      ],
+      "summary": "決算特別委員会の委員長報告は認定議決であるとして示され、決算審査結果報告書の通り認定されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "認定",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "認定第2号",
+      "bill_title": "令和7年度新得町水道事業会計決算認定について",
+      "bill_tags": [
+        "財政",
+        "水道"
+      ],
+      "summary": "決算特別委員会の委員長報告は認定議決であるとして示され、決算審査結果報告書の通り認定されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "認定",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "認定第3号",
+      "bill_title": "令和7年度新得町公共下水道事業会計決算認定について",
+      "bill_tags": [
+        "財政",
+        "下水道"
+      ],
+      "summary": "決算特別委員会の委員長報告は認定議決であるとして示され、決算審査結果報告書の通り認定されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "認定",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "意見案第8号",
+      "bill_title": "国土強靱化に資する社会資本整備等に関する意見書",
+      "bill_tags": [
+        "公共事業",
+        "防災"
+      ],
+      "summary": "委員長報告は原案可決であるとして示され、委員長報告の通り可決されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "意見案第9号",
+      "bill_title": "奨学金の金利に対する負担軽減を求める意見書",
+      "bill_tags": [
+        "教育"
+      ],
+      "summary": "委員長報告は原案可決であるとして示され、委員長報告の通り可決されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "意見案第10号",
+      "bill_title": "備蓄水準の早期回復を求める意見書",
+      "bill_tags": [
+        "農業",
+        "食料"
+      ],
+      "summary": "委員長報告は原案可決であるとして示され、委員長報告の通り可決されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "陳情第1号",
+      "bill_title": "軽油引取税の課税免除特例措置の継続を求める陳情",
+      "bill_tags": [
+        "税制",
+        "農業"
+      ],
+      "summary": "委員長報告は採択であるとして示され、委員長報告の通り採択されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "採択",
+      "result_detail": "",
+      "referred_to_committee": false
+    },
+    {
+      "bill_number": "意見案第11号",
+      "bill_title": "軽油引取税の課税免除特例措置の継続を求める意見書",
+      "bill_tags": [
+        "税制",
+        "農業"
+      ],
+      "summary": "産業文教常任委員会の福原 智幸委員長から追加提案された。会議規則第41条第3項の規定により提案理由の説明が省略され、原案の通り可決されたとして記録されている。",
+      "proposer": "",
+      "questions": [],
+      "result": "可決",
+      "result_detail": "挙手全員",
+      "referred_to_committee": false
+    }
+  ],
+  "committee_referrals": []
+}
