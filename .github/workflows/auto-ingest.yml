@@ -73,6 +73,12 @@ jobs:
       - name: Commit ingest-state.json if changed
         if: always()
         run: |
+          # dry-run では状態ファイルを書かない。1件も処理しなければ作られもしない。
+          if [ ! -f data/watch/ingest-state.json ]; then
+            echo "状態ファイルが無いのでスキップします（dry-run か、処理対象なし）"
+            exit 0
+          fi
+
           BRANCH="${GITHUB_REF_NAME}"
           git checkout "$BRANCH" 2>/dev/null || true
 
