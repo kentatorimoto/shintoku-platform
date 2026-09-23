@@ -160,6 +160,7 @@ npm run fetch:transcript -- --url <url> --out <path>
 npm run extract:md -- --session <id> --part day1 --type honkaigi
 npm run cards:generate -- <sessionId>  # レビュー済みMD -> cards.yaml（全パート reviewed:true が前提）
 npm run watch:council -- [--dry-run]   # RSS監視 -> GitHub Issue
+npm run watch:council -- --video <url|videoId>   # 取りこぼしの拾い直し（既知でもIssueを立てる）
 npm run auto-ingest -- [--dry-run] [--issue 17]  # Issue -> 字幕 -> MD -> PR（Actions上で自動実行）
 
 # Data scraping & sync

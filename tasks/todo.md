@@ -49,6 +49,11 @@ GitHub Actions 上で走らせる。**人間に残す判断はレビューだけ
 - `npm run build:data` の出力が変わらないこと（`public/data/` に差分なし）
 - `npm run lint` / `tsc --noEmit` で新規ファイルに指摘なし
 
+### 実地テスト前の確認
+
+6本（#15 #16 #17 #18 #25 #27）すべて字幕を取得できることを確認した（最長は #15 の
+33,533字・115分で、抽出の上限 150,000字に対して余裕がある）。exit 3 に当たる動画は無い。
+
 ### 途中で見つけて直したこと
 
 - **`igK2MirgtK8`（#25 の動画）が `known-videos.json` に入っていない。**
@@ -65,5 +70,5 @@ GitHub Actions 上で走らせる。**人間に残す判断はレビューだけ
 
 - Secrets（`ANTHROPIC_API_KEY` / `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID`）の登録
 - リポジトリ設定「Allow GitHub Actions to create and approve pull requests」の有効化
-- `令和8年7月6日 臨時第3回`（`fzEjguY0KsM`）が未取り込みのまま。Issueは開いていないので
-  auto-ingest は拾わない。取り込むなら手動で Issue を立てるか add-session を叩く
+- （解決）`令和8年7月6日 臨時第3回`（`fzEjguY0KsM`）は #27 を立てて取り込み対象にした。
+  既知リストに入っている動画を拾い直せるよう `watch:council --video` を足してある

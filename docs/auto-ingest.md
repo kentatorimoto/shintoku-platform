@@ -102,8 +102,19 @@ RSS の公開日は使わない。議会はライブ配信枠を数日前に作�
 ```bash
 npm run auto-ingest -- --dry-run            # 推定だけ見る（何も書き込まない）
 npm run auto-ingest -- --issue 17           # Issue #17 だけ処理する
-npm run auto-ingest                          # 開いている [新着動画] Issue をすべて処理
+npm run auto-ingest                         # 開いている [新着動画] Issue をすべて処理
 ```
+
+取りこぼした動画を拾い直すときは、**Issue を手書きせず watcher に立てさせる**
+（本文の書式が auto-ingest のパーサと一致することを保証するため）。
+
+```bash
+npm run watch:council -- --video fzEjguY0KsM   # 既知リストに入っていてもIssueを立てる
+```
+
+既知リストには手を触れないので、通常の監視の動きは変わらない。
+フィードの直近15件より古い動画は取れないので、そのときはタイトルを
+`[新着動画] <動画タイトル>` に合わせて手でIssueを立てる。
 
 Actions からは `Auto Ingest Sessions` を `workflow_dispatch` で実行（`dry_run` / `issue` を指定できる）。
 
