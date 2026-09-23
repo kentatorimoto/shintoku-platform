@@ -1,6 +1,111 @@
 {
   "version": 1,
   "videos": {
+    "-pgTXnPoSp8": {
+      "issue": 2,
+      "title": "[新着動画] 令和８年３月１８日　定例第１回　最終日",
+      "url": "https://www.youtube.com/watch?v=-pgTXnPoSp8",
+      "status": "done",
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 0,
+      "note": "既に session.yaml にある"
+    },
+    "1-X2MCzENes": {
+      "issue": 18,
+      "title": "[新着動画] 令和８年９月１６日　定例第３回　一般質問②",
+      "url": "https://www.youtube.com/watch?v=1-X2MCzENes",
+      "status": "done",
+      "sessionId": "r8-2026-09-regular-3",
+      "partFile": "day3",
+      "label": "一般質問②（9/16）",
+      "partType": "qna",
+      "date": "2026-09-16",
+      "trace": [
+        "正規化: 「令和8年9月16日 定例第3回 一般質問②」",
+        "日付: タイトルの「令和8年9月16日」→ 2026-09-16（公開日は使わない）",
+        "表1「定例第{N}回」→ r8-2026-09-regular-3",
+        "表2「一般質問（②③…）」→ day3（既存 2 パートの次）/ type=qna / label「一般質問②（9/16）」"
+      ],
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 1,
+      "prUrl": "https://github.com/kentatorimoto/shintoku-platform/pull/32"
+    },
+    "14_23_jU3pc": {
+      "issue": 3,
+      "title": "[新着動画] 令和８年１月２０日　新得町基本構想審査特別委員会　午前",
+      "url": "https://www.youtube.com/watch?v=14_23_jU3pc",
+      "status": "done",
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 0,
+      "note": "既に session.yaml にある"
+    },
+    "aBHABXJ8-tA": {
+      "issue": 15,
+      "title": "[新着動画] 令和８年９月１4日　決算特別委員会　午前",
+      "url": "https://www.youtube.com/watch?v=aBHABXJ8-tA",
+      "status": "done",
+      "sessionId": "r8-2026-09-kessan-tokubetsu",
+      "partFile": "part1",
+      "label": "午前",
+      "partType": "qna",
+      "date": "2026-09-14",
+      "trace": [
+        "正規化: 「令和8年9月14日 決算特別委員会 午前」",
+        "日付: タイトルの「令和8年9月14日」→ 2026-09-14（公開日は使わない）",
+        "表1「決算特別委員会」→ r8-2026-09-kessan-tokubetsu",
+        "表2「午前」→ part1（既存 0 パートの次）/ type=qna / label「午前」",
+        "新規セッション: tags=[特別委員会, 決算] / officialTitle「令和8年9月14日 決算特別委員会（令和7年度）」"
+      ],
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 1,
+      "prUrl": "https://github.com/kentatorimoto/shintoku-platform/pull/31"
+    },
+    "b4LLwOXfTvM": {
+      "issue": 17,
+      "title": "[新着動画] 令和８年９月１６日　定例第３回　一般質問",
+      "url": "https://www.youtube.com/watch?v=b4LLwOXfTvM",
+      "status": "done",
+      "sessionId": "r8-2026-09-regular-3",
+      "partFile": "day2",
+      "label": "一般質問（9/16）",
+      "partType": "qna",
+      "date": "2026-09-16",
+      "trace": [
+        "正規化: 「令和8年9月16日 定例第3回 一般質問」",
+        "日付: タイトルの「令和8年9月16日」→ 2026-09-16（公開日は使わない）",
+        "表1「定例第{N}回」→ r8-2026-09-regular-3",
+        "表2「一般質問（②③…）」→ day2（既存 1 パートの次）/ type=qna / label「一般質問（9/16）」"
+      ],
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 1,
+      "prUrl": "https://github.com/kentatorimoto/shintoku-platform/pull/32"
+    },
+    "bTItSDksk10": {
+      "issue": 16,
+      "title": "[新着動画] 令和８年９月１４日　決算特別委員会　午後",
+      "url": "https://www.youtube.com/watch?v=bTItSDksk10",
+      "status": "done",
+      "sessionId": "r8-2026-09-kessan-tokubetsu",
+      "partFile": "part2",
+      "label": "午後",
+      "partType": "qna",
+      "date": "2026-09-14",
+      "trace": [
+        "正規化: 「令和8年9月14日 決算特別委員会 午後」",
+        "日付: タイトルの「令和8年9月14日」→ 2026-09-14（公開日は使わない）",
+        "表1「決算特別委員会」→ r8-2026-09-kessan-tokubetsu",
+        "表2「午後」→ part2（既存 1 パートの次）/ type=qna / label「午後」"
+      ],
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 1,
+      "prUrl": "https://github.com/kentatorimoto/shintoku-platform/pull/31"
+    },
     "fzEjguY0KsM": {
       "issue": 27,
       "title": "[新着動画] 令和８年７月６日　臨時第３回",
@@ -22,6 +127,39 @@
       "lastTried": "2026-09-23",
       "attempts": 2,
       "prUrl": "https://github.com/kentatorimoto/shintoku-platform/pull/30"
+    },
+    "Ib5TgHKlAps": {
+      "issue": 11,
+      "title": "[新着動画] 令和８年９月１日　定例第３回　初日",
+      "url": "https://www.youtube.com/watch?v=Ib5TgHKlAps",
+      "status": "done",
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 0,
+      "note": "既に session.yaml にある"
+    },
+    "igK2MirgtK8": {
+      "issue": 25,
+      "title": "[新着動画] 令和８年９月１８日　定例第３回　最終日",
+      "url": "https://www.youtube.com/watch?v=igK2MirgtK8",
+      "status": "done",
+      "sessionId": "r8-2026-09-regular-3",
+      "partFile": "day4",
+      "label": "最終日（9/18）",
+      "partType": "honkaigi",
+      "date": "2026-09-18",
+      "trace": [
+        "正規化: 「令和8年9月18日 定例第3回 最終日」",
+        "日付: タイトルの「令和8年9月18日」→ 2026-09-18（公開日は使わない）",
+        "表1「定例第{N}回」→ r8-2026-09-regular-3",
+        "表2「最終日」→ day4（既存 3 パートの次）/ type=honkaigi / label「最終日（9/18）」",
+        "「最終日」ラベルのため date を 2026-09-18 に更新し、sortDate に会期初日を入れる（スキーマ §2.1）"
+      ],
+      "firstSeen": "2026-09-23",
+      "lastTried": "2026-09-23",
+      "attempts": 1,
+      "dateNote": "date=2026-09-18 / sortDate=2026-09-01",
+      "prUrl": "https://github.com/kentatorimoto/shintoku-platform/pull/32"
     }
   }
 }
