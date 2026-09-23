@@ -83,6 +83,17 @@ function parseArgs(argv: string[]): Args {
 const loadYaml = (src: string) => yaml.load(src, { schema: yaml.CORE_SCHEMA })
 const dumpYaml = (v: unknown) => yaml.dump(v, { lineWidth: -1, noRefs: true, quoteStyle: "double" })
 
+/**
+ * session.yaml 冒頭のコメント（narrativeTitle の候補など）を切り出す。
+ * js-yaml はコメントを保持しないので、書き戻すときは必ずこれで退避して先頭に戻すこと。
+ * ここを忘れると、2パート目を足したときに1パート目で書いた候補が消える。
+ */
+export function leadingComments(raw: string): string {
+  const lines = raw.split("\n")
+  const end = lines.findIndex(l => l.trim() !== "" && !l.startsWith("#"))
+  return end > 0 ? lines.slice(0, end).join("\n") + "\n" : ""
+}
+
 /** 会議種別タグを id から推測する。曖昧なら null（--tags を必須にする）。 */
 function guessMeetingTag(sessionId: string): string | null {
   if (/-regular-/.test(sessionId)) return "定例会"
@@ -100,9 +111,12 @@ export function scaffoldSession(args: ScaffoldInput): { session: GikaiSession; c
 
   let session: GikaiSession
   let created = false
+  let comments = ""
 
   if (fs.existsSync(yamlPath)) {
-    session = loadYaml(fs.readFileSync(yamlPath, "utf-8")) as GikaiSession
+    const raw = fs.readFileSync(yamlPath, "utf-8")
+    comments = leadingComments(raw)
+    session = loadYaml(raw) as GikaiSession
   } else {
     created = true
     const meetingTag = guessMeetingTag(args.id)
@@ -137,7 +151,7 @@ export function scaffoldSession(args: ScaffoldInput): { session: GikaiSession; c
     if (!session.parts[i]) throw new Error(`parts[${i}] が空です。--part は既存パートの直後から順に埋めてください。`)
   }
 
-  fs.writeFileSync(yamlPath, dumpYaml(session))
+  fs.writeFileSync(yamlPath, comments + dumpYaml(session))
   return { session, created }
 }
 
