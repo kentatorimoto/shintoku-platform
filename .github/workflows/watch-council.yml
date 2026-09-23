@@ -37,4 +37,19 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
 
           git add data/watch/known-videos.json
-          git diff --cached --quiet || (git commit -m "chore: update known videos" && git push)
+          if git diff --cached --quiet; then
+            echo "変更なし"
+          else
+            git commit -m "chore: update known videos"
+            # 他のワークフロー（daily-sync 等）が先に push していると弾かれる。
+            # ここで落ちると既知リストが保存されず、翌日に同じ動画で重複Issueが立つ。
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "${GITHUB_REF_NAME}"
+          fi
+
+  # 新着を Issue にしたら、そのまま取り込みまで走らせる。
+  # 字幕が未生成なら auto-ingest 側が保留して翌日以降に再試行する。
+  ingest:
+    needs: watch
+    uses: ./.github/workflows/auto-ingest.yml
+    secrets: inherit

@@ -45,6 +45,13 @@ export const COUNCIL_CHANNEL_ID = "UC8YKJ8zgl7CoGL0kapCPMzg"
  */
 export const TRANSCRIPT_PENDING_WINDOW_HOURS = 48
 
+/**
+ * 字幕待ち（exit 2）で再試行を続ける日数。これを過ぎたら諦めて Issue に報告する。
+ * fetch-transcript は公開から TRANSCRIPT_PENDING_WINDOW_HOURS を過ぎると exit 3 を返すので、
+ * 通常はそちらが先に立つ。これは「公開日時が読めない動画」が延々と再試行されるのを止める安全弁。
+ */
+export const TRANSCRIPT_RETRY_DAYS = 5
+
 // ── exit code 規約（watcher・CLI・CI で共有する）─────────────────────────────
 
 export const EXIT = {

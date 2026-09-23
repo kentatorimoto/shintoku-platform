@@ -1,0 +1,88 @@
+name: Auto Ingest Sessions
+
+# 新着動画の Issue を拾って、字幕 → MD → PR まで作る。
+# 人間の仕事はPRレビューだけ。推定できないものは Issue にコメントして止まる。
+#
+# 起動は3通り:
+#   - watch-council.yml から（新着を検知した直後）
+#   - 毎日12:00 JST（字幕待ちの再試行・保留の消化）
+#   - 手動（特定Issueだけ流す / 推定だけ見る）
+
+on:
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "推定だけ表示して何も書き込まない"
+        type: boolean
+        default: false
+      issue:
+        description: "この Issue 番号だけを処理する（空なら全部）"
+        type: string
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+# 同時に走るとブランチとPRを取り合うので直列化する
+concurrency:
+  group: auto-ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    # 字幕取得 + Claude抽出 + フルビルドを溜まった本数ぶん繰り返す余裕を見る
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # auto/session-* ブランチに積み直すので履歴が要る
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Configure git
+        run: |
+          git config user.name "shintoku-atlas-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Ingest
+        env:
+          GH_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
+          ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          DRY_RUN:            ${{ inputs.dry_run }}
+          ONLY_ISSUE:         ${{ inputs.issue }}
+        run: |
+          FLAGS=""
+          if [ "$DRY_RUN" = "true" ]; then FLAGS="$FLAGS --dry-run"; fi
+          if [ -n "$ONLY_ISSUE" ]; then FLAGS="$FLAGS --issue $ONLY_ISSUE"; fi
+          npx tsx scripts/auto-ingest.ts $FLAGS
+
+      # 取り込みが途中で落ちても、試行回数は記録しておく（翌日の再試行判断に使う）
+      - name: Commit ingest-state.json if changed
+        if: always()
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+          git checkout "$BRANCH" 2>/dev/null || true
+
+          # daily-sync の教訓: グロブではなく明示パスでコミットする
+          git add data/watch/ingest-state.json
+          if git diff --cached --quiet; then
+            echo "変更なし"
+          else
+            git commit -m "chore: update ingest state"
+            # watch-council が先に known-videos.json を push している場合がある
+            git pull --rebase origin "$BRANCH"
+            git push origin "$BRANCH"
+          fi
