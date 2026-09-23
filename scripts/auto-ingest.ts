@@ -20,7 +20,7 @@ import { execFileSync } from "child_process"
 import fs from "fs"
 import path from "path"
 import yaml from "js-yaml"
-import { proposeNarrativeTitles, scaffoldSession, writeNarrativeTitle } from "./add-session"
+import { leadingComments, proposeNarrativeTitles, scaffoldSession, writeNarrativeTitle } from "./add-session"
 import { EXIT, MODEL, TRANSCRIPT_RETRY_DAYS } from "./config"
 import { readFrontmatter } from "./build-data"
 import { collectNeedsReview, extractPart } from "./extract-md"
@@ -133,10 +133,7 @@ function rewriteSession(id: string, mutate: (s: GikaiSession) => void) {
   const file = sessionYaml(id)
   const raw  = fs.readFileSync(file, "utf-8")
 
-  const lines = raw.split("\n")
-  const headEnd = lines.findIndex(l => l.trim() !== "" && !l.startsWith("#"))
-  const head = headEnd > 0 ? lines.slice(0, headEnd).join("\n") + "\n" : ""
-
+  const head = leadingComments(raw)
   const session = yaml.load(raw, { schema: yaml.CORE_SCHEMA }) as GikaiSession
   mutate(session)
 
