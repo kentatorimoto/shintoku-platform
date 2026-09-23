@@ -1,13 +1,16 @@
-# narrativeTitle の候補（AI提案・レビューで選ぶか書き直す）:
+# narrativeTitle の候補（AI提案。レビューで書き直して確定済み）:
 #   1. 駅前温浴宿泊施設の工事契約3件を変更し工期を90日延長
 #   2. 物価高騰に伴う温浴施設工事費増額と水道料金免除延長を審議
 #   3. こども園給食異物混入とポイント事業データ誤りの報告が相次ぐ
 id: r8-2026-07-rinji-03
 officialTitle: 令和8年第3回新得町議会臨時会
-narrativeTitle: 駅前温浴宿泊施設の工事契約3件を変更し工期を90日延長
+narrativeTitle: 温浴宿泊施設の工事、物価高騰で増額と90日延長
 date: "2026-07-06"
 tags:
   - 臨時会
+  - インフラ
+  - 財政
+  - 観光
 parts:
   - label: 本会議（7/6）
     youtube: https://www.youtube.com/watch?v=fzEjguY0KsM
