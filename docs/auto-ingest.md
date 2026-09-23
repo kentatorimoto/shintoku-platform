@@ -116,7 +116,26 @@ npm run watch:council -- --video fzEjguY0KsM   # 既知リストに入ってい�
 フィードの直近15件より古い動画は取れないので、そのときはタイトルを
 `[新着動画] <動画タイトル>` に合わせて手でIssueを立てる。
 
-Actions からは `Auto Ingest Sessions` を `workflow_dispatch` で実行（`dry_run` / `issue` を指定できる）。
+Actions からは `Auto Ingest Sessions` を `workflow_dispatch` で実行
+（`dry_run` / `issue` / `notify_test` を指定できる）。
+
+## 実行場所 — なぜセルフホストランナーなのか
+
+**YouTube は GitHub ホストランナー（データセンターIP）からの視聴を弾く。**
+`playabilityStatus: LOGIN_REQUIRED` が返り、字幕以前に動画ページが読めない。
+同じ動画が手元からは `OK` で取れるので、動画側の設定ではなく実行元IPの問題。
+
+- `auto-ingest.yml` → `runs-on: self-hosted`（母艦のMacに登録したランナー）
+- `watch-council.yml` → `ubuntu-latest` のまま。RSSが弾かれても Data API に落ちるので動く
+
+ランナーが落ちていると取り込みは走らない（Issueは溜まるだけなので、次に起きたときに消化される）。
+`gh api -X POST repos/{owner}/{repo}/actions/runners/registration-token` で登録トークンは取れる。
+launchd で常駐させる手順は `tasks/runner-setup.md`。
+
+> **公開リポジトリでセルフホストランナーを使うときの注意**: fork からの PR で任意のコードが
+> 走ると母艦が危ない。本リポジトリのワークフローは `pull_request` で起動しないので
+> （`schedule` / `workflow_dispatch` / `workflow_call` のみ）、fork PR から self-hosted は動かない。
+> この前提を崩すワークフローを足さないこと。
 
 ## 必要な Secrets
 

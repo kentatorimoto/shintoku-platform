@@ -20,6 +20,10 @@ on:
         description: "この Issue 番号だけを処理する（空なら全部）"
         type: string
         required: false
+      notify_test:
+        description: "Telegram に疎通確認を1通送って終わる（取り込みはしない）"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -33,7 +37,10 @@ concurrency:
 
 jobs:
   ingest:
-    runs-on: ubuntu-latest
+    # YouTube は GitHub ホストランナー（データセンターIP）からの視聴を弾く
+    # （playabilityStatus: LOGIN_REQUIRED）。字幕が要るのでセルフホストで動かす。
+    # watch-council は RSS + Data API フォールバックで動くのでホストランナーのまま。
+    runs-on: self-hosted
     # 字幕取得 + Claude抽出 + フルビルドを溜まった本数ぶん繰り返す余裕を見る
     timeout-minutes: 90
 
@@ -63,8 +70,10 @@ jobs:
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
           DRY_RUN:            ${{ inputs.dry_run }}
           ONLY_ISSUE:         ${{ inputs.issue }}
+          NOTIFY_TEST:        ${{ inputs.notify_test }}
         run: |
           FLAGS=""
+          if [ "$NOTIFY_TEST" = "true" ]; then FLAGS="--notify-test"; fi
           if [ "$DRY_RUN" = "true" ]; then FLAGS="$FLAGS --dry-run"; fi
           if [ -n "$ONLY_ISSUE" ]; then FLAGS="$FLAGS --issue $ONLY_ISSUE"; fi
           npx tsx scripts/auto-ingest.ts $FLAGS

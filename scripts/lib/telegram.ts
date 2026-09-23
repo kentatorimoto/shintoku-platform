@@ -3,12 +3,14 @@
 // トークンが無い環境（ローカルのドライラン等）では黙って諦めず、理由をログに出してスキップする。
 // 通知の失敗でパイプライン自体を落とさない — 取り込みは済んでいるのに Actions が赤くなる方が困る。
 
-export type NotifyKind = "pr" | "pending" | "blocked"
+/** 運用で飛ぶのは3種類（pr / pending / blocked）。test は `--notify-test` の疎通確認専用。 */
+export type NotifyKind = "pr" | "pending" | "blocked" | "test"
 
 const HEADING: Record<NotifyKind, string> = {
   pr:      "🟢 PRを作成しました",
   pending: "⏳ 字幕待ちで保留",
   blocked: "🛑 推定できず停止",
+  test:    "🔔 通知テスト",
 }
 
 const escapeHtml = (s: string) =>
@@ -30,6 +32,7 @@ export async function notify(kind: NotifyKind, title: string, lines: string[]): 
     console.warn(text.replace(/<\/?b>/g, ""))
     return
   }
+
 
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {

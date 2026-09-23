@@ -224,20 +224,25 @@ function fetchIssues(limit: number): IssueRef[] {
     .sort((a, b) => a.number - b.number)
 }
 
-/** 同じ知らせを毎日書かないよう、マーカー付きで1回だけコメントする。 */
+/**
+ * 同じ知らせを毎日書かないよう、1回だけコメントする。
+ * 判定は「マーカー＋本文が完全一致」。理由が変わったときは書く価値があるので、そのときだけ新しく出す。
+ */
 function commentOnce(issue: number, marker: string, body: string, dryRun: boolean) {
   const tag = `<!-- auto-ingest:${marker} -->`
+  const full = `${tag}\n${body}`
+
   if (dryRun) {
     console.log(`   (dry-run) #${issue} にコメント: ${marker}`)
     return
   }
   const raw = gh("issue", "view", String(issue), "--json", "comments")
   const { comments } = JSON.parse(raw) as { comments: { body: string }[] }
-  if (comments.some(c => c.body.includes(tag))) {
-    console.log(`   #${issue} には ${marker} のコメント済み（重複させない）`)
+  if (comments.some(c => c.body.trim() === full.trim())) {
+    console.log(`   #${issue} には同じ内容の ${marker} コメント済み（繰り返さない）`)
     return
   }
-  gh("issue", "comment", String(issue), "--body", `${tag}\n${body}`)
+  gh("issue", "comment", String(issue), "--body", full)
   console.log(`   #${issue} にコメントしました（${marker}）`)
 }
 
@@ -524,13 +529,14 @@ function ensureBranch(branch: string, baseBranch: string) {
   }
 }
 
+/** 戻り値は「人間の対処が要る件数」。ワークフローの終了コードに反映する。 */
 async function processSession(
   sessionId: string,
   plans: Plan[],
   state: IngestState,
   baseBranch: string,
   dryRun: boolean,
-) {
+): Promise<number> {
   console.log(`\n${"─".repeat(70)}\n📦 ${sessionId}（${plans.length} パート）`)
 
   const branch = `auto/session-${sessionId}`
@@ -539,6 +545,7 @@ async function processSession(
   const today = todayJst()
   const results: PartResult[] = []
   let halted: string | null = null
+  let problems = 0
 
   for (const plan of plans) {
     const previous = state.videos[plan.videoId]
@@ -590,6 +597,8 @@ async function processSession(
 
     state.videos[plan.videoId] = { ...record, status: outcome.status, note: outcome.note }
     halted = `#${plan.issue.number}`
+    // 字幕待ち（pending）は想定内。それ以外は人間の対処が要る
+    if (outcome.status !== "pending") problems += 1
     console.log(`   ⛔ #${plan.issue.number}: ${outcome.note}`)
 
     if (outcome.status === "pending" || outcome.status === "gave_up") {
@@ -602,21 +611,24 @@ async function processSession(
           givingUp ? "自動取り込みは諦めました。手で対処してください。" : "翌日の実行で再試行します。",
         ])
       }
-    } else {
+    } else if (previous?.note !== outcome.note) {
+      // 同じ理由で毎日鳴らさない。理由が変わったときだけ知らせる
       await notify("blocked", `${sessionId} ${plan.inference.partFile}`, [
         `Issue: #${plan.issue.number}「${plan.issue.title}」`,
         outcome.note,
         "Issue にコメントを残しました。",
       ])
+    } else {
+      console.log(`   （前回と同じ理由なので通知しません）`)
     }
   }
 
-  if (dryRun) return
+  if (dryRun) return problems
 
   if (results.length === 0) {
     git("checkout", baseBranch)
     console.log("   新しく入ったパートが無いので、PRは作りません")
-    return
+    return problems
   }
 
   console.log("\n   全体を検証（npm run build）")
@@ -625,6 +637,7 @@ async function processSession(
     npm("run", "build")
   } catch (err) {
     buildOk = false
+    problems += 1
     console.error(`   ⚠️  build に失敗しましたが、PRは作って人の目に入れます: ${errText(err)}`)
   }
 
@@ -647,6 +660,7 @@ async function processSession(
   ].filter(Boolean))
 
   git("checkout", baseBranch)
+  return problems
 }
 
 // ── メイン ──────────────────────────────────────────────────────────────────
@@ -657,14 +671,25 @@ function parseArgs(argv: string[]) {
     return i >= 0 ? argv[i + 1] : undefined
   }
   return {
-    dryRun: argv.includes("--dry-run"),
-    issue:  get("--issue") ? Number(get("--issue")) : null,
-    limit:  Number(get("--limit") ?? 50),
+    dryRun:     argv.includes("--dry-run"),
+    notifyTest: argv.includes("--notify-test"),
+    issue:      get("--issue") ? Number(get("--issue")) : null,
+    limit:      Number(get("--limit") ?? 50),
   }
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2))
+
+  // Secrets の疎通確認だけして終わる。取り込みは何もしない
+  if (args.notifyTest) {
+    await notify("test", "auto-ingest からの疎通確認です", [
+      `実行: ${new Date().toISOString()}`,
+      "これが届いていれば TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID は正しく設定されています。",
+    ])
+    return
+  }
+
   const state = loadState()
   const base = git("rev-parse", "--abbrev-ref", "HEAD")
 
@@ -673,6 +698,8 @@ async function main() {
   const issues = fetchIssues(args.limit).filter(i => args.issue === null || i.number === args.issue)
   const ingested = ingestedVideoIds()
   const plans: Plan[] = []
+  // 人間の対処が要る件数。1件でもあればワークフローを赤くする（通知が落ちていても気づけるように）
+  let problems = 0
 
   for (const issue of issues) {
     const videoId = issue.url ? extractVideoId(issue.url) : null
@@ -718,6 +745,7 @@ async function main() {
     const res = infer(issue.title, repo)
     if (!res.ok) {
       console.log(`🛑 #${issue.number}: ${res.reason}`)
+      problems += 1
       state.videos[videoId] = {
         issue: issue.number, title: issue.title, url: issue.url, status: "blocked",
         trace: res.trace, firstSeen: record?.firstSeen ?? todayJst(), lastTried: todayJst(),
@@ -759,7 +787,7 @@ async function main() {
   }
 
   for (const [sessionId, list] of [...grouped.entries()].sort()) {
-    await processSession(sessionId, list, state, base, args.dryRun)
+    problems += await processSession(sessionId, list, state, base, args.dryRun)
   }
 
   if (args.dryRun) {
@@ -768,6 +796,11 @@ async function main() {
     git("checkout", base)
     saveState(state)
     console.log(`\n📝 data/watch/ingest-state.json を更新しました`)
+  }
+
+  if (problems > 0) {
+    console.error(`\n❌ 人間の対処が要る件数: ${problems}（詳細は Issue のコメントを見てください）`)
+    process.exit(EXIT.ERROR)
   }
 }
 
