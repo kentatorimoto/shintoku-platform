@@ -1,7 +1,3 @@
-# narrativeTitle の候補（AI提案・レビューで選ぶか書き直す）:
-#   1. 人口減少下の公共施設縮小・職員派遣・農業委員報酬など令和7年度決算の総括質疑
-#   2. 施設マネジメント・DX・空き家対策・鳥獣駆除にわたる決算審査の一般質問
-#   3. 道の駅設計進捗から協力隊募集難・消化液利用まで多分野を横断した決算質疑
 id: r8-2026-09-kessan-tokubetsu
 officialTitle: 令和8年9月14日 決算特別委員会（令和7年度）
 narrativeTitle: 人口減少下の公共施設縮小・職員派遣・農業委員報酬など令和7年度決算の総括質疑
@@ -12,3 +8,5 @@ tags:
 parts:
   - label: 午前
     youtube: https://www.youtube.com/watch?v=aBHABXJ8-tA
+  - label: 午後
+    youtube: https://www.youtube.com/watch?v=bTItSDksk10
