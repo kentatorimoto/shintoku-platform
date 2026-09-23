@@ -188,8 +188,9 @@ export async function fetchTranscriptToFile(
     return {
       code: EXIT.ERROR,
       message:
-        `動画を視聴できません（playabilityStatus: ${probe.playabilityStatus}）。\n` +
-        `  非公開化・限定公開・削除された可能性があります: https://www.youtube.com/watch?v=${videoId}`,
+        `実行環境から動画を視聴できません（playabilityStatus: ${probe.playabilityStatus}）。\n` +
+        `  (a) 動画側の非公開化・限定公開・削除、または (b) 実行元IPの制限（データセンターIPのbot判定）の\n` +
+        `  いずれかです。手元で見えるのにここで見えないなら (b): https://www.youtube.com/watch?v=${videoId}`,
     }
   }
 
