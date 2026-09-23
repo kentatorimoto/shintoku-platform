@@ -6,7 +6,7 @@ session_date: "2026-09-18"
 source_url: https://www.youtube.com/watch?v=igK2MirgtK8
 extracted_by: claude-sonnet-4-6
 extracted_at: "2026-09-23"
-reviewed: false
+reviewed: true
 ---
 # 議案審議
 
@@ -87,7 +87,7 @@ referred_to_committee: false
 
 委員長報告は原案可決であるとして示され、委員長報告の通り可決されたとして記録されている。
 
-## 意見案第9号 — 【要確認: 冒頭部不明瞭「急する」】奨学金の金利に対する負担軽減を求める意見書
+## 意見案第9号 — 奨学金の金利に対する負担軽減を求める意見書
 
 tags: 教育
 result: 可決
@@ -98,7 +98,7 @@ referred_to_committee: false
 
 委員長報告は原案可決であるとして示され、委員長報告の通り可決されたとして記録されている。
 
-## 意見案第10号 — 備蓄水準の早期回復を求める【要確認: 「えなか生かな生かな生食用社会がの輸入金を行うことを求める」—タイトル中間部不明瞭】意見書
+## 意見案第10号 — 備蓄水準の早期回復を求める意見書
 
 tags: 農業, 食料
 result: 可決
