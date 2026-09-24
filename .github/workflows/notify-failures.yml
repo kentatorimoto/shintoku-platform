@@ -1,0 +1,65 @@
+name: Notify Workflow Failures
+
+# 「スクリプトの外」で落ちたときに気づくための見張り。
+#
+# auto-ingest.ts は自分の中で起きた失敗を Telegram に投げるが、
+# ワークフローの起動失敗（YAMLの不備・権限不足）やジョブ自体の失敗は誰も知らせない。
+# 実際、watch-council が起動失敗しても通知は1通も飛ばなかった。
+#
+# 注意:
+#   - workflow_run はデフォルトブランチに置いたものだけが発火する
+#   - ここは ubuntu-latest で動かす（母艦のセルフホストランナーが落ちていても届くように）
+#   - この見張り自身が落ちたときは誰も知らせない。Actions の実行履歴で見ること
+
+on:
+  workflow_run:
+    workflows:
+      - Watch Council Channel
+      - Auto Ingest Sessions
+      - Weekly Sync
+      - Daily Scrape
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    # cancelled と skipped は人が止めたか条件で飛ばした結果なので鳴らさない
+    if: >-
+      github.event.workflow_run.conclusion == 'failure' ||
+      github.event.workflow_run.conclusion == 'startup_failure' ||
+      github.event.workflow_run.conclusion == 'timed_out'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Telegram に通知
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          WF:         ${{ github.event.workflow_run.name }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          URL:        ${{ github.event.workflow_run.html_url }}
+          BRANCH:     ${{ github.event.workflow_run.head_branch }}
+          SHA:        ${{ github.event.workflow_run.head_sha }}
+          EVENT:      ${{ github.event.workflow_run.event }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID が未設定のため通知をスキップします"
+            exit 0
+          fi
+
+          case "$CONCLUSION" in
+            startup_failure) HEAD="🧨 ワークフローが起動できませんでした（YAMLか権限の問題）" ;;
+            timed_out)       HEAD="⏱ ワークフローがタイムアウトしました" ;;
+            *)               HEAD="🔴 ワークフローが失敗しました" ;;
+          esac
+
+          TEXT=$(printf '%s\n\n%s（%s）\nブランチ: %s / %s\nきっかけ: %s\n%s' \
+            "$HEAD" "$WF" "$CONCLUSION" "$BRANCH" "${SHA:0:7}" "$EVENT" "$URL")
+
+          curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${TEXT}" \
+            --data-urlencode "disable_web_page_preview=true" \
+            -o /dev/null -w "Telegram: HTTP %{http_code}\n"
