@@ -59,6 +59,36 @@ function heatClass(count: number): string {
   return                  "bg-accent text-onAccent font-semibold hover:bg-accentSoft"
 }
 
+/**
+ * 西暦 → 和暦の年ラベル。giketsu_index.json に無い年（未収録の年）を
+ * 注記に出すために使う。データにある年は、必ずデータ側の eraLabel を優先する。
+ */
+function eraLabelOf(year: number): string {
+  if (year >= 2019) return year === 2019 ? "令和元年" : `令和${year - 2018}年`
+  return `平成${year - 1988}年`
+}
+
+/** 連続する年をまとめて「平成29年〜令和元年（2017〜2019）」の形にする。 */
+function formatYearRanges(years: { era: string; year: number }[]): string {
+  const sorted = [...years].sort((a, b) => a.year - b.year)
+  const groups: { era: string; year: number }[][] = []
+  for (const y of sorted) {
+    const last = groups[groups.length - 1]
+    if (last && y.year === last[last.length - 1].year + 1) last.push(y)
+    else groups.push([y])
+  }
+  return groups
+    .map((g) => {
+      const head = g[0]
+      const tail = g[g.length - 1]
+      return g.length === 1
+        ? `${head.era}（${head.year}）`
+        : `${head.era}〜${tail.era}（${head.year}〜${tail.year}）`
+    })
+    .reverse()
+    .join("・")
+}
+
 // ─────────────────────────── Page ─────────────────────────────────
 
 export default function InsightsPage() {
@@ -85,6 +115,29 @@ export default function InsightsPage() {
   const sortedEras = [...eraYearMap.entries()]
     .sort(([, a], [, b]) => b - a)
     .map(([era]) => era)
+
+  // ── 収録できている年度だけを列にする ─────────────────────────
+  // 議決を1件も取り出せていない年度を空列で並べると「議会が無かった」ように読めるので、
+  // 列からは外して注記に回す（/gikai の年度フィルタも、件数0の会期は出さない）。
+  const itemCountByEra = new Map<string, number>()
+  for (const s of sessions) {
+    itemCountByEra.set(s.eraLabel, (itemCountByEra.get(s.eraLabel) ?? 0) + s.items.length)
+  }
+  const coveredEras = sortedEras.filter((era) => (itemCountByEra.get(era) ?? 0) > 0)
+
+  // 未収録 = ①データにあるが議決0件の年度 ②収録年の範囲に入っているのにデータが無い年
+  const coveredYears = new Set(coveredEras.map((era) => eraYearMap.get(era) as number))
+  const uncovered: { era: string; year: number }[] = sortedEras
+    .filter((era) => (itemCountByEra.get(era) ?? 0) === 0)
+    .map((era) => ({ era, year: eraYearMap.get(era) as number }))
+
+  if (coveredYears.size > 0) {
+    const min = Math.min(...coveredYears)
+    const max = Math.max(...coveredYears)
+    for (let y = min; y <= max; y++) {
+      if (!coveredYears.has(y)) uncovered.push({ era: eraLabelOf(y), year: y })
+    }
+  }
 
   // ── 集計 ────────────────────────────────────────────────────
   // heatmap[eraLabel][themeId] = count
@@ -174,12 +227,13 @@ export default function InsightsPage() {
                 <th className="sticky left-0 bg-ink text-left px-4 py-3 text-textMuted text-xs font-medium border-b border-line w-28">
                   テーマ
                 </th>
-                {sortedEras.map((era) => (
+                {/* 列見出しは和暦。/gikai の年度フィルタ（eraLabel）と同じ表記に揃える */}
+                {coveredEras.map((era) => (
                   <th
                     key={era}
                     className="px-2 py-3 text-textMuted text-xs font-medium border-b border-line text-center whitespace-nowrap min-w-[3rem]"
                   >
-                    {eraYearMap.get(era)}
+                    {era}
                   </th>
                 ))}
               </tr>
@@ -193,9 +247,9 @@ export default function InsightsPage() {
                   <td className="sticky left-0 bg-ink px-4 py-2 text-textMain text-xs font-medium whitespace-nowrap">
                     {INSIGHT_THEME_LABELS[themeId]}
                   </td>
-                  {sortedEras.map((era) => {
+                  {coveredEras.map((era) => {
                     const count = heatmap[era]?.[themeId] ?? 0
-                    const tipLabel = `${INSIGHT_THEME_LABELS[themeId]} / ${eraYearMap.get(era)}: ${count}件`
+                    const tipLabel = `${INSIGHT_THEME_LABELS[themeId]} / ${era}: ${count}件`
                     return (
                       <td key={era} className="p-0.5 text-center">
                         {count > 0 ? (
@@ -222,6 +276,14 @@ export default function InsightsPage() {
             </tbody>
           </table>
         </div>
+
+        {uncovered.length > 0 && (
+          <p className="text-[12.5px] text-textMuted mt-3">
+            {formatYearRanges(uncovered)}は<strong className="font-medium text-textMain">未収録</strong>です。
+            ATLAS が{LABELS.giketsu.formal}を取り込めていないだけで、
+            その年に議会が開かれなかったわけではありません。
+          </p>
+        )}
       </section>
 
       {/* ── B. テーマ別ランキング ───────────────────────────── */}
