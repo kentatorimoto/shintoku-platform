@@ -5,9 +5,13 @@ on:
   schedule:
     - cron: "0 0 * * *" # UTC 00:00 = JST 09:00。議会は平日日中開催なので1日1回で足りる。
 
+# 呼ぶ側の権限は、呼ばれる側（auto-ingest.yml）の上限になる。
+# pull-requests を落とすと「起動失敗（startup_failure）」になり、
+# ジョブが1つも動かないまま終わる（2026-09-24 に発生）。
 permissions:
   contents: write
   issues: write
+  pull-requests: write
 
 jobs:
   watch:
