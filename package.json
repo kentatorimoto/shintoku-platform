@@ -8,7 +8,7 @@
     "build:data": "tsx scripts/build-data.ts",
     "suggest:links": "node tools/suggest-gikai-links.mjs",
     "merge:links": "node tools/merge-gikai-links.mjs",
-    "build": "npm run build:links && npm run build:data && npm run check:contrast && npm run og:fonts && next build",
+    "build": "npm run build:links && npm run build:data && npm run build:search-index && npm run check:contrast && npm run og:fonts && next build",
     "start": "next start",
     "lint": "eslint",
     "add-session": "tsx scripts/add-session.ts",
@@ -25,7 +25,7 @@
     "index:newsletters": "npx tsx scripts/index-newsletters.ts",
     "scrape:giketsu": "npx tsx scripts/scrape-giketsu.ts",
     "slides:generate": "node scripts/convertSlides.mjs",
-    "build:search-index": "npx tsx scripts/build-qna-search-index.ts",
+    "build:search-index": "tsx scripts/build-search-index.ts",
     "check:contrast": "tsx scripts/check-contrast.ts"
   },
   "dependencies": {

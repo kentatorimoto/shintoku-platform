@@ -40,12 +40,36 @@ interface GiketsuSession {
   }[]
 }
 
+interface NewsletterPage {
+  page: number
+  text: string
+}
+
+interface NewsletterEntry {
+  title: string
+  date:  string
+  url:   string
+  pages: NewsletterPage[]
+}
+
+interface Announcement {
+  title:    string
+  date:     string
+  category: string
+  url:      string
+}
+
 interface SearchResult {
   category: SearchCategory
   title: string
   subtitle: string
   href: string
+  /** 町サイト・PDFなど、サイト外へ出るリンク */
+  external?: boolean
 }
+
+/** 1回に出す最大件数。カテゴリごとに最大5件を集めてから、この数で頭打ちにする。 */
+const MAX_RESULTS = 14
 
 // ── 検索ロジック ───────────────────────────────────────────────────────────
 
@@ -162,6 +186,57 @@ function searchShiseki(items: ShisekiItem[], tokens: string[]): SearchResult[] {
     }))
 }
 
+/** 一致した箇所の前後を切り出す。広報は本文が長いので、当たった場所を見せないと選べない。 */
+function extractSnippet(text: string, tokens: string[], width = 28): string {
+  const lower = text.toLowerCase()
+  let at = -1
+  for (const t of tokens) {
+    const i = lower.indexOf(t.toLowerCase())
+    if (i >= 0 && (at < 0 || i < at)) at = i
+  }
+  if (at < 0) return text.slice(0, width * 2)
+  const start = Math.max(0, at - width)
+  const end = Math.min(text.length, at + width * 2)
+  return (start > 0 ? "…" : "") + text.slice(start, end).trim() + (end < text.length ? "…" : "")
+}
+
+/**
+ * 広報しんとくはページ単位で当てる（号単位だと、どこに書いてあるか分からない）。
+ * リンクはPDFの該当ページへ直接飛ばす。
+ */
+function searchNewsletters(entries: NewsletterEntry[], tokens: string[]): SearchResult[] {
+  const results: SearchResult[] = []
+  for (const entry of entries) {
+    for (const page of entry.pages) {
+      if (results.length >= 5) return results
+      if (!matchesAll(page.text, tokens)) continue
+      results.push({
+        category: SEARCH_CATEGORIES.newsletter,
+        title: `${entry.title} p.${page.page}`,
+        subtitle: extractSnippet(page.text, tokens),
+        href: `${entry.url}#page=${page.page}`,
+        external: true,
+      })
+      break // 1号につき1件（同じ号で何ページも埋めない）
+    }
+  }
+  return results
+}
+
+/** お知らせは町サイトの原文へ送る。ATLAS 側に本文は持っていない。 */
+function searchAnnouncements(items: Announcement[], tokens: string[]): SearchResult[] {
+  return items
+    .filter((a) => matchesAll(`${a.title} ${a.category} ${a.date}`, tokens))
+    .slice(0, 5)
+    .map((a) => ({
+      category: SEARCH_CATEGORIES.announcement,
+      title: a.title,
+      subtitle: [a.date, a.category].filter(Boolean).join(" — ") + "（新得町公式サイト）",
+      href: a.url,
+      external: true,
+    }))
+}
+
 // ── コンポーネント ─────────────────────────────────────────────────────────
 
 interface Props {
@@ -181,7 +256,13 @@ export default function GlobalSearch({ open, onClose }: Props) {
   const [qnaEntries, setQnaEntries] = useState<QnaSearchEntry[]>([])
   const [giketsuSessions, setGiketsuSessions] = useState<GiketsuSession[]>([])
   const [shiseki, setShiseki] = useState<ShisekiItem[]>([])
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
   const [loading, setLoading] = useState(false)
+
+  // 広報しんとくの全文は約3MBある。開いただけで取りに行かず、実際に検索したときだけ読む。
+  const [newsletters, setNewsletters] = useState<NewsletterEntry[]>([])
+  const [newslettersFailed, setNewslettersFailed] = useState(false)
+  const newslettersRequested = useRef(false)
 
   // モーダルが開いたらデータをフェッチ
   useEffect(() => {
@@ -195,12 +276,16 @@ export default function GlobalSearch({ open, onClose }: Props) {
       fetch("/data/archive/shiseki.json")
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
+      fetch("/data/announcements.json")
+        .then((r) => (r.ok ? r.json() : []))
+        .catch(() => []),
     ])
-      .then(([s, q, g, a]) => {
+      .then(([s, q, g, a, n]) => {
         setSessions(s)
         setQnaEntries(q)
         setGiketsuSessions(g)
         setShiseki((a as ShisekiData | null)?.items ?? [])
+        setAnnouncements(n as Announcement[])
       })
       .catch((err) => console.error("Failed to load search data:", err))
       .finally(() => setLoading(false))
@@ -241,19 +326,46 @@ export default function GlobalSearch({ open, onClose }: Props) {
 
   const tokens = useMemo(() => parseTokens(debouncedQuery), [debouncedQuery])
 
+  // 最初に検索語が入った時点で広報を取りに行く。以後はブラウザのキャッシュに任せる。
+  useEffect(() => {
+    if (tokens.length === 0 || newslettersRequested.current) return
+    // 読み込み中フラグは持たない（effect 内の同期 setState は cascading render を招く）。
+    // 「まだ届いていない」は newsletters が空かどうかで分かる。
+    newslettersRequested.current = true
+    fetch("/data/newsletters_index.json")
+      .then((r) => {
+        // 404 のときも「読み込み中」のまま止まらないよう、失敗として扱う
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
+      .then((data) => setNewsletters(data as NewsletterEntry[]))
+      .catch((err) => {
+        console.error("Failed to load newsletters:", err)
+        setNewslettersFailed(true)
+      })
+  }, [tokens])
+
+  /** 広報が届くまでの間だけ真になる。届けば newsletters が埋まり、失敗すればフラグで止まる。 */
+  const newslettersPending =
+    tokens.length > 0 && newsletters.length === 0 && !newslettersFailed
+
   const results: SearchResult[] = useMemo(() => {
     if (tokens.length === 0) return []
     const s = searchSessions(sessions, tokens)
     const q = searchQna(qnaEntries, tokens)
     const g = searchGiketsu(giketsuSessions, tokens)
     const a = searchShiseki(shiseki, tokens)
-    return [...s, ...q, ...g, ...a].slice(0, 12)
-  }, [tokens, sessions, qnaEntries, giketsuSessions, shiseki])
+    const n = searchNewsletters(newsletters, tokens)
+    const o = searchAnnouncements(announcements, tokens)
+    return [...s, ...q, ...g, ...a, ...n, ...o].slice(0, MAX_RESULTS)
+  }, [tokens, sessions, qnaEntries, giketsuSessions, shiseki, newsletters, announcements])
 
   const handleSelect = useCallback(
-    (href: string) => {
+    (href: string, external?: boolean) => {
       onClose()
-      router.push(href)
+      // 広報PDF・町サイトのお知らせはサイト外。別タブで開く
+      if (external) window.open(href, "_blank", "noopener,noreferrer")
+      else router.push(href)
     },
     [onClose, router],
   )
@@ -307,9 +419,15 @@ export default function GlobalSearch({ open, onClose }: Props) {
               </div>
             )}
 
-            {!loading && tokens.length > 0 && results.length === 0 && (
+            {!loading && tokens.length > 0 && results.length === 0 && !newslettersPending && (
               <div className="px-5 py-8 text-center text-textMuted text-sm">
                 「{debouncedQuery.trim()}」に一致する結果はありません
+              </div>
+            )}
+
+            {!loading && tokens.length > 0 && newslettersPending && (
+              <div className="px-5 py-3 text-center text-textMuted text-xs border-b border-line">
+                {SEARCH_CATEGORIES.newsletter}の全文を読み込み中…
               </div>
             )}
 
@@ -318,7 +436,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
                 {results.map((r, i) => (
                   <li key={i}>
                     <button
-                      onClick={() => handleSelect(r.href)}
+                      onClick={() => handleSelect(r.href, r.external)}
                       className="w-full text-left px-5 py-3 hover:bg-accent/8 transition-colors"
                     >
                       <span className="inline-block text-[11px] font-medium text-accent bg-hover rounded-[2px] px-1.5 py-0.5 mr-2">
@@ -340,7 +458,7 @@ export default function GlobalSearch({ open, onClose }: Props) {
           {/* フッター */}
           {!loading && tokens.length > 0 && results.length > 0 && (
             <div className="px-5 py-2.5 border-t border-line text-[11px] text-textMuted">
-              {results.length} 件表示（最大10件）
+              {results.length} 件表示（最大{MAX_RESULTS}件）
             </div>
           )}
         </div>

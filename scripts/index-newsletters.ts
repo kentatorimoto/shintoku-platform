@@ -25,8 +25,23 @@ interface IndexEntry {
   pages: PageEntry[]
 }
 
-function normalizeText(raw: string): string {
-  return raw.replace(/\s+/g, " ").trim()
+/** 全角文字のあいだの空白を潰す（PDF抽出が1文字ずつ空けてくる見出し対策）。 */
+const CJK = "\\u3040-\\u30ff\\u3400-\\u9fff\\uff66-\\uff9f"
+const CJK_GAP = new RegExp(`([${CJK}]) +(?=[${CJK}])`, "g")
+
+/**
+ * PDFの抽出結果は、見出しなどで1文字ずつ空白が入る（「元 気 な ま ち」）。
+ * そのままでは「元気なまち」で検索しても当たらないので、全角文字どうしの空白だけ潰す。
+ * 英数字のあいだの空白（"September.2026 since.1950"）は語の区切りなので残す。
+ */
+export function normalizeText(raw: string): string {
+  let text = raw.replace(/\s+/g, " ").trim()
+  let prev = ""
+  while (prev !== text) {
+    prev = text
+    text = text.replace(CJK_GAP, "$1")
+  }
+  return text
 }
 
 async function extractPages(buf: Uint8Array): Promise<PageEntry[]> {
@@ -118,7 +133,11 @@ async function main() {
   console.log(`Saved ${results.length} entries to ${outPath}`)
 }
 
-main().catch((err) => {
-  console.error("Index failed:", err)
-  process.exit(1)
-})
+// 他のスクリプトから normalizeText だけを import しても本体が走らないようにする
+// （ガードが無かったため、import しただけで全PDFの再取得が始まった）
+if (path.basename(process.argv[1] ?? "") === "index-newsletters.ts") {
+  main().catch((err) => {
+    console.error("Index failed:", err)
+    process.exit(1)
+  })
+}

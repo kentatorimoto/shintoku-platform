@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Key features:
 - Gikai (議会) session viewer with PDF slides, YouTube links, AI-generated summaries, Q&A (一般質問), and honkaigi (本会議議案) structured data
-- Full-text search for newsletters (町報) and decisions (議決)
+- Full-text search across sessions, decisions (議決), newsletters (広報), announcements (お知らせ) — all in GlobalSearch
 - Decision-making process visualization (timeline, issue cards, priorities)
 - Interactive map with GeoJSON overlays (rivers, passes, center shifts)
 - Automated daily scraping via GitHub Actions
@@ -38,7 +38,6 @@ shintoku-platform/
 │   ├── globals.css               # TailwindCSS 4 theme & utility classes
 │   ├── page.tsx                  # Home page
 │   ├── about/                    # About page
-│   ├── announcements/            # Town announcements
 │   ├── gikai/                    # 議会 (Assembly)
 │   │   ├── page.tsx              #   議決一覧 (decisions list)
 │   │   ├── layout.tsx            #   Shared gikai layout
@@ -50,7 +49,6 @@ shintoku-platform/
 │   │           └── [partIndex]/       # Part-specific page (SSG, getPartData)
 │   ├── insights/                 # Data visualizations
 │   ├── map/                      # Interactive map (experimental)
-│   ├── newsletters/              # Newsletter search
 │   ├── process/                  # Decision-making process
 │   │   ├── issues/               #   Issue cards + tuktuk subpage
 │   │   ├── timeline/             #   Timeline view
@@ -60,7 +58,7 @@ shintoku-platform/
 │   ├── Header.tsx                # Navigation header
 │   ├── Footer.tsx                # Footer with links
 │   ├── MapView.tsx               # Leaflet map wrapper (~34KB)
-│   ├── NewsletterSearch.tsx      # Full-text search UI
+│   ├── GlobalSearch.tsx          # 横断検索（議会・議決・史跡・広報・お知らせ）
 │   └── GiketsuCountBadge.tsx     # Decision count badge
 ├── lib/
 │   └── scraper/                  # Scraper classes
@@ -104,7 +102,8 @@ shintoku-platform/
 │   ├── scrape-announcements.ts
 │   ├── scrape-newsletters.ts
 │   ├── scrape-giketsu.ts
-│   ├── index-newsletters.ts      # Full-text index builder
+│   ├── index-newsletters.ts      # 広報PDF → 全文索引（全角文字間の空白を潰す）
+│   ├── build-search-index.ts     # ★ 検索用の索引（一般質問・お知らせ）
 │   ├── convertSlides.mjs         # PDF → JPEG slides (requires poppler)
 │   ├── test-scraper.ts           # CI test scraper
 │   └── lib/http.ts               # HTTP utilities
@@ -121,7 +120,8 @@ shintoku-platform/
 │   │   ├── gikai_sessions.json   # Core session metadata
 │   │   ├── gikai_links.json      # Session-to-decision links
 │   │   ├── giketsu_index.json    # Decisions full-text index
-│   │   ├── newsletters_index.json # Newsletter search index (~3MB)
+│   │   ├── newsletters_index.json # 広報の全文索引（約3MB・検索が読む）
+│   │   ├── announcements.json    # お知らせ（data/scraped の最新から生成）
 │   │   ├── decision_links.json
 │   │   ├── basin_questions.json
 │   │   ├── lastSync.json
@@ -147,7 +147,7 @@ shintoku-platform/
 ```bash
 # Development
 npm run dev              # Start Next.js dev server (http://localhost:3000)
-npm run build            # Production build (build:links -> build:data -> check:contrast -> og:fonts -> next build)
+npm run build            # Production build (build:links -> build:data -> build:search-index -> check:contrast -> og:fonts -> next build)
 npm run lint             # ESLint
 npm run check:contrast   # 文字色のコントラスト検査（透過0件・AA 4.5:1。build から呼ばれる）
 
@@ -341,6 +341,7 @@ GitHub Actions automates:
 | `/map` | 地形を読む (Experimental) |
 | `/sources` | 出典一覧 |
 | `/about` | About |
+| `/newsletters` `/announcements` | **廃止**（301 → `/gikai/sessions`）。横断検索に吸収した |
 
 ### Navigation
 
