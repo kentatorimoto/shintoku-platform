@@ -19,6 +19,7 @@
     "shiseki:summary": "tsx scripts/generate-shiseki-summary.ts",
     "og:fonts": "tsx scripts/fetch-og-fonts.ts",
     "watch:council": "tsx scripts/watch-council.ts",
+    "notify:failed-runs": "tsx scripts/notify-failed-runs.ts",
     "sync": "npx tsx scripts/sync-all.ts",
     "scrape:announcements": "npx tsx scripts/scrape-announcements.ts",
     "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts",

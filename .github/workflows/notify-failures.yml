@@ -6,12 +6,19 @@ name: Notify Workflow Failures
 # ワークフローの起動失敗（YAMLの不備・権限不足）やジョブ自体の失敗は誰も知らせない。
 # 実際、watch-council が起動失敗しても通知は1通も飛ばなかった。
 #
-# 注意:
-#   - workflow_run はデフォルトブランチに置いたものだけが発火する
-#   - ここは ubuntu-latest で動かす（母艦のセルフホストランナーが落ちていても届くように）
-#   - この見張り自身が落ちたときは誰も知らせない。Actions の実行履歴で見ること
+# **起動失敗では workflow_run イベントが発火しない**（実際に起動失敗させて確認した）。
+# そのため workflow_run だけに頼らず、定期的に GitHub API を掃く。
+#   - workflow_run: ジョブの失敗をすぐ知らせる
+#   - schedule:     起動失敗を拾う（イベントが来ないので API を見るしかない）
+# 二重に鳴らないよう、通知済みの run id は data/watch/notified-runs.json に残す。
+#
+# 母艦のセルフホストランナーが落ちていても届くよう ubuntu-latest で動かす。
+# この見張り自身が落ちたときは誰も知らせない（Actions の実行履歴で見ること）。
 
 on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 */6 * * *" # 6時間ごと。起動失敗の取りこぼしを拾う
   workflow_run:
     workflows:
       - Watch Council Channel
@@ -21,45 +28,47 @@ on:
     types: [completed]
 
 permissions:
-  contents: read
+  contents: write
+  actions: read
+
+concurrency:
+  group: notify-failures
+  cancel-in-progress: false
 
 jobs:
   notify:
-    # cancelled と skipped は人が止めたか条件で飛ばした結果なので鳴らさない
-    if: >-
-      github.event.workflow_run.conclusion == 'failure' ||
-      github.event.workflow_run.conclusion == 'startup_failure' ||
-      github.event.workflow_run.conclusion == 'timed_out'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Telegram に通知
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: 失敗した実行を拾って通知する
         env:
+          GH_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
-          WF:         ${{ github.event.workflow_run.name }}
-          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          URL:        ${{ github.event.workflow_run.html_url }}
-          BRANCH:     ${{ github.event.workflow_run.head_branch }}
-          SHA:        ${{ github.event.workflow_run.head_sha }}
-          EVENT:      ${{ github.event.workflow_run.event }}
+        run: npx tsx scripts/notify-failed-runs.ts
+
+      - name: Commit notified-runs.json if changed
+        if: always()
         run: |
-          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
-            echo "TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID が未設定のため通知をスキップします"
-            exit 0
+          if [ ! -f data/watch/notified-runs.json ]; then exit 0; fi
+
+          git config user.name "shintoku-atlas-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add data/watch/notified-runs.json
+          if git diff --cached --quiet; then
+            echo "変更なし"
+          else
+            git commit -m "chore: update notified runs"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "${GITHUB_REF_NAME}"
           fi
-
-          case "$CONCLUSION" in
-            startup_failure) HEAD="🧨 ワークフローが起動できませんでした（YAMLか権限の問題）" ;;
-            timed_out)       HEAD="⏱ ワークフローがタイムアウトしました" ;;
-            *)               HEAD="🔴 ワークフローが失敗しました" ;;
-          esac
-
-          TEXT=$(printf '%s\n\n%s（%s）\nブランチ: %s / %s\nきっかけ: %s\n%s' \
-            "$HEAD" "$WF" "$CONCLUSION" "$BRANCH" "${SHA:0:7}" "$EVENT" "$URL")
-
-          curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
-            --data-urlencode "text=${TEXT}" \
-            --data-urlencode "disable_web_page_preview=true" \
-            -o /dev/null -w "Telegram: HTTP %{http_code}\n"

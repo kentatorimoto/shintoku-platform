@@ -3,14 +3,19 @@
 // トークンが無い環境（ローカルのドライラン等）では黙って諦めず、理由をログに出してスキップする。
 // 通知の失敗でパイプライン自体を落とさない — 取り込みは済んでいるのに Actions が赤くなる方が困る。
 
-/** 運用で飛ぶのは3種類（pr / pending / blocked）。test は `--notify-test` の疎通確認専用。 */
-export type NotifyKind = "pr" | "pending" | "blocked" | "test"
+/**
+ * 取り込みで飛ぶのは3種類（pr / pending / blocked）。
+ * test は `--notify-test` の疎通確認専用、ci はワークフロー自体の失敗
+ * （notify-failed-runs.ts）で、見出しは呼び出し側が組み立てる。
+ */
+export type NotifyKind = "pr" | "pending" | "blocked" | "test" | "ci"
 
 const HEADING: Record<NotifyKind, string> = {
   pr:      "🟢 PRを作成しました",
   pending: "⏳ 字幕待ちで保留",
   blocked: "🛑 推定できず停止",
   test:    "🔔 通知テスト",
+  ci:      "",
 }
 
 const escapeHtml = (s: string) =>
@@ -20,8 +25,9 @@ export async function notify(kind: NotifyKind, title: string, lines: string[]): 
   const token  = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
 
+  const heading = HEADING[kind]
   const text = [
-    `<b>${escapeHtml(HEADING[kind])}</b>`,
+    ...(heading ? [`<b>${escapeHtml(heading)}</b>`] : []),
     escapeHtml(title),
     "",
     ...lines.map(escapeHtml),
