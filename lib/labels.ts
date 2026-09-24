@@ -128,10 +128,12 @@ export const LABELS = {
  * ナビの「土地の記憶」ではなく「史跡」の方が何の結果か分かりやすい）。
  */
 export const SEARCH_CATEGORIES = {
-  session: "セッション",
-  qna:     "一般質問",
-  giketsu: "議決",
-  shiseki: "史跡",
+  session:      "セッション",
+  qna:          "一般質問",
+  giketsu:      "議決",
+  shiseki:      "史跡",
+  newsletter:   "広報",
+  announcement: "お知らせ",
 } as const
 
 export type SearchCategory = (typeof SEARCH_CATEGORIES)[keyof typeof SEARCH_CATEGORIES]
