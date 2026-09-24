@@ -333,7 +333,11 @@ export default function GlobalSearch({ open, onClose }: Props) {
     // 「まだ届いていない」は newsletters が空かどうかで分かる。
     newslettersRequested.current = true
     fetch("/data/newsletters_index.json")
-      .then((r) => (r.ok ? r.json() : []))
+      .then((r) => {
+        // 404 のときも「読み込み中」のまま止まらないよう、失敗として扱う
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
       .then((data) => setNewsletters(data as NewsletterEntry[]))
       .catch((err) => {
         console.error("Failed to load newsletters:", err)
