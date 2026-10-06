@@ -122,34 +122,70 @@ npm run slides:generate r8-2026-01-20-basic-plan afternoon
 
 ### 会議データの追加
 
-`public/data/gikai_sessions.json` に会議を追加してください:
+会議データの正典は `content/sessions/{sessionId}/` の Markdown と `session.yaml` です。`public/data/gikai_sessions.json`・`public/data/qna/`・`public/data/cards/` は `npm run build:data` の生成物なので、直接編集しません。
 
-```json
-{
-  "id": "<sessionId>",
-  "title": "会議タイトル",
-  "date": "YYYY-MM-DD",
-  "videos": [
-    { "label": "午前", "youtubeUrl": "https://www.youtube.com/watch?v=..." }
-  ],
-  "slides": [
-    { "id": "morning", "label": "午前スライド", "pdfFile": "<sessionId>_morning.pdf" }
-  ]
-}
 ```
+字幕（transcripts/） →  Markdown（content/sessions/） →  JSON（public/data/）
+   加工しない              正典・人がレビューする           生成物・直接編集しない
+```
+
+**通常は自動で入ります。** 議会チャンネルに新着動画があると、GitHub Actions が Issue を立て、字幕の取得から PR の作成までを行います。人が行うのは PR のレビューです。固有名詞・数値・タグを確かめ、各 Markdown を `reviewed: true` にしてマージします。
+
+**手動で取り込む場合**（自動が止まったとき）:
+
+```bash
+npm run add-session -- \
+  --id r8-2026-06-regular-2 \
+  --url "https://www.youtube.com/watch?v=XXXX" \
+  --type honkaigi --part day2 --label "最終日（6/19）" \
+  --date 2026-06-19 \
+  --title-official "令和8年定例第2回新得町議会" \
+  --tags "定例会,補正予算,観光"
+```
+
+抽出には Claude API のキー（`ANTHROPIC_API_KEY`）が必要です。
+
+**内容を直す場合**は `content/sessions/{sessionId}/` の Markdown を編集し、JSON を作り直します:
+
+```bash
+npm run build:data   # content/sessions/** → public/data/*.json（検証に落ちると exit 1）
+```
+
+スキーマは [docs/content-schema.md](docs/content-schema.md)、自動取り込みの運用は [docs/auto-ingest.md](docs/auto-ingest.md) にあります。
 
 ## 📁 プロジェクト構成
 ```
 shintoku-platform/
-├── app/                    # Next.js App Router
-│   ├── page.tsx           # トップページ
-│   └── announcements/     # お知らせ一覧
-├── lib/
-│   └── scraper/           # スクレイピング機能
-├── scripts/               # 実行スクリプト
-├── data/
-│   └── scraped/           # 収集データ
-└── components/            # 共通コンポーネント
+├── app/                        # Next.js App Router
+│   ├── page.tsx                # トップページ
+│   ├── gikai/                  # 町の決定を読む（議決一覧）
+│   │   └── sessions/           # 議会を読む（会議一覧・会議ごとのページ）
+│   ├── process/                # 意思決定の流れ（論点カード・タイムライン・重点テーマ）
+│   ├── insights/               # データで見る
+│   ├── shiseki/                # 史跡の資料
+│   ├── sources/                # 出典一覧
+│   └── about/
+├── components/                 # 共通コンポーネント（ヘッダー・横断検索・要点カードなど）
+├── content/                    # 正典（Markdown + YAML）
+│   ├── sessions/{sessionId}/   # 会議ごとの記録
+│   │   ├── session.yaml        #   会議のメタ情報
+│   │   ├── day{n}.md           #   本会議（議案審議）
+│   │   ├── part{n}.md          #   パート別の記録（一般質問など）
+│   │   ├── cards.yaml          #   要点カード
+│   │   └── transcripts/        #   字幕の生データ（加工しない）
+│   └── archive/                # 史跡・郷土資料
+├── scripts/                    # 取り込み・抽出・ビルド・スクレイピング（tsx で実行）
+│   ├── lib/                    #   共通の型・検証・セッションIDの対応表
+│   └── prompts/                #   Claude に渡す抽出プロンプト
+├── lib/                        # UI ラベル・OGP・スクレイパー
+├── tools/                      # 議会と議決のリンク生成
+├── data/                       # 作業用データ（配信しない。スクレイピング結果など）
+├── public/
+│   ├── data/                   # 配信する JSON（会議・議決・検索索引。一部は生成物）
+│   ├── pdf/                    # 会議スライドの PDF
+│   └── slides/                 # スライド画像
+├── docs/                       # スキーマ・自動取り込みの運用・デザインの指針
+└── .github/workflows/          # 新着検知・自動取り込み・定期同期
 ```
 
 ## 🌐 データソース
