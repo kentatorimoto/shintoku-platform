@@ -1,46 +1,59 @@
 # Shintoku Atlas
 
-**An unofficial public information dashboard**
+**新得町議会を読むための、非公式の記録集**
 
-新得町の公開情報を検索しやすく、APIとして利用可能にする完全オープンソースのプラットフォーム
+**Live Demo: https://shintoku-platform.vercel.app**
 
 ![License](https://img.shields.io/badge/license-AGPL--3.0-green)
-![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
-## 🎯 プロジェクトの目的
+## 🎯 何を作ったか
 
-- 🏛️ **町の公開情報を自動収集**: 新得町公式サイトから最新情報を自動取得
-- 🔍 **全文検索機能**: お知らせを簡単に検索
-- 📊 **データAPI提供**: 機械可読形式でデータを提供
-- 📱 **レスポンシブデザイン**: スマホでも見やすいUI
-- ⚖️ **完全オープンソース**: AGPL-3.0ライセンス
+北海道新得町の議会の動画・資料・議決を構造化し、「誰が何を問い、何が決まり、何が続いているか」を読めるようにした非公式の記録集です。
 
-## ✨ 特徴
+議会の記録は公開されていますが、数時間の動画と PDF のままでは、あとから辿るのが難しい。Shintoku Atlas は会議ごとに、議員の質問と町の答え、議案の採決結果、次に持ち越された課題を整理して並べます。
 
-### 非党派性・非企業性
-政党にも企業にもよらない、中立的な町政情報基盤
+個人による取り組みで、新得町役場とは無関係です。使うのは公開情報だけで、役場や町民に追加の作業は生じません。政党にも企業にもよりません。
 
-### 役場・町民への負担ゼロ
-新得町公式サイトの公開情報のみを使用。役場や町民への追加作業は一切不要
+## 📊 規模
 
-### オープンソース
-全コードを公開。誰でも改善・拡張が可能
+| | |
+|---|---|
+| 会議 | 21 |
+| 議決 | 729 |
+| 継続論点 | 6 |
 
-## 🚀 現在の機能
+## 🤖 AI の使い方
 
-- ✅ **町政ニュース**: 新得町の最新お知らせを自動収集（20件）
-- 🚧 **広報しんとくアーカイブ**: 開発中
-- 🚧 **イベントカレンダー**: 開発中
-- 🚧 **議会情報**: 開発中
+```
+YouTube 字幕 → Claude による構造化抽出 → 人間のレビュー → Markdown で正典化 → JSON → Web
+```
+
+- **字幕は加工しない**: 取得した字幕は `content/sessions/{id}/transcripts/` にそのまま残します
+- **Claude が構造化する**: 字幕から、一般質問（質問・答弁・継続課題）と議案審議（議案・質疑・採決結果）を Markdown に抽出します。検証に通らなければ自己修正します（最大2回）
+- **人間がレビューする**: 固有名詞・数値・タグを人が確かめ、`reviewed: true` にしてからマージします
+- **Markdown が正典**: `content/sessions/**` が正で、`public/data/` の JSON は `npm run build:data` の生成物です
+
+新着動画の検知から PR 作成までは GitHub Actions で自動化しています。毎日 09:00 JST に議会チャンネルの RSS を見て、新着があれば Issue を立て、字幕取得・抽出・検証を経て PR を作ります。人が行うのは PR のレビューとマージです。
+
+AI による要約には誤りが含まれる可能性があります。各会議のページから元の動画と資料を確認できます。
 
 ## 🛠️ 技術スタック
 
-- **フロントエンド**: Next.js 15, React, TypeScript
-- **スタイリング**: TailwindCSS
-- **データ収集**: Cheerio, Axios
-- **データベース**: Supabase（予定）
-- **デプロイ**: Vercel（予定）
+| 層 | 技術 |
+|---|---|
+| フレームワーク | Next.js 16.1（App Router） |
+| UI | React 19.2, TypeScript 5 |
+| スタイリング | TailwindCSS 4 |
+| AI 抽出 | Claude（@anthropic-ai/sdk 0.110）, youtube-transcript 1.3 |
+| 正典の処理 | gray-matter 4, js-yaml 5, remark 15 |
+| データ収集 | Cheerio 1.2, Axios 1.13 |
+| PDF | pdf-parse 2.4, poppler（スライド画像） |
+| 地図 | Leaflet 1.9 |
+| データベース | なし（`public/data/` の静的 JSON） |
+| CI/CD | GitHub Actions |
+| デプロイ | Vercel |
 
 ## 📦 インストール
 ```bash
@@ -153,15 +166,6 @@ AGPL-3.0-or-later
 ## 🤝 コントリビューション
 
 プルリクエスト、イシューの作成を歓迎します！
-
-## 💡 将来の展望
-
-- [ ] 広報しんとくPDFの全文検索
-- [ ] イベント情報の統合
-- [ ] 町議会の議事録データベース
-- [ ] 町予算の可視化
-- [ ] AIによる情報要約
-- [ ] APIの公開
 
 ## 📞 お問い合わせ
 
