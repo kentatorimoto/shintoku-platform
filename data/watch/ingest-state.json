@@ -42,6 +42,28 @@
       "attempts": 0,
       "note": "既に session.yaml にある"
     },
+    "5UC2bBMFLwo": {
+      "issue": 45,
+      "title": "[新着動画] 令和８年１０月１５日　臨時第４回",
+      "url": "https://www.youtube.com/watch?v=5UC2bBMFLwo",
+      "status": "failed",
+      "sessionId": "r8-2026-10-rinji-04",
+      "partFile": "day1",
+      "label": "本会議（10/15）",
+      "partType": "honkaigi",
+      "date": "2026-10-15",
+      "trace": [
+        "正規化: 「令和8年10月15日 臨時第4回」",
+        "日付: タイトルの「令和8年10月15日」→ 2026-10-15（公開日は使わない）",
+        "表1「臨時第{N}回」→ r8-2026-10-rinji-04",
+        "表2「（パート名なし）」→ day1（既存 0 パートの次）/ type=honkaigi / label「本会議（10/15）」",
+        "新規セッション: tags=[臨時会] / officialTitle「令和8年第4回新得町議会臨時会」"
+      ],
+      "firstSeen": "2026-10-15",
+      "lastTried": "2026-10-15",
+      "attempts": 1,
+      "note": "実行環境から動画を視聴できません（playabilityStatus: LIVE_STREAM_OFFLINE）。"
+    },
     "aBHABXJ8-tA": {
       "issue": 15,
       "title": "[新着動画] 令和８年９月１4日　決算特別委員会　午前",
