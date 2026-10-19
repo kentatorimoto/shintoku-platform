@@ -46,7 +46,7 @@
       "issue": 45,
       "title": "[新着動画] 令和８年１０月１５日　臨時第４回",
       "url": "https://www.youtube.com/watch?v=5UC2bBMFLwo",
-      "status": "failed",
+      "status": "done",
       "sessionId": "r8-2026-10-rinji-04",
       "partFile": "day1",
       "label": "本会議（10/15）",
@@ -60,9 +60,9 @@
         "新規セッション: tags=[臨時会] / officialTitle「令和8年第4回新得町議会臨時会」"
       ],
       "firstSeen": "2026-10-15",
-      "lastTried": "2026-10-15",
-      "attempts": 1,
-      "note": "実行環境から動画を視聴できません（playabilityStatus: LIVE_STREAM_OFFLINE）。"
+      "lastTried": "2026-10-19",
+      "attempts": 2,
+      "note": "この動画は既に session.yaml にあります（取り込み済み）"
     },
     "aBHABXJ8-tA": {
       "issue": 15,
