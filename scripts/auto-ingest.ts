@@ -29,6 +29,7 @@ import {
   daysSince, isRetryable, loadState, saveState, todayJst,
   type IngestState, type VideoRecord,
 } from "./lib/ingest-state"
+import { isTransient, retrySync } from "./lib/retry"
 import { orderSessionKeys, type GikaiSession } from "./lib/schema"
 import {
   infer, type Inference, type SessionRepo, type SessionSnapshot,
@@ -44,7 +45,11 @@ const ISSUE_TITLE_PREFIX = "[新着動画]"
 // ── 外部コマンド ────────────────────────────────────────────────────────────
 
 const git = (...args: string[]) => execFileSync("git", args, { cwd: ROOT, encoding: "utf-8" }).trim()
-const gh  = (...args: string[]) => execFileSync("gh",  args, { cwd: ROOT, encoding: "utf-8" }).trim()
+// gh は全部 GitHub API を叩くので、一時的な通信失敗は短く待って再試行する
+const gh  = (...args: string[]) =>
+  retrySync(`gh ${args.slice(0, 2).join(" ")}`, () => execFileSync("gh", args, { cwd: ROOT, encoding: "utf-8" }).trim())
+/** リモートと通信する git（fetch / push）。ローカルだけの操作は git() のまま。 */
+const gitRemote = (...args: string[]) => retrySync(`git ${args[0]}`, () => git(...args))
 const npm = (...args: string[]) => execFileSync("npm", args, { cwd: ROOT, stdio: "inherit" })
 
 const errText = (err: unknown) => (err instanceof Error ? err.message : String(err))
@@ -517,10 +522,12 @@ function openOrUpdatePr(branch: string, baseBranch: string, sessionId: string, e
 /** 既にリモートにあれば その上に積む。無ければ base から作る。 */
 function ensureBranch(branch: string, baseBranch: string) {
   try {
-    git("fetch", "origin", branch)
+    gitRemote("fetch", "origin", branch)
     git("checkout", "-B", branch, "FETCH_HEAD")
     console.log(`   既存ブランチ ${branch} に積みます`)
-  } catch {
+  } catch (err) {
+    // 通信断を「リモートにブランチが無い」と取り違えると、既存PRの積み上げを base から作り直してしまう
+    if (isTransient(err)) throw err
     git("checkout", "-B", branch, baseBranch)
     console.log(`   ブランチ ${branch} を ${baseBranch} から作成`)
   }
@@ -638,7 +645,7 @@ async function processSession(
     console.error(`   ⚠️  build に失敗しましたが、PRは作って人の目に入れます: ${errText(err)}`)
   }
 
-  git("push", "-u", "origin", branch)
+  gitRemote("push", "-u", "origin", branch)
 
   // ブランチに載っている全パート（前回までの分を含む）でPR本文を組み直す
   const prUrl = openOrUpdatePr(branch, baseBranch, sessionId, prEntries(sessionId, state), buildOk)

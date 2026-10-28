@@ -52,6 +52,14 @@ export const TRANSCRIPT_PENDING_WINDOW_HOURS = 48
  */
 export const TRANSCRIPT_RETRY_DAYS = 5
 
+// ── 外部通信のリトライ ──────────────────────────────────────────────────────
+
+/**
+ * 一時的な通信失敗（母艦ランナーのネットワーク断・5xx）の再試行間隔。長さがそのまま再試行回数。
+ * 使い切ったら失敗にする。判定は scripts/lib/retry.ts の isTransient。
+ */
+export const RETRY_DELAYS_MS = [5_000, 15_000, 45_000]
+
 // ── exit code 規約（watcher・CLI・CI で共有する）─────────────────────────────
 
 export const EXIT = {

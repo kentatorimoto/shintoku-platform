@@ -14,6 +14,7 @@ import fs from "fs"
 import path from "path"
 import { YoutubeTranscript } from "youtube-transcript"
 import { EXIT, TRANSCRIPT_PENDING_WINDOW_HOURS } from "./config"
+import { retryAsync } from "./lib/retry"
 
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
@@ -121,7 +122,7 @@ export interface TranscriptResult {
 }
 
 async function fetchTranscript(videoId: string, url: string): Promise<TranscriptResult> {
-  const segments = await YoutubeTranscript.fetchTranscript(videoId, { lang: "ja" })
+  const segments = await retryAsync("YouTube 字幕", () => YoutubeTranscript.fetchTranscript(videoId, { lang: "ja" }))
   const last = segments[segments.length - 1]
   const durationMinutes = last ? (last.offset + last.duration) / 60_000 : 0
 
@@ -182,7 +183,7 @@ export async function fetchTranscriptToFile(
     return { code: EXIT.OK, message: `既に存在するのでスキップしました: ${path.relative(process.cwd(), outPath)}（上書きは --force）` }
   }
 
-  const probe = await probeVideo(videoId)
+  const probe = await retryAsync("YouTube watchページ", () => probeVideo(videoId))
 
   if (!probe.playable) {
     return {

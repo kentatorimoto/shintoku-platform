@@ -6,6 +6,7 @@ import Link from "next/link"
 import SessionDetail from "../SessionDetail"
 import { ANCHORS, LABELS, SESSION_SUMMARY_LABELS, qnaLabel } from "@/lib/labels"
 import type { CardsData, GikaiSession, HonkaigiData, PartData, QnaData } from "@/scripts/lib/schema"
+import slidesManifest from "@/public/data/slides.json"
 
 function getPartData(sessionId: string, partIndex: number): PartData | null {
   const candidates = [
@@ -47,14 +48,15 @@ function getSessions(): GikaiSession[] {
   }
 }
 
+/**
+ * スライド画像は build:slides-manifest が作った一覧から引く。
+ *
+ * 以前は fs.readdirSync(public/slides/...) で数えていたが、Next のファイルトレースが
+ * **public/slides 配下の全JPEG（172MB）** をこのルートの依存として取り込んでいた。
+ * 静的 import なら走査もトレースへの巻き込みも起きない。
+ */
 function getSlideImages(sessionId: string, slidesDir: string): string[] {
-  const slideDir = path.join(process.cwd(), "public", "slides", sessionId, slidesDir)
-  if (!fs.existsSync(slideDir)) return []
-  return fs
-    .readdirSync(slideDir)
-    .filter(f => /^page-\d+\.jpg$/.test(f))
-    .sort()
-    .map(f => `/slides/${sessionId}/${slidesDir}/${f}`)
+  return (slidesManifest as Record<string, Record<string, string[]>>)[sessionId]?.[slidesDir] ?? []
 }
 
 export async function generateStaticParams() {

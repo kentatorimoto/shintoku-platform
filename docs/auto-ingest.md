@@ -129,6 +129,12 @@ Actions からは `Auto Ingest Sessions` を `workflow_dispatch` で実行
 - `watch-council.yml` → `ubuntu-latest` のまま。RSSが弾かれても Data API に落ちるので動く
 
 ランナーが落ちていると取り込みは走らない（Issueは溜まるだけなので、次に起きたときに消化される）。
+
+母艦は一瞬ネットワークが切れることがある前提で動かす。`gh`・`git fetch/push`・YouTube・Claude API・
+Telegram は、一時的な失敗（接続断・タイムアウト・5xx）のときだけ 5秒 → 15秒 → 45秒 待って再試行し、
+使い切ったときだけ失敗にする（`scripts/lib/retry.ts`、間隔は `config.ts` の `RETRY_DELAYS_MS`）。
+認証エラー・4xx・reCAPTCHA は再試行しない。ランナー自身の action ダウンロード（`Set up job`）は
+スクリプトの外なので、これで救えない — 落ちたら `gh run rerun <id> --failed`。
 `gh api -X POST repos/{owner}/{repo}/actions/runners/registration-token` で登録トークンは取れる。
 launchd で常駐させる手順は `tasks/runner-setup.md`。
 

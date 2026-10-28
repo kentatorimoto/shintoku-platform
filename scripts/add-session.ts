@@ -20,6 +20,7 @@ import yaml from "js-yaml"
 import { EXIT, MODEL } from "./config"
 import { collectNeedsReview, extractPart, partIndexOf, type PartType } from "./extract-md"
 import { fetchTranscriptToFile } from "./fetch-transcript"
+import { retryAsync } from "./lib/retry"
 import { orderSessionKeys, validateTags, type GikaiSession, type Part } from "./lib/schema"
 
 const ROOT        = process.cwd()
@@ -161,16 +162,17 @@ export async function proposeNarrativeTitles(mdPath: string): Promise<string[]> 
   const body = fs.readFileSync(mdPath, "utf-8").slice(0, 20_000)
   const client = new Anthropic()
 
-  const stream = client.messages.stream({
-    model: MODEL,
-    max_tokens: 1024,
-    system:
-      "新得町議会のアーカイブサイト向けに、セッションの内容を一言で表す見出し（narrativeTitle）を考えます。\n" +
-      "規律: 事実の再配置のみ。評価語（良い/悪い/すべき）や党派的な含意を書かない。20〜30字程度。\n" +
-      "出力は3行だけ。各行 `1. ` `2. ` `3. ` で始め、他には何も書かない。",
-    messages: [{ role: "user", content: `次の会議録から narrativeTitle の案を3つ出してください。\n\n${body}` }],
-  })
-  const message = await stream.finalMessage()
+  const message = await retryAsync("Claude API（narrativeTitle）", () =>
+    client.messages.stream({
+      model: MODEL,
+      max_tokens: 1024,
+      system:
+        "新得町議会のアーカイブサイト向けに、セッションの内容を一言で表す見出し（narrativeTitle）を考えます。\n" +
+        "規律: 事実の再配置のみ。評価語（良い/悪い/すべき）や党派的な含意を書かない。20〜30字程度。\n" +
+        "出力は3行だけ。各行 `1. ` `2. ` `3. ` で始め、他には何も書かない。",
+      messages: [{ role: "user", content: `次の会議録から narrativeTitle の案を3つ出してください。\n\n${body}` }],
+    }).finalMessage(),
+  )
   const text = message.content.filter(b => b.type === "text").map(b => b.text).join("")
 
   return text

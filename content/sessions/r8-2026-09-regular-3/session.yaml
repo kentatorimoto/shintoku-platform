@@ -20,6 +20,8 @@ summary:
 parts:
   - label: 初日（9/1）
     youtube: https://www.youtube.com/watch?v=Ib5TgHKlAps
+    pdf: r8-2026-09-regular-3_summary.pdf
+    slidesDir: summary
   - label: 一般質問（9/16）
     youtube: https://www.youtube.com/watch?v=b4LLwOXfTvM
   - label: 一般質問②（9/16）

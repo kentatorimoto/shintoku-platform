@@ -375,8 +375,7 @@ function VideoCard({ youtube, label }: { youtube: string; label: string }) {
 }
 
 // ── スライド ────────────────────────────────────────────────────────────────
-/** `collapsed` のときは「過去のスライド」として畳む（要点カードが役割を引き継いだセッション）。 */
-function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) {
+function SlidesSection({ part }: { part: Part }) {
   const pdfLink = part.pdfPath && (
     <a
       href={part.pdfPath}
@@ -433,31 +432,12 @@ function SlidesSection({ part, collapsed }: { part: Part; collapsed: boolean }) 
             height={1600}
             className="w-full h-auto block"
             unoptimized
-            priority={!collapsed && i < 2}
+            priority={i < 2}
           />
         </a>
       ))}
     </div>
   )
-
-  if (collapsed) {
-    return (
-      <details className="group">
-        <summary className="flex items-center justify-between gap-4 cursor-pointer list-none
-                            border-t border-line pt-4">
-          <span className="text-[13px] font-bold text-textMuted group-open:text-textMain transition-colors">
-            {LABELS.legacySlides.text}
-            <span className="mono text-[11px] font-normal text-textMuted ml-2">
-              {part.images.length}枚
-            </span>
-          </span>
-          <span className="mono text-[11px] text-textMuted">開く ↓</span>
-        </summary>
-        <div className="mt-4 flex justify-end mb-4">{pdfLink}</div>
-        {images}
-      </details>
-    )
-  }
 
   return (
     <section>
@@ -484,7 +464,6 @@ export default function SessionDetail({
   }
 
   const activePart = parts[activeIdx]
-  const hasCards = (cards?.length ?? 0) > 0
 
   function handleTabChange(i: number) {
     setActiveIdx(i)
@@ -517,15 +496,16 @@ export default function SessionDetail({
         </div>
       )}
 
-      {/* ── 要点カード ─────────────────────────────────────────────
-          読者の動線は「30秒で分かる（summary）→ 3分で見る（カード/スライド）→
-          動画で確かめる → 全部調べる（議案審議）」。この順にセクションを置く。 */}
-      {cards && cards.length > 0 && <SessionCards cards={cards} />}
-
-      {/* ── スライド（画像があるパートのみ。カードがあれば折りたたむ）──────── */}
+      {/* ── スライド（画像があるパートのみ）────────────────────────
+          読者の動線は「30秒で分かる（summary）→ 眺めて掴む（スライド）→
+          要点で確かめる（カード）→ 動画で確かめる → 全部調べる（議案審議）」。
+          この順にセクションを置く。 */}
       {activePart.images.length > 0 && (
-        <SlidesSection part={activePart} collapsed={hasCards} />
+        <SlidesSection part={activePart} />
       )}
+
+      {/* ── 要点カード ─────────────────────────────────────────────── */}
+      {cards && cards.length > 0 && <SessionCards cards={cards} />}
 
       {/* ── 動画 ─────────────────────────────────────────────────────── */}
       {activePart.youtube && (

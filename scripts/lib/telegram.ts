@@ -3,6 +3,8 @@
 // トークンが無い環境（ローカルのドライラン等）では黙って諦めず、理由をログに出してスキップする。
 // 通知の失敗でパイプライン自体を落とさない — 取り込みは済んでいるのに Actions が赤くなる方が困る。
 
+import { retryAsync } from "./retry"
+
 /**
  * 取り込みで飛ぶのは3種類（pr / pending / blocked）。
  * test は `--notify-test` の疎通確認専用、ci はワークフロー自体の失敗
@@ -39,22 +41,25 @@ export async function notify(kind: NotifyKind, title: string, lines: string[]): 
     return
   }
 
-
   try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({
-        chat_id: chatId,
-        text,
-        parse_mode: "HTML",
-        // 動画URLのプレビューでタイムラインが埋まるのを避ける
-        link_preview_options: { is_disabled: true },
-      }),
-    })
-    if (!res.ok) throw new Error(`HTTP ${res.status} ${await res.text()}`)
+    await retryAsync("Telegram", () => send(token, chatId, text))
     console.log(`   📨 Telegram に通知しました（${kind}）`)
   } catch (err) {
     console.warn(`⚠️  Telegram への通知に失敗: ${err instanceof Error ? err.message : err}`)
   }
+}
+
+async function send(token: string, chatId: string, text: string): Promise<void> {
+  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method:  "POST",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify({
+      chat_id: chatId,
+      text,
+      parse_mode: "HTML",
+      // 動画URLのプレビューでタイムラインが埋まるのを避ける
+      link_preview_options: { is_disabled: true },
+    }),
+  })
+  if (!res.ok) throw new Error(`HTTP ${res.status} ${await res.text()}`)
 }

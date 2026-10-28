@@ -17,6 +17,7 @@ import Anthropic from "@anthropic-ai/sdk"
 import yaml from "js-yaml"
 import { buildFromContent } from "./build-data"
 import { EFFORT, EXIT, MAX_SELF_CORRECTION_ROUNDS, MAX_TOKENS, MODEL, PRICING } from "./config"
+import { retryAsync } from "./lib/retry"
 import type { GikaiSession } from "./lib/schema"
 
 const ROOT        = process.cwd()
@@ -140,15 +141,17 @@ export async function callClaude(
 ): Promise<{ content: Anthropic.ContentBlock[]; text: string; usage: Usage }> {
   // 字幕は長いのでストリーミングする（非ストリーミングだとHTTPタイムアウトに当たる）。
   // system（スキーマ+glossary）は毎回同じなのでキャッシュする。自己修正ラウンドで効く。
-  const stream = client.messages.stream({
-    model:      MODEL,
-    max_tokens: MAX_TOKENS,
-    thinking:   { type: "adaptive" },
-    output_config: { effort: EFFORT },
-    system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
-    messages,
-  })
-  const message = await stream.finalMessage()
+  // SDK の自動再試行は接続確立までしか効かないので、ストリーム途中の切断はここで丸ごとやり直す。
+  const message = await retryAsync("Claude API", () =>
+    client.messages.stream({
+      model:      MODEL,
+      max_tokens: MAX_TOKENS,
+      thinking:   { type: "adaptive" },
+      output_config: { effort: EFFORT },
+      system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
+      messages,
+    }).finalMessage(),
+  )
 
   if (message.stop_reason === "max_tokens") {
     throw new Error(
