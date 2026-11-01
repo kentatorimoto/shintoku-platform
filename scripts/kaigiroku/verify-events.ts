@@ -5,7 +5,7 @@
 import fs from "fs"
 import path from "path"
 import type { Excerpt } from "./excerpt"
-import { ACTIONS, ACTION_PHRASES, CHAIR_ROLE, LAYERS, MEMBER_ROLE, OBJECTS, type TraceEvent } from "./event-schema"
+import { ACTIONS, ACTION_PHRASES, CHAIR_ROLE, KOHO_ACTOR, LAYERS, MEMBER_ROLE, OBJECTS, type TraceEvent } from "./event-schema"
 
 const ROOT = process.cwd()
 const squash = (s: string) => s.replace(/\s+/g, "")
@@ -20,7 +20,30 @@ function main() {
   const fail = (e: TraceEvent, rule: string) => failures.push(`[${rule}] ${e.id} ${e.date} ${e.actor.name} ${e.actor.role} layer=${e.layer}`)
   const known = new Map(ACTION_PHRASES.flatMap(a => a.phrases.map(p => [p, a.action] as const)))
 
+  const issues = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "newsletters_index.json"), "utf-8")) as
+    { date: string; url: string; pages: { page: number; text: string }[] }[]
+
   for (const e of events) {
+    if (e.source_type !== "kaigiroku" && e.source_type !== "koho") { fail(e, "source_typeが無い"); continue }
+    if (e.source_type === "koho") {
+      // 広報は発言者がいないので、号・ページ・本文に照らす
+      const issue = issues.find(i => i.date === e.date)
+      const page = issue?.pages.find(p => p.page === e.source.page)
+      if (!issue || !page) { fail(e, "広報の号かページが実在しない"); continue }
+      const body = squash(page.text)
+      if (!body.includes(e.source.quote)) fail(e, "広報の引用が本文に無い")
+      if (!body.includes(e.source.sentence)) fail(e, "広報の一文が本文に無い")
+      if (e.source.url !== `${issue.url}#page=${page.page}`) fail(e, "広報のURLが違う")
+      if (e.actor.name !== KOHO_ACTOR.name || e.actor.role !== KOHO_ACTOR.role) fail(e, "広報のactorが違う")
+      if (e.layer === "debate") fail(e, "広報の記事がdebate")
+      if (e.source.session_key !== null || e.source.speech_index !== null) fail(e, "広報に会議録の参照がある")
+      if (e.action !== null && !ACTIONS.includes(e.action)) fail(e, "actionが語彙に無い")
+      if (e.action_phrase && !e.source.sentence.includes(e.action_phrase)) fail(e, "言い回しが一文に無い")
+      if (e.objects.some(o => !OBJECTS.includes(o))) fail(e, "objectが語彙に無い")
+      for (const c of e.causes) if (!e.source.sentence.includes(c.reason) || !e.source.sentence.includes(c.effect)) fail(e, "因果が原文に無い")
+      continue
+    }
+    if (e.source.session_key === null || e.source.speech_index === null) { fail(e, "会議録の参照が無い"); continue }
     const speeches = JSON.parse(fs.readFileSync(path.join(ROOT, "content", "kaigiroku", e.source.session_key, "speeches.json"), "utf-8")) as SpeechRow[]
     const s = speeches[e.source.speech_index]
     if (!s) { fail(e, "発言が実在しない"); continue }

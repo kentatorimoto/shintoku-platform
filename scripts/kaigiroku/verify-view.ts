@@ -7,7 +7,7 @@ import path from "path"
 
 const ROOT = process.cwd()
 const squash = (s: string) => s.replace(/\s+/g, "")
-interface Citation { meeting: string; sessionKey: string; speechIndex: number; date: string; speaker: string; role: string; page: number; url: string; quote: string }
+interface Citation { kind?: string; meeting: string; sessionKey: string; speechIndex: number; date: string; speaker: string; role: string; page: number; url: string; quote: string }
 
 function main() {
   const theme = process.argv[2]
@@ -26,7 +26,18 @@ function main() {
   walk(view)
 
   const failures: string[] = []
+  const issues = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "newsletters_index.json"), "utf-8")) as
+    { date: string; url: string; pages: { page: number; text: string }[] }[]
   for (const c of citations) {
+    if (c.kind === "koho") {
+      const at = `広報 ${c.date} p.${c.page}`
+      const issue = issues.find(i => i.date === c.date)
+      const page = issue?.pages.find(p => p.page === c.page)
+      if (!issue || !page) { failures.push(`広報の号かページが無い ${at}`); continue }
+      if (!squash(page.text).includes(squash(c.quote))) failures.push(`広報の引用が本文に無い ${at}`)
+      if (c.url !== `${issue.url}#page=${c.page}`) failures.push(`広報のURLが違う ${at}`)
+      continue
+    }
     const dir = path.join(ROOT, "content", "kaigiroku", c.sessionKey)
     const s = (JSON.parse(fs.readFileSync(path.join(dir, "speeches.json"), "utf-8")) as { date: string; speaker: string; role: string; text: string }[])[c.speechIndex]
     const at = `${c.sessionKey}#${c.speechIndex} p.${c.page}`

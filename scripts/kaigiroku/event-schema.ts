@@ -17,7 +17,7 @@ export const ACTION_PHRASES: { action: string; phrases: string[] }[] = [
   { action: "契約", phrases: ["工事請負契約", "契約の締結", "契約を締結", "契約"] },
   { action: "開所", phrases: ["オープン", "開所", "開業", "供用", "開館"] },
   { action: "閉鎖", phrases: ["閉館", "解体", "閉鎖"] },
-  { action: "着工", phrases: ["着工", "着手"] },
+  { action: "着工", phrases: ["着工", "着手", "起工", "安全祈願", "地鎮祭", "工事が始ま", "工事を開始"] },
   { action: "完成", phrases: ["完成", "竣工"] },
   { action: "条例制定", phrases: ["条例の制定", "条例を制定", "設置条例"] },
   { action: "指定", phrases: ["指定管理者の指定", "指定管理者に指定", "指定期間"] },
@@ -51,8 +51,12 @@ export interface EventCause {
   stated_by: string
 }
 
+export const KOHO_ACTOR = { name: "町（広報しんとく）", role: "広報" }
+
 export interface TraceEvent {
   id: string
+  /** kaigiroku: 町の会議録の発言 / koho: 広報しんとくの記事 */
+  source_type: "kaigiroku" | "koho"
   layer: Layer
   action: string | null
   /** 行為を決めた原文の語。受け皿のときは null */
@@ -72,9 +76,12 @@ export interface TraceEvent {
   source: {
     /** 抜粋ID。抜粋に無い議決の発言は null */
     excerpt_id: string | null
-    session_key: string
-    /** speeches.json の添字（0始まり） */
-    speech_index: number
+    /** 会議録の会議。広報は null */
+    session_key: string | null
+    /** speeches.json の添字（0始まり）。広報は null */
+    speech_index: number | null
+    /** 広報の号（例: 令和7年2月号）。会議録は null */
+    issue: string | null
     page: number
     url: string
     agenda: string

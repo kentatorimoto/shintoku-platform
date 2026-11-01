@@ -11,7 +11,7 @@ import type { Excerpt } from "./excerpt"
 import type { Speech } from "./extract"
 import type { SourceRef, TraceResponse } from "./trace-schema"
 import {
-  ACTION_PHRASES, CHAIR_ROLE, FALLBACK_ACTION, MEMBER_ROLE, OBJECTS,
+  ACTION_PHRASES, CHAIR_ROLE, FALLBACK_ACTION, KOHO_ACTOR, MEMBER_ROLE, OBJECTS,
   type EventCause, type Layer, type TraceEvent, type TraceObject,
 } from "./event-schema"
 
@@ -148,6 +148,72 @@ function tenseOf(sentence: string): TraceEvent["tense"] {
   return null
 }
 
+// ── 広報しんとく ────────────────────────────────────────────────────────────
+
+const KOHO_SUBJECT = /駅前周辺再整備|駅前再整備|駅前広場|駅前複合施設|複合施設|とくとく|地域交流センター|温浴宿泊|温浴施設|町営浴場|タウンマネ|ステラステーション/
+/** 日付と事実が書かれた記事の語 */
+const KOHO_ACT = /起工|安全祈願|地鎮祭|竣工|完成|オープン|開所|開業|開館|閉館|着工|着手|工事が始ま|工事を開始|延期|ずれ込|白紙|指定管理者|供用|解体/
+/** 町の考えや効果の説明の語 */
+const KOHO_VIEW = /賑わい|にぎわい|交流人口|コンセプト|目的|を目指/
+/** 町の説明でないもの（投稿・編集後記・質問）と、別の話題 */
+const KOHO_NOT_TOWN = /[▼●]|編集後記|ちなみに|モニター|ご意見|質問|どうにか|でしょうか|ですか/
+const KOHO_OTHER = /文化会館|屋台村|そば祭り|植栽|回数券|商品券|出店費用|ジオラマ|観光協会事務所|生活応援|感謝祭|記念祭|場所[：:]|日時|役場庁舎|新庁舎|診療情報|思います|[・…]P\d|火夫の像|駅ピアノ|夏休み/
+const QUOTE_RADIUS = 45
+const QUOTE_MIN_SENTENCE = 12
+const QUOTE_MAX_SENTENCE = 400
+
+function kohoStatedDate(text: string, issueDate: string): string | null {
+  const era = /令和(\d+)年(\d+)月(?:(\d+)日)?/.exec(toHalf(text))
+  if (era) return `${2018 + Number(era[1])}-${era[2].padStart(2, "0")}${era[3] ? `-${era[3].padStart(2, "0")}` : ""}`
+  const md = /(\d{1,2})月(\d{1,2})日/.exec(toHalf(text))
+  return md ? `${issueDate.slice(0, 4)}-${md[1].padStart(2, "0")}-${md[2].padStart(2, "0")}` : null
+}
+
+/** 索引の本文を文に切り、規則に当たる文だけ event にする。引用は索引の本文から空白を除いた抜き出し */
+function kohoEvents(): TraceEvent[] {
+  const issues = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "newsletters_index.json"), "utf-8")) as
+    { title: string; date: string; url: string; pages: { page: number; text: string }[] }[]
+  const seen = new Set<string>()
+  const out: TraceEvent[] = []
+
+  for (const issue of [...issues].sort((a, b) => (a.date < b.date ? -1 : 1))) {
+    for (const p of issue.pages) {
+      if (!KOHO_SUBJECT.test(p.text)) continue
+      for (const raw of p.text.split(/(?<=。)/)) {
+        const sentence = squash(raw)
+        if (sentence.length < QUOTE_MIN_SENTENCE || sentence.length > QUOTE_MAX_SENTENCE || seen.has(sentence)) continue
+        if (!KOHO_SUBJECT.test(sentence) || KOHO_NOT_TOWN.test(sentence) || KOHO_OTHER.test(sentence)) continue
+        const actAt = sentence.search(KOHO_ACT)
+        const viewAt = sentence.search(KOHO_VIEW)
+        if (actAt < 0 && viewAt < 0) continue
+        seen.add(sentence)
+
+        const at = actAt >= 0 ? actAt : viewAt
+        const layer: Layer = actAt >= 0 ? "fact" : "interpretation"
+        const quote = sentence.slice(Math.max(0, at - QUOTE_RADIUS), at + QUOTE_RADIUS)
+        const textObjects = OBJECTS.filter(o => OBJECT_WORDS[o].test(quote))
+        const objects = textObjects.length > 0 ? textObjects : OBJECTS.filter(o => OBJECT_WORDS[o].test(sentence))
+        const { action, phrase } = layer === "fact" ? actionOf(quote, sentence, layer) : { action: FALLBACK_ACTION.interpretation, phrase: null }
+        const label = /令和\S+?[号月]/.exec(issue.title)?.[0] ?? issue.title
+        out.push({
+          id: "", source_type: "koho", layer, action, action_phrase: phrase, tense: tenseOf(sentence),
+          actor: KOHO_ACTOR, objects, object_source: objects.length > 0 ? "text" : null,
+          date: issue.date, stated_date: kohoStatedDate(quote, issue.date),
+          amounts: amountsOf(sentence),
+          // 広報の本文は別の記事とつながることがあるので、理由と読むのは語の確かなものだけ
+          causes: causesOf(sentence, KOHO_ACTOR.name, false).filter(c => /の影響|ことから/.test(c.marker)),
+          source: {
+            excerpt_id: null, session_key: null, speech_index: null, issue: `広報しんとく ${label}`, page: p.page,
+            url: `${issue.url}#page=${p.page}`, agenda: "", quote, sentence,
+          },
+          bill: null, result: null, groups: [], derived_from: [{ section: "koho", title: label }],
+        })
+      }
+    }
+  }
+  return out
+}
+
 function main() {
   const theme = process.argv[2]
   const excerpts = JSON.parse(fs.readFileSync(path.join(DIR, `${theme}.excerpts.json`), "utf-8")) as Excerpt[]
@@ -226,7 +292,7 @@ function main() {
     const bill = /議案第[0-9０-９]+号から/.test(s.agenda) ? undefined : /(議案第[0-9０-９]+号)/.exec(s.agenda)?.[1]
 
     events.set(key, {
-      id: "",
+      id: "", source_type: "kaigiroku",
       layer, action, action_phrase: phrase, tense: tenseOf(sentence),
       actor: { name: s.speaker, role: s.role },
       objects,
@@ -235,7 +301,7 @@ function main() {
       stated_date: statedDate && statedDate !== s.date ? statedDate : null,
       amounts, causes,
       source: {
-        excerpt_id: ref.excerpt_id, session_key: e.sessionKey, speech_index: index, page,
+        excerpt_id: ref.excerpt_id, session_key: e.sessionKey, speech_index: index, issue: null, page,
         url: `${urlOf.get(e.sessionKey)}#page=${page}`, agenda: s.agenda, quote: ref.quote, sentence,
       },
       bill: bill ? toHalf(bill) : null,
@@ -259,7 +325,7 @@ function main() {
   for (const ev of bills.values()) {
     const num = toHalf(ev.bill ?? "")
     // 特別委員会は付託審査なので、採決は本会議の側にある
-    const sessionKey = ev.source.session_key
+    const sessionKey = (ev.source.session_key ?? "")
       .replace("yosan-tokubetsu", "regular-1").replace("kessan-tokubetsu", "regular-3")
     if (!urlOf.has(sessionKey)) { billsWithoutResult++; continue }
     const speeches = speechesOf(sessionKey)
@@ -275,12 +341,12 @@ function main() {
     const key = `${sessionKey}#${index}#${sentence}`
     if (events.has(key)) continue
     events.set(key, {
-      id: "", layer: "fact", action: "議決", action_phrase: /(可決|否決|承認|認定|同意)/.exec(sentence)?.[1] ?? null, tense: "実施",
+      id: "", source_type: "kaigiroku", layer: "fact", action: "議決", action_phrase: /(可決|否決|承認|認定|同意)/.exec(sentence)?.[1] ?? null, tense: "実施",
       actor: { name: s.speaker, role: s.role },
       objects: ev.objects, object_source: ev.object_source,
       date: s.date, stated_date: null, amounts: [], causes: [],
       source: {
-        excerpt_id: null, session_key: sessionKey, speech_index: index, page,
+        excerpt_id: null, session_key: sessionKey, speech_index: index, issue: null, page,
         url: `${urlOf.get(sessionKey)}#page=${page}`, agenda: s.agenda, quote: sentence, sentence,
       },
       bill: ev.bill, result: /(可決|否決|承認|認定|同意)/.exec(sentence)?.[1] ?? null,
@@ -288,8 +354,9 @@ function main() {
     })
   }
 
-  const list = [...events.values()].sort((a, b) =>
-    a.date < b.date ? -1 : a.date > b.date ? 1 : a.source.page - b.source.page || a.source.speech_index - b.source.speech_index)
+  const koho = kohoEvents()
+  const list = [...events.values(), ...koho].sort((a, b) =>
+    a.date < b.date ? -1 : a.date > b.date ? 1 : a.source.page - b.source.page || (a.source.speech_index ?? 0) - (b.source.speech_index ?? 0))
   list.forEach((e, i) => { e.id = `ev-${String(i + 1).padStart(4, "0")}` })
   fs.writeFileSync(path.join(DIR, `${theme}.events.json`), `[\n${list.map(e => JSON.stringify(e)).join(",\n")}\n]\n`)
 
@@ -299,7 +366,7 @@ function main() {
   const table = ACTION_PHRASES.flatMap(({ action, phrases }) => phrases.map(phrase => ({ phrase, action, observed: counts.get(phrase) ?? 0 })))
   fs.writeFileSync(path.join(DIR, "action-normalization.json"), `[\n${table.map(t => JSON.stringify(t)).join(",\n")}\n]\n`)
 
-  console.log(`✅ ${list.length} 件 / 未解決 ${unresolved.length} / 議案の結果を確かめられず ${billsWithoutResult}`)
+  console.log(`✅ ${list.length} 件（広報 ${koho.length}）/ 未解決 ${unresolved.length} / 議案の結果を確かめられず ${billsWithoutResult}`)
   unresolved.forEach(u => console.log(`  ${u}`))
 }
 

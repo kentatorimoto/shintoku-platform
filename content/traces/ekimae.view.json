@@ -132,6 +132,7 @@
   "points": [
     {
       "id": "ev-0030",
+      "sourceType": "kaigiroku",
       "date": "2017-08-09",
       "action": "予算計上",
       "label": "商工会の調査に補助",
@@ -157,6 +158,7 @@
     },
     {
       "id": "ev-0051",
+      "sourceType": "kaigiroku",
       "date": "2019-09-18",
       "action": "着工",
       "label": "複合施設「着手まで複数年」",
@@ -182,6 +184,7 @@
     },
     {
       "id": "ev-0052",
+      "sourceType": "kaigiroku",
       "date": "2019-12-13",
       "action": "予算計上",
       "label": "JR用地の購入費を計上",
@@ -207,6 +210,7 @@
     },
     {
       "id": "ev-0075",
+      "sourceType": "kaigiroku",
       "date": "2021-12-15",
       "action": "着工",
       "label": "「令和5年度以降に着工」",
@@ -232,6 +236,7 @@
     },
     {
       "id": "ev-0086",
+      "sourceType": "kaigiroku",
       "date": "2022-03-16",
       "action": "計画",
       "label": "概算 全体32億円程度",
@@ -258,7 +263,8 @@
       "reason": null
     },
     {
-      "id": "ev-0088",
+      "id": "ev-0095",
+      "sourceType": "kaigiroku",
       "date": "2022-12-20",
       "action": "着工",
       "label": "「本格的に着工」の方針",
@@ -283,7 +289,8 @@
       "reason": null
     },
     {
-      "id": "ev-0089",
+      "id": "ev-0098",
+      "sourceType": "kaigiroku",
       "date": "2023-03-02",
       "action": "着工",
       "label": "駅前広場の工事に着手へ",
@@ -309,7 +316,8 @@
       "reason": null
     },
     {
-      "id": "ev-0092",
+      "id": "ev-0103",
+      "sourceType": "kaigiroku",
       "date": "2023-06-02",
       "action": "契約",
       "label": "駅前広場の工事契約",
@@ -334,7 +342,8 @@
       "reason": null
     },
     {
-      "id": "ev-0094",
+      "id": "ev-0105",
+      "sourceType": "kaigiroku",
       "date": "2023-12-05",
       "action": "増額",
       "label": "同 契約を667万7,000円増額",
@@ -373,7 +382,8 @@
       }
     },
     {
-      "id": "ev-0098",
+      "id": "ev-0118",
+      "sourceType": "kaigiroku",
       "date": "2024-06-04",
       "action": "契約",
       "label": "複合施設の工事契約",
@@ -398,7 +408,35 @@
       "reason": null
     },
     {
-      "id": "ev-0104",
+      "id": "ev-0122",
+      "sourceType": "koho",
+      "date": "2024-06-06",
+      "action": "着工",
+      "label": "複合施設の工事安全祈願祭",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和6年7月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2024-07-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30786/kouhou.7.A4.pdf#page=12",
+        "quote": "ます！！大日本プロレス青木選手が来庁工事の安全を祈願する関係者6月6日、駅前複合施設工事の安全祈願祭が執り行われ、関係者22名が出席しました。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0125",
+      "sourceType": "kaigiroku",
       "date": "2024-12-17",
       "action": "着工",
       "label": "温浴宿泊施設に着手へ",
@@ -423,7 +461,8 @@
       "reason": null
     },
     {
-      "id": "ev-0105",
+      "id": "ev-0126",
+      "sourceType": "kaigiroku",
       "date": "2024-12-17",
       "action": "計画",
       "label": "金融機関部分の増築を計画",
@@ -449,7 +488,8 @@
       "reason": null
     },
     {
-      "id": "ev-0106",
+      "id": "ev-0127",
+      "sourceType": "kaigiroku",
       "date": "2024-12-17",
       "action": "増額",
       "label": "全体事業費 約7億円増",
@@ -491,7 +531,62 @@
       }
     },
     {
-      "id": "ev-0113",
+      "id": "ev-0132",
+      "sourceType": "koho",
+      "date": "2025-02-15",
+      "action": "開所",
+      "label": "「とくとく」6/15オープンと告知",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年2月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-02-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 3,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/32046/A4kouhoushintoku.pdf#page=3",
+        "quote": "「とくとく」外観大型遊具今月の２月今月の２月地域交流センター「とくとく」は6月15日にオープン〜着々と工事が進んでいます〜当日は当日はオープンイベントをオープンイベントを予定し"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0131",
+      "sourceType": "koho",
+      "date": "2025-03-01",
+      "action": "開所",
+      "label": "駅前ロータリー 3/1 供用開始",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年2月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-02-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 3,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/32046/A4kouhoushintoku.pdf#page=3",
+        "quote": "32025\u000f2/P\u000f819駅前ロータリーは3月1日より供用開始します町営浴場出入口北側駐車場出入口（担当：施設課土木係０１５６ー６４−０５２９／"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0139",
+      "sourceType": "kaigiroku",
       "date": "2025-03-17",
       "action": "指定",
       "label": "指定管理者の指定（5年間）",
@@ -517,7 +612,8 @@
       "reason": null
     },
     {
-      "id": "ev-0115",
+      "id": "ev-0150",
+      "sourceType": "kaigiroku",
       "date": "2025-06-02",
       "action": "開所",
       "label": "「とくとく」6/15開所",
@@ -542,7 +638,8 @@
       "reason": null
     },
     {
-      "id": "ev-0116",
+      "id": "ev-0151",
+      "sourceType": "kaigiroku",
       "date": "2025-06-20",
       "action": "契約",
       "label": "温浴宿泊施設の工事契約",
@@ -567,7 +664,62 @@
       "reason": null
     },
     {
-      "id": "ev-0122",
+      "id": "ev-0155",
+      "sourceType": "koho",
+      "date": "2025-08-05",
+      "action": "着工",
+      "label": "温浴宿泊施設の工事安全祈願祭",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年9月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-09-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 14,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33679/A4.2025.9.pdf#page=14",
+        "quote": "る萩原代表取締役社長駅前温浴宿泊施設の工事安全を願いました8月5日、駅前温浴宿泊施設工事の安全祈願祭が執り行われ、関係者26名が出席しました。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0156",
+      "sourceType": "koho",
+      "date": "2025-09-01",
+      "action": "着工",
+      "label": "令和8年10月完成の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年9月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-09-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 14,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33679/A4.2025.9.pdf#page=14",
+        "quote": "安全祈願祭に参加した関係者一同令和8年10月に完成を予定している駅前温浴宿泊施設イメージ"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0161",
+      "sourceType": "kaigiroku",
       "date": "2026-03-16",
       "action": "開所",
       "label": "12月開業の予定",
@@ -592,7 +744,8 @@
       "reason": null
     },
     {
-      "id": "ev-0130",
+      "id": "ev-0176",
+      "sourceType": "kaigiroku",
       "date": "2026-06-03",
       "action": "延期",
       "label": "開業は来年4月以降に",
@@ -632,7 +785,8 @@
       }
     },
     {
-      "id": "ev-0131",
+      "id": "ev-0177",
+      "sourceType": "kaigiroku",
       "date": "2026-06-03",
       "action": "白紙",
       "label": "金融機関の増設 いったん白紙",
@@ -672,7 +826,8 @@
       }
     },
     {
-      "id": "ev-0132",
+      "id": "ev-0178",
+      "sourceType": "kaigiroku",
       "date": "2026-06-03",
       "action": "延期",
       "label": "町営浴場の営業を延長",
@@ -697,7 +852,8 @@
       "reason": null
     },
     {
-      "id": "ev-0133",
+      "id": "ev-0179",
+      "sourceType": "kaigiroku",
       "date": "2026-06-19",
       "action": "増額",
       "label": "工事費を増額（補正予算）",
@@ -736,7 +892,62 @@
       }
     },
     {
-      "id": "ev-0135",
+      "id": "ev-0181",
+      "sourceType": "koho",
+      "date": "2026-07-01",
+      "action": "延期",
+      "label": "開業の延期をお知らせ",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和8年7月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2026-07-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 18,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36025/A4.pdf#page=18",
+        "quote": "お知らせ▲詳細はこちら駅前温浴宿泊施設は令和８年12月の開業に向け工事を進めておりましたが、中東情勢の影響により建築資材の入荷が遅れることが確定し"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0182",
+      "sourceType": "koho",
+      "date": "2026-07-01",
+      "action": "延期",
+      "label": "町営浴場の閉館を令和9年3月末まで延期",
+      "planned": true,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "町営浴場"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和8年7月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2026-07-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 18,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36025/A4.pdf#page=18",
+        "quote": "なお、開業を延期したことに合わせて、町営浴場の閉館も令和９年３月末まで延期となります。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0184",
+      "sourceType": "kaigiroku",
       "date": "2026-07-06",
       "action": "増額",
       "label": "契約を1億2,663万9,150円増額",
@@ -757,6 +968,33 @@
         "page": 7,
         "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf#page=7",
         "quote": "変更前、10億4,390万円、変更後、11億7,053万9,150円となり"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0186",
+      "sourceType": "koho",
+      "date": "2026-10-01",
+      "action": "開所",
+      "label": "令和9年4月オープンと告知",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和8年10月",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2026-10-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 6,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36859/A4.pdf#page=6",
+        "quote": "▲温浴宿泊施設は令和9年4月にオープンします。"
       },
       "reason": null
     }

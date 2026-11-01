@@ -18,7 +18,7 @@ const RIGHT = 12
 const TOP = 34
 const LANE_H = 52
 const X_START = 2010
-const X_END = 2027
+const X_END = 2028
 const BOTTOM = TOP + LANE_H * LANES.length
 const MIN_GAP = 15
 const QUIET_BAR_H = 130
@@ -55,6 +55,12 @@ function placeLanePoints() {
 
 function Marker({ p, x, y }: { p: Point; x: number; y: number }) {
   const color = p.change ? "var(--color-accent)" : "var(--color-textMain)"
+  // 広報由来は四角、会議録由来は丸
+  if (p.sourceType === "koho") {
+    return p.planned
+      ? <rect x={x - 5} y={y - 5} width={10} height={10} fill="var(--color-paper)" stroke={color} strokeWidth={2} />
+      : <rect x={x - 5.5} y={y - 5.5} width={11} height={11} fill={color} stroke="var(--color-paper)" strokeWidth={1.5} />
+  }
   return p.planned
     ? <circle cx={x} cy={y} r={5.5} fill="var(--color-paper)" stroke={color} strokeWidth={2} />
     : <circle cx={x} cy={y} r={6} fill={color} stroke="var(--color-paper)" strokeWidth={2} />
@@ -172,6 +178,7 @@ function Legend() {
       <li><span aria-hidden className="inline-block w-2.5 h-2.5 rounded-full bg-textMain mr-1.5" />実施・報告</li>
       <li><span aria-hidden className="inline-block w-2.5 h-2.5 rounded-full border-2 border-textMain mr-1.5" />予定</li>
       <li><span aria-hidden className="inline-block w-2.5 h-2.5 rounded-full bg-accent mr-1.5 text-onAccent" />増額・延期・白紙</li>
+      <li><span aria-hidden className="inline-block w-2.5 h-2.5 bg-textMain mr-1.5" />四角は広報しんとく（丸は会議録）</li>
       <li className="hidden md:list-item">縦の線は事業全体の話（破線は予定）</li>
       <li className="md:hidden">横の線は事業全体の話</li>
     </ul>
@@ -207,9 +214,10 @@ const ROW = "grid grid-cols-[46px_repeat(6,17px)_minmax(0,1fr)] items-center gap
 function MobileDot({ p }: { p: Point }) {
   const color = p.change ? "bg-accent text-onAccent" : "bg-textMain"
   const ring = p.change ? "border-accent" : "border-textMain"
+  const shape = p.sourceType === "koho" ? "" : "rounded-full"
   return p.planned
-    ? <span className={`block w-[11px] h-[11px] rounded-full border-2 ${ring} bg-paper`} />
-    : <span className={`block w-[11px] h-[11px] rounded-full ${color}`} />
+    ? <span className={`block w-[11px] h-[11px] ${shape} border-2 ${ring} bg-paper`} />
+    : <span className={`block w-[11px] h-[11px] ${shape} ${color}`} />
 }
 
 export function MobileTimeline() {
@@ -270,7 +278,10 @@ export function MobileTimeline() {
                       {p.objects.includes(l) && <span className="relative"><MobileDot p={p} /></span>}
                     </span>
                   ))}
-              <span className={`pl-2 text-[13px] leading-snug ${p.change ? "font-bold text-textMain" : "text-textSub"}`}>{p.label}</span>
+              <span className={`pl-2 text-[13px] leading-snug ${p.change ? "font-bold text-textMain" : "text-textSub"}`}>
+                {p.label}
+                {p.sourceType === "koho" && <span className="block text-[10px] text-textMuted">広報しんとく</span>}
+              </span>
             </a>
             {p.reason && (
               <ul className="ml-[46px] py-2.5"><ReasonCard p={p} n={0} /></ul>
