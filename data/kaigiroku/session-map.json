@@ -464,6 +464,22 @@
     "existingSession": null
   },
   {
+    "sessionKey": "h31-2019-03-regular-1",
+    "title": "定例第1回(H31.3.4~3.22)",
+    "start": "2019-03-04",
+    "end": "2019-03-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/14440/H31tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h31-2019-03-yosan-tokubetsu",
+    "title": "予算特別委員会(H31.3.4~3.19)",
+    "start": "2019-03-04",
+    "end": "2019-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/14441/H31yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
     "sessionKey": "r1-2019-05-rinji-1",
     "title": "臨時第1回(R1.5.8)",
     "start": "2019-05-08",
@@ -517,6 +533,838 @@
     "start": "2019-12-25",
     "end": "2019-12-25",
     "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/15363/R1rin2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-01-rinji-1",
+    "title": "臨時第1回(H30.1.24)",
+    "start": "2018-01-24",
+    "end": "2018-01-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/12230/H30rinji3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-03-regular-1",
+    "title": "定例第1回(H30.3.2~3.22)",
+    "start": "2018-03-02",
+    "end": "2018-03-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/12545/H30tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-03-yosan-tokubetsu",
+    "title": "予算特別委員会(H30.3.2~3.19)",
+    "start": "2018-03-02",
+    "end": "2018-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/12546/H30yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-05-rinji-2",
+    "title": "臨時第2回(H30.5.24)",
+    "start": "2018-05-24",
+    "end": "2018-05-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/13690/H30rinji2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-06-regular-2",
+    "title": "定例第2回(H30.6.5~6.18)",
+    "start": "2018-06-05",
+    "end": "2018-06-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/13689/30tei2kekka.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-09-regular-3",
+    "title": "定例第3回(H30.9.3~9.18)",
+    "start": "2018-09-03",
+    "end": "2018-09-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/13688/30tei3kekka.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-09-kessan-tokubetsu",
+    "title": "決算特別委員会(H30.9.3~9.10)",
+    "start": "2018-09-03",
+    "end": "2018-09-10",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/13446/H29kessanntokubetsu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-11-kodomo-7",
+    "title": "第7回子ども議会(H30.11.22)",
+    "start": "2018-11-22",
+    "end": "2018-11-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/13560/dai7kakodomogikai.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h30-2018-12-regular-4",
+    "title": "定例第4回(H30.12.7~12.20)",
+    "start": "2018-12-07",
+    "end": "2018-12-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1331/13687/30tei4kekka.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-01-rinji-1",
+    "title": "臨時第1回(H29.1.27)",
+    "start": "2017-01-27",
+    "end": "2017-01-27",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/10500/H29rinji1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-03-regular-1",
+    "title": "定例第1回(H29.3.2~3.17)",
+    "start": "2017-03-02",
+    "end": "2017-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/10924/H29tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-03-yosan-tokubetsu",
+    "title": "予算特別委員会(H29.3.2~3.16)",
+    "start": "2017-03-02",
+    "end": "2017-03-16",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11002/H29yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-05-rinji-2",
+    "title": "臨時第2回(H29.5.16)",
+    "start": "2017-05-16",
+    "end": "2017-05-16",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11005/H29rinji2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-06-regular-2",
+    "title": "定例第2回(H29.6.9~6.23)",
+    "start": "2017-06-09",
+    "end": "2017-06-23",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11523/H29tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-08-rinji-3",
+    "title": "臨時第3回(H29.8.9)",
+    "start": "2017-08-09",
+    "end": "2017-08-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11522/H29rinji3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-09-kessan-tokubetsu",
+    "title": "決算特別委員会(H29.9.4~9.12)",
+    "start": "2017-09-04",
+    "end": "2017-09-12",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11980/H28kessantokubetsu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-09-regular-3",
+    "title": "定例第3回(H29.9.4~9.20)",
+    "start": "2017-09-04",
+    "end": "2017-09-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-10-rinji-4",
+    "title": "臨時第4回(H29.10.11)",
+    "start": "2017-10-11",
+    "end": "2017-10-11",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/11739/H29rinji4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-11-kodomo-6",
+    "title": "第6回子ども議会(H29.11.24)",
+    "start": "2017-11-24",
+    "end": "2017-11-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/12124/H29dai6kdomogikai.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-11-rinji-5",
+    "title": "臨時第5回(H29.11.24)",
+    "start": "2017-11-24",
+    "end": "2017-11-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/12187/H29rinji5gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h29-2017-12-regular-4",
+    "title": "定例第4回(H29.12.8~12.21)",
+    "start": "2017-12-08",
+    "end": "2017-12-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1129/12229/H29tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-01-rinji-1",
+    "title": "臨時第1回(H28.1.26)",
+    "start": "2016-01-26",
+    "end": "2016-01-26",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/8596/H28rinnji1gikairoku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-01-19-basic-plan",
+    "title": "基本構想審査特別委員会(H27.12.17～H28.1.19)",
+    "start": "2015-12-17",
+    "end": "2016-01-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/8603/H27.28kihonkousoushinnsatokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-03-regular-1",
+    "title": "定例第1回(H28.3.3~3.18)",
+    "start": "2016-03-03",
+    "end": "2016-03-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/8795/H28tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-03-yosan-tokubetsu",
+    "title": "予算特別委員会(H28.3.3~3.17)",
+    "start": "2016-03-03",
+    "end": "2016-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/9782/H28yosantokubetsu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-03-rinji-2",
+    "title": "臨時第2回(H28.3.24)",
+    "start": "2016-03-24",
+    "end": "2016-03-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/9779/H28rinji2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-05-rinji-3",
+    "title": "臨時第3回(H28.5.10)",
+    "start": "2016-05-10",
+    "end": "2016-05-10",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/9781/H28rinji3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-06-regular-2",
+    "title": "定例第2回(H28.6.3~6.16)",
+    "start": "2016-06-03",
+    "end": "2016-06-16",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/9819/H28tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-09-kessan-tokubetsu",
+    "title": "決算特別委員会(H28.9.2~9.9)",
+    "start": "2016-09-02",
+    "end": "2016-09-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/10181/H28kessantokubetsu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-09-regular-3",
+    "title": "定例第3回(H28.9.2~9.15)",
+    "start": "2016-09-02",
+    "end": "2016-09-15",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/10182/H28tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-09-rinji-4",
+    "title": "臨時第4回(H28.9.29)",
+    "start": "2016-09-29",
+    "end": "2016-09-29",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/10183/H28rinji4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-11-rinji-5",
+    "title": "臨時第5回(H28.11.7)",
+    "start": "2016-11-07",
+    "end": "2016-11-07",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/10184/H28rinji5gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-11-kodomo-5",
+    "title": "第5回子ども議会(H28.11.21)",
+    "start": "2016-11-21",
+    "end": "2016-11-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/10310/H28dai5kodomogikai.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h28-2016-12-regular-4",
+    "title": "定例第4回(H28.12.2~12.15)",
+    "start": "2016-12-02",
+    "end": "2016-12-15",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/933/10497/H28tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-02-rinji-1",
+    "title": "臨時第1回(H27.2.10)",
+    "start": "2015-02-10",
+    "end": "2015-02-10",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7414/H27rinji1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-03-regular-1",
+    "title": "定例第1回(H27.3.4~3.20)",
+    "start": "2015-03-04",
+    "end": "2015-03-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7415/H27tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-03-yosan-tokubetsu",
+    "title": "予算特別委員会(H27.3.4~3.19)",
+    "start": "2015-03-04",
+    "end": "2015-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7574/H27yosantokubetsu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-05-rinji-2",
+    "title": "臨時第2回(H27.5.8)",
+    "start": "2015-05-08",
+    "end": "2015-05-08",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7626/H27rinji2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-06-regular-2",
+    "title": "定例第2回(H27.6.5~6.19)",
+    "start": "2015-06-05",
+    "end": "2015-06-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7625/H27tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-07-rinji-3",
+    "title": "臨時第3回(H27.7.22)",
+    "start": "2015-07-22",
+    "end": "2015-07-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7627/H27rinji3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-08-rinji-4",
+    "title": "臨時第4回(H27.8.3)",
+    "start": "2015-08-03",
+    "end": "2015-08-03",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/7628/H27rinji4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-09-kessan-tokubetsu",
+    "title": "決算特別委員会(H27.9.4~9.9)",
+    "start": "2015-09-04",
+    "end": "2015-09-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/8069/H27kessantokubetsu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-09-regular-3",
+    "title": "定例第3回(H27.9.4~9.17)",
+    "start": "2015-09-04",
+    "end": "2015-09-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/8070/H27tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-10-rinji-5",
+    "title": "臨時第5回(H27.10.9)",
+    "start": "2015-10-09",
+    "end": "2015-10-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/8234/H27rinji5gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-11-rinji-6",
+    "title": "臨時第6回(H27.11.9)",
+    "start": "2015-11-09",
+    "end": "2015-11-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/8235/H27rinji6gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-11-kodomo-4",
+    "title": "第4回子ども議会(H27.11.27)",
+    "start": "2015-11-27",
+    "end": "2015-11-27",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/8236/H27dai4kodomogikai.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h27-2015-12-regular-4",
+    "title": "定例第4回(H27.12.3~12.17)",
+    "start": "2015-12-03",
+    "end": "2015-12-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/817/8487/H27tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-01-rinji-1",
+    "title": "臨時第1回(H26.1.17)",
+    "start": "2014-01-17",
+    "end": "2014-01-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260117_h26rinji1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-03-regular-1",
+    "title": "定例第1回(H26.3.5~3.24)",
+    "start": "2014-03-05",
+    "end": "2014-03-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260305_h26teirei1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-03-yosan-tokubetsu",
+    "title": "予算特別委員会(H26.3.5~3.20)",
+    "start": "2014-03-05",
+    "end": "2014-03-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260305_h26yosan.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-04-rinji-2",
+    "title": "臨時第2回(H26.4.23)",
+    "start": "2014-04-23",
+    "end": "2014-04-23",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260423_h26rin2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-06-regular-2",
+    "title": "定例第2回(H26.6.6~6.20)",
+    "start": "2014-06-06",
+    "end": "2014-06-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260606_h26tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-06-rinji-3",
+    "title": "臨時第3回(H26.6.30)",
+    "start": "2014-06-30",
+    "end": "2014-06-30",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260630_h26rin3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-08-rinji-4",
+    "title": "臨時第4回(H26.8.18)",
+    "start": "2014-08-18",
+    "end": "2014-08-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260818_H26rin4.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-09-regular-3",
+    "title": "定例第3回(H26.9.5~9.19)",
+    "start": "2014-09-05",
+    "end": "2014-09-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260905_h26_te3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-09-kessan-tokubetsu",
+    "title": "決算特別委員会",
+    "start": "2014-09-05",
+    "end": "2014-09-10",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260905_h26kessantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-11-kodomo-3",
+    "title": "第3回子ども議会(H26.11.27)",
+    "start": "2014-11-27",
+    "end": "2014-11-27",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/261127_h26_3kai_kodomo.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-11-rinji-5",
+    "title": "臨時第5回(H26.11.28)",
+    "start": "2014-11-28",
+    "end": "2014-11-28",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/261128_H26rin5.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h26-2014-12-regular-4",
+    "title": "定例第4回(H26.12.3~12.16)",
+    "start": "2014-12-03",
+    "end": "2014-12-16",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/H26tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-01-rinji-1",
+    "title": "臨時第1回(H25.1.29)",
+    "start": "2013-01-29",
+    "end": "2013-01-29",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250129_h25.1.29rin1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-02-kodomo-1",
+    "title": "第1回新得町子ども議会(H25.2.12)",
+    "start": "2013-02-12",
+    "end": "2013-02-12",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250212_h25.2kodogikai.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-03-regular-1",
+    "title": "定例第1回(H25.3.15~3.21)",
+    "start": "2013-03-05",
+    "end": "2013-03-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-03-yosan-tokubetsu",
+    "title": "予算特別委員会",
+    "start": "2013-03-05",
+    "end": "2013-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25yosankaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-04-rinji-2",
+    "title": "臨時第2回(H25.4.19)",
+    "start": "2013-04-19",
+    "end": "2013-04-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250419_h25rin2kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-06-regular-2",
+    "title": "定例第2回(H25.6.7~6.21)",
+    "start": "2013-06-07",
+    "end": "2013-06-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250607_h25tei2kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-08-rinji-3",
+    "title": "臨時第3回(H25.8.2)",
+    "start": "2013-08-02",
+    "end": "2013-08-02",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250802_h25rin3kaigiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-09-regular-3",
+    "title": "定例第3回(H25.9.4~9.18)",
+    "start": "2013-09-04",
+    "end": "2013-09-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250904_h25tei3kaigiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-09-kessan-tokubetsu",
+    "title": "決算特別委員会",
+    "start": "2013-09-04",
+    "end": "2013-09-10",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250904h24kessan.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-11-kodomo-2",
+    "title": "第2回新得町子ども議会(H25.11.14)",
+    "start": "2013-11-14",
+    "end": "2013-11-14",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/251114_h25kodomogikaikaigiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h25-2013-12-regular-4",
+    "title": "定例第4回(H25.12.4~12.17)",
+    "start": "2013-12-04",
+    "end": "2013-12-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/251204_h25tei4.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-03-regular-1",
+    "title": "定例第1回(H24.3.2~3.16)",
+    "start": "2012-03-02",
+    "end": "2012-03-16",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240302_h24teirei1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-03-yosan-tokubetsu",
+    "title": "予算特別委員会",
+    "start": "2012-03-02",
+    "end": "2012-03-14",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240302_h24yosan.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-05-rinji-1",
+    "title": "臨時第1回(H24.5.11)",
+    "start": "2012-05-11",
+    "end": "2012-05-11",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240511_h24rinji1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-06-regular-2",
+    "title": "定例第2回(H24.6.4~6.15)",
+    "start": "2012-06-04",
+    "end": "2012-06-15",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240604_h24teirei2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-08-rinji-2",
+    "title": "臨時第2回(H24.8.6)",
+    "start": "2012-08-06",
+    "end": "2012-08-06",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240806_h24rin2kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-09-regular-3",
+    "title": "定例第3回(H24.9.4~9.19)",
+    "start": "2012-09-04",
+    "end": "2012-09-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240904_h24_tei3kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-09-kessan-tokubetsu",
+    "title": "決算特別委員会",
+    "start": "2012-09-04",
+    "end": "2012-09-12",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/240904_h24kessannkaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-11-rinji-3",
+    "title": "臨時第3回(H24.11.5)",
+    "start": "2012-11-05",
+    "end": "2012-11-05",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/241105_h24rin3kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h24-2012-12-regular-4",
+    "title": "定例第4回(H24.12.3~12.19)",
+    "start": "2012-12-03",
+    "end": "2012-12-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/241203_h24tei4kaigi.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-02-rinji-1",
+    "title": "臨時第1回(H23.2.1)",
+    "start": "2011-02-01",
+    "end": "2011-02-01",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230201_H23rinji_1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-02-rinji-2",
+    "title": "臨時第2回(H23.2.28)",
+    "start": "2011-02-28",
+    "end": "2011-02-28",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230228_H23rinji_2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-03-regular-1",
+    "title": "定例第1回(H23.3.2~3.18)",
+    "start": "2011-03-02",
+    "end": "2011-03-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230302_H23teirei_1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-03-yosan-tokubetsu",
+    "title": "予算特別委員会",
+    "start": "2011-03-02",
+    "end": "2011-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230302_h23yosan_a.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-05-rinji-3",
+    "title": "臨時第3回(H23.5.6)",
+    "start": "2011-05-06",
+    "end": "2011-05-06",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230506_H23rinji_3.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-06-regular-2",
+    "title": "定例第2回(H23.6.3~6.17)",
+    "start": "2011-06-03",
+    "end": "2011-06-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230603_H23teirei_2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-07-rinji-4",
+    "title": "臨時第4回(H23.7.6)",
+    "start": "2011-07-06",
+    "end": "2011-07-06",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230706_H23rinji_4.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-08-rinji-5",
+    "title": "臨時第5回(H23.8.9)",
+    "start": "2011-08-09",
+    "end": "2011-08-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230809_H23rinji_5.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-09-regular-3",
+    "title": "定例第3回(H23.9.5~9.20)",
+    "start": "2011-09-05",
+    "end": "2011-09-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230905_H23_teirei_3.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-09-kessan-tokubetsu",
+    "title": "決算特別委員会",
+    "start": "2011-09-05",
+    "end": "2011-09-14",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230905_H23kessan.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-11-rinji-6",
+    "title": "臨時第6回(H23.11.1)",
+    "start": "2011-11-01",
+    "end": "2011-11-01",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/231101_H23rinji_6.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-11-rinji-7",
+    "title": "臨時第7回(H23.11.10)",
+    "start": "2011-11-10",
+    "end": "2011-11-10",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/231110_H23rinji_7.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-11-rinji-8",
+    "title": "臨時第8回(H23.11.28)",
+    "start": "2011-11-28",
+    "end": "2011-11-28",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/231128_H23rinji_8.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-12-regular-4",
+    "title": "定例第4回(H23.12.5~12.16)",
+    "start": "2011-12-05",
+    "end": "2011-12-16",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/231205_H23teirei_4.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h23-2011-12-rinji-9",
+    "title": "臨時第9回(H23.12.28)",
+    "start": "2011-12-28",
+    "end": "2011-12-28",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/231228_H23rinji_9.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-01-rinji-1",
+    "title": "臨時第1回(H22.1.29)",
+    "start": "2010-01-29",
+    "end": "2010-01-29",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220129_H22rinji_1.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-03-regular-1",
+    "title": "定例第1回(H22.3.2~3.19)",
+    "start": "2010-03-02",
+    "end": "2010-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220302_h22teirei_1-2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-03-yosan-tokubetsu",
+    "title": "予算特別委員会",
+    "start": "2010-03-02",
+    "end": "2010-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220302_h22yosan_a.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-05-rinji-2",
+    "title": "臨時第2回(H22.5.14)",
+    "start": "2010-05-14",
+    "end": "2010-05-14",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220514_H22rinji_2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-06-regular-2",
+    "title": "定例第2回(H22.6.8~6.21)",
+    "start": "2010-06-08",
+    "end": "2010-06-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220608_H22teirei_2.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-09-regular-3",
+    "title": "定例第3回(H22.9.2~9.17)",
+    "start": "2010-09-02",
+    "end": "2010-09-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220902_H22_teirei_3.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-09-kessan-tokubetsu",
+    "title": "決算特別委員会",
+    "start": "2010-09-02",
+    "end": "2010-09-15",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220902_h22kessan.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-11-rinji-3",
+    "title": "臨時第3回(H22.11.8)",
+    "start": "2010-11-08",
+    "end": "2010-11-08",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/221108_H22rinji_3.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-11-rinji-4",
+    "title": "臨時第4回(H22.11.29)",
+    "start": "2010-11-29",
+    "end": "2010-11-29",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/221129_H22rinnji_4.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "h22-2010-12-regular-4",
+    "title": "定例第4回(H22.12.6~12.17)",
+    "start": "2010-12-06",
+    "end": "2010-12-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/221206_H22trirei_4.pdf",
     "existingSession": null
   }
 ]

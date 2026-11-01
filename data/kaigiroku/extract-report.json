@@ -1,15 +1,5 @@
 {
-  "unresolved": [
-    "日付を読めない: h26 決算特別委員会",
-    "日付を読めない: h25 予算特別委員会",
-    "日付を読めない: h25 決算特別委員会",
-    "日付を読めない: h24 予算特別委員会",
-    "日付を読めない: h24 決算特別委員会",
-    "日付を読めない: h23 予算特別委員会",
-    "日付を読めない: h23 決算特別委員会",
-    "日付を読めない: h22 予算特別委員会",
-    "日付を読めない: h22 決算特別委員会"
-  ],
+  "unresolved": [],
   "sessions": [
     {
       "sessionKey": "r8-2026-01-20-basic-plan",
@@ -206,7 +196,7 @@
     {
       "sessionKey": "r5-2023-05-rinji-1",
       "pages": 29,
-      "rawChars": 25224,
+      "rawChars": 25225,
       "speeches": 153,
       "speechChars": 19189,
       "anomalies": []
@@ -482,9 +472,25 @@
       "anomalies": []
     },
     {
+      "sessionKey": "h31-2019-03-regular-1",
+      "pages": 73,
+      "rawChars": 78040,
+      "speeches": 248,
+      "speechChars": 66519,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h31-2019-03-yosan-tokubetsu",
+      "pages": 99,
+      "rawChars": 125859,
+      "speeches": 679,
+      "speechChars": 110887,
+      "anomalies": []
+    },
+    {
       "sessionKey": "r1-2019-05-rinji-1",
       "pages": 35,
-      "rawChars": 29082,
+      "rawChars": 29083,
       "speeches": 184,
       "speechChars": 21507,
       "anomalies": []
@@ -535,6 +541,838 @@
       "rawChars": 15941,
       "speeches": 55,
       "speechChars": 13879,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-01-rinji-1",
+      "pages": 10,
+      "rawChars": 8017,
+      "speeches": 45,
+      "speechChars": 6208,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-03-regular-1",
+      "pages": 64,
+      "rawChars": 66673,
+      "speeches": 195,
+      "speechChars": 56673,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-03-yosan-tokubetsu",
+      "pages": 126,
+      "rawChars": 167063,
+      "speeches": 760,
+      "speechChars": 149385,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-05-rinji-2",
+      "pages": 15,
+      "rawChars": 14043,
+      "speeches": 59,
+      "speechChars": 10369,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-06-regular-2",
+      "pages": 58,
+      "rawChars": 56191,
+      "speeches": 264,
+      "speechChars": 44922,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-09-regular-3",
+      "pages": 46,
+      "rawChars": 43773,
+      "speeches": 167,
+      "speechChars": 34651,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-09-kessan-tokubetsu",
+      "pages": 49,
+      "rawChars": 55807,
+      "speeches": 365,
+      "speechChars": 47805,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-11-kodomo-7",
+      "pages": 17,
+      "rawChars": 14654,
+      "speeches": 78,
+      "speechChars": 11523,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h30-2018-12-regular-4",
+      "pages": 73,
+      "rawChars": 81087,
+      "speeches": 283,
+      "speechChars": 70599,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-01-rinji-1",
+      "pages": 14,
+      "rawChars": 10869,
+      "speeches": 63,
+      "speechChars": 8153,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-03-regular-1",
+      "pages": 56,
+      "rawChars": 56931,
+      "speeches": 204,
+      "speechChars": 48730,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-03-yosan-tokubetsu",
+      "pages": 96,
+      "rawChars": 122663,
+      "speeches": 556,
+      "speechChars": 108975,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-05-rinji-2",
+      "pages": 25,
+      "rawChars": 23744,
+      "speeches": 123,
+      "speechChars": 17946,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-06-regular-2",
+      "pages": 51,
+      "rawChars": 47581,
+      "speeches": 217,
+      "speechChars": 38009,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-08-rinji-3",
+      "pages": 11,
+      "rawChars": 8077,
+      "speeches": 43,
+      "speechChars": 5949,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-09-kessan-tokubetsu",
+      "pages": 39,
+      "rawChars": 40598,
+      "speeches": 279,
+      "speechChars": 34094,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-09-regular-3",
+      "pages": 54,
+      "rawChars": 50650,
+      "speeches": 202,
+      "speechChars": 41033,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-10-rinji-4",
+      "pages": 9,
+      "rawChars": 6352,
+      "speeches": 31,
+      "speechChars": 4576,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-11-kodomo-6",
+      "pages": 20,
+      "rawChars": 17917,
+      "speeches": 93,
+      "speechChars": 14559,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-11-rinji-5",
+      "pages": 9,
+      "rawChars": 5844,
+      "speeches": 29,
+      "speechChars": 3802,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h29-2017-12-regular-4",
+      "pages": 66,
+      "rawChars": 71819,
+      "speeches": 229,
+      "speechChars": 62378,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-01-rinji-1",
+      "pages": 11,
+      "rawChars": 8303,
+      "speeches": 38,
+      "speechChars": 5892,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-01-19-basic-plan",
+      "pages": 32,
+      "rawChars": 35180,
+      "speeches": 137,
+      "speechChars": 30829,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-03-regular-1",
+      "pages": 71,
+      "rawChars": 74616,
+      "speeches": 252,
+      "speechChars": 63439,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-03-yosan-tokubetsu",
+      "pages": 86,
+      "rawChars": 106543,
+      "speeches": 529,
+      "speechChars": 92969,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-03-rinji-2",
+      "pages": 7,
+      "rawChars": 4213,
+      "speeches": 16,
+      "speechChars": 2805,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-05-rinji-3",
+      "pages": 18,
+      "rawChars": 14982,
+      "speeches": 85,
+      "speechChars": 11371,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-06-regular-2",
+      "pages": 57,
+      "rawChars": 55135,
+      "speeches": 257,
+      "speechChars": 44605,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-09-kessan-tokubetsu",
+      "pages": 20,
+      "rawChars": 14486,
+      "speeches": 113,
+      "speechChars": 9904,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-09-regular-3",
+      "pages": 33,
+      "rawChars": 24606,
+      "speeches": 139,
+      "speechChars": 16581,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-09-rinji-4",
+      "pages": 8,
+      "rawChars": 5134,
+      "speeches": 27,
+      "speechChars": 3444,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-11-rinji-5",
+      "pages": 9,
+      "rawChars": 6375,
+      "speeches": 27,
+      "speechChars": 4712,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-11-kodomo-5",
+      "pages": 21,
+      "rawChars": 19508,
+      "speeches": 96,
+      "speechChars": 16101,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h28-2016-12-regular-4",
+      "pages": 71,
+      "rawChars": 77352,
+      "speeches": 269,
+      "speechChars": 66593,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-02-rinji-1",
+      "pages": 8,
+      "rawChars": 4485,
+      "speeches": 25,
+      "speechChars": 3050,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-03-regular-1",
+      "pages": 86,
+      "rawChars": 95056,
+      "speeches": 277,
+      "speechChars": 82274,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-03-yosan-tokubetsu",
+      "pages": 105,
+      "rawChars": 130451,
+      "speeches": 659,
+      "speechChars": 114954,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-05-rinji-2",
+      "pages": 30,
+      "rawChars": 22663,
+      "speeches": 142,
+      "speechChars": 17744,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-06-regular-2",
+      "pages": 64,
+      "rawChars": 60109,
+      "speeches": 291,
+      "speechChars": 48846,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-07-rinji-3",
+      "pages": 10,
+      "rawChars": 7676,
+      "speeches": 41,
+      "speechChars": 5919,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-08-rinji-4",
+      "pages": 8,
+      "rawChars": 4534,
+      "speeches": 29,
+      "speechChars": 3085,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-09-kessan-tokubetsu",
+      "pages": 45,
+      "rawChars": 50043,
+      "speeches": 245,
+      "speechChars": 43457,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-09-regular-3",
+      "pages": 55,
+      "rawChars": 52124,
+      "speeches": 231,
+      "speechChars": 41837,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-10-rinji-5",
+      "pages": 7,
+      "rawChars": 3464,
+      "speeches": 15,
+      "speechChars": 2177,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-11-rinji-6",
+      "pages": 9,
+      "rawChars": 5813,
+      "speeches": 31,
+      "speechChars": 3993,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-11-kodomo-4",
+      "pages": 21,
+      "rawChars": 18563,
+      "speeches": 111,
+      "speechChars": 14888,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h27-2015-12-regular-4",
+      "pages": 51,
+      "rawChars": 49932,
+      "speeches": 210,
+      "speechChars": 40398,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-01-rinji-1",
+      "pages": 10,
+      "rawChars": 7359,
+      "speeches": 31,
+      "speechChars": 5842,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-03-regular-1",
+      "pages": 86,
+      "rawChars": 91991,
+      "speeches": 309,
+      "speechChars": 79442,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-03-yosan-tokubetsu",
+      "pages": 112,
+      "rawChars": 141655,
+      "speeches": 686,
+      "speechChars": 126123,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-04-rinji-2",
+      "pages": 17,
+      "rawChars": 14423,
+      "speeches": 45,
+      "speechChars": 11796,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-06-regular-2",
+      "pages": 55,
+      "rawChars": 50896,
+      "speeches": 235,
+      "speechChars": 39751,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-06-rinji-3",
+      "pages": 10,
+      "rawChars": 6652,
+      "speeches": 39,
+      "speechChars": 5044,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-08-rinji-4",
+      "pages": 12,
+      "rawChars": 8810,
+      "speeches": 27,
+      "speechChars": 7190,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-09-regular-3",
+      "pages": 68,
+      "rawChars": 66514,
+      "speeches": 273,
+      "speechChars": 54718,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-09-kessan-tokubetsu",
+      "pages": 55,
+      "rawChars": 63862,
+      "speeches": 336,
+      "speechChars": 55963,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-11-kodomo-3",
+      "pages": 24,
+      "rawChars": 21837,
+      "speeches": 129,
+      "speechChars": 17771,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-11-rinji-5",
+      "pages": 17,
+      "rawChars": 11618,
+      "speeches": 66,
+      "speechChars": 8085,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h26-2014-12-regular-4",
+      "pages": 67,
+      "rawChars": 67097,
+      "speeches": 265,
+      "speechChars": 56041,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-01-rinji-1",
+      "pages": 19,
+      "rawChars": 16549,
+      "speeches": 97,
+      "speechChars": 13503,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-02-kodomo-1",
+      "pages": 25,
+      "rawChars": 23406,
+      "speeches": 125,
+      "speechChars": 18891,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-03-regular-1",
+      "pages": 94,
+      "rawChars": 101053,
+      "speeches": 341,
+      "speechChars": 85907,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-03-yosan-tokubetsu",
+      "pages": 116,
+      "rawChars": 148502,
+      "speeches": 694,
+      "speechChars": 132866,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-04-rinji-2",
+      "pages": 14,
+      "rawChars": 11748,
+      "speeches": 61,
+      "speechChars": 9180,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-06-regular-2",
+      "pages": 61,
+      "rawChars": 61491,
+      "speeches": 270,
+      "speechChars": 50567,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-08-rinji-3",
+      "pages": 11,
+      "rawChars": 6467,
+      "speeches": 46,
+      "speechChars": 4367,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-09-regular-3",
+      "pages": 57,
+      "rawChars": 57287,
+      "speeches": 205,
+      "speechChars": 47772,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-09-kessan-tokubetsu",
+      "pages": 45,
+      "rawChars": 49388,
+      "speeches": 296,
+      "speechChars": 42311,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-11-kodomo-2",
+      "pages": 32,
+      "rawChars": 33526,
+      "speeches": 137,
+      "speechChars": 27856,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h25-2013-12-regular-4",
+      "pages": 53,
+      "rawChars": 49720,
+      "speeches": 195,
+      "speechChars": 40475,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-03-regular-1",
+      "pages": 84,
+      "rawChars": 96612,
+      "speeches": 284,
+      "speechChars": 84799,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-03-yosan-tokubetsu",
+      "pages": 136,
+      "rawChars": 173663,
+      "speeches": 806,
+      "speechChars": 154543,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-05-rinji-1",
+      "pages": 20,
+      "rawChars": 15320,
+      "speeches": 99,
+      "speechChars": 11476,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-06-regular-2",
+      "pages": 54,
+      "rawChars": 55317,
+      "speeches": 197,
+      "speechChars": 46266,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-08-rinji-2",
+      "pages": 14,
+      "rawChars": 11689,
+      "speeches": 66,
+      "speechChars": 9200,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-09-regular-3",
+      "pages": 73,
+      "rawChars": 77957,
+      "speeches": 276,
+      "speechChars": 67140,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-09-kessan-tokubetsu",
+      "pages": 62,
+      "rawChars": 75489,
+      "speeches": 408,
+      "speechChars": 66421,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-11-rinji-3",
+      "pages": 9,
+      "rawChars": 5246,
+      "speeches": 23,
+      "speechChars": 3577,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h24-2012-12-regular-4",
+      "pages": 59,
+      "rawChars": 61415,
+      "speeches": 219,
+      "speechChars": 52395,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-02-rinji-1",
+      "pages": 9,
+      "rawChars": 5084,
+      "speeches": 29,
+      "speechChars": 3434,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-02-rinji-2",
+      "pages": 22,
+      "rawChars": 22841,
+      "speeches": 132,
+      "speechChars": 19264,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-03-regular-1",
+      "pages": 110,
+      "rawChars": 128727,
+      "speeches": 405,
+      "speechChars": 114218,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-03-yosan-tokubetsu",
+      "pages": 140,
+      "rawChars": 190851,
+      "speeches": 787,
+      "speechChars": 172853,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-05-rinji-3",
+      "pages": 20,
+      "rawChars": 14199,
+      "speeches": 89,
+      "speechChars": 10305,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-06-regular-2",
+      "pages": 76,
+      "rawChars": 85136,
+      "speeches": 341,
+      "speechChars": 73987,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-07-rinji-4",
+      "pages": 13,
+      "rawChars": 11037,
+      "speeches": 51,
+      "speechChars": 8829,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-08-rinji-5",
+      "pages": 11,
+      "rawChars": 8245,
+      "speeches": 37,
+      "speechChars": 6466,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-09-regular-3",
+      "pages": 66,
+      "rawChars": 70555,
+      "speeches": 237,
+      "speechChars": 59992,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-09-kessan-tokubetsu",
+      "pages": 38,
+      "rawChars": 41058,
+      "speeches": 239,
+      "speechChars": 34761,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-11-rinji-6",
+      "pages": 12,
+      "rawChars": 8960,
+      "speeches": 51,
+      "speechChars": 7170,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-11-rinji-7",
+      "pages": 11,
+      "rawChars": 8314,
+      "speeches": 45,
+      "speechChars": 6623,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-11-rinji-8",
+      "pages": 10,
+      "rawChars": 5826,
+      "speeches": 31,
+      "speechChars": 4032,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-12-regular-4",
+      "pages": 71,
+      "rawChars": 80129,
+      "speeches": 274,
+      "speechChars": 69737,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h23-2011-12-rinji-9",
+      "pages": 10,
+      "rawChars": 6271,
+      "speeches": 31,
+      "speechChars": 4587,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-01-rinji-1",
+      "pages": 13,
+      "rawChars": 8005,
+      "speeches": 50,
+      "speechChars": 5625,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-03-regular-1",
+      "pages": 100,
+      "rawChars": 114513,
+      "speeches": 320,
+      "speechChars": 101522,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-03-yosan-tokubetsu",
+      "pages": 142,
+      "rawChars": 188163,
+      "speeches": 843,
+      "speechChars": 168503,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-05-rinji-2",
+      "pages": 22,
+      "rawChars": 17986,
+      "speeches": 113,
+      "speechChars": 13825,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-06-regular-2",
+      "pages": 74,
+      "rawChars": 77496,
+      "speeches": 316,
+      "speechChars": 66031,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-09-regular-3",
+      "pages": 71,
+      "rawChars": 77090,
+      "speeches": 269,
+      "speechChars": 66682,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-09-kessan-tokubetsu",
+      "pages": 67,
+      "rawChars": 83102,
+      "speeches": 416,
+      "speechChars": 74101,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-11-rinji-3",
+      "pages": 10,
+      "rawChars": 6531,
+      "speeches": 31,
+      "speechChars": 4980,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-11-rinji-4",
+      "pages": 19,
+      "rawChars": 15728,
+      "speeches": 81,
+      "speechChars": 12135,
+      "anomalies": []
+    },
+    {
+      "sessionKey": "h22-2010-12-regular-4",
+      "pages": 72,
+      "rawChars": 82851,
+      "speeches": 247,
+      "speechChars": 73102,
       "anomalies": []
     }
   ]

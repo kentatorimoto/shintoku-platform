@@ -41,27 +41,37 @@ const WIDE_GAP = new RegExp(`([${WIDE}]) +(?=[${WIDE}])`, "g")
 
 /** 全角文字どうしの空白を潰す。発言行の「◎氏名役職 本文」の区切りだけは残す。 */
 export function normalizeLine(line: string): string {
-  const flat = line.replace(/　/g, " ")
-  const speech = /^ ?(◎[^ ]+) +(.*)$/.exec(flat)
-  const collapse = (s: string) => s.replace(WIDE_GAP, "$1").replace(/ +/g, " ").trim()
-  if (speech && ROLE_TAIL.test(speech[1])) return `${speech[1]} ${collapse(speech[2])}`
-  return collapse(flat)
+  const collapsed = line.replace(/\u3000/g, " ").replace(WIDE_GAP, "$1").replace(/ +/g, " ").trim()
+  const speech = parseSpeechLine(collapsed)
+  return speech ? `◎${speech.speaker}${speech.role} ${speech.text}`.trimEnd() : collapsed
 }
 
 const toHalf = (s: string) => s.replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
 
 // ── 発言者 ──────────────────────────────────────────────────────────────────
 
-/** 発言者トークンの末尾。これで終わらない ◎ 行は発言として扱わない */
-const ROLE_TAIL = /(町長|議長|議員|委員長|委員|教育長|課長|室長|署長|所長|局長|参事|主幹|主査|係長|次長|補佐|院長|園長|センター長|監査委員|管理者|館長|代表|参考人|説明員|町民|児童|生徒|校長|審議員|担当|理事|専門員|主任)$/
-
 /** 姓名のあとに続く、役職の書き出し。最も手前で当たった位置を姓名の終わりとする */
-const ROLE_HEAD = /(副町長|町長|教育長|副議長|議長|議員|議会|臨時|副委員長|委員長|委員|監査|総務|企画|財政|まちづくり|地域|税務|出納|会計|町民|住民|保健|福祉|医療|病院|施設|建設|水道|農林|農政|農業|産業|商工|観光|林業|児童|子育て|学校|社会|教育|屈足|事務局|消防|署長|環境|政策|参事|主幹|主査|課長|室長|所長|局長|係長|次長|代表|参考人|説明員)/
+const ROLE_HEAD = /(副町長|町長|教育長|副議長|議長|議員|議会|臨時|副委員長|委員長|委員|監査|総務|企画|財政|まちづくり|地域|域戦略|税務|出納|会計|町民|住民|保健|福祉|保育|庶務|医療|病院|施設|建設|水道|農林|農政|農業|産業|商工|観光|林業|児童|子育て|学校|社会|教育|屈足|事務局|消防|署長|環境|政策|参事|主幹|主査|課長|室長|所長|局長|係長|次長|代表|参考人|説明員)/
 
-export function splitSpeaker(token: string): { speaker: string; role: string } {
-  const m = ROLE_HEAD.exec(token)
-  if (!m || m.index === 0) return { speaker: "", role: token }
-  return { speaker: token.slice(0, m.index), role: token.slice(m.index) }
+/** 役職の終わり。平成の会議録は役職と本文のあいだに区切りが無い行があるので、語彙で切る */
+const ROLE_END = /^[\u3040-\u30ff\u3400-\u9fff]{0,14}?(副町長|町長|教育長|副議長|議長|議員|副委員長|委員長|委員(?!会事務|会局|会長)|課長|室長|署長|所長|局長|センター長|園長|参事|主幹|主査|係長|次長|参考人|説明員)(補佐|代理者?)?/
+
+/** 姓名に使わない文字。日程番号や「◎諸般の報告」を発言者と読まないため */
+const NOT_NAME = /[0-9０-９の、。（）・]|^日程/
+const MAX_NAME_CHARS = 6
+
+/** 正規化済みの1行が発言の書き出しなら、発言者・役職・本文に分ける */
+export function parseSpeechLine(line: string): { speaker: string; role: string; text: string } | null {
+  if (!line.startsWith("◎")) return null
+  // 町の組版の崩れ（実例: `◎委青柳茂行員長`）を元に戻す
+  const body = line.slice(1).trimStart().replace(/^委(.{2,5}?)員長/, "$1委員長")
+  const head = ROLE_HEAD.exec(body)
+  if (!head || head.index === 0 || head.index > MAX_NAME_CHARS) return null
+  const speaker = body.slice(0, head.index)
+  if (NOT_NAME.test(speaker)) return null
+  const end = ROLE_END.exec(body.slice(head.index))
+  if (!end) return null
+  return { speaker, role: end[0], text: body.slice(head.index + end[0].length).trim() }
 }
 
 // ── 分割 ────────────────────────────────────────────────────────────────────
@@ -104,12 +114,10 @@ export function parseSpeeches(layoutText: string): { speeches: Speech[]; anomali
       if (SIGNATURE.test(line)) { close("front"); continue }
 
       if (line.startsWith("◎")) {
-        const token = line.slice(1).split(" ")[0]
-        if (indent < 2 && ROLE_TAIL.test(token)) {
-          const { speaker, role } = splitSpeaker(token)
-          if (!speaker) anomalies.push({ page, kind: "発言者を姓名と役職に分けられない", line: token })
+        const parsed = indent < 2 ? parseSpeechLine(line) : null
+        if (parsed) {
           if (!date) anomalies.push({ page, kind: "日付が未確定のまま発言", line: line.slice(0, 40) })
-          current = { agenda, speaker, role, date, page, text: line.slice(token.length + 2) }
+          current = { agenda, speaker: parsed.speaker, role: parsed.role, date, page, text: parsed.text }
           speeches.push(current)
           state = "speech"
         } else if (indent >= 2 || AGENDA_WORD.test(line)) {
@@ -223,15 +231,23 @@ async function main() {
   const map: Record<string, unknown>[] = []
   const report: Record<string, unknown>[] = []
   const unresolved: string[] = []
+  const seen = new Set<string>()
 
   for (const entry of index) {
-    const dates = parseTitleDates(entry.title)
-    if (!dates) { unresolved.push(`日付を読めない: ${entry.year} ${entry.title}`); continue }
-    if (!all && dates.start < "2019-05-01") continue
-    const key = sessionKeyOf(entry.title, dates, existing)
-    if (!key) { unresolved.push(`sessionKeyを決められない: ${entry.title}`); continue }
+    // 平成22〜26年の特別委員会は索引の題名に日付が無いので、本文の日付で決める
+    const titleDates = parseTitleDates(entry.title)
+    if (titleDates && !all && titleDates.start < "2019-05-01") continue
+    if (!titleDates && !all) continue
 
     const layout = await layoutTextOf(entry, workDir, cacheDir)
+    const held0 = parseSpeeches(layout).speeches.map(s => s.date).filter(Boolean).sort()
+    const dates = titleDates ?? (held0.length ? { start: held0[0], end: held0[held0.length - 1] } : null)
+    if (!dates) { unresolved.push(`日付を読めない: ${entry.year} ${entry.title}`); continue }
+    const key = sessionKeyOf(entry.title, dates, existing)
+    if (!key) { unresolved.push(`sessionKeyを決められない: ${entry.year} ${entry.title}`); continue }
+    if (seen.has(key)) { unresolved.push(`sessionKeyが重複: ${key} ${entry.title}`); continue }
+    seen.add(key)
+
     const { speeches, anomalies } = parseSpeeches(layout)
     const raw = layout.split("\f").map(p => p.split("\n").map(normalizeLine).join("\n").replace(/\n{2,}/g, "\n").trim()).join("\f\n")
     const speechChars = speeches.reduce((n, s) => n + s.text.length, 0)
