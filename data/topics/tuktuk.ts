@@ -36,14 +36,6 @@ export const PHASES: TuktukPhase[] = [
     label: "Phase 1｜駅前広場整備（前段）",
     events: [
       {
-        date: "2022-06-04",
-        type: "契約",
-        summary:
-          "街路事業工事（駅前広場）工事請負契約の締結（議案第50号）",
-        decision: true,
-        sourceNote: "giketsu_index（令和4年定例第2回）※ATLASセッション未登録",
-      },
-      {
         date: "2023-06-02",
         type: "契約",
         summary:
@@ -57,6 +49,14 @@ export const PHASES: TuktukPhase[] = [
         summary: "同 契約変更（議案第66号）",
         decision: false,
         sourceNote: "giketsu_index（令和5年定例第4回）※ATLASセッション未登録",
+      },
+      {
+        date: "2024-06-04",
+        type: "契約",
+        summary:
+          "街路事業工事（駅前広場）工事請負契約の締結（議案第40号）",
+        decision: true,
+        sessionId: "r6-2024-06-regular-2",
       },
     ],
   },
