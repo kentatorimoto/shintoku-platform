@@ -32,6 +32,8 @@
     "kaigiroku:verify": "tsx scripts/kaigiroku/verify-trace.ts",
     "kaigiroku:events": "tsx scripts/kaigiroku/build-events.ts",
     "kaigiroku:verify-events": "tsx scripts/kaigiroku/verify-events.ts",
+    "kaigiroku:view": "tsx scripts/kaigiroku/build-view.ts",
+    "kaigiroku:verify-view": "tsx scripts/kaigiroku/verify-view.ts",
     "scrape:giketsu": "npx tsx scripts/scrape-giketsu.ts",
     "slides:generate": "node scripts/convertSlides.mjs",
     "build:search-index": "tsx scripts/build-search-index.ts",

@@ -1,0 +1,863 @@
+{
+  "title": "駅前の15年",
+  "subtitle": "2010年の一般質問から2026年まで",
+  "contrast": [
+    {
+      "year": "2011",
+      "citation": {
+        "meeting": "平成23年 定例第1回",
+        "sessionKey": "h23-2011-03-regular-1",
+        "speechIndex": 303,
+        "date": "2011-03-11",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 92,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230302_H23teirei_1.pdf#page=92",
+        "quote": "構想というものは今持ち合わせていない"
+      }
+    },
+    {
+      "year": "2026",
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "いったん白紙とすることでご了承いただいているところであります"
+      }
+    }
+  ],
+  "stats": {
+    "years": {
+      "value": "15年",
+      "note": "2011年の答弁から2026年の報告まで"
+    },
+    "total": {
+      "value": "約32億円",
+      "note": "概算事業費（2022年3月の説明）",
+      "citation": {
+        "meeting": "令和4年 予算特別委員会",
+        "sessionKey": "r4-2022-03-yosan-tokubetsu",
+        "speechIndex": 141,
+        "date": "2022-03-16",
+        "speaker": "小林健利",
+        "role": "地域戦略室長補佐",
+        "page": 32,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+        "quote": "全体で32億円程度を見込んでおります"
+      }
+    },
+    "increase": {
+      "value": "約7億円",
+      "note": "増額（2024年12月、当初計画との比較）",
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+      }
+    }
+  },
+  "mayors": [
+    {
+      "name": "浜田正利 町長",
+      "until": "2025-06",
+      "citation": {
+        "meeting": "令和7年 定例第2回",
+        "sessionKey": "r7-2025-06-regular-2",
+        "speechIndex": 17,
+        "date": "2025-06-02",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=13",
+        "quote": ""
+      }
+    },
+    {
+      "name": "湯浅真希 町長",
+      "from": "2025-08",
+      "citation": {
+        "meeting": "令和7年 臨時第2回",
+        "sessionKey": "r7-2025-08-rinji-2",
+        "speechIndex": 2,
+        "date": "2025-08-06",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 6,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33985/r7rinji2kaigiroku.pdf#page=6",
+        "quote": ""
+      }
+    }
+  ],
+  "points": [
+    {
+      "id": "ev-0030",
+      "date": "2017-08-09",
+      "action": "予算計上",
+      "label": "商工会の調査に補助",
+      "planned": false,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "平成29年 臨時第3回",
+        "sessionKey": "h29-2017-08-rinji-3",
+        "speechIndex": 35,
+        "date": "2017-08-09",
+        "speaker": "田中透嗣",
+        "role": "副町長",
+        "page": 10,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11522/H29rinji3gijiroku.pdf#page=10",
+        "quote": "商工会が実施する駅前再整備調査に対し国の補助事業が採択されたことから"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0051",
+      "date": "2019-09-18",
+      "action": "着工",
+      "label": "複合施設「着手まで複数年」",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体"
+      ],
+      "citation": {
+        "meeting": "令和元年 定例第3回",
+        "sessionKey": "r1-2019-09-regular-3",
+        "speechIndex": 214,
+        "date": "2019-09-18",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 54,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15152/R1tei3gijiroku.pdf#page=54",
+        "quote": "複合施設につきましては、その建設着手までには複数年掛かると見込んでおり"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0052",
+      "date": "2019-12-13",
+      "action": "予算計上",
+      "label": "JR用地の購入費を計上",
+      "planned": false,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和元年 定例第4回",
+        "sessionKey": "r1-2019-12-regular-4",
+        "speechIndex": 150,
+        "date": "2019-12-13",
+        "speaker": "金田將",
+        "role": "副町長",
+        "page": 28,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15362/R1tei4gijiroku.pdf#page=28",
+        "quote": "駅前周辺再整備に伴いＪＲ北海道の土地を購入する必要があることから"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0075",
+      "date": "2021-12-15",
+      "action": "着工",
+      "label": "「令和5年度以降に着工」",
+      "planned": true,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和3年 定例第4回",
+        "sessionKey": "r3-2021-12-regular-4",
+        "speechIndex": 147,
+        "date": "2021-12-15",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 37,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei4gijiroku.pdf#page=37",
+        "quote": "令和５年度以降において、駅前周辺再整備等、事業実施の環境が整ったものの着工を予定しております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0086",
+      "date": "2022-03-16",
+      "action": "計画",
+      "label": "概算 全体32億円程度",
+      "planned": false,
+      "change": false,
+      "whole": true,
+      "direct": "概算32億円",
+      "objects": [
+        "とくとく本体",
+        "温浴宿泊施設",
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和4年 予算特別委員会",
+        "sessionKey": "r4-2022-03-yosan-tokubetsu",
+        "speechIndex": 141,
+        "date": "2022-03-16",
+        "speaker": "小林健利",
+        "role": "地域戦略室長補佐",
+        "page": 32,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+        "quote": "全体で32億円程度を見込んでおります"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0088",
+      "date": "2022-12-20",
+      "action": "着工",
+      "label": "「本格的に着工」の方針",
+      "planned": true,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和4年 定例第4回",
+        "sessionKey": "r4-2022-12-regular-4",
+        "speechIndex": 111,
+        "date": "2022-12-20",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 30,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/26959/R4tei4gijiroku.pdf#page=30",
+        "quote": "役場庁舎建設、中継施設建設、駅前周辺再整備事業などが本格的に着工することから"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0089",
+      "date": "2023-03-02",
+      "action": "着工",
+      "label": "駅前広場の工事に着手へ",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体",
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和5年 定例第1回",
+        "sessionKey": "r5-2023-03-regular-1",
+        "speechIndex": 11,
+        "date": "2023-03-02",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 17,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/27816/R5tei1gijiroku.pdf#page=17",
+        "quote": "バス等のロータリー部分である駅前広場の工事に着手するとともに、複合施設の実施設計を進めてまいります"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0092",
+      "date": "2023-06-02",
+      "action": "契約",
+      "label": "駅前広場の工事契約",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "契約",
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和5年 定例第2回",
+        "sessionKey": "r5-2023-06-regular-2",
+        "speechIndex": 46,
+        "date": "2023-06-02",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 16,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/28256/R5tei2gijiroku.pdf#page=16",
+        "quote": "契約の目的でありますが、街路事業工事（駅前広場再整備）でございます"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0094",
+      "date": "2023-12-05",
+      "action": "増額",
+      "label": "同 契約を667万7,000円増額",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "citation": {
+        "meeting": "令和5年 定例第4回",
+        "sessionKey": "r5-2023-12-regular-4",
+        "speechIndex": 13,
+        "date": "2023-12-05",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/30041/R5tei4gijiroku.pdf#page=12",
+        "quote": "変更前、１億780万円。変更後、１億1,447万7,000円となり"
+      },
+      "reason": {
+        "text": "地中電線管が想定より浅い位置で確認されたことにより",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和5年 定例第4回",
+          "sessionKey": "r5-2023-12-regular-4",
+          "speechIndex": 13,
+          "date": "2023-12-05",
+          "speaker": "東川恭一",
+          "role": "総務課長",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/30041/R5tei4gijiroku.pdf#page=12",
+          "quote": "地中電線管が想定より浅い位置で確認されたことにより"
+        }
+      }
+    },
+    {
+      "id": "ev-0098",
+      "date": "2024-06-04",
+      "action": "契約",
+      "label": "複合施設の工事契約",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "契約",
+      "objects": [
+        "とくとく本体"
+      ],
+      "citation": {
+        "meeting": "令和6年 定例第2回",
+        "sessionKey": "r6-2024-06-regular-2",
+        "speechIndex": 33,
+        "date": "2024-06-04",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 16,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/31067/R6tei2gijiroku.pdf#page=16",
+        "quote": "駅前周辺再整備複合施設建設工事、建築主体でございます"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0104",
+      "date": "2024-12-17",
+      "action": "着工",
+      "label": "温浴宿泊施設に着手へ",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "新年度から温浴宿泊施設の建設工事に着手をし、令和８年度中に完成をした後"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0105",
+      "date": "2024-12-17",
+      "action": "計画",
+      "label": "金融機関部分の増築を計画",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体",
+        "金融機関"
+      ],
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "令和９年度に複合施設金融機関部分の増築と外構工事を計画しております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0106",
+      "date": "2024-12-17",
+      "action": "増額",
+      "label": "全体事業費 約7億円増",
+      "planned": false,
+      "change": true,
+      "whole": true,
+      "direct": "約7億円増",
+      "objects": [
+        "駅前広場",
+        "温浴宿泊施設",
+        "町営浴場",
+        "金融機関"
+      ],
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+      },
+      "reason": {
+        "text": "物価高騰の影響を受け",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "speechIndex": 134,
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "物価高騰の影響を受け"
+        }
+      }
+    },
+    {
+      "id": "ev-0115",
+      "date": "2025-06-02",
+      "action": "開所",
+      "label": "「とくとく」6/15開所",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "開所",
+      "objects": [
+        "とくとく本体"
+      ],
+      "citation": {
+        "meeting": "令和7年 定例第2回",
+        "sessionKey": "r7-2025-06-regular-2",
+        "speechIndex": 17,
+        "date": "2025-06-02",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=13",
+        "quote": "６月15日オープンをいたします地域交流センター「とくとく」の中に"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0116",
+      "date": "2025-06-20",
+      "action": "契約",
+      "label": "温浴宿泊施設の工事契約",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "meeting": "令和7年 定例第2回",
+        "sessionKey": "r7-2025-06-regular-2",
+        "speechIndex": 249,
+        "date": "2025-06-20",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 60,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=60",
+        "quote": "駅前周辺再整備温浴宿泊施設建設工事、建築主体でございます"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0122",
+      "date": "2026-03-16",
+      "action": "開所",
+      "label": "12月開業の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "meeting": "令和8年 予算特別委員会",
+        "sessionKey": "r8-2026-03-yosan-tokubetsu",
+        "speechIndex": 39,
+        "date": "2026-03-16",
+        "speaker": "加賀谷敬",
+        "role": "地域戦略室長補佐",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=12",
+        "quote": "今のところ完成予定が９月で、12月の開業を予定しております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0130",
+      "date": "2026-06-03",
+      "action": "延期",
+      "label": "開業は来年4月以降に",
+      "planned": true,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設",
+        "町営浴場"
+      ],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "開業は来年４月以降にずれ込む見込みであります"
+      },
+      "reason": {
+        "text": "中東情勢悪化の影響を受けまして、駅前温浴宿泊施設の建設が大幅に遅れております",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "speechIndex": 9,
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "中東情勢悪化の影響を受けまして、駅前温浴宿泊施設の建設が大幅に遅れております"
+        }
+      }
+    },
+    {
+      "id": "ev-0131",
+      "date": "2026-06-03",
+      "action": "白紙",
+      "label": "金融機関の増設 いったん白紙",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": "白紙",
+      "objects": [
+        "とくとく本体",
+        "金融機関"
+      ],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "いったん白紙とすることでご了承いただいているところであります"
+      },
+      "reason": {
+        "text": "コスト増、町民の利便性などを再度考慮し",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "speechIndex": 9,
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "コスト増、町民の利便性などを再度考慮し"
+        }
+      }
+    },
+    {
+      "id": "ev-0132",
+      "date": "2026-06-03",
+      "action": "延期",
+      "label": "町営浴場の営業を延長",
+      "planned": true,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "町営浴場"
+      ],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=12",
+        "quote": "既存の町営浴場の営業を延長し、切れ目のないように"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0133",
+      "date": "2026-06-19",
+      "action": "増額",
+      "label": "工事費を増額（補正予算）",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 223,
+        "date": "2026-06-19",
+        "speaker": "畑中栄和",
+        "role": "副町長",
+        "page": 65,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=65",
+        "quote": "インフレスライドを適用することから、駅前周辺再整備温浴宿泊施設建設工事費を増額しております"
+      },
+      "reason": {
+        "text": "中東情勢の影響を受け、資材単価および労務単価の上昇によりインフレスライドを適用",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "speechIndex": 223,
+          "date": "2026-06-19",
+          "speaker": "畑中栄和",
+          "role": "副町長",
+          "page": 65,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=65",
+          "quote": "中東情勢の影響を受け、資材単価および労務単価の上昇によりインフレスライドを適用"
+        }
+      }
+    },
+    {
+      "id": "ev-0135",
+      "date": "2026-07-06",
+      "action": "増額",
+      "label": "契約を1億2,663万9,150円増額",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "citation": {
+        "meeting": "令和8年 臨時第3回",
+        "sessionKey": "r8-2026-07-rinji-03",
+        "speechIndex": 9,
+        "date": "2026-07-06",
+        "speaker": "福原浩之",
+        "role": "総務課長",
+        "page": 7,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf#page=7",
+        "quote": "変更前、10億4,390万円、変更後、11億7,053万9,150円となり"
+      },
+      "reason": null
+    }
+  ],
+  "cost": [
+    {
+      "label": "事業全体",
+      "base": 32,
+      "baseLabel": "約32億円",
+      "plus": 7,
+      "plusLabel": "約7億円増",
+      "citations": [
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "speechIndex": 141,
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "全体で32億円程度を見込んでおります"
+        },
+        {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "speechIndex": 134,
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+        }
+      ]
+    },
+    {
+      "label": "温浴宿泊施設（建築主体の契約）",
+      "base": 10.439,
+      "baseLabel": "10億4,390万円",
+      "plus": 1.2663915,
+      "plusLabel": "1億2,663万9,150円増",
+      "citations": [
+        {
+          "meeting": "令和8年 臨時第3回",
+          "sessionKey": "r8-2026-07-rinji-03",
+          "speechIndex": 9,
+          "date": "2026-07-06",
+          "speaker": "福原浩之",
+          "role": "総務課長",
+          "page": 7,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf#page=7",
+          "quote": "変更前、10億4,390万円、変更後、11億7,053万9,150円となり"
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "再整備の範囲",
+      "question": {
+        "meeting": "平成25年 定例第1回",
+        "sessionKey": "h25-2013-03-regular-1",
+        "speechIndex": 192,
+        "date": "2013-03-13",
+        "speaker": "長野章",
+        "role": "議員",
+        "page": 57,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=57",
+        "quote": "構想だけでももう少し広げた考えを持っていただけないかお伺いしたいと思います"
+      },
+      "answer": {
+        "meeting": "平成25年 定例第1回",
+        "sessionKey": "h25-2013-03-regular-1",
+        "speechIndex": 194,
+        "date": "2013-03-13",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 58,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=58",
+        "quote": "まずは駅前広場の町有地の範囲内での構想を考えていこうというものであります"
+      }
+    },
+    {
+      "topic": "ロータリーの通行",
+      "question": {
+        "meeting": "令和4年 定例第1回",
+        "sessionKey": "r4-2022-03-regular-1",
+        "speechIndex": 182,
+        "date": "2022-03-11",
+        "speaker": "森本洋子",
+        "role": "議員",
+        "page": 63,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+        "quote": "ロータリーでの逆走車防止の解決になるのかが疑問であり"
+      },
+      "answer": {
+        "meeting": "令和4年 定例第1回",
+        "sessionKey": "r4-2022-03-regular-1",
+        "speechIndex": 184,
+        "date": "2022-03-11",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 63,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+        "quote": "ご質問にあるロータリー全体を交互通行にという要望には応えることができなかったものであります"
+      }
+    },
+    {
+      "topic": "ホテルを町が建てる意義",
+      "question": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 132,
+        "date": "2024-12-17",
+        "speaker": "湯浅真希",
+        "role": "議員",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "公共施設としてビジネスホテルを建設する意義をあらためてお伺いいたします"
+      },
+      "answer": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "ビジネスホテルという選択肢が増えることで、人を呼び込み、新たな消費を創出し"
+      }
+    },
+    {
+      "topic": "指定管理者の決算の公開",
+      "question": {
+        "meeting": "令和8年 予算特別委員会",
+        "sessionKey": "r8-2026-03-yosan-tokubetsu",
+        "speechIndex": 483,
+        "date": "2026-03-17",
+        "speaker": "櫻田郷史",
+        "role": "委員",
+        "page": 79,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=79",
+        "quote": "必ず決算書や報告書というのは、いつでも閲覧できるような状態にしておかなければならない"
+      },
+      "answer": {
+        "meeting": "令和8年 予算特別委員会",
+        "sessionKey": "r8-2026-03-yosan-tokubetsu",
+        "speechIndex": 485,
+        "date": "2026-03-17",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 79,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=79",
+        "quote": "その運営には透明性と経営責任というものが求められるのではないのかなというふうに、私は考えております"
+      }
+    }
+  ]
+}

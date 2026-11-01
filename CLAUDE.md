@@ -173,6 +173,8 @@ npm run kaigiroku:render -- ekimae     # 出典を解決して ekimae.md / ekima
 npm run kaigiroku:verify -- ekimae     # 出典・引用が会議録に実在するかを検査
 npm run kaigiroku:events -- ekimae     # 生成結果と発言 -> events.json（docs/trace-events-schema.md。API なし）
 npm run kaigiroku:verify-events -- ekimae  # layer・actor・引用を出典の発言者に照らして検査
+npm run kaigiroku:view -- ekimae       # events -> view.json（/process/traces/ekimae の図のデータ）
+npm run kaigiroku:verify-view -- ekimae    # 図のすべての出典を会議録に照らして検査
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)

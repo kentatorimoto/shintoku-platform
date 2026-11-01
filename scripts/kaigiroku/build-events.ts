@@ -43,7 +43,7 @@ const CAUSE_MARKERS = [
   /(?:した|いた|なった|あった|された|れた|ない|ある|いる|できる)ため/,
   /(?:おります|あります|ございます|ました|ません|ない|ある)ので、/,
 ]
-const GUESS = /思われ|と思い|と思って|と考え|見込み|おそらく|かもしれ|のではないか|だろう|ようです|想定|予想|恐れ|懸念/
+const GUESS = /思われ|と思い|と思って|と考え|見込み|おそらく|かもしれ|のではないか|だろう|ようです|想定(?!より)|予想|恐れ|懸念/
 /** 議員が、町や文書の説明を引いて述べている文の終わり方 */
 const QUOTING = /(ということでありました|ということでした|とのことでした|と書かれており?ま?し?た?|というふうに書かれておりました)。?$/
 const HEARSAY = /伺って|と聞いて|とのこと/
@@ -81,7 +81,6 @@ function causesOf(sentence: string, statedBy: string, isMember: boolean): EventC
   return []
 }
 /** 増額や延期の理由は、議案の説明で直前の文に述べられることがある。結果の語が合う文だけ拾う */
-const NEEDS_REASON = new Set(["増額", "減額", "延期", "白紙", "契約変更"])
 const EFFECT_WORDS = /変更|増額|減額|遅れ|延期|ずれ込|上昇/
 const LOOK_BACK_SENTENCES = 3
 
@@ -112,13 +111,19 @@ function amountsOf(sentence: string): TraceEvent["amounts"] {
   return out
 }
 
-function layerOf(role: string, sentence: string, hasCause: boolean, hasAmount: boolean): Layer {
+/** 行為そのものが確かなもの。理由が添えられていても fact で、理由は causes に持つ */
+const HARD_ACTIONS = new Set(["白紙", "延期", "増額", "減額", "契約変更", "契約", "開所", "閉鎖", "着工", "完成", "条例制定", "指定", "用地取得", "予算計上"])
+
+function layerOf(role: string, sentence: string, action: string | null, hasAmount: boolean): Layer {
   if (MEMBER_ROLE.test(role)) return "debate"
   if (CHAIR_ROLE.test(role)) return "fact"
-  if (hasCause || REASONING.test(sentence)) return "interpretation"
-  return hasAmount || FACTUAL.test(sentence) ? "fact" : "interpretation"
+  if (hasAmount || (action !== null && HARD_ACTIONS.has(action))) return "fact"
+  if (REASONING.test(sentence)) return "interpretation"
+  return FACTUAL.test(sentence) ? "fact" : "interpretation"
 }
 
+/** 変更の行為。「に伴い」を理由と読むのと、直前の文まで理由を探すのは、これだけ */
+const NEEDS_REASON = new Set(["増額", "減額", "延期", "白紙", "契約変更"])
 const NOT_ACTION = /早期着手|早期着工|着手すべき/
 
 /** 引用そのものの語を優先する。一文に複数の行為があるとき、選ばれた発言の焦点に合わせるため */
@@ -196,14 +201,24 @@ function main() {
     const s = speeches[index]
     const sentence = sentenceOf(s.text, ref.quote) ?? ref.quote
     const statedBy = `${s.speaker} ${s.role}`
+    const rawAction = actionOf(squash(ref.quote), sentence, "debate").action
+    // 「〜の開設に伴い、規定に基づき」のような定型文を因果にしない。「に伴い」は変更の行為に限る
     let causes = causesOf(sentence, statedBy, MEMBER_ROLE.test(s.role))
+      .filter(c => !c.marker.startsWith("に伴い") || (rawAction !== null && NEEDS_REASON.has(rawAction)))
     const amounts = amountsOf(sentence)
-    const layer = layerOf(s.role, sentence, causes.length > 0, amounts.length > 0)
+    const layer = layerOf(s.role, sentence, rawAction, amounts.length > 0)
     const { action, phrase } = actionOf(squash(ref.quote), sentence, layer)
     if (causes.length === 0 && !MEMBER_ROLE.test(s.role) && action && NEEDS_REASON.has(action)) {
       causes = causesBefore(s.text, sentence, statedBy)
     }
-    const textObjects = OBJECTS.filter(o => OBJECT_WORDS[o].test(sentence))
+    // 引用の中の語を優先する。「駅前周辺再整備」は事業全体の呼び名なので、施設名があれば駅前広場には載せない
+    const objectsIn = (text: string) => {
+      const found = OBJECTS.filter(o => OBJECT_WORDS[o].test(text))
+      const specific = found.filter(o => o !== "駅前広場")
+      return specific.length > 0 && !/駅前広場|ロータリー/.test(text) ? specific : found
+    }
+    const quoteObjects = objectsIn(squash(ref.quote))
+    const textObjects = quoteObjects.length > 0 ? quoteObjects : objectsIn(sentence)
     const parentObjects = [...new Set(branches.flatMap(b => BRANCH_OBJECT[b] ?? []))]
     const objects = textObjects.length > 0 ? textObjects : parentObjects
     const page = pageOf(e.sessionKey, ref.quote, s.page)
