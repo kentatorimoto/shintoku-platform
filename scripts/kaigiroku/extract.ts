@@ -71,7 +71,10 @@ export function parseSpeechLine(line: string): { speaker: string; role: string; 
   if (NOT_NAME.test(speaker)) return null
   const end = ROLE_END.exec(body.slice(head.index))
   if (!end) return null
-  return { speaker, role: end[0], text: body.slice(head.index + end[0].length).trim() }
+  const text = body.slice(head.index + end[0].length).trim()
+  // 「◎追加日程議長の常任委員辞任について」のような見出しを発言と読まない
+  if (text.startsWith("の")) return null
+  return { speaker, role: end[0], text }
 }
 
 // ── 分割 ────────────────────────────────────────────────────────────────────
