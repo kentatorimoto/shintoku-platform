@@ -73,6 +73,7 @@ shintoku-platform/
 │       ├── session.md            #   単一パート（part_type: qna）
 │       ├── cards.yaml            #   要点カード（MDの派生物。cards:generate で生成）
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
+│   kaigiroku/{sessionKey}/       # 町の公式会議録の抽出テキスト（Layer 0。build:data の対象外・public に出さない）
 ├── docs/
 │   ├── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
 │   ├── auto-ingest.md            # ★ 自動取り込みの対応表と運用
@@ -162,6 +163,10 @@ npm run cards:generate -- <sessionId>  # レビュー済みMD -> cards.yaml（�
 npm run watch:council -- [--dry-run]   # RSS監視 -> GitHub Issue
 npm run watch:council -- --video <url|videoId>   # 取りこぼしの拾い直し（既知でもIssueを立てる）
 npm run auto-ingest -- [--dry-run] [--issue 17]  # Issue -> 字幕 -> MD -> PR（Actions上で自動実行）
+
+# 公式会議録（docs/claude-code-kaigiroku-structure.md。PDFはリポジトリに置かない）
+npm run kaigiroku:index                # 町のページ -> data/kaigiroku/index.json
+npm run kaigiroku:extract -- [--all]   # PDF -> content/kaigiroku/{key}/（既定は令和分）
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)

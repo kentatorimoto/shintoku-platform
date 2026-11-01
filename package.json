@@ -24,6 +24,8 @@
     "scrape:announcements": "npx tsx scripts/scrape-announcements.ts",
     "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts",
     "index:newsletters": "npx tsx scripts/index-newsletters.ts",
+    "kaigiroku:index": "tsx scripts/kaigiroku/fetch-index.ts",
+    "kaigiroku:extract": "tsx scripts/kaigiroku/extract.ts",
     "scrape:giketsu": "npx tsx scripts/scrape-giketsu.ts",
     "slides:generate": "node scripts/convertSlides.mjs",
     "build:search-index": "tsx scripts/build-search-index.ts",

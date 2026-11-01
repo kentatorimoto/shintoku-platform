@@ -1,0 +1,522 @@
+[
+  {
+    "sessionKey": "r8-2026-01-20-basic-plan",
+    "title": "新得町基本構想審査特別委員会(R7.12.19～R8.1.20)",
+    "start": "2025-12-19",
+    "end": "2026-01-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/35171/kihonkousoukaigiroku.pdf",
+    "existingSession": "r8-2026-01-20-basic-plan"
+  },
+  {
+    "sessionKey": "r8-2026-01-27-rinji-01",
+    "title": "臨時第1回(R8.1.27)",
+    "start": "2026-01-27",
+    "end": "2026-01-27",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/35170/r8rinji1kaigiroku.pdf",
+    "existingSession": "r8-2026-01-27-rinji-01"
+  },
+  {
+    "sessionKey": "r8-2026-03-regular-1",
+    "title": "定例第1回(R8.3.2～R8.3.18)",
+    "start": "2026-03-02",
+    "end": "2026-03-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/36077/r8tei1kaigiroku.pdf",
+    "existingSession": "r8-2026-03-regular-1"
+  },
+  {
+    "sessionKey": "r8-2026-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R8.3.2～R8.3.17)",
+    "start": "2026-03-02",
+    "end": "2026-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf",
+    "existingSession": "r8-2026-03-yosan-tokubetsu"
+  },
+  {
+    "sessionKey": "r8-2026-04-rinji-02",
+    "title": "臨時第2回(R8.4.7)",
+    "start": "2026-04-07",
+    "end": "2026-04-07",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/36286/r8rinji2.pdf",
+    "existingSession": "r8-2026-04-rinji-02"
+  },
+  {
+    "sessionKey": "r8-2026-06-regular-2",
+    "title": "定例第2回(R8.6.3～R8.6.19)",
+    "start": "2026-06-03",
+    "end": "2026-06-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf",
+    "existingSession": "r8-2026-06-regular-2"
+  },
+  {
+    "sessionKey": "r8-2026-07-rinji-03",
+    "title": "臨時第3回(R8.7.6)",
+    "start": "2026-07-06",
+    "end": "2026-07-06",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf",
+    "existingSession": "r8-2026-07-rinji-03"
+  },
+  {
+    "sessionKey": "r7-2025-02-rinji-1",
+    "title": "臨時第1回(R7.2.3)",
+    "start": "2025-02-03",
+    "end": "2025-02-03",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/32394/R7rin1gijiroku.pdf",
+    "existingSession": "r7-2025-02-rinji-1"
+  },
+  {
+    "sessionKey": "r7-2025-03-regular-1",
+    "title": "定例第1回(R7.3.3～R7.3.19)",
+    "start": "2025-03-03",
+    "end": "2025-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/33235/r7tei1kaigiroku.pdf",
+    "existingSession": "r7-2025-03-regular-1"
+  },
+  {
+    "sessionKey": "r7-2025-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R7.3.3～R7.3.18)",
+    "start": "2025-03-03",
+    "end": "2025-03-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf",
+    "existingSession": "r7-2025-03-yosan-tokubetsu"
+  },
+  {
+    "sessionKey": "r7-2025-06-regular-2",
+    "title": "定例第2回(R7.6.2～R7.6.20)",
+    "start": "2025-06-02",
+    "end": "2025-06-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf",
+    "existingSession": "r7-2025-06-regular-2"
+  },
+  {
+    "sessionKey": "r7-2025-08-rinji-2",
+    "title": "臨時第2回(R7.8.6)",
+    "start": "2025-08-06",
+    "end": "2025-08-06",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/33985/r7rinji2kaigiroku.pdf",
+    "existingSession": "r7-2025-08-rinji-2"
+  },
+  {
+    "sessionKey": "r7-2025-09-regular-3",
+    "title": "定例第3回（R7.9.1～R7.9.19）",
+    "start": "2025-09-01",
+    "end": "2025-09-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/34363/r7tei3kaigiroku.pdf",
+    "existingSession": "r7-2025-09-regular-3"
+  },
+  {
+    "sessionKey": "r7-2025-09-kessan-tokubetsu",
+    "title": "決算特別委員会（R7.9.1～R7.9.12）",
+    "start": "2025-09-01",
+    "end": "2025-09-12",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/34538/R7kessantokubetu.pdf",
+    "existingSession": "r7-2025-09-kessan-tokubetsu"
+  },
+  {
+    "sessionKey": "r7-2025-12-regular-4",
+    "title": "定例第4回会議録（R7.12.2～R7.12.19）",
+    "start": "2025-12-02",
+    "end": "2025-12-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3199/35084/tei4kaigiroku.pdf",
+    "existingSession": "r7-2025-12-regular-4"
+  },
+  {
+    "sessionKey": "r6-2024-02-rinji-1",
+    "title": "臨時第1回(R6.2.13)",
+    "start": "2024-02-13",
+    "end": "2024-02-13",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/30042/R6rin1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r6-2024-03-regular-1",
+    "title": "定例第1回(R6.3.4~3.21)",
+    "start": "2024-03-04",
+    "end": "2024-03-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/30497/R6tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r6-2024-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R6.3.4~3.19)",
+    "start": "2024-03-04",
+    "end": "2024-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/30752/R6yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r6-2024-06-regular-2",
+    "title": "定例第2回(R6.6.4~6.21)",
+    "start": "2024-06-04",
+    "end": "2024-06-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/31067/R6tei2gijiroku.pdf",
+    "existingSession": "r6-2024-06-regular-2"
+  },
+  {
+    "sessionKey": "r6-2024-09-regular-3",
+    "title": "定例第3回(R6.9.2~9.20)",
+    "start": "2024-09-02",
+    "end": "2024-09-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/31606/R6tei3gijiroku.pdf",
+    "existingSession": "r6-2024-09-regular-3"
+  },
+  {
+    "sessionKey": "r6-2024-09-kessan-tokubetsu",
+    "title": "決算特別委員会(R6.9.2～9.13)",
+    "start": "2024-09-02",
+    "end": "2024-09-13",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/31748/R6kessantokubetu.pdf",
+    "existingSession": "r6-2024-09-kessan-tokubetsu"
+  },
+  {
+    "sessionKey": "r6-2024-12-regular-4",
+    "title": "定例第4回(R6.12.2~12.20)",
+    "start": "2024-12-02",
+    "end": "2024-12-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf",
+    "existingSession": "r6-2024-12-regular-4"
+  },
+  {
+    "sessionKey": "r5-2023-03-regular-1",
+    "title": "定例第1回(R5.3.2~3.23)",
+    "start": "2023-03-02",
+    "end": "2023-03-23",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/27816/R5tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r5-2023-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R5.3.2~3.22)",
+    "start": "2023-03-02",
+    "end": "2023-03-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/28040/R5yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r5-2023-05-rinji-1",
+    "title": "臨時第1回(R5.5.9)",
+    "start": "2023-05-09",
+    "end": "2023-05-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/27907/R5rin1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r5-2023-06-regular-2",
+    "title": "定例第2回(R5.6.2~6.22)",
+    "start": "2023-06-02",
+    "end": "2023-06-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/28256/R5tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r5-2023-09-regular-3",
+    "title": "定例第3回(R5.9.1~9.22)",
+    "start": "2023-09-01",
+    "end": "2023-09-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/28773/R5tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r5-2023-09-kessan-tokubetsu",
+    "title": "決算特別委員会(R5.9.1～9.13)",
+    "start": "2023-09-01",
+    "end": "2023-09-13",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/28836/R5kessantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r5-2023-12-regular-4",
+    "title": "定例第4回(R5.12.5~12.22)",
+    "start": "2023-12-05",
+    "end": "2023-12-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2828/30041/R5tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-02-rinji-1",
+    "title": "臨時第1回(R4.2.1)",
+    "start": "2022-02-01",
+    "end": "2022-02-01",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/23072/R4rin1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-03-regular-1",
+    "title": "定例第1回(R4.3.2~3.18)",
+    "start": "2022-03-02",
+    "end": "2022-03-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R4.3.2~3.17)",
+    "start": "2022-03-02",
+    "end": "2022-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-04-rinji-2",
+    "title": "臨時第2回(R4.4.28)",
+    "start": "2022-04-28",
+    "end": "2022-04-28",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/25477/R4rin2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-06-regular-2",
+    "title": "定例第2回(R4.6.7~6.24)",
+    "start": "2022-06-07",
+    "end": "2022-06-24",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/25752/R4tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-09-regular-3",
+    "title": "定例第3回(R4.9.2~9.22)",
+    "start": "2022-09-02",
+    "end": "2022-09-22",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/26547/R4tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-09-kessan-tokubetsu",
+    "title": "決算特別委員会(R4.9.2~9.13)",
+    "start": "2022-09-02",
+    "end": "2022-09-13",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/26627/R4kessantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r4-2022-12-regular-4",
+    "title": "定例第4回(R4.12.6~12.23)",
+    "start": "2022-12-06",
+    "end": "2022-12-23",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2524/26959/R4tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-03-regular-1",
+    "title": "定例第1回(R3.3.4~3.18)",
+    "start": "2021-03-02",
+    "end": "2021-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R3.3.4~3.17)",
+    "start": "2021-03-02",
+    "end": "2021-03-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-05-rinji-1",
+    "title": "臨時第1回(R3.5.18)",
+    "start": "2021-05-18",
+    "end": "2021-05-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3rin1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-06-regular-2",
+    "title": "定例第2回(R3.6.4～6.18)",
+    "start": "2021-06-04",
+    "end": "2021-06-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-08-rinji-2",
+    "title": "臨時第2回(R3.8.6)",
+    "start": "2021-08-06",
+    "end": "2021-08-06",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3rin2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-09-regular-3",
+    "title": "定例第3回(R3.9.3~9.17)",
+    "start": "2021-09-03",
+    "end": "2021-09-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-09-kessan-tokubetsu",
+    "title": "決算特別委員会(R3.9.3~9.13)",
+    "start": "2021-09-03",
+    "end": "2021-09-13",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3kessantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-10-rinji-3",
+    "title": "臨時第3回(R3.10.8)",
+    "start": "2021-10-08",
+    "end": "2021-10-08",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3rin3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r3-2021-12-regular-4",
+    "title": "定例第4回(R3.12.1~12.17)",
+    "start": "2021-12-01",
+    "end": "2021-12-17",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-03-regular-1",
+    "title": "定例第1回(R2.3.2~3.19)",
+    "start": "2020-03-02",
+    "end": "2020-03-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-03-yosan-tokubetsu",
+    "title": "予算特別委員会(R2.3.2~3.18)",
+    "start": "2020-03-02",
+    "end": "2020-03-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2yosantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-04-rinji-1",
+    "title": "臨時第1回(R2.4.7)",
+    "start": "2020-04-07",
+    "end": "2020-04-07",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2rin1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-05-rinji-2",
+    "title": "臨時第2回(R2.5.8)",
+    "start": "2020-05-08",
+    "end": "2020-05-08",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2rin2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-05-rinji-3",
+    "title": "臨時第3回(R2.5.21)",
+    "start": "2020-05-21",
+    "end": "2020-05-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2rin3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-06-regular-2",
+    "title": "定例第2回(R2.6.8~6.19)",
+    "start": "2020-06-08",
+    "end": "2020-06-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-07-rinji-4",
+    "title": "臨時第4回(R2.7.21)",
+    "start": "2020-07-21",
+    "end": "2020-07-21",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2rin4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-09-regular-3",
+    "title": "定例第3回(R2.9.2~9.18)",
+    "start": "2020-09-02",
+    "end": "2020-09-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-09-kessan-tokubetsu",
+    "title": "決算特別委員会(R2.9.2~9.14)",
+    "start": "2020-09-02",
+    "end": "2020-09-14",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2kessantokubetu.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-10-rinji-5",
+    "title": "臨時第5回(R2.10.9)",
+    "start": "2020-10-09",
+    "end": "2020-10-09",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2rin5gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-11-rinji-6",
+    "title": "臨時第6回(R2.11.26)",
+    "start": "2020-11-26",
+    "end": "2020-11-26",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2rin6gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r2-2020-12-regular-4",
+    "title": "定例第4回(R2.12.4~12.18)",
+    "start": "2020-12-04",
+    "end": "2020-12-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-05-rinji-1",
+    "title": "臨時第1回(R1.5.8)",
+    "start": "2019-05-08",
+    "end": "2019-05-08",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/14522/R1rin1gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-06-regular-2",
+    "title": "定例第2回(R1.6.5~6.19)",
+    "start": "2019-06-05",
+    "end": "2019-06-19",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/14523/R1tei2gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-09-regular-3",
+    "title": "定例第3回(R1.9.3~9.20)",
+    "start": "2019-09-03",
+    "end": "2019-09-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/15152/R1tei3gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-09-kessan-tokubetsu",
+    "title": "決算特別委員会(R1.9.3~9.12)",
+    "start": "2019-09-03",
+    "end": "2019-09-12",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/15153/R1kessanngijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-11-kodomo-8",
+    "title": "第8回子ども議会(R1.11.18)",
+    "start": "2019-11-18",
+    "end": "2019-11-18",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/15159/R1kodomogijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-12-regular-4",
+    "title": "定例第4回(R1.12.13~12.20)",
+    "start": "2019-12-13",
+    "end": "2019-12-20",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/15362/R1tei4gijiroku.pdf",
+    "existingSession": null
+  },
+  {
+    "sessionKey": "r1-2019-12-rinji-2",
+    "title": "臨時第2回(R1.12.25)",
+    "start": "2019-12-25",
+    "end": "2019-12-25",
+    "pdfUrl": "https://www.shintoku-town.jp/output/contents/file/release/1591/15363/R1rin2gijiroku.pdf",
+    "existingSession": null
+  }
+]
