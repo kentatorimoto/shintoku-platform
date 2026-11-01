@@ -21,6 +21,10 @@ const X_START = 2010
 const X_END = 2027
 const BOTTOM = TOP + LANE_H * LANES.length
 const MIN_GAP = 15
+const QUIET_BAR_H = 130
+const QUIET_MAX = Math.max(...view.quietYears.map(q => q.count))
+const QUIET_TOTAL = view.quietYears.reduce((n, q) => n + q.count, 0)
+const QUIET_NOTE = `2010〜2016年 年表に載る出来事なし・発言${QUIET_TOTAL}件（棒は年ごとの件数。軸を縮めています）`
 
 const yearOf = (iso: string) => {
   const [y, m, d] = iso.split("-").map(Number)
@@ -77,8 +81,8 @@ export default function DesktopTimeline() {
 
         {years.map(y => (
           <g key={y}>
-            {(y >= X_BREAK || y === X_START) && <line x1={xOf(y)} x2={xOf(y)} y1={TOP} y2={BOTTOM} stroke="var(--color-line)" />}
-            {y < X_END && (y >= X_BREAK || y === X_START) && (
+            {y >= X_BREAK && <line x1={xOf(y)} x2={xOf(y)} y1={TOP} y2={BOTTOM} stroke="var(--color-line)" />}
+            {y < X_END && y >= X_BREAK && (
               <text x={xOf(y)} y={BOTTOM + 16} fontSize={11} fill="var(--color-textMuted)" className="mono">{y}</text>
             )}
           </g>
@@ -90,8 +94,21 @@ export default function DesktopTimeline() {
           </g>
         ))}
         <rect x={xOf(X_START) + 1} y={TOP} width={xOf(X_BREAK) - xOf(X_START) - 2} height={BOTTOM - TOP} fill="var(--color-paper)" />
-        <foreignObject x={xOf(X_START) + 4} y={laneY("温浴宿泊施設") - 26} width={xOf(X_BREAK) - xOf(X_START) - 8} height={100}>
-          <p className="text-[11px] leading-snug text-textMuted">2010〜2016年は年表の条件に当たる出来事が抜粋になし（軸を縮めています）</p>
+        {view.quietYears.map((q) => {
+          const x0 = xOf(q.year) + 1
+          const w = xOf(q.year + 1) - xOf(q.year) - 2
+          const h = (q.count / QUIET_MAX) * QUIET_BAR_H
+          return (
+            <g key={q.year}>
+              <title>{`${q.year}年 年表に載る出来事なし・発言${q.count}件`}</title>
+              <rect x={x0} y={BOTTOM - h} width={w} height={h} fill="var(--color-line)" />
+              <text x={x0 + w / 2} y={BOTTOM - h - 4} fontSize={10.5} textAnchor="middle" fill="var(--color-textMuted)" className="mono">{q.count}</text>
+              <text x={x0 + w / 2} y={BOTTOM + 16} fontSize={10.5} textAnchor="middle" fill="var(--color-textMuted)" className="mono">{String(q.year).slice(2)}</text>
+            </g>
+          )
+        })}
+        <foreignObject x={xOf(X_START) + 2} y={TOP + 4} width={xOf(X_BREAK) - xOf(X_START) - 4} height={90}>
+          <p className="text-[11px] leading-snug text-textMuted">{QUIET_NOTE}</p>
         </foreignObject>
 
         {/* 全体の話は帯を横断する線 */}
@@ -157,7 +174,6 @@ function Legend() {
       <li><span aria-hidden className="inline-block w-2.5 h-2.5 rounded-full bg-accent mr-1.5 text-onAccent" />増額・延期・白紙</li>
       <li className="hidden md:list-item">縦の線は事業全体の話（破線は予定）</li>
       <li className="md:hidden">横の線は事業全体の話</li>
-      <li>「指定管理」は年表の行為に当たる点がなく、下のカードで見られます</li>
     </ul>
   )
 }
@@ -214,9 +230,18 @@ export function MobileTimeline() {
       <a href={hamada.citation.url} target="_blank" rel="noopener noreferrer" className="block text-[12px] font-bold text-textMuted py-2 underline underline-offset-2">
         {hamada.name}
       </a>
-      <p className="text-[12px] leading-relaxed text-textMuted border-l-2 border-line pl-3 mb-3">
-        2010〜2016年：年表の条件に当たる出来事は抜粋になし
-      </p>
+      <figure className="mb-3">
+        <div className="flex items-end gap-1 h-[72px]">
+          {view.quietYears.map(q => (
+            <div key={q.year} className="flex-1 flex flex-col justify-end items-center h-full">
+              <span className="mono text-[10px] text-textMuted">{q.count}</span>
+              <span className="w-full bg-line" style={{ height: `${(q.count / QUIET_MAX) * 48}px` }} />
+              <span className="mono text-[10px] text-textMuted">{q.year}</span>
+            </div>
+          ))}
+        </div>
+        <figcaption className="text-[12px] leading-relaxed text-textMuted mt-1">{QUIET_NOTE.replace("（棒は年ごとの件数。軸を縮めています）", "（棒は年ごとの件数）")}</figcaption>
+      </figure>
 
       {view.points.map((p, i) => {
         const year = p.date.slice(0, 4)

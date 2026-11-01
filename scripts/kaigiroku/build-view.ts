@@ -11,7 +11,7 @@ import type { TraceEvent } from "./event-schema"
 
 const ROOT = process.cwd()
 const squash = (s: string) => s.replace(/\s+/g, "")
-const TIMELINE_ACTIONS = new Set(["構想", "計画", "予算計上", "契約", "着工", "開所", "延期", "白紙", "増額"])
+const TIMELINE_ACTIONS = new Set(["構想", "計画", "予算計上", "契約", "着工", "開所", "延期", "白紙", "増額", "指定"])
 const CHANGE_ACTIONS = new Set(["延期", "白紙", "増額"])
 
 interface SpeechRow { date: string; speaker: string; role: string; page: number; text: string }
@@ -32,6 +32,7 @@ const TIMELINE: Record<string, { label: string; whole?: boolean; planned?: boole
   "新年度から温浴宿泊施設": { label: "温浴宿泊施設に着手へ", planned: true },
   "令和９年度に複合施設金融機関": { label: "金融機関部分の増築を計画", planned: true },
   "現時点で全体事業費は約７億円": { label: "全体事業費 約7億円増", whole: true, direct: "約7億円増" },
+  "令和７年４月１日から令和12年３月31日": { label: "指定管理者の指定（5年間）", direct: "指定" },
   "６月15日オープン": { label: "「とくとく」6/15開所", direct: "開所" },
   "駅前周辺再整備温浴宿泊施設建設工事、建築主体": { label: "温浴宿泊施設の工事契約" },
   "今のところ完成予定が９月": { label: "12月開業の予定", planned: true },
@@ -68,9 +69,6 @@ const CARDS: { topic: string; session: string; q: [number, string]; a: [number, 
   { topic: "ホテルを町が建てる意義", session: "r6-2024-12-regular-4",
     q: [132, "公共施設としてビジネスホテルを建設する意義をあらためてお伺いいたします"],
     a: [134, "ビジネスホテルという選択肢が増えることで、人を呼び込み、新たな消費を創出し"] },
-  { topic: "指定管理者の決算の公開", session: "r8-2026-03-yosan-tokubetsu",
-    q: [483, "必ず決算書や報告書というのは、いつでも閲覧できるような状態にしておかなければならない"],
-    a: [485, "その運営には透明性と経営責任というものが求められるのではないのかなというふうに、私は考えております"] },
 ]
 
 function main() {
@@ -138,6 +136,14 @@ function main() {
     }]
   }).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0))
 
+  // 年表に載る出来事が無い期間の、年ごとの発言件数（抜粋の件数）
+  const excerptRows = JSON.parse(fs.readFileSync(path.join(dir, `${theme}.excerpts.json`), "utf-8")) as { date: string }[]
+  const quietYears = [2010, 2011, 2012, 2013, 2014, 2015, 2016].map(year => ({
+    year, count: excerptRows.filter(e => e.date.startsWith(String(year))).length,
+  }))
+  const pointInQuietYears = points.find(p => p.date < "2017")
+  if (pointInQuietYears) throw new Error(`縮めた期間に点がある: ${pointInQuietYears.date} ${pointInQuietYears.label}`)
+
   const view = {
     title: "駅前の15年",
     subtitle: "2010年の一般質問から2026年まで",
@@ -154,6 +160,7 @@ function main() {
       { name: "浜田正利 町長", until: "2025-06", citation: cite("r7-2025-06-regular-2", speechesOf("r7-2025-06-regular-2").findIndex(s => s.role === "町長"), "") },
       { name: "湯浅真希 町長", from: "2025-08", citation: cite("r7-2025-08-rinji-2", speechesOf("r7-2025-08-rinji-2").findIndex(s => s.role === "町長"), "") },
     ],
+    quietYears,
     points,
     cost: [
       { label: "事業全体", base: 32, baseLabel: "約32億円", plus: 7, plusLabel: "約7億円増",

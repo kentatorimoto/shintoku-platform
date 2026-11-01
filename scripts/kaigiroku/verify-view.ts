@@ -42,6 +42,12 @@ function main() {
   const pointsWithoutUrl = (view.points as { label: string; citation?: Citation }[]).filter(p => !p.citation?.url)
   pointsWithoutUrl.forEach(p => failures.push(`出典の無い点 ${p.label}`))
 
+  const excerpts = JSON.parse(fs.readFileSync(path.join(ROOT, "content", "traces", `${theme}.excerpts.json`), "utf-8")) as { date: string }[]
+  for (const q of view.quietYears as { year: number; count: number }[]) {
+    if (excerpts.filter(e => e.date.slice(0, 4) === String(q.year)).length !== q.count) failures.push(`発言件数が違う ${q.year}`)
+    if ((view.points as { date: string }[]).some(p => p.date.slice(0, 4) === String(q.year))) failures.push(`点がある年 ${q.year}`)
+  }
+
   console.log(`出典 ${citations.length} 件 / 点 ${view.points.length} / 不合格 ${failures.length}`)
   failures.forEach(f => console.log(`  ${f}`))
   if (failures.length > 0) process.exit(1)

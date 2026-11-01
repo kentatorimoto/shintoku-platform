@@ -99,6 +99,36 @@
       }
     }
   ],
+  "quietYears": [
+    {
+      "year": 2010,
+      "count": 11
+    },
+    {
+      "year": 2011,
+      "count": 14
+    },
+    {
+      "year": 2012,
+      "count": 7
+    },
+    {
+      "year": 2013,
+      "count": 18
+    },
+    {
+      "year": 2014,
+      "count": 23
+    },
+    {
+      "year": 2015,
+      "count": 10
+    },
+    {
+      "year": 2016,
+      "count": 25
+    }
+  ],
   "points": [
     {
       "id": "ev-0030",
@@ -459,6 +489,32 @@
           "quote": "物価高騰の影響を受け"
         }
       }
+    },
+    {
+      "id": "ev-0113",
+      "date": "2025-03-17",
+      "action": "指定",
+      "label": "指定管理者の指定（5年間）",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "指定",
+      "objects": [
+        "とくとく本体",
+        "指定管理"
+      ],
+      "citation": {
+        "meeting": "令和7年 予算特別委員会",
+        "sessionKey": "r7-2025-03-yosan-tokubetsu",
+        "speechIndex": 327,
+        "date": "2025-03-17",
+        "speaker": "福原浩之",
+        "role": "地域戦略室長",
+        "page": 57,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=57",
+        "quote": "令和７年４月１日から令和12年３月31日までの５年間としております"
+      },
+      "reason": null
     },
     {
       "id": "ev-0115",
@@ -832,31 +888,6 @@
         "page": 34,
         "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
         "quote": "ビジネスホテルという選択肢が増えることで、人を呼び込み、新たな消費を創出し"
-      }
-    },
-    {
-      "topic": "指定管理者の決算の公開",
-      "question": {
-        "meeting": "令和8年 予算特別委員会",
-        "sessionKey": "r8-2026-03-yosan-tokubetsu",
-        "speechIndex": 483,
-        "date": "2026-03-17",
-        "speaker": "櫻田郷史",
-        "role": "委員",
-        "page": 79,
-        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=79",
-        "quote": "必ず決算書や報告書というのは、いつでも閲覧できるような状態にしておかなければならない"
-      },
-      "answer": {
-        "meeting": "令和8年 予算特別委員会",
-        "sessionKey": "r8-2026-03-yosan-tokubetsu",
-        "speechIndex": 485,
-        "date": "2026-03-17",
-        "speaker": "湯浅真希",
-        "role": "町長",
-        "page": 79,
-        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=79",
-        "quote": "その運営には透明性と経営責任というものが求められるのではないのかなというふうに、私は考えております"
       }
     }
   ]
