@@ -157,7 +157,18 @@ const KOHO_ACT = /起工|安全祈願|地鎮祭|竣工|完成|オープン|開�
 const KOHO_VIEW = /賑わい|にぎわい|交流人口|コンセプト|目的|を目指/
 /** 町の説明でないもの（投稿・編集後記・質問）と、別の話題 */
 const KOHO_NOT_TOWN = /[▼●]|編集後記|ちなみに|モニター|ご意見|質問|どうにか|でしょうか|ですか/
-const KOHO_OTHER = /文化会館|屋台村|そば祭り|植栽|回数券|商品券|出店費用|ジオラマ|観光協会事務所|生活応援|感謝祭|記念祭|場所[：:]|日時|役場庁舎|新庁舎|診療情報|思います|[・…]P\d|火夫の像|駅ピアノ|夏休み/
+const KOHO_OTHER = /文化会館|屋台村|そば祭り|植栽|商品券|出店費用|ジオラマ|観光協会事務所|生活応援|感謝祭|記念祭|場所[：:]|日時|役場庁舎|新庁舎|診療情報|思います|[・…]P\d|火夫の像|駅ピアノ|夏休み/
+/** 回数券の案内は、開業予定の時期が書かれた文だけ使う */
+const KOHO_TICKET_ONLY = /回数券(?!.*開業予定)/
+/** 文の形になっていない予定（スケジュール表など）。語の並びを直接拾う */
+const KOHO_PLAN_PATTERNS: { re: RegExp; action: string; phrase: string }[] = [
+  { re: /令和\d+年度工事着工・令和\d+年度開業/, action: "開所", phrase: "開業" },
+  { re: /令和[０-９\d]+年[０-９\d]+月(?:令和[０-９\d]+年[０-９\d]+月)?新・駅前広場(?:新・駅前広場)?供用（利用）(?:供用（利用）)?開始予定(?:開始予定)?/, action: "開所", phrase: "供用" },
+  { re: /令和[０-９\d]+年[０-９\d]+月(?:令和[０-９\d]+年[０-９\d]+月)?複合施設(?:複合施設)?開業(?:開業)?予定(?:予定)?/, action: "開所", phrase: "開業" },
+  { re: /令和５年５月中旬から令和７年３月頃までの工事期間中/, action: "着工", phrase: "工事" },
+  { re: /複合施設➡︎令和６年(?:複合施設➡︎令和６年)?温浴宿泊施設➡︎令和７年(?:温浴宿泊施設➡︎令和７年)?/, action: "着工", phrase: "令和" },
+  { re: /令和８年度に解体後[^。]*令和９年度に金融機関の営業を開始する予定です/, action: "計画", phrase: "予定" },
+]
 const QUOTE_RADIUS = 45
 const QUOTE_MIN_SENTENCE = 12
 const QUOTE_MAX_SENTENCE = 400
@@ -179,10 +190,30 @@ function kohoEvents(): TraceEvent[] {
   for (const issue of [...issues].sort((a, b) => (a.date < b.date ? -1 : 1))) {
     for (const p of issue.pages) {
       if (!KOHO_SUBJECT.test(p.text)) continue
+      const issueLabel = /令和\S+?[号月]/.exec(issue.title)?.[0] ?? issue.title
+      const body = squash(p.text)
+      for (const plan of KOHO_PLAN_PATTERNS) {
+        const m = plan.re.exec(body)
+        if (!m || seen.has(`${issue.date}#${m[0]}`)) continue
+        seen.add(`${issue.date}#${m[0]}`)
+        const objects = OBJECTS.filter(o => OBJECT_WORDS[o].test(m[0]))
+        out.push({
+          id: "", source_type: "koho", layer: "fact", action: plan.action, action_phrase: m[0].includes(plan.phrase) ? plan.phrase : null, tense: "予定",
+          actor: KOHO_ACTOR, objects, object_source: objects.length > 0 ? "text" : null,
+          date: issue.date, stated_date: kohoStatedDate(m[0], issue.date),
+          amounts: [], causes: [],
+          source: {
+            excerpt_id: null, session_key: null, speech_index: null, issue: `広報しんとく ${issueLabel}`, page: p.page,
+            url: `${issue.url}#page=${p.page}`, agenda: "", quote: m[0], sentence: m[0],
+          },
+          bill: null, result: null, groups: [], derived_from: [{ section: "koho", title: issueLabel }],
+        })
+      }
       for (const raw of p.text.split(/(?<=。)/)) {
         const sentence = squash(raw)
         if (sentence.length < QUOTE_MIN_SENTENCE || sentence.length > QUOTE_MAX_SENTENCE || seen.has(sentence)) continue
-        if (!KOHO_SUBJECT.test(sentence) || KOHO_NOT_TOWN.test(sentence) || KOHO_OTHER.test(sentence)) continue
+        if (!KOHO_SUBJECT.test(sentence) || KOHO_NOT_TOWN.test(sentence) || KOHO_OTHER.test(sentence) || KOHO_TICKET_ONLY.test(sentence)) continue
+        // 開業予定の時期だけが要る文は、その語を引用の中心にする
         const actAt = sentence.search(KOHO_ACT)
         const viewAt = sentence.search(KOHO_VIEW)
         if (actAt < 0 && viewAt < 0) continue

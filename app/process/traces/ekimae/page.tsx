@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import detail from "@/content/traces/ekimae.json"
 import view from "@/content/traces/ekimae.view.json"
-import DesktopTimeline, { MobileTimeline } from "./Timeline"
+import DesktopTimeline, { MobileTimeline, PlanChanges } from "./Timeline"
 
 export const metadata: Metadata = {
   title: "駅前の15年（試作） | Shintoku Atlas",
@@ -111,6 +111,23 @@ export default function EkimaeTracePage() {
         <p className="text-[13px] leading-relaxed text-textMuted mb-5">点を押すと町の会議録PDFの該当ページが開きます。</p>
         <div className="hidden md:block"><DesktopTimeline /></div>
         <div className="md:hidden"><MobileTimeline /></div>
+        <PlanChanges />
+      </section>
+
+      {/* ── 延期の理由 ──────────────────── */}
+      <section className="mb-14">
+        <h2 className="text-2xl font-bold text-textMain mb-5">温浴宿泊施設の開業延期の理由</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          {view.delayReasons.map(r => (
+            <figure key={r.subject} className="bg-ink border border-line rounded-[3px] p-5">
+              <figcaption className="text-[13px] font-bold text-textMuted mb-2">{r.subject}</figcaption>
+              <blockquote className="text-[15px] font-bold leading-snug text-textMain">「{r.citation.quote}」</blockquote>
+              <p className="text-[12px] text-textMuted mt-2">
+                {r.citation.speaker} {r.citation.role} ／ {toDot(r.citation.date)} ／ <PdfLink c={r.citation} />
+              </p>
+            </figure>
+          ))}
+        </div>
       </section>
 
       {/* ── 事業費 ──────────────────────── */}

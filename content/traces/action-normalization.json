@@ -32,8 +32,8 @@
 {"phrase":"契約","action":"契約","observed":3},
 {"phrase":"オープン","action":"開所","observed":13},
 {"phrase":"開所","action":"開所","observed":0},
-{"phrase":"開業","action":"開所","observed":7},
-{"phrase":"供用","action":"開所","observed":4},
+{"phrase":"開業","action":"開所","observed":15},
+{"phrase":"供用","action":"開所","observed":7},
 {"phrase":"開館","action":"開所","observed":1},
 {"phrase":"閉館","action":"閉鎖","observed":1},
 {"phrase":"解体","action":"閉鎖","observed":1},
@@ -73,7 +73,7 @@
 {"phrase":"基本設計","action":"計画","observed":0},
 {"phrase":"スケジュール","action":"計画","observed":0},
 {"phrase":"計画","action":"計画","observed":8},
-{"phrase":"予定","action":"計画","observed":5},
+{"phrase":"予定","action":"計画","observed":6},
 {"phrase":"基本構想","action":"構想","observed":6},
 {"phrase":"構想","action":"構想","observed":7}
 ]

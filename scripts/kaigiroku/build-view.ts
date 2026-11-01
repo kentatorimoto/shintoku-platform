@@ -17,8 +17,12 @@ const CHANGE_ACTIONS = new Set(["延期", "白紙", "増額"])
 interface SpeechRow { date: string; speaker: string; role: string; page: number; text: string }
 interface MapEntry { sessionKey: string; title: string; start: string; pdfUrl: string }
 
+const ONYOKU_PLAN = "温浴宿泊施設の開業"
+const TOKUTOKU_PLAN = "複合施設「とくとく」の開業"
+const HIROBA_PLAN = "駅前広場の供用"
+
 /** key は引用の書き出し。whole は事業全体の話で、帯を横断して描く */
-const TIMELINE: Record<string, { label: string; whole?: boolean; planned?: boolean; direct?: string; lanes?: string[] }> = {
+const TIMELINE: Record<string, { label: string; whole?: boolean; planned?: boolean; direct?: string; lanes?: string[]; plan?: string; target?: string }> = {
   "商工会が実施する駅前再整備調査": { label: "商工会の調査に補助", whole: true },
   "複合施設につきましては、その建設着手": { label: "複合施設「着手まで複数年」", planned: true },
   "駅前周辺再整備に伴いＪＲ北海道": { label: "JR用地の購入費を計上", whole: true },
@@ -35,16 +39,35 @@ const TIMELINE: Record<string, { label: string; whole?: boolean; planned?: boole
   "令和７年４月１日から令和12年３月31日": { label: "指定管理者の指定（5年間）", direct: "指定" },
   "6月6日、駅前複合施設工事の安全祈願": { label: "複合施設の工事安全祈願祭", lanes: ["とくとく本体"] },
   "駅前ロータリーは3月1日より供用開始": { label: "駅前ロータリー 3/1 供用開始", lanes: ["駅前広場"] },
-  "今月の２月地域交流センター「とくとく」は6月15日にオープン": { label: "「とくとく」6/15オープンと告知", planned: true },
   "8月5日、駅前温浴宿泊施設工事の安全祈願": { label: "温浴宿泊施設の工事安全祈願祭" },
-  "令和8年10月に完成を予定": { label: "令和8年10月完成の予定", planned: true },
-  "令和８年12月の開業に向け工事を進めておりましたが": { label: "開業の延期をお知らせ" },
+  // 予定の告知（発行日に置く）
+  "令和6年度工事着工・令和7年度開業": { label: "複合施設 令和7年度開業の予定", lanes: ["とくとく本体"], planned: true, plan: TOKUTOKU_PLAN, target: "令和7年度" },
+  "令和7年度工事着工・令和8年度開業": { label: "温浴宿泊施設 令和8年度開業の予定", lanes: ["温浴宿泊施設"], planned: true, plan: ONYOKU_PLAN, target: "令和8年度" },
+  "令和９年度に金融機関の営業を開始": { label: "金融機関 令和9年度営業開始の予定", lanes: ["金融機関"], planned: true },
+  "新・駅前広場": { label: "駅前広場 令和7年4月供用開始の予定", lanes: ["駅前広場"], planned: true, plan: HIROBA_PLAN, target: "令和7年4月" },
+  "複合施設複合施設開業": { label: "複合施設 令和7年6月開業の予定", lanes: ["とくとく本体"], planned: true, plan: TOKUTOKU_PLAN, target: "令和7年6月" },
+  "令和５年５月中旬から": { label: "駅前広場の工事 令和5年5月からの予定", lanes: ["駅前広場"], planned: true },
+  "複合施設➡︎令和６年": { label: "着工予定 複合施設は令和6年、温浴宿泊施設は令和7年", lanes: ["とくとく本体", "温浴宿泊施設"], planned: true },
+  "町商工会が出資する「新得タウンマネジメント株式会社」を予": { label: "指定管理者に新得タウンマネジメントの予定", lanes: ["指定管理"], planned: true },
+  "今年は複合施設、来年は宿泊施設": { label: "複合施設は今年、宿泊施設は来年開業の予定", lanes: ["とくとく本体", "温浴宿泊施設"], planned: true, plan: ONYOKU_PLAN, target: "来年（令和8年）" },
+  "今月の２月地域交流センター「とくとく」は6月15日にオープン": { label: "「とくとく」6/15オープンと告知", planned: true, plan: TOKUTOKU_PLAN, target: "令和7年6月15日" },
+  "今月の３月今月の３月": { label: "「とくとく」6/15オープンと告知", planned: true, plan: TOKUTOKU_PLAN, target: "令和7年6月15日" },
+  "6月に駅前の複合施設がオープン": { label: "複合施設 6月オープンの回答", lanes: ["とくとく本体"], planned: true, plan: TOKUTOKU_PLAN, target: "令和7年6月" },
+  "できる予算新得駅前地域交流センター": { label: "「とくとく」オープンの予定", lanes: ["とくとく本体"], planned: true },
+  "令和7年６月にオープンを迎えます": { label: "「とくとく」令和7年6月オープンの予定", planned: true, plan: TOKUTOKU_PLAN, target: "令和7年6月" },
+  "令和8年12月開業予定": { label: "温浴宿泊施設 令和8年12月開業の予定", lanes: ["温浴宿泊施設"], planned: true, plan: ONYOKU_PLAN, target: "令和8年12月" },
+  "温浴宿泊施設は今年から工事が始まる予定": { label: "温浴宿泊施設 今年から工事の予定", planned: true },
+  "令和8年10月に完成を予定": { label: "令和8年10月完成の予定", planned: true, plan: ONYOKU_PLAN, target: "令和8年10月（完成）" },
+  "12月開業予定の温浴宿泊施設": { label: "温浴宿泊施設 12月開業の予定", lanes: ["温浴宿泊施設"], planned: true, plan: ONYOKU_PLAN, target: "12月" },
+  "令和8年度に温浴宿泊施設が開業": { label: "温浴宿泊施設 令和8年度開業の予定", lanes: ["温浴宿泊施設"], planned: true, plan: ONYOKU_PLAN, target: "令和8年度" },
+  "令和８年12月の開業に向け工事": { label: "開業の延期をお知らせ", plan: ONYOKU_PLAN, target: "令和9年4月" },
   "町営浴場の閉館も令和９年３月末まで延期": { label: "町営浴場の閉館を令和9年3月末まで延期", planned: true },
-  "温浴宿泊施設は令和9年4月にオープン": { label: "令和9年4月オープンと告知", planned: true },
+  "令和9年4月開業予定の温浴宿泊施設": { label: "温浴宿泊施設 令和9年4月開業の予定", lanes: ["温浴宿泊施設"], planned: true, plan: ONYOKU_PLAN, target: "令和9年4月" },
+  "温浴宿泊施設は令和9年4月にオープン": { label: "令和9年4月オープンと告知", planned: true, plan: ONYOKU_PLAN, target: "令和9年4月" },
   "６月15日オープン": { label: "「とくとく」6/15開所", direct: "開所" },
   "駅前周辺再整備温浴宿泊施設建設工事、建築主体": { label: "温浴宿泊施設の工事契約" },
-  "今のところ完成予定が９月": { label: "12月開業の予定", planned: true },
-  "開業は来年４月以降": { label: "開業は来年4月以降に", planned: true },
+  "今のところ完成予定が９月": { label: "12月開業の予定", planned: true, plan: ONYOKU_PLAN, target: "12月" },
+  "開業は来年４月以降": { label: "開業は来年4月以降に", planned: true, plan: ONYOKU_PLAN, target: "来年4月以降" },
   "いったん白紙": { label: "金融機関の増設 いったん白紙", direct: "白紙" },
   "既存の町営浴場の営業を延長": { label: "町営浴場の営業を延長", planned: true },
   "インフレスライドを適用": { label: "工事費を増額（補正予算）" },
@@ -58,13 +81,13 @@ const EXCLUDED: Record<string, string> = {
   "そのうちの35億円くらい": "複数事業の財源の説明で、対象を特定できない",
   "前年度対比42.5パーセント増": "町全体の一般会計予算で、この事業の額ではない",
   "複合施設が８億2,800万円": "全体32億円と同じ説明の内訳",
-  "令和７年４月令和７年４月": "広報: スケジュール表の文字が連なり、どの予定か読めない",
-  "今月の３月今月の３月": "広報: 2月号と同じ告知",
-  "令和8年12月開業予定": "広報: 見出しの語で、記事の文として読めない",
-  "令和7年６月にオープンを迎えます": "広報: 2月号の告知と同じ内容",
   "駅前広場・ロータリー部分は令和5年度から工事": "広報: ロータリーの供用開始と同じ内容",
   "オープン１周年": "広報: 記念行事の案内で、開所の日ではない",
   "町営浴場は、温浴宿泊施設の開業延期": "広報: 同じ号の閉館延期のお知らせと同じ内容",
+  "なお、現在の町営浴場を令和８年度に解体後": "広報: 金融機関の営業開始の予定と同じ文",
+  "通路の場所は随時変わります": "広報: 同じ紙面の着工予定（複合施設は令和6年…）と同じ告知",
+  "一切入れません一切": "広報: 同じ紙面の着工予定（複合施設は令和6年…）と同じ告知",
+  "設計を含む": "広報: スケジュール表と費用の文字が連なり、予定として読めない",
 }
 /** 町が示した理由。text は原文の抜き出し（検査で本文との一致を確かめる） */
 const CALLOUTS: Record<string, string> = {
@@ -134,15 +157,20 @@ function main() {
 
   // 年表: 機械で選んだ event が、載せるか除外するかのどちらかに必ず入っていること
   // 広報は記事に日付が書かれたものだけ（発行日しかない記事は、出来事の日を示せない）
-  const selected = events.filter(e => e.layer === "fact" && e.action !== null && TIMELINE_ACTIONS.has(e.action)
-    && (e.source_type === "kaigiroku" || e.stated_date !== null))
+  // 予定の告知は日付が無くても載せる
   const prefixOf = (e: TraceEvent, keys: string[]) => keys.find(k => e.source_type === "koho" ? e.source.quote.includes(k) : e.source.quote.startsWith(k))
+  const selected = events.filter(e => e.layer === "fact" && e.action !== null && TIMELINE_ACTIONS.has(e.action)
+    && (e.source_type === "kaigiroku" || e.stated_date !== null || e.tense === "予定" || prefixOf(e, Object.keys(TIMELINE)) !== undefined))
   const unassigned = selected.filter(e => !prefixOf(e, Object.keys(TIMELINE)) && !prefixOf(e, Object.keys(EXCLUDED)))
   if (unassigned.length > 0) throw new Error(`見出しも除外理由も無い: ${unassigned.map(e => `${e.id} ${e.source.quote}`).join(" / ")}`)
 
+  const seenInIssue = new Set<string>()
   const points = selected.flatMap((e) => {
-    const key = prefixOf(e, Object.keys(TIMELINE))
+    const key = prefixOf(e, Object.keys(EXCLUDED)) ? undefined : prefixOf(e, Object.keys(TIMELINE))
     if (!key) return []
+    // 同じ紙面の表と文から同じ予定が二度取れることがある
+    if (seenInIssue.has(`${e.date}#${key}`)) return []
+    seenInIssue.add(`${e.date}#${key}`)
     const c = TIMELINE[key]
     const calloutText = CALLOUTS[key]
     return [{
@@ -154,6 +182,8 @@ function main() {
       whole: c.whole ?? false,
       direct: c.direct ?? null,
       objects: c.lanes ?? e.objects,
+      plan: c.plan ?? null,
+      target: c.target ?? null,
       citation: citeEvent(e),
       reason: calloutText ? {
         text: calloutText,
@@ -170,6 +200,20 @@ function main() {
   }))
   const pointInQuietYears = points.find(p => p.date < "2017")
   if (pointInQuietYears) throw new Error(`縮めた期間に点がある: ${pointInQuietYears.date} ${pointInQuietYears.label}`)
+
+  const planChanges = [ONYOKU_PLAN, TOKUTOKU_PLAN, HIROBA_PLAN].map(name => ({
+    name,
+    rows: points.filter(p => p.plan === name).map(p => ({ date: p.date, target: p.target, moved: p.action === "延期", sourceType: p.sourceType, citation: p.citation })),
+  }))
+  const kohoCite = (date: string, page: number, quote: string) => {
+    const e = events.find(x => x.source_type === "koho" && x.date === date && x.source.page === page)
+    if (!e) throw new Error(`広報の event が無い: ${date} p.${page}`)
+    return { kind: "koho", meeting: e.source.issue ?? "", sessionKey: null, speechIndex: null, date, speaker: e.actor.name, role: e.actor.role, page, url: e.source.url, quote }
+  }
+  const delayReasons = [
+    { subject: "町（広報しんとく）の説明", citation: kohoCite("2026-07-01", 18, "中東情勢の影響により建築資材の入荷が遅れることが確定したため、開業を令和９年４月に延期することになりました") },
+    { subject: "会議録の答弁", citation: cite("r8-2026-06-regular-2", 9, "中東情勢悪化の影響を受けまして、駅前温浴宿泊施設の建設が大幅に遅れております") },
+  ]
 
   const view = {
     title: "駅前の15年",
@@ -189,6 +233,8 @@ function main() {
     ],
     quietYears,
     points,
+    planChanges,
+    delayReasons,
     cost: [
       { label: "事業全体", base: 32, baseLabel: "約32億円", plus: 7, plusLabel: "約7億円増",
         citations: [citeEvent(find("全体で32億円程度")), citeEvent(find("現時点で全体事業費は約７億円"))] },

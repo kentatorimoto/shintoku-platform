@@ -16,15 +16,17 @@ const W = 1000
 const LEFT = 92
 const RIGHT = 12
 const TOP = 34
-const LANE_H = 52
+const LANE_H = 58
 const X_START = 2010
-const X_END = 2028
+const X_END = 2027
 const BOTTOM = TOP + LANE_H * LANES.length
-const MIN_GAP = 15
+const MIN_GAP = 13
+const TIERS = [0, -14, 14]
+const REASON_GAP = 24
 const QUIET_BAR_H = 130
 const QUIET_MAX = Math.max(...view.quietYears.map(q => q.count))
 const QUIET_TOTAL = view.quietYears.reduce((n, q) => n + q.count, 0)
-const QUIET_NOTE = `2010〜2016年 年表に載る出来事なし・発言${QUIET_TOTAL}件（棒は年ごとの件数。軸を縮めています）`
+const QUIET_NOTE = `2010〜2016年 年表に載る出来事なし・駅前に関する発言 ${QUIET_TOTAL}件（棒は年ごとの件数。軸を縮めています）`
 
 const yearOf = (iso: string) => {
   const [y, m, d] = iso.split("-").map(Number)
@@ -41,16 +43,19 @@ const xOf = (year: number) => {
 }
 const laneY = (lane: string) => TOP + LANE_H * LANES.indexOf(lane) + LANE_H / 2
 
-/** 同じ帯で重なる点を右へずらす */
-function placeLanePoints() {
-  const placed = new Map<string, number>()
-  const lastInLane = new Map<string, number>()
+/** 点は必ず日付の位置に置く。同じ帯で重なるときは、帯の中で上下の段に分ける */
+function laneTiers() {
+  const tiers = new Map<string, number>()
+  const lastOnTier = new Map<string, number>()
   for (const p of view.points.filter(x => !x.whole)) {
-    const x = Math.max(...p.objects.map(o => (lastInLane.get(o) ?? -Infinity) + MIN_GAP), xOf(yearOf(p.date)))
-    placed.set(p.id, x)
-    p.objects.forEach(o => lastInLane.set(o, x))
+    const x = xOf(yearOf(p.date))
+    for (const lane of p.objects) {
+      const tier = TIERS.find(t => x - (lastOnTier.get(`${lane}#${t}`) ?? -Infinity) >= MIN_GAP) ?? 0
+      lastOnTier.set(`${lane}#${tier}`, x)
+      tiers.set(`${p.id}-${lane}`, tier)
+    }
   }
-  return placed
+  return tiers
 }
 
 function Marker({ p, x, y }: { p: Point; x: number; y: number }) {
@@ -67,7 +72,7 @@ function Marker({ p, x, y }: { p: Point; x: number; y: number }) {
 }
 
 export default function DesktopTimeline() {
-  const placed = placeLanePoints()
+  const tiers = laneTiers()
   const boundary = xOf(yearOf("2025-07-15"))
   const years = Array.from({ length: X_END - X_START + 1 }, (_, i) => X_START + i)
   const reasons = view.points.filter(p => p.reason)
@@ -106,7 +111,7 @@ export default function DesktopTimeline() {
           const h = (q.count / QUIET_MAX) * QUIET_BAR_H
           return (
             <g key={q.year}>
-              <title>{`${q.year}年 年表に載る出来事なし・発言${q.count}件`}</title>
+              <title>{`${q.year}年 年表に載る出来事なし・駅前に関する発言 ${q.count}件`}</title>
               <rect x={x0} y={BOTTOM - h} width={w} height={h} fill="var(--color-line)" />
               <text x={x0 + w / 2} y={BOTTOM - h - 4} fontSize={10.5} textAnchor="middle" fill="var(--color-textMuted)" className="mono">{q.count}</text>
               <text x={x0 + w / 2} y={BOTTOM + 16} fontSize={10.5} textAnchor="middle" fill="var(--color-textMuted)" className="mono">{String(q.year).slice(2)}</text>
@@ -133,11 +138,12 @@ export default function DesktopTimeline() {
         })}
 
         {/* 理由の線 */}
-        {reasons.map((p) => {
-          const x = p.whole ? xOf(yearOf(p.date)) : placed.get(p.id) ?? 0
+        {reasons.map((p, i) => {
+          const x = xOf(yearOf(p.date))
           const y = p.whole ? BOTTOM : Math.max(...p.objects.map(laneY))
           const n = reasonNumber(p)
-          const labelX = Math.min(W - RIGHT - 10, x)
+          // 番号は重ならないよう、右端から詰めて並べる
+          const labelX = Math.min(x, W - RIGHT - 10 - (reasons.length - 1 - i) * REASON_GAP)
           return (
             <g key={p.id}>
               <path d={`M ${x} ${y} L ${x} ${BOTTOM + 22} L ${labelX} ${BOTTOM + 36}`} fill="none" stroke="var(--color-accent)" strokeWidth={1} />
@@ -149,15 +155,15 @@ export default function DesktopTimeline() {
 
         {/* 帯の上の点 */}
         {view.points.filter(p => !p.whole).flatMap(p => p.objects.map((o) => {
-          const x = placed.get(p.id) ?? 0
-          const y = laneY(o)
+          const x = xOf(yearOf(p.date))
+          const y = laneY(o) + (tiers.get(`${p.id}-${o}`) ?? 0)
           return (
             <a key={`${p.id}-${o}`} href={p.citation.url} target="_blank" rel="noopener noreferrer" aria-label={tip(p)}>
               <title>{tip(p)}</title>
               <circle cx={x} cy={y} r={13} fill="transparent" />
               <Marker p={p} x={x} y={y} />
               {p.direct && o === p.objects[p.objects.length - 1] && (
-                <text x={x} y={y - 11} fontSize={11.5} fontWeight={700} textAnchor="middle" fill="var(--color-textMain)">{p.direct}</text>
+                <text x={x} y={laneY(o) - 18} fontSize={11.5} fontWeight={700} textAnchor="middle" fill="var(--color-textMain)">{p.direct}</text>
               )}
             </a>
           )
@@ -218,6 +224,39 @@ function MobileDot({ p }: { p: Point }) {
   return p.planned
     ? <span className={`block w-[11px] h-[11px] ${shape} border-2 ${ring} bg-paper`} />
     : <span className={`block w-[11px] h-[11px] ${shape} ${color}`} />
+}
+
+/** 同じ施設の予定が、いつ、どの時期として示されたか。行為が延期の行を太くする */
+export function PlanChanges() {
+  return (
+    <div className="mt-8">
+      <h3 className="text-[15px] font-bold text-textMain mb-3">予定の変わり方</h3>
+      <div className="grid md:grid-cols-3 gap-5">
+        {view.planChanges.map(group => (
+          <div key={group.name}>
+            <p className="text-[13px] font-bold text-textMuted mb-2">{group.name}</p>
+            <ol className="space-y-1">
+              {group.rows.map((r, i) => {
+                return (
+                  <li key={`${r.date}-${i}`} className="flex gap-2 text-[13px] leading-snug">
+                    <a href={r.citation.url} target="_blank" rel="noopener noreferrer"
+                       aria-label={`${toDot(r.date)} ${r.target}（${r.citation.meeting} p.${r.citation.page}）`}
+                       className="mono text-[11px] text-textMuted underline underline-offset-2 hover:text-accent shrink-0 pt-px">
+                      {r.date.slice(0, 7).replace("-", ".")}
+                    </a>
+                    <span className={r.moved ? "font-bold text-textMain" : "text-textSub"}>
+                      {r.target}
+                      <span className="text-[10px] font-normal text-textMuted ml-1">{r.sourceType === "koho" ? "広報" : "会議録"}</span>
+                    </span>
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export function MobileTimeline() {
