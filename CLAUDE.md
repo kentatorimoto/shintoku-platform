@@ -167,6 +167,10 @@ npm run auto-ingest -- [--dry-run] [--issue 17]  # Issue -> 字幕 -> MD -> PR�
 # 公式会議録（docs/claude-code-kaigiroku-structure.md。PDFはリポジトリに置かない）
 npm run kaigiroku:index                # 町のページ -> data/kaigiroku/index.json
 npm run kaigiroku:extract -- [--all]   # PDF -> content/kaigiroku/{key}/（既定は令和分）
+npm run kaigiroku:excerpt -- ekimae    # キーワード抜粋 -> content/traces/（落とした発言も残す）
+npm run kaigiroku:trace -- ekimae [--dry-run]  # 抜粋 -> Claude -> 流れ（課金あり。--dry-run は入力サイズのみ）
+npm run kaigiroku:render -- ekimae     # 出典を解決して ekimae.md / ekimae.json を描画
+npm run kaigiroku:verify -- ekimae     # 出典・引用が会議録に実在するかを検査
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)
