@@ -1,17 +1,22 @@
 import { execSync } from "child_process"
 
-function runStep(name: string, cmd: string) {
+function runStep(name: string, cmd: string, required = false) {
   try {
     console.log(`Running ${name}...`)
     execSync(cmd, { stdio: "inherit" })
-  } catch (e) {
+  } catch {
+    if (required) {
+      console.error(`❌ ${name} failed`)
+      process.exit(1)
+    }
     console.error(`❌ ${name} failed but continuing`)
   }
 }
 
 runStep("announcements", "npm run scrape:announcements")
-runStep("newsletters", "npm run scrape:newsletters")
-runStep("index newsletters", "npm run index:newsletters")
+// 広報は号が減ったときに失敗して知らせる（scrape-newsletters.ts）。ここで握りつぶさない
+runStep("newsletters", "npm run scrape:newsletters", true)
+runStep("index newsletters", "npm run index:newsletters", true)
 
 // public/data/lastSync.json は書かない。
 //
