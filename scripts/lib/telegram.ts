@@ -7,8 +7,9 @@
  * 取り込みで飛ぶのは3種類（pr / pending / blocked）。
  * test は `--notify-test` の疎通確認専用、ci はワークフロー自体の失敗
  * （notify-failed-runs.ts）で、見出しは呼び出し側が組み立てる。
+ * koho は広報の新しい号に個人の欄の疑いがあったとき（index-newsletters.ts）。
  */
-export type NotifyKind = "pr" | "pending" | "blocked" | "test" | "ci"
+export type NotifyKind = "pr" | "pending" | "blocked" | "test" | "ci" | "koho"
 
 const HEADING: Record<NotifyKind, string> = {
   pr:      "🟢 PRを作成しました",
@@ -16,6 +17,7 @@ const HEADING: Record<NotifyKind, string> = {
   blocked: "🛑 推定できず停止",
   test:    "🔔 通知テスト",
   ci:      "",
+  koho:    "🔎 広報: 個人の欄の取りこぼしの疑い",
 }
 
 const escapeHtml = (s: string) =>

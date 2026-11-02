@@ -73,6 +73,7 @@ shintoku-platform/
 │       ├── session.md            #   単一パート（part_type: qna）
 │       ├── cards.yaml            #   要点カード（MDの派生物。cards:generate で生成）
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
+│   koho/{key}/raw.txt            # 広報しんとくの全文（一覧は data/koho/index.json。PDFは置かない。町民の名前が並ぶページは目印に置換）
 │   kaigiroku/{sessionKey}/       # 町の公式会議録の抽出テキスト（Layer 0。build:data の対象外・public に出さない）
 ├── docs/
 │   ├── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
@@ -103,7 +104,8 @@ shintoku-platform/
 │   ├── scrape-announcements.ts
 │   ├── scrape-newsletters.ts
 │   ├── scrape-giketsu.ts
-│   ├── index-newsletters.ts      # 広報PDF → 全文索引（全角文字間の空白を潰す）
+│   ├── index-newsletters.ts      # 広報PDF → content/koho/ の全文と年ごとの検索索引（要 poppler）
+│   ├── check-koho.ts             # 月号が各月1号そろっているかの検査
 │   ├── build-search-index.ts     # ★ 検索用の索引（一般質問・お知らせ）
 │   ├── convertSlides.mjs         # PDF → JPEG slides (requires poppler)
 │   ├── test-scraper.ts           # CI test scraper
@@ -121,7 +123,7 @@ shintoku-platform/
 │   │   ├── gikai_sessions.json   # Core session metadata
 │   │   ├── gikai_links.json      # Session-to-decision links
 │   │   ├── giketsu_index.json    # Decisions full-text index
-│   │   ├── newsletters_index.json # 広報の全文索引（約3MB・検索が読む）
+│   │   ├── koho/                 # 広報の検索索引（index-YYYY.json・years.json。検索が年ごとに読む）
 │   │   ├── announcements.json    # お知らせ（data/scraped の最新から生成）
 │   │   ├── decision_links.json
 │   │   ├── basin_questions.json
@@ -181,7 +183,8 @@ npm run sync             # Run all scrapers (announcements -> newsletters -> ind
 npm run scrape:announcements
 npm run scrape:newsletters
 npm run scrape:giketsu
-npm run index:newsletters  # Build full-text search index for newsletters
+npm run index:newsletters  # 未取得の号の PDF -> content/koho/{key}/raw.txt、検索索引を年ごとに作る
+npm run koho:check         # 月号の抜け・文字なしの号を報告
 
 # Gikai tools
 npm run slides:generate <sessionId> <slideId>  # PDF -> slide images (requires poppler)
@@ -210,7 +213,7 @@ Next.js App Router pages (app/)
 `npm run build:data` の生成物。**直接編集禁止** — 修正は `content/` のMD / cards.yaml に対して行う。
 
 GitHub Actions automates:
-- `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / `newsletters_index.json` （生成物 `gikai_sessions.json` / `qna/` には触れない）
+- `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / 広報の `data/koho` `content/koho` `public/data/koho` （生成物 `gikai_sessions.json` / `qna/` には触れない）
 - `daily-scrape.yml`: Runs `test-scraper.ts` at 09:00 JST, commits `data/scraped/` changes
 - `watch-council.yml`: Runs `watch-council.ts` at 09:00 JST。議会チャンネルのRSSに新着があれば GitHub Issue を立て、`data/watch/known-videos.json` を更新する。続けて `auto-ingest.yml` を呼ぶ
 - `auto-ingest.yml`: Issue のタイトルからセッションID・パートを推定し、字幕 → MD → PR まで作る（12:00 JST の再試行 + 手動実行）。詳細は `docs/auto-ingest.md`

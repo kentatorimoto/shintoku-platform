@@ -4,7 +4,7 @@
  *   public/data/qna/*.json        → public/data/qna_search_index.json
  *   data/scraped/announcements-*  → public/data/announcements.json
  *
- * 広報しんとくの全文（newsletters_index.json）は index-newsletters.ts が作る。
+ * 広報しんとくの全文（public/data/koho/）は index-newsletters.ts が作る。
  * ここでは触らない（週次で更新される素材をビルドのたびに作り直さない）。
  */
 import fs from "fs"
