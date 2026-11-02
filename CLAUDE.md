@@ -73,6 +73,7 @@ shintoku-platform/
 │       ├── session.md            #   単一パート（part_type: qna）
 │       ├── cards.yaml            #   要点カード（MDの派生物。cards:generate で生成）
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
+│   traces/{theme}.*.json         # 会議録・広報から起こした流れ（抜粋・出来事・図のデータ。全文は corpus にだけ置く）
 ├── docs/
 │   ├── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
 │   ├── auto-ingest.md            # ★ 自動取り込みの対応表と運用
@@ -163,6 +164,18 @@ npm run cards:generate -- <sessionId>  # レビュー済みMD -> cards.yaml（�
 npm run watch:council -- [--dry-run]   # RSS監視 -> GitHub Issue
 npm run watch:council -- --video <url|videoId>   # 取りこぼしの拾い直し（既知でもIssueを立てる）
 npm run auto-ingest -- [--dry-run] [--issue 17]  # Issue -> 字幕 -> MD -> PR（Actions上で自動実行）
+
+# 公式会議録（docs/claude-code-kaigiroku-structure.md。PDFはリポジトリに置かない）
+npm run kaigiroku:index                # 町のページ -> data/kaigiroku/index.json
+npm run kaigiroku:extract -- [--all]   # PDF -> .corpus/kaigiroku/{key}/（既定は令和分。子ども議会も corpus にだけ入れる）
+npm run kaigiroku:excerpt -- ekimae    # キーワード抜粋 -> content/traces/（落とした発言も残す）
+npm run kaigiroku:trace -- ekimae [--dry-run]  # 抜粋 -> Claude -> 流れ（課金あり。--dry-run は入力サイズのみ）
+npm run kaigiroku:render -- ekimae     # 出典を解決して ekimae.md / ekimae.json を描画
+npm run kaigiroku:verify -- ekimae     # 出典・引用が会議録に実在するかを検査
+npm run kaigiroku:events -- ekimae     # 生成結果と発言 -> events.json（docs/trace-events-schema.md。API なし）
+npm run kaigiroku:verify-events -- ekimae  # layer・actor・引用を出典の発言者に照らして検査
+npm run kaigiroku:view -- ekimae       # events -> view.json（/process/traces/ekimae の図のデータ）
+npm run kaigiroku:verify-view -- ekimae    # 図のすべての出典を会議録に照らして検査
 
 # Data scraping & sync
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)

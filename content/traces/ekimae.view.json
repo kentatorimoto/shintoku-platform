@@ -1,0 +1,2253 @@
+{
+  "title": "駅前の15年",
+  "subtitle": "2010年の一般質問から2026年まで",
+  "contrast": [
+    {
+      "year": "2011",
+      "citation": {
+        "meeting": "平成23年 定例第1回",
+        "sessionKey": "h23-2011-03-regular-1",
+        "speechIndex": 303,
+        "date": "2011-03-11",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 92,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230302_H23teirei_1.pdf#page=92",
+        "quote": "構想というものは今持ち合わせていない"
+      }
+    },
+    {
+      "year": "2026",
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "いったん白紙とすることでご了承いただいているところであります"
+      }
+    }
+  ],
+  "stats": {
+    "years": {
+      "value": "15年",
+      "note": "2011年の答弁から2026年の報告まで"
+    },
+    "total": {
+      "value": "約32億円",
+      "note": "概算事業費（2022年3月の説明）",
+      "citation": {
+        "meeting": "令和4年 予算特別委員会",
+        "sessionKey": "r4-2022-03-yosan-tokubetsu",
+        "speechIndex": 141,
+        "date": "2022-03-16",
+        "speaker": "小林健利",
+        "role": "地域戦略室長補佐",
+        "page": 32,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+        "quote": "全体で32億円程度を見込んでおります"
+      }
+    },
+    "increase": {
+      "value": "約7億円",
+      "note": "増額（2024年12月、当初計画との比較）",
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+      }
+    }
+  },
+  "mayors": [
+    {
+      "name": "浜田正利 町長",
+      "until": "2025-06",
+      "citation": {
+        "meeting": "令和7年 定例第2回",
+        "sessionKey": "r7-2025-06-regular-2",
+        "speechIndex": 17,
+        "date": "2025-06-02",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=13",
+        "quote": ""
+      }
+    },
+    {
+      "name": "湯浅真希 町長",
+      "from": "2025-08",
+      "citation": {
+        "meeting": "令和7年 臨時第2回",
+        "sessionKey": "r7-2025-08-rinji-2",
+        "speechIndex": 2,
+        "date": "2025-08-06",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 6,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33985/r7rinji2kaigiroku.pdf#page=6",
+        "quote": ""
+      }
+    }
+  ],
+  "quietYears": [
+    {
+      "year": 2010,
+      "count": 11
+    },
+    {
+      "year": 2011,
+      "count": 14
+    },
+    {
+      "year": 2012,
+      "count": 7
+    },
+    {
+      "year": 2013,
+      "count": 18
+    },
+    {
+      "year": 2014,
+      "count": 23
+    },
+    {
+      "year": 2015,
+      "count": 9
+    },
+    {
+      "year": 2016,
+      "count": 25
+    }
+  ],
+  "points": [
+    {
+      "id": "ev-0036",
+      "sourceType": "kaigiroku",
+      "date": "2017-08-09",
+      "action": "予算計上",
+      "label": "商工会の調査に補助",
+      "planned": false,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "平成29年 臨時第3回",
+        "sessionKey": "h29-2017-08-rinji-3",
+        "speechIndex": 35,
+        "date": "2017-08-09",
+        "speaker": "田中透嗣",
+        "role": "副町長",
+        "page": 10,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11522/H29rinji3gijiroku.pdf#page=10",
+        "quote": "商工会が実施する駅前再整備調査に対し国の補助事業が採択されたことから"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0058",
+      "sourceType": "kaigiroku",
+      "date": "2019-09-18",
+      "action": "着工",
+      "label": "複合施設「着手まで複数年」",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和元年 定例第3回",
+        "sessionKey": "r1-2019-09-regular-3",
+        "speechIndex": 214,
+        "date": "2019-09-18",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 54,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15152/R1tei3gijiroku.pdf#page=54",
+        "quote": "複合施設につきましては、その建設着手までには複数年掛かると見込んでおり"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0059",
+      "sourceType": "kaigiroku",
+      "date": "2019-12-13",
+      "action": "予算計上",
+      "label": "JR用地の購入費を計上",
+      "planned": false,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和元年 定例第4回",
+        "sessionKey": "r1-2019-12-regular-4",
+        "speechIndex": 150,
+        "date": "2019-12-13",
+        "speaker": "金田將",
+        "role": "副町長",
+        "page": 28,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15362/R1tei4gijiroku.pdf#page=28",
+        "quote": "駅前周辺再整備に伴いＪＲ北海道の土地を購入する必要があることから"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0089",
+      "sourceType": "koho",
+      "date": "2021-06-01",
+      "action": "開所",
+      "label": "広場は令和5年度供用、施設は令和7年度開業の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "駅前広場",
+        "とくとく本体",
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "駅前広場の供用",
+          "target": "令和5年度"
+        },
+        {
+          "plan": "複合施設「とくとく」の開業",
+          "target": "令和7年度"
+        },
+        {
+          "plan": "温浴宿泊施設の開業",
+          "target": "令和7年度"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和3年6月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2021-06-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 8,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1999/19664/kouhou.shintoku_2021.06_mid.A4.pdf#page=8",
+        "quote": "駅前周辺再整備スケジュール（現時点での予定）"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0094",
+      "sourceType": "kaigiroku",
+      "date": "2021-12-15",
+      "action": "着工",
+      "label": "「令和5年度以降に着工」",
+      "planned": true,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和3年 定例第4回",
+        "sessionKey": "r3-2021-12-regular-4",
+        "speechIndex": 147,
+        "date": "2021-12-15",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 37,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei4gijiroku.pdf#page=37",
+        "quote": "令和５年度以降において、駅前周辺再整備等、事業実施の環境が整ったものの着工を予定しております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0105",
+      "sourceType": "kaigiroku",
+      "date": "2022-03-16",
+      "action": "計画",
+      "label": "概算 全体32億円程度",
+      "planned": false,
+      "change": false,
+      "whole": true,
+      "direct": "概算32億円",
+      "objects": [
+        "とくとく本体",
+        "温浴宿泊施設",
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和4年 予算特別委員会",
+        "sessionKey": "r4-2022-03-yosan-tokubetsu",
+        "speechIndex": 141,
+        "date": "2022-03-16",
+        "speaker": "小林健利",
+        "role": "地域戦略室長補佐",
+        "page": 32,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+        "quote": "全体で32億円程度を見込んでおります"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0117",
+      "sourceType": "koho",
+      "date": "2022-08-15",
+      "action": "計画",
+      "label": "金融機関 令和9年度営業開始の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "金融機関"
+      ],
+      "plans": [
+        {
+          "plan": "金融機関の営業開始",
+          "target": "令和9年度"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和4年8月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2022-08-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 9,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=9",
+        "quote": "令和８年度に解体後、その跡地を使って金融機関の建設工事を実施するため、他の複合施設が令和７年度に開業してから２年後となる令和９年度に金融機関の営業を開始する"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0121",
+      "sourceType": "koho",
+      "date": "2022-08-15",
+      "action": "開所",
+      "label": "温浴宿泊施設 令和8年10月開業の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "温浴宿泊施設の開業",
+          "target": "令和8年10月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和4年8月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2022-08-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+        "quote": "令和８年10月温浴宿泊施設"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0122",
+      "sourceType": "koho",
+      "date": "2022-08-15",
+      "action": "開所",
+      "label": "駅前広場 令和7年4月供用開始の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [
+        {
+          "plan": "駅前広場の供用",
+          "target": "令和7年4月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和4年8月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2022-08-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+        "quote": "令和７年４月新・駅前広場"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0124",
+      "sourceType": "koho",
+      "date": "2022-08-15",
+      "action": "開所",
+      "label": "複合施設 令和7年6月開業の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体"
+      ],
+      "plans": [
+        {
+          "plan": "複合施設「とくとく」の開業",
+          "target": "令和7年6月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和4年8月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2022-08-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+        "quote": "複合施設開業予定"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0130",
+      "sourceType": "kaigiroku",
+      "date": "2022-12-20",
+      "action": "着工",
+      "label": "「本格的に着工」の方針",
+      "planned": true,
+      "change": false,
+      "whole": true,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和4年 定例第4回",
+        "sessionKey": "r4-2022-12-regular-4",
+        "speechIndex": 111,
+        "date": "2022-12-20",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 30,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/26959/R4tei4gijiroku.pdf#page=30",
+        "quote": "役場庁舎建設、中継施設建設、駅前周辺再整備事業などが本格的に着工することから"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0131",
+      "sourceType": "koho",
+      "date": "2023-02-15",
+      "action": "着工",
+      "label": "駅前広場の工事 令和5年5月からの予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [
+        {
+          "plan": "駅前広場の工事開始",
+          "target": "令和5年5月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和5年2月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2023-02-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 3,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/26788/2023.2.kouhou.A4.mid.all.pdf#page=3",
+        "quote": "令和５年５月中旬から令和７年３月頃までの工事期間中"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0132",
+      "sourceType": "koho",
+      "date": "2023-02-15",
+      "action": "着工",
+      "label": "着工予定 複合施設は令和6年、温浴宿泊施設は令和7年",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体",
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "複合施設・温浴宿泊施設の着工",
+          "target": "複合施設 令和6年・温浴宿泊施設 令和7年"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和5年2月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2023-02-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 3,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/26788/2023.2.kouhou.A4.mid.all.pdf#page=3",
+        "quote": "複合施設➡︎令和６年温浴宿泊施設➡︎令和７年"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0135",
+      "sourceType": "kaigiroku",
+      "date": "2023-03-02",
+      "action": "着工",
+      "label": "駅前広場の工事に着手へ",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体",
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和5年 定例第1回",
+        "sessionKey": "r5-2023-03-regular-1",
+        "speechIndex": 11,
+        "date": "2023-03-02",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 17,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/27816/R5tei1gijiroku.pdf#page=17",
+        "quote": "バス等のロータリー部分である駅前広場の工事に着手するとともに、複合施設の実施設計を進めてまいります"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0146",
+      "sourceType": "kaigiroku",
+      "date": "2023-06-02",
+      "action": "契約",
+      "label": "駅前広場の工事契約",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "契約",
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和5年 定例第2回",
+        "sessionKey": "r5-2023-06-regular-2",
+        "speechIndex": 46,
+        "date": "2023-06-02",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 16,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/28256/R5tei2gijiroku.pdf#page=16",
+        "quote": "契約の目的でありますが、街路事業工事（駅前広場再整備）でございます"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0148",
+      "sourceType": "kaigiroku",
+      "date": "2023-12-05",
+      "action": "増額",
+      "label": "同 契約を667万7,000円増額",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "駅前広場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和5年 定例第4回",
+        "sessionKey": "r5-2023-12-regular-4",
+        "speechIndex": 13,
+        "date": "2023-12-05",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/30041/R5tei4gijiroku.pdf#page=12",
+        "quote": "変更前、１億780万円。変更後、１億1,447万7,000円となり"
+      },
+      "reason": {
+        "text": "地中電線管が想定より浅い位置で確認されたことにより",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和5年 定例第4回",
+          "sessionKey": "r5-2023-12-regular-4",
+          "speechIndex": 13,
+          "date": "2023-12-05",
+          "speaker": "東川恭一",
+          "role": "総務課長",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/30041/R5tei4gijiroku.pdf#page=12",
+          "quote": "地中電線管が想定より浅い位置で確認されたことにより"
+        }
+      }
+    },
+    {
+      "id": "ev-0163",
+      "sourceType": "koho",
+      "date": "2024-04-15",
+      "action": "計画",
+      "label": "指定管理者に新得タウンマネジメントの予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "指定管理"
+      ],
+      "plans": [
+        {
+          "plan": "指定管理者",
+          "target": "新得タウンマネジメント"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和6年4月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2024-04-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 19,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30124/2024.4.kouhou.A4.full.all.pdf#page=19",
+        "quote": "運営を担う指定管理者は、町商工会が出資する「新得タウンマネジメント株式会社」を予定しています。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0166",
+      "sourceType": "kaigiroku",
+      "date": "2024-06-04",
+      "action": "契約",
+      "label": "複合施設の工事契約",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "契約",
+      "objects": [
+        "とくとく本体"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和6年 定例第2回",
+        "sessionKey": "r6-2024-06-regular-2",
+        "speechIndex": 33,
+        "date": "2024-06-04",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 16,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/31067/R6tei2gijiroku.pdf#page=16",
+        "quote": "駅前周辺再整備複合施設建設工事、建築主体でございます"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0170",
+      "sourceType": "koho",
+      "date": "2024-06-06",
+      "action": "着工",
+      "label": "複合施設の工事安全祈願祭",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体"
+      ],
+      "plans": [],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和6年7月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2024-07-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30786/kouhou.7.A4.pdf#page=12",
+        "quote": "内実行委員長駅前工事の安全を願って大日本プロレス青木選手が来庁6月6日、駅前複合施設工事の安全祈願祭が執り行われ、関係者22名が出席しました。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0173",
+      "sourceType": "kaigiroku",
+      "date": "2024-12-17",
+      "action": "着工",
+      "label": "温浴宿泊施設に着手へ",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "新年度から温浴宿泊施設の建設工事に着手をし、令和８年度中に完成をした後"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0174",
+      "sourceType": "kaigiroku",
+      "date": "2024-12-17",
+      "action": "計画",
+      "label": "金融機関部分の増築を計画",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "とくとく本体",
+        "金融機関"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "令和９年度に複合施設金融機関部分の増築と外構工事を計画しております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0175",
+      "sourceType": "kaigiroku",
+      "date": "2024-12-17",
+      "action": "増額",
+      "label": "全体事業費 約7億円増",
+      "planned": false,
+      "change": true,
+      "whole": true,
+      "direct": "約7億円増",
+      "objects": [
+        "駅前広場",
+        "温浴宿泊施設",
+        "町営浴場",
+        "金融機関"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+      },
+      "reason": {
+        "text": "物価高騰の影響を受け",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "speechIndex": 134,
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "物価高騰の影響を受け"
+        }
+      }
+    },
+    {
+      "id": "ev-0188",
+      "sourceType": "kaigiroku",
+      "date": "2025-03-17",
+      "action": "指定",
+      "label": "指定管理者の指定（5年間）",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "指定",
+      "objects": [
+        "とくとく本体",
+        "指定管理"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和7年 予算特別委員会",
+        "sessionKey": "r7-2025-03-yosan-tokubetsu",
+        "speechIndex": 327,
+        "date": "2025-03-17",
+        "speaker": "福原浩之",
+        "role": "地域戦略室長",
+        "page": 57,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=57",
+        "quote": "令和７年４月１日から令和12年３月31日までの５年間としております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0192",
+      "sourceType": "koho",
+      "date": "2025-04-01",
+      "action": "開所",
+      "label": "温浴宿泊施設 令和8年12月開業の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "温浴宿泊施設の開業",
+          "target": "令和8年12月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年4月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-04-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 7,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/32613/2025.4.1.A4.pdf#page=7",
+        "quote": "ラインの意匠・内装も鉄道をイメージした空間づくり・サウナ室はロウリュ式を採用令和8年12月開業予定デザインコンセプト：天然素材を活かした山の麓の道の駅にふさわしい建物道の駅・スマー"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0196",
+      "sourceType": "kaigiroku",
+      "date": "2025-06-02",
+      "action": "開所",
+      "label": "「とくとく」6/15開所",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": "開所",
+      "objects": [
+        "とくとく本体"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和7年 定例第2回",
+        "sessionKey": "r7-2025-06-regular-2",
+        "speechIndex": 17,
+        "date": "2025-06-02",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=13",
+        "quote": "６月15日オープンをいたします地域交流センター「とくとく」の中に"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0197",
+      "sourceType": "kaigiroku",
+      "date": "2025-06-20",
+      "action": "契約",
+      "label": "温浴宿泊施設の工事契約",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和7年 定例第2回",
+        "sessionKey": "r7-2025-06-regular-2",
+        "speechIndex": 249,
+        "date": "2025-06-20",
+        "speaker": "東川恭一",
+        "role": "総務課長",
+        "page": 60,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=60",
+        "quote": "駅前周辺再整備温浴宿泊施設建設工事、建築主体でございます"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0200",
+      "sourceType": "koho",
+      "date": "2025-08-01",
+      "action": "着工",
+      "label": "温浴宿泊施設 今年〔令和7年〕から工事の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "複合施設・温浴宿泊施設の着工",
+          "target": "温浴宿泊施設 今年〔令和7年〕"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年8月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-08-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 9,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33591/A4.2025.8.pdf#page=9",
+        "quote": "温浴宿泊施設は今年から工事が始まる予定です。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0201",
+      "sourceType": "koho",
+      "date": "2025-08-05",
+      "action": "着工",
+      "label": "温浴宿泊施設の工事安全祈願祭",
+      "planned": false,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年9月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-09-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 14,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33679/A4.2025.9.pdf#page=14",
+        "quote": "駅前温浴宿泊施設の工事安全を願いました8月5日、駅前温浴宿泊施設工事の安全祈願祭が執り行われ、関係者26名が出席しました。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0202",
+      "sourceType": "koho",
+      "date": "2025-09-01",
+      "action": "着工",
+      "label": "温浴宿泊施設 令和8年10月完成の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "温浴宿泊施設の完成",
+          "target": "令和8年10月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和7年9月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2025-09-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 14,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33679/A4.2025.9.pdf#page=14",
+        "quote": "令和8年10月に完成を予定している駅前温浴宿泊施設イメージ安全祈願祭に参加した関係者一同鍬入れをする湯浅町"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0208",
+      "sourceType": "kaigiroku",
+      "date": "2026-03-16",
+      "action": "開所",
+      "label": "12月〔令和8年〕開業の予定",
+      "planned": true,
+      "change": false,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "温浴宿泊施設の開業",
+          "target": "12月〔令和8年〕",
+          "key": "令和8年12月"
+        },
+        {
+          "plan": "温浴宿泊施設の完成",
+          "target": "9月〔令和8年〕",
+          "key": "令和8年9月"
+        }
+      ],
+      "citation": {
+        "meeting": "令和8年 予算特別委員会",
+        "sessionKey": "r8-2026-03-yosan-tokubetsu",
+        "speechIndex": 39,
+        "date": "2026-03-16",
+        "speaker": "加賀谷敬",
+        "role": "地域戦略室長補佐",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=12",
+        "quote": "今のところ完成予定が９月で、12月の開業を予定しております"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0222",
+      "sourceType": "kaigiroku",
+      "date": "2026-06-03",
+      "action": "延期",
+      "label": "開業は来年〔令和9年〕4月以降に",
+      "planned": true,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設",
+        "町営浴場"
+      ],
+      "plans": [
+        {
+          "plan": "温浴宿泊施設の開業",
+          "target": "来年〔令和9年〕4月以降",
+          "key": "令和9年4月"
+        }
+      ],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "開業は来年４月以降にずれ込む見込みであります"
+      },
+      "reason": {
+        "text": "中東情勢悪化の影響を受けまして、駅前温浴宿泊施設の建設が大幅に遅れております",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "speechIndex": 9,
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "中東情勢悪化の影響を受けまして、駅前温浴宿泊施設の建設が大幅に遅れております"
+        }
+      }
+    },
+    {
+      "id": "ev-0223",
+      "sourceType": "kaigiroku",
+      "date": "2026-06-03",
+      "action": "白紙",
+      "label": "金融機関の増設 いったん白紙",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": "白紙",
+      "objects": [
+        "とくとく本体",
+        "金融機関"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "いったん白紙とすることでご了承いただいているところであります"
+      },
+      "reason": {
+        "text": "コスト増、町民の利便性などを再度考慮し",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "speechIndex": 9,
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "コスト増、町民の利便性などを再度考慮し"
+        }
+      }
+    },
+    {
+      "id": "ev-0224",
+      "sourceType": "kaigiroku",
+      "date": "2026-06-03",
+      "action": "延期",
+      "label": "町営浴場の営業を延長",
+      "planned": true,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "町営浴場"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 12,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=12",
+        "quote": "既存の町営浴場の営業を延長し、切れ目のないように"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0225",
+      "sourceType": "kaigiroku",
+      "date": "2026-06-19",
+      "action": "増額",
+      "label": "工事費を増額（補正予算）",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 223,
+        "date": "2026-06-19",
+        "speaker": "畑中栄和",
+        "role": "副町長",
+        "page": 65,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=65",
+        "quote": "インフレスライドを適用することから、駅前周辺再整備温浴宿泊施設建設工事費を増額しております"
+      },
+      "reason": {
+        "text": "中東情勢の影響を受け、資材単価および労務単価の上昇によりインフレスライドを適用",
+        "certainty": "断定",
+        "citation": {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "speechIndex": 223,
+          "date": "2026-06-19",
+          "speaker": "畑中栄和",
+          "role": "副町長",
+          "page": 65,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=65",
+          "quote": "中東情勢の影響を受け、資材単価および労務単価の上昇によりインフレスライドを適用"
+        }
+      }
+    },
+    {
+      "id": "ev-0227",
+      "sourceType": "koho",
+      "date": "2026-07-01",
+      "action": "延期",
+      "label": "開業の延期をお知らせ",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [
+        {
+          "plan": "温浴宿泊施設の開業",
+          "target": "令和9年4月"
+        }
+      ],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和8年7月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2026-07-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 18,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36025/A4.pdf#page=18",
+        "quote": "（地域戦略室地域戦略係☎64-0521）お知らせ駅前温浴宿泊施設開業の延期について駅前温浴宿泊施設は令和８年12月の開業に向け工事を進めておりましたが、中"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0228",
+      "sourceType": "koho",
+      "date": "2026-07-01",
+      "action": "延期",
+      "label": "町営浴場の閉館を令和9年3月末まで延期",
+      "planned": true,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "町営浴場"
+      ],
+      "plans": [],
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和8年7月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2026-07-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 18,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36025/A4.pdf#page=18",
+        "quote": "なお、開業を延期したことに合わせて、町営浴場の閉館も令和９年３月末まで延期となります。"
+      },
+      "reason": null
+    },
+    {
+      "id": "ev-0229",
+      "sourceType": "kaigiroku",
+      "date": "2026-07-06",
+      "action": "増額",
+      "label": "契約を1億2,663万9,150円増額",
+      "planned": false,
+      "change": true,
+      "whole": false,
+      "direct": null,
+      "objects": [
+        "温浴宿泊施設"
+      ],
+      "plans": [],
+      "citation": {
+        "meeting": "令和8年 臨時第3回",
+        "sessionKey": "r8-2026-07-rinji-03",
+        "speechIndex": 9,
+        "date": "2026-07-06",
+        "speaker": "福原浩之",
+        "role": "総務課長",
+        "page": 7,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf#page=7",
+        "quote": "変更前、10億4,390万円、変更後、11億7,053万9,150円となり"
+      },
+      "reason": null
+    }
+  ],
+  "planChanges": [
+    {
+      "name": "温浴宿泊施設の開業",
+      "rows": [
+        {
+          "date": "2021-06-01",
+          "target": "令和7年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和3年6月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2021-06-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 8,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/1999/19664/kouhou.shintoku_2021.06_mid.A4.pdf#page=8",
+            "quote": "駅前周辺再整備スケジュール（現時点での予定）"
+          }
+        },
+        {
+          "date": "2022-08-15",
+          "target": "令和8年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 10,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=10",
+            "quote": "令和8年度開業"
+          }
+        },
+        {
+          "date": "2022-08-15",
+          "target": "令和8年10月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+            "quote": "令和８年10月温浴宿泊施設"
+          }
+        },
+        {
+          "date": "2023-04-15",
+          "target": "令和8年10月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和5年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2023-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 7,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2791/27350/2023.4.kouhou.A4.mid.all.pdf#page=7",
+            "quote": "令和８年10月温浴宿泊施設"
+          }
+        },
+        {
+          "date": "2025-01-20",
+          "target": "来年〔令和8年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年1月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-01-20",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/31939/A4.pdf#page=13",
+            "quote": "また、新得駅周辺の再整備を現在進めており、今年は複合施設、来年は宿泊施設の開業を予定しておりますので、皆さんのお話をヒントに進めていければと思いました。"
+          }
+        },
+        {
+          "date": "2025-04-01",
+          "target": "令和8年12月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-04-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 7,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/32613/2025.4.1.A4.pdf#page=7",
+            "quote": "ラインの意匠・内装も鉄道をイメージした空間づくり・サウナ室はロウリュ式を採用令和8年12月開業予定デザインコンセプト：天然素材を活かした山の麓の道の駅にふさわしい建物道の駅・スマー"
+          }
+        },
+        {
+          "date": "2026-02-01",
+          "target": "12月〔令和8年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和8年2月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2026-02-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 18,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/34760/A4.2026.2.pdf#page=18",
+            "quote": "回数券については、12月開業予定の温浴宿泊施設ではご利用できません。"
+          }
+        },
+        {
+          "date": "2026-03-16",
+          "target": "12月〔令和8年〕",
+          "moved": false,
+          "sourceType": "kaigiroku",
+          "citation": {
+            "meeting": "令和8年 予算特別委員会",
+            "sessionKey": "r8-2026-03-yosan-tokubetsu",
+            "speechIndex": 39,
+            "date": "2026-03-16",
+            "speaker": "加賀谷敬",
+            "role": "地域戦略室長補佐",
+            "page": 12,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=12",
+            "quote": "今のところ完成予定が９月で、12月の開業を予定しております"
+          }
+        },
+        {
+          "date": "2026-04-01",
+          "target": "令和8年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和8年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2026-04-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 7,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/35244/A4.pdf#page=7",
+            "quote": "♯02駅前周辺再整備・スマートIC道の駅「道の駅」整備に向けた取り組み「温浴宿泊施設」オープン令和8年度に温浴宿泊施設が開業します。"
+          }
+        },
+        {
+          "date": "2026-06-03",
+          "target": "来年〔令和9年〕4月以降",
+          "moved": true,
+          "sourceType": "kaigiroku",
+          "citation": {
+            "meeting": "令和8年 定例第2回",
+            "sessionKey": "r8-2026-06-regular-2",
+            "speechIndex": 9,
+            "date": "2026-06-03",
+            "speaker": "湯浅真希",
+            "role": "町長",
+            "page": 11,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+            "quote": "開業は来年４月以降にずれ込む見込みであります"
+          }
+        },
+        {
+          "date": "2026-07-01",
+          "target": "令和9年4月",
+          "moved": true,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和8年7月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2026-07-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 18,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36025/A4.pdf#page=18",
+            "quote": "（地域戦略室地域戦略係☎64-0521）お知らせ駅前温浴宿泊施設開業の延期について駅前温浴宿泊施設は令和８年12月の開業に向け工事を進めておりましたが、中"
+          }
+        },
+        {
+          "date": "2026-10-01",
+          "target": "令和9年4月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和8年10月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2026-10-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 6,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36859/A4.pdf#page=6",
+            "quote": "万円▶スマートインターチェンジ接続道実施設計委託料297万円▲温浴宿泊施設は令和9年4月にオープンします。"
+          }
+        }
+      ]
+    },
+    {
+      "name": "温浴宿泊施設の完成",
+      "rows": [
+        {
+          "date": "2025-09-01",
+          "target": "令和8年10月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年9月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-09-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 14,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33679/A4.2025.9.pdf#page=14",
+            "quote": "令和8年10月に完成を予定している駅前温浴宿泊施設イメージ安全祈願祭に参加した関係者一同鍬入れをする湯浅町"
+          }
+        },
+        {
+          "date": "2026-03-16",
+          "target": "9月〔令和8年〕",
+          "moved": false,
+          "sourceType": "kaigiroku",
+          "citation": {
+            "meeting": "令和8年 予算特別委員会",
+            "sessionKey": "r8-2026-03-yosan-tokubetsu",
+            "speechIndex": 39,
+            "date": "2026-03-16",
+            "speaker": "加賀谷敬",
+            "role": "地域戦略室長補佐",
+            "page": 12,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=12",
+            "quote": "今のところ完成予定が９月で、12月の開業を予定しております"
+          }
+        }
+      ]
+    },
+    {
+      "name": "複合施設「とくとく」の開業",
+      "rows": [
+        {
+          "date": "2021-06-01",
+          "target": "令和7年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和3年6月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2021-06-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 8,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/1999/19664/kouhou.shintoku_2021.06_mid.A4.pdf#page=8",
+            "quote": "駅前周辺再整備スケジュール（現時点での予定）"
+          }
+        },
+        {
+          "date": "2022-08-15",
+          "target": "令和7年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 5,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=5",
+            "quote": "令和7年度開業"
+          }
+        },
+        {
+          "date": "2022-08-15",
+          "target": "令和7年6月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+            "quote": "複合施設開業予定"
+          }
+        },
+        {
+          "date": "2023-04-15",
+          "target": "令和7年6月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和5年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2023-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 7,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2791/27350/2023.4.kouhou.A4.mid.all.pdf#page=7",
+            "quote": "令和７年６月複合施設複合施設"
+          }
+        },
+        {
+          "date": "2024-04-15",
+          "target": "令和7年6月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和6年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2024-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 19,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30124/2024.4.kouhou.A4.full.all.pdf#page=19",
+            "quote": "複合施設金融機関建設工事開業予定"
+          }
+        },
+        {
+          "date": "2025-01-20",
+          "target": "今年〔令和7年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年1月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-01-20",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/31939/A4.pdf#page=13",
+            "quote": "また、新得駅周辺の再整備を現在進めており、今年は複合施設、来年は宿泊施設の開業を予定しておりますので、皆さんのお話をヒントに進めていければと思いました。"
+          }
+        },
+        {
+          "date": "2025-02-15",
+          "target": "6月15日〔令和7年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年2月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-02-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 3,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/32046/A4kouhoushintoku.pdf#page=3",
+            "quote": "今月の当日はオープンイベントを予定しています２月地域交流センター「とくとく」は6月15日にオープン〜着"
+          }
+        },
+        {
+          "date": "2025-02-15",
+          "target": "6月〔令和7年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年2月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-02-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 11,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/32046/A4kouhoushintoku.pdf#page=11",
+            "quote": "ひとけの無さの解消については、6月に駅前の複合施設がオープンしますので、待ち時間は施設をご利用いただくこともできます。"
+          }
+        },
+        {
+          "date": "2025-03-15",
+          "target": "6月15日〔令和7年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年3月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-03-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/32382/2025.3.A4.pdf#page=13",
+            "quote": "今月の３月当日はオープンイベントを予定しています地域交流センター「とくとく」は6月15日にオープン〜徐々に"
+          }
+        },
+        {
+          "date": "2025-04-01",
+          "target": "令和7年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-04-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 3,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/32613/2025.4.1.A4.pdf#page=3",
+            "quote": "ジタル技術の活用推進まちの変化や進化を「実感」できる予算新得駅前地域交流センターとくとくの開業や、サホロクリニックの開院が予定されております。"
+          }
+        },
+        {
+          "date": "2025-04-01",
+          "target": "令和7年6月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-04-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 9,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/32613/2025.4.1.A4.pdf#page=9",
+            "quote": "修駅前周辺賑わい創出事業1,360万円新得駅前地域交流センター「とくとく」が令和7年６月にオープンを迎えます。"
+          }
+        }
+      ]
+    },
+    {
+      "name": "駅前広場の供用",
+      "rows": [
+        {
+          "date": "2021-06-01",
+          "target": "令和5年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和3年6月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2021-06-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 8,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/1999/19664/kouhou.shintoku_2021.06_mid.A4.pdf#page=8",
+            "quote": "駅前周辺再整備スケジュール（現時点での予定）"
+          }
+        },
+        {
+          "date": "2022-08-15",
+          "target": "令和7年4月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+            "quote": "令和７年４月新・駅前広場"
+          }
+        },
+        {
+          "date": "2022-08-15",
+          "target": "令和7年4月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 13,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+            "quote": "供用（利用）開始予定"
+          }
+        },
+        {
+          "date": "2023-04-15",
+          "target": "令和7年4月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和5年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2023-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 7,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2791/27350/2023.4.kouhou.A4.mid.all.pdf#page=7",
+            "quote": "令和７年４月新・駅前広場供用（利用）開始予定"
+          }
+        },
+        {
+          "date": "2024-04-15",
+          "target": "令和7年4月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和6年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2024-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 19,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30124/2024.4.kouhou.A4.full.all.pdf#page=19",
+            "quote": "令和７年４月新・駅前広場"
+          }
+        },
+        {
+          "date": "2024-04-15",
+          "target": "令和7年4月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和6年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2024-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 19,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30124/2024.4.kouhou.A4.full.all.pdf#page=19",
+            "quote": "供用（利用）開始予定"
+          }
+        }
+      ]
+    },
+    {
+      "name": "駅前広場の工事開始",
+      "rows": [
+        {
+          "date": "2023-02-15",
+          "target": "令和5年5月",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和5年2月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2023-02-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 3,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/26788/2023.2.kouhou.A4.mid.all.pdf#page=3",
+            "quote": "令和５年５月中旬から令和７年３月頃までの工事期間中"
+          }
+        }
+      ]
+    },
+    {
+      "name": "複合施設・温浴宿泊施設の着工",
+      "rows": [
+        {
+          "date": "2023-02-15",
+          "target": "複合施設 令和6年・温浴宿泊施設 令和7年",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和5年2月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2023-02-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 3,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/26788/2023.2.kouhou.A4.mid.all.pdf#page=3",
+            "quote": "複合施設➡︎令和６年温浴宿泊施設➡︎令和７年"
+          }
+        },
+        {
+          "date": "2023-04-15",
+          "target": "複合施設 令和6年・温浴宿泊施設 令和7年",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和5年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2023-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 3,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2791/27350/2023.4.kouhou.A4.mid.all.pdf#page=3",
+            "quote": "複合施設➡︎令和６年温浴宿泊施設➡︎令和７年"
+          }
+        },
+        {
+          "date": "2024-05-15",
+          "target": "複合施設 令和6年・温浴宿泊施設 令和7年",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和6年5月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2024-05-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 9,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30283/2024.5.kouhou.A4.full.all.pdf#page=9",
+            "quote": "複合施設➡︎令和６年温浴宿泊施設➡︎令和７年"
+          }
+        },
+        {
+          "date": "2025-08-01",
+          "target": "温浴宿泊施設 今年〔令和7年〕",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和7年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2025-08-01",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 9,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3231/33591/A4.2025.8.pdf#page=9",
+            "quote": "温浴宿泊施設は今年から工事が始まる予定です。"
+          }
+        }
+      ]
+    },
+    {
+      "name": "金融機関の営業開始",
+      "rows": [
+        {
+          "date": "2022-08-15",
+          "target": "令和9年度",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和4年8月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2022-08-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 9,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=9",
+            "quote": "令和８年度に解体後、その跡地を使って金融機関の建設工事を実施するため、他の複合施設が令和７年度に開業してから２年後となる令和９年度に金融機関の営業を開始する"
+          }
+        }
+      ]
+    },
+    {
+      "name": "指定管理者",
+      "rows": [
+        {
+          "date": "2024-04-15",
+          "target": "新得タウンマネジメント",
+          "moved": false,
+          "sourceType": "koho",
+          "citation": {
+            "kind": "koho",
+            "meeting": "広報しんとく 令和6年4月号",
+            "sessionKey": null,
+            "speechIndex": null,
+            "date": "2024-04-15",
+            "speaker": "町（広報しんとく）",
+            "role": "広報",
+            "page": 19,
+            "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30124/2024.4.kouhou.A4.full.all.pdf#page=19",
+            "quote": "運営を担う指定管理者は、町商工会が出資する「新得タウンマネジメント株式会社」を予定しています。"
+          }
+        }
+      ]
+    }
+  ],
+  "delayReasons": [
+    {
+      "subject": "町（広報しんとく）の説明",
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和8年7月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2026-07-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 18,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3481/36025/A4.pdf#page=18",
+        "quote": "中東情勢の影響により建築資材の入荷が遅れることが確定したため、開業を令和９年４月に延期することになりました"
+      }
+    },
+    {
+      "subject": "会議録の答弁",
+      "citation": {
+        "meeting": "令和8年 定例第2回",
+        "sessionKey": "r8-2026-06-regular-2",
+        "speechIndex": 9,
+        "date": "2026-06-03",
+        "speaker": "湯浅真希",
+        "role": "町長",
+        "page": 11,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+        "quote": "中東情勢悪化の影響を受けまして、駅前温浴宿泊施設の建設が大幅に遅れております"
+      }
+    }
+  ],
+  "costStatements": [
+    {
+      "amount": "約32億円",
+      "when": "2021年6月号",
+      "scope": "概略設計の前の想定。設計費や工事費全体で、内訳の記載なし",
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和3年6月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2021-06-01",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 8,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/1999/19664/kouhou.shintoku_2021.06_mid.A4.pdf#page=8",
+        "quote": "設計費や工事費全体で“約３２億円”を見込んでいます"
+      }
+    },
+    {
+      "amount": "32億5,800万円",
+      "when": "2022年8月号",
+      "scope": "令和3年度の概略設計で算出。駅前広場（設計を含む）・複合施設・温浴宿泊施設・全体の実施設計・全体の外構",
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和4年8月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2022-08-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 13,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2599/25649/2022.8.kouhou.A4.mid.all.pdf#page=13",
+        "quote": "３２億５，８００万円"
+      }
+    },
+    {
+      "amount": "36億6,870万円",
+      "when": "2024年4月号",
+      "scope": "令和2〜9年度の概算。2022年8月号と同じ5区分",
+      "citation": {
+        "kind": "koho",
+        "meeting": "広報しんとく 令和6年4月号",
+        "sessionKey": null,
+        "speechIndex": null,
+        "date": "2024-04-15",
+        "speaker": "町（広報しんとく）",
+        "role": "広報",
+        "page": 19,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3022/30124/2024.4.kouhou.A4.full.all.pdf#page=19",
+        "quote": "合計３６億６，８７０万円"
+      }
+    }
+  ],
+  "cost": [
+    {
+      "label": "事業全体",
+      "base": 32,
+      "baseLabel": "約32億円",
+      "plus": 7,
+      "plusLabel": "約7億円増",
+      "citations": [
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "speechIndex": 141,
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "全体で32億円程度を見込んでおります"
+        },
+        {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "speechIndex": 134,
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+        }
+      ]
+    },
+    {
+      "label": "温浴宿泊施設（建築主体の契約）",
+      "base": 10.439,
+      "baseLabel": "10億4,390万円",
+      "plus": 1.2663915,
+      "plusLabel": "1億2,663万9,150円増",
+      "citations": [
+        {
+          "meeting": "令和8年 臨時第3回",
+          "sessionKey": "r8-2026-07-rinji-03",
+          "speechIndex": 9,
+          "date": "2026-07-06",
+          "speaker": "福原浩之",
+          "role": "総務課長",
+          "page": 7,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf#page=7",
+          "quote": "変更前、10億4,390万円、変更後、11億7,053万9,150円となり"
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "再整備の範囲",
+      "question": {
+        "meeting": "平成25年 定例第1回",
+        "sessionKey": "h25-2013-03-regular-1",
+        "speechIndex": 192,
+        "date": "2013-03-13",
+        "speaker": "長野章",
+        "role": "議員",
+        "page": 57,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=57",
+        "quote": "構想だけでももう少し広げた考えを持っていただけないかお伺いしたいと思います"
+      },
+      "answer": {
+        "meeting": "平成25年 定例第1回",
+        "sessionKey": "h25-2013-03-regular-1",
+        "speechIndex": 194,
+        "date": "2013-03-13",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 58,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=58",
+        "quote": "まずは駅前広場の町有地の範囲内での構想を考えていこうというものであります"
+      }
+    },
+    {
+      "topic": "ロータリーの通行",
+      "question": {
+        "meeting": "令和4年 定例第1回",
+        "sessionKey": "r4-2022-03-regular-1",
+        "speechIndex": 182,
+        "date": "2022-03-11",
+        "speaker": "森本洋子",
+        "role": "議員",
+        "page": 63,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+        "quote": "ロータリーでの逆走車防止の解決になるのかが疑問であり"
+      },
+      "answer": {
+        "meeting": "令和4年 定例第1回",
+        "sessionKey": "r4-2022-03-regular-1",
+        "speechIndex": 184,
+        "date": "2022-03-11",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 63,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+        "quote": "ご質問にあるロータリー全体を交互通行にという要望には応えることができなかったものであります"
+      }
+    },
+    {
+      "topic": "ホテルを町が建てる意義",
+      "question": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 132,
+        "date": "2024-12-17",
+        "speaker": "湯浅真希",
+        "role": "議員",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "公共施設としてビジネスホテルを建設する意義をあらためてお伺いいたします"
+      },
+      "answer": {
+        "meeting": "令和6年 定例第4回",
+        "sessionKey": "r6-2024-12-regular-4",
+        "speechIndex": 134,
+        "date": "2024-12-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 34,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+        "quote": "ビジネスホテルという選択肢が増えることで、人を呼び込み、新たな消費を創出し"
+      }
+    }
+  ]
+}
