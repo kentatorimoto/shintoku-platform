@@ -195,6 +195,10 @@ export const ANCHORS = {
   qna:      "qna",
 } as const
 
-/** 検索で、まだ読んでいない年の広報を読むボタン */
-export const SEARCH_KOHO_MORE_TEXT = (newest: number, oldest: number) =>
-  `広報しんとくをさらに検索する（未読: ${oldest}〜${newest}年）`
+/** 検索で、まだ読んでいない年の広報があるときの表示 */
+export const SEARCH_KOHO_UNREAD_TEXT = (oldest: number, newest: number) =>
+  `まだ読んでいない年があります（広報 ${oldest}〜${newest}年）`
+
+/** 読む量の目安つきの、全年を読むボタン */
+export const SEARCH_KOHO_ALL_TEXT = (bytes: number) =>
+  `すべての年を検索（約${Math.round(bytes / 1e6)}MB）`

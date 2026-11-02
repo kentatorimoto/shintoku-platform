@@ -3,7 +3,9 @@
 //   npm run index:newsletters [-- --cache <リポジトリ外のdir>]
 //
 //   content/koho/{key}/raw.txt     全文（Layer 0。ページ境界は \f。public に出さない）
-//   public/data/koho/years.json    索引のある年の一覧
+//   public/data/koho/years.json    索引のある年と大きさ
+//   data/koho/personal-pages.json     検索索引から外したページ（町民の名前が並ぶ欄）
+//   data/koho/personal-suspects.json  取りこぼしの疑いがあるページ（索引には残す）
 //   public/data/koho/index-YYYY.json  その年の検索索引
 //
 // PDFは保存しない。pdftotext（poppler）が要る。
@@ -14,6 +16,7 @@ import os from "os"
 import path from "path"
 import { http } from "./lib/http"
 import type { KohoIssue } from "./lib/koho-issue"
+import { personalReason, suspectReason } from "./lib/koho-personal"
 
 const ROOT = process.cwd()
 const INDEX_PATH = path.join(ROOT, "data", "koho", "index.json")
@@ -65,6 +68,8 @@ function writeSearchIndex(issues: KohoIssue[]) {
   fs.mkdirSync(PUBLIC_DIR, { recursive: true })
   const years = [...new Set(issues.filter(i => i.status === "text").map(i => i.year))].sort((a, b) => b - a)
   const sizes: { year: number; bytes: number }[] = []
+  const excluded: Record<string, unknown>[] = []
+  const suspects: Record<string, unknown>[] = []
   for (const year of years) {
     const entries = issues.filter(i => i.status === "text" && i.year === year).map((issue) => {
       const raw = fs.readFileSync(path.join(CONTENT_DIR, issue.key, "raw.txt"), "utf-8").split("\f")
@@ -72,7 +77,17 @@ function writeSearchIndex(issues: KohoIssue[]) {
         title: issue.title.replace(/[（(]?A4版?[）)]?/, "").trim(), date: issue.date, url: issue.url,
         pages: raw.flatMap((p, i) => {
           const text = normalizeText(p)
-          return text ? [{ page: i + 1, text }] : []
+          if (!text) return []
+          const where = { key: issue.key, page: i + 1, url: `${issue.url}#page=${i + 1}` }
+          // 町民の名前が並ぶ欄は検索できないようにする。全文は content/koho に残る
+          const personal = personalReason(p)
+          if (personal) {
+            excluded.push({ ...where, reason: personal })
+            return []
+          }
+          const suspect = suspectReason(p)
+          if (suspect) suspects.push({ ...where, reason: suspect })
+          return [{ page: i + 1, text }]
         }),
       }
     })
@@ -80,7 +95,12 @@ function writeSearchIndex(issues: KohoIssue[]) {
     fs.writeFileSync(path.join(PUBLIC_DIR, `index-${year}.json`), body + "\n")
     sizes.push({ year, bytes: Buffer.byteLength(body) })
   }
-  fs.writeFileSync(path.join(PUBLIC_DIR, "years.json"), JSON.stringify(years) + "\n")
+  fs.writeFileSync(path.join(PUBLIC_DIR, "years.json"), JSON.stringify(sizes) + "\n")
+  const writeRows = (file: string, rows: unknown[]) =>
+    fs.writeFileSync(path.join(path.dirname(INDEX_PATH), file), `[\n${rows.map(r => JSON.stringify(r)).join(",\n")}\n]\n`)
+  writeRows("personal-pages.json", excluded)
+  writeRows("personal-suspects.json", suspects)
+  console.log(`検索索引から外したページ ${excluded.length} / 疑いのあるページ ${suspects.length}`)
   const total = sizes.reduce((n, s) => n + s.bytes, 0)
   const max = sizes.reduce((a, b) => (a.bytes > b.bytes ? a : b), { year: 0, bytes: 0 })
   console.log(`検索索引: ${years.length} 年分 / 合計 ${(total / 1e6).toFixed(1)}MB / 最大 ${max.year} 年 ${(max.bytes / 1e6).toFixed(2)}MB`)
