@@ -73,7 +73,6 @@ shintoku-platform/
 │       ├── session.md            #   単一パート（part_type: qna）
 │       ├── cards.yaml            #   要点カード（MDの派生物。cards:generate で生成）
 │       └── transcripts/          #   Layer 0: 字幕生データ（不可侵）
-│   koho/{key}/raw.txt            # 広報しんとくの全文（一覧は data/koho/index.json。PDFは置かない。町民の名前が並ぶページは目印に置換）
 ├── docs/
 │   ├── content-schema.md         # コンテンツ正典スキーマ（迷ったらこれが正）
 │   ├── auto-ingest.md            # ★ 自動取り込みの対応表と運用
@@ -103,7 +102,7 @@ shintoku-platform/
 │   ├── scrape-announcements.ts
 │   ├── scrape-newsletters.ts
 │   ├── scrape-giketsu.ts
-│   ├── index-newsletters.ts      # 広報PDF → content/koho/ の全文と年ごとの検索索引（要 poppler）
+│   ├── index-newsletters.ts      # 広報PDF → corpus の全文と年ごとの検索索引（要 poppler）
 │   ├── check-koho.ts             # 月号が各月1号そろっているかの検査
 │   ├── build-search-index.ts     # ★ 検索用の索引（一般質問・お知らせ）
 │   ├── convertSlides.mjs         # PDF → JPEG slides (requires poppler)
@@ -170,7 +169,7 @@ npm run sync             # Run all scrapers (announcements -> newsletters -> ind
 npm run scrape:announcements
 npm run scrape:newsletters
 npm run scrape:giketsu
-npm run index:newsletters  # 未取得の号の PDF -> content/koho/{key}/raw.txt、検索索引を年ごとに作る
+npm run index:newsletters  # 未取得の号の PDF -> .corpus/koho/{key}/raw.txt、検索索引を年ごとに作る
 npm run koho:check         # 月号の抜け・文字なしの号を報告
 
 # Gikai tools
@@ -196,11 +195,22 @@ Public JSON (public/data/*.json)  ←────────  content/sessions/
 Next.js App Router pages (app/)
 ```
 
+**全文（会議録・広報）は非公開リポジトリ `kentatorimoto/shintoku-corpus` に置く。** 公開リポジトリには入れない。
+手元では `.corpus/` に clone する（gitignore 済み。場所は `CORPUS_DIR` で変えられる。`scripts/lib/corpus.ts`）。
+weekly-sync はデプロイキー `CORPUS_DEPLOY_KEY` で corpus を読み書きする。Vercel のビルドは全文を読まない。
+
+```bash
+git clone git@github.com:kentatorimoto/shintoku-corpus.git .corpus
+```
+
+広報の検索索引（`public/data/koho`）からは、学校・学年と児童生徒の名前が並ぶ文を外す（全文には残す。
+外したページは `data/koho/minor-name-pages.json`）。
+
 `public/data/gikai_sessions.json`・`public/data/qna/*.json`・`public/data/cards/*.json` は
 `npm run build:data` の生成物。**直接編集禁止** — 修正は `content/` のMD / cards.yaml に対して行う。
 
 GitHub Actions automates:
-- `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / 広報の `data/koho` `content/koho` `public/data/koho` （生成物 `gikai_sessions.json` / `qna/` には触れない）
+- `daily-sync.yml`: Runs `npm run sync` + `index:newsletters` at 12:00 JST, commits `lastSync.json` / 広報の `data/koho` `public/data/koho`。全文は先に shintoku-corpus へ push する（生成物 `gikai_sessions.json` / `qna/` には触れない）
 - `daily-scrape.yml`: Runs `test-scraper.ts` at 09:00 JST, commits `data/scraped/` changes
 - `watch-council.yml`: Runs `watch-council.ts` at 09:00 JST。議会チャンネルのRSSに新着があれば GitHub Issue を立て、`data/watch/known-videos.json` を更新する。続けて `auto-ingest.yml` を呼ぶ
 - `auto-ingest.yml`: Issue のタイトルからセッションID・パートを推定し、字幕 → MD → PR まで作る（12:00 JST の再試行 + 手動実行）。詳細は `docs/auto-ingest.md`

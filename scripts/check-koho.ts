@@ -4,6 +4,7 @@
 
 import fs from "fs"
 import path from "path"
+import { corpusPath } from "./lib/corpus"
 import type { KohoIssue } from "./lib/koho-issue"
 import { maskedReason, personalReason } from "./lib/koho-personal"
 
@@ -34,7 +35,7 @@ console.log(`未取得 ${issues.filter(i => i.status === "pending").length} 号`
 console.log(`抜けている月 ${missing.length}: ${missing.join(", ") || "なし"}`)
 
 // 名前の欄が本文に残っていたら失敗にする
-const leaks = text.flatMap(i => fs.readFileSync(path.join(process.cwd(), "content", "koho", i.key, "raw.txt"), "utf-8").split("\f")
+const leaks = text.flatMap(i => fs.readFileSync(corpusPath("koho", i.key, "raw.txt"), "utf-8").split("\f")
   .flatMap((p, n) => (!maskedReason(p) && personalReason(p) ? [`${i.key} p.${n + 1}`] : [])))
 console.log(`個人の欄が残るページ ${leaks.length}: ${leaks.join(", ") || "なし"}`)
 if (leaks.length > 0) process.exit(1)

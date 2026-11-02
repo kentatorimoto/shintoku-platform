@@ -15,6 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 広報の全文は非公開の shintoku-corpus にある。公開リポジトリには入れない
+      - uses: actions/checkout@v4
+        with:
+          repository: kentatorimoto/shintoku-corpus
+          ssh-key: ${{ secrets.CORPUS_DEPLOY_KEY }}
+          path: .corpus
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -37,10 +44,17 @@ jobs:
       #
       # lastSync.json はコミットしない（そもそも書かなくなった）。
       # 画面から読まれていないのに日付1行が毎日変わり、ビルドの引き金になっていた。
+      #
+      # 全文は corpus に先に push する。公開側の索引が全文より先に進まないように。
       - name: Commit and push if changed
         run: |
-          git config user.name "shintoku-atlas-bot"
-          git config user.email "actions@users.noreply.github.com"
+          for dir in .corpus .; do
+            git -C "$dir" config user.name "shintoku-atlas-bot"
+            git -C "$dir" config user.email "actions@users.noreply.github.com"
+          done
 
-          git add data/koho content/koho public/data/koho
+          git -C .corpus add koho
+          git -C .corpus diff --cached --quiet || (git -C .corpus commit -m "chore: weekly newsletter text" && git -C .corpus push)
+
+          git add data/koho public/data/koho
           git diff --cached --quiet || (git commit -m "chore: weekly newsletter index" && git push)
