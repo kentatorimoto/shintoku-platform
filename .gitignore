@@ -48,3 +48,6 @@ public/data/gikai_links.json
 
 # Claude Code のワークツリー（gitlink として誤ってコミットされていた）
 .claude/worktrees/
+
+# 会議録と広報の全文。非公開リポジトリ kentatorimoto/shintoku-corpus を clone して使う（scripts/lib/corpus.ts）
+/.corpus

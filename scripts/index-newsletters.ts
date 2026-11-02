@@ -1,11 +1,14 @@
-// 未取得の号のPDFを一時取得して全文を content/koho/{key}/raw.txt に保存し、横断検索の索引を年ごとに作る。
+// 未取得の号のPDFを一時取得して全文を corpus の koho/{key}/raw.txt に保存し、横断検索の索引を年ごとに作る。
 //
 //   npm run index:newsletters [-- --cache <リポジトリ外のdir>]
 //
-//   content/koho/{key}/raw.txt     全文（ページ境界は \f。public に出さない）。町民の名前が並ぶページは目印に置き換える
+//   {corpus}/koho/{key}/raw.txt    全文（非公開の shintoku-corpus。ページ境界は \f）。町民の名前が並ぶページは目印に置き換える
 //   public/data/koho/years.json    索引のある年と大きさ
 //   data/koho/personal-pages.json     目印に置き換えたページ（町民の名前が並ぶ欄）
 //   data/koho/personal-suspects.json  取りこぼしの疑いがあるページ（本文に残す）
+//   data/koho/minor-name-pages.json   索引から児童生徒の名前を含む文を外したページと文の数
+//
+// 索引では、児童生徒の名前を含む文を外す（全文には残す。規則は lib/koho-personal.ts）。
 //
 // 新しい号に疑いのページがあれば Telegram に号とページを知らせる。
 //   public/data/koho/index-YYYY.json  その年の検索索引
@@ -17,13 +20,16 @@ import fs from "fs"
 import os from "os"
 import path from "path"
 import { http } from "./lib/http"
+import { corpusPath } from "./lib/corpus"
 import type { KohoIssue } from "./lib/koho-issue"
-import { maskedReason, personalMarker, personalReason, suspectReason } from "./lib/koho-personal"
+import { maskedReason, personalMarker, personalReason, rosterPattern, stripMinorNames, suspectReason } from "./lib/koho-personal"
 import { notify } from "./lib/telegram"
 
 const ROOT = process.cwd()
 const INDEX_PATH = path.join(ROOT, "data", "koho", "index.json")
-const CONTENT_DIR = path.join(ROOT, "content", "koho")
+const CONTENT_DIR = corpusPath("koho")
+/** 子ども議会の児童生徒の名簿（kaigiroku:extract が作る）。公開リポジトリには置かない */
+const ROSTER_PATH = corpusPath("names", "child-assembly.txt")
 const PUBLIC_DIR = path.join(ROOT, "public", "data", "koho")
 const FETCH_INTERVAL_MS = 1_000
 /** これ未満の文字数のページは「文字なし」と数える */
@@ -92,6 +98,10 @@ function writeSearchIndex(issues: KohoIssue[]) {
   const sizes: { year: number; bytes: number }[] = []
   const excluded: Record<string, unknown>[] = []
   const suspects: { key: string; page: number; url: string; reason: string }[] = []
+  const minors: { key: string; page: number; url: string; sentences: number }[] = []
+  const removedBy = { school: 0, roster: 0, kunChan: 0 }
+  const roster = rosterPattern(fs.readFileSync(ROSTER_PATH, "utf-8").split("\n"))
+  if (!roster) throw new Error(`名簿が空: ${ROSTER_PATH}`)
   for (const year of years) {
     const entries = issues.filter(i => i.status === "text" && i.year === year).map((issue) => ({
       title: issue.title.replace(/[（(]?A4版?[）)]?/, "").trim(), date: issue.date, url: issue.url,
@@ -101,7 +111,10 @@ function writeSearchIndex(issues: KohoIssue[]) {
           excluded.push({ ...where, reason: personal })
           return []
         }
-        const text = normalizeText(raw)
+        const { text, removed } = stripMinorNames(normalizeText(raw), roster)
+        const sentences = removed.school + removed.roster + removed.kunChan
+        if (sentences > 0) minors.push({ ...where, sentences })
+        for (const k of Object.keys(removedBy) as (keyof typeof removedBy)[]) removedBy[k] += removed[k]
         if (!text) return []
         const suspect = suspectReason(raw)
         if (suspect) suspects.push({ ...where, reason: suspect })
@@ -117,7 +130,9 @@ function writeSearchIndex(issues: KohoIssue[]) {
     fs.writeFileSync(path.join(path.dirname(INDEX_PATH), file), `[\n${rows.map(r => JSON.stringify(r)).join(",\n")}\n]\n`)
   writeRows("personal-pages.json", excluded)
   writeRows("personal-suspects.json", suspects)
+  writeRows("minor-name-pages.json", minors)
   console.log(`目印に置き換えたページ ${excluded.length} / 疑いのあるページ ${suspects.length}`)
+  console.log(`索引から外した児童生徒の名前の文 ${minors.reduce((n, m) => n + m.sentences, 0)}（${minors.length} ページ）: 学校・学年 ${removedBy.school} / 名簿 ${removedBy.roster} / くん・ちゃん ${removedBy.kunChan}`)
   const total = sizes.reduce((n, s) => n + s.bytes, 0)
   const max = sizes.reduce((a, b) => (a.bytes > b.bytes ? a : b), { year: 0, bytes: 0 })
   console.log(`検索索引: ${years.length} 年分 / 合計 ${(total / 1e6).toFixed(1)}MB / 最大 ${max.year} 年 ${(max.bytes / 1e6).toFixed(2)}MB`)
