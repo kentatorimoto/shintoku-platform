@@ -268,5 +268,5 @@
 {"key":"2026-08","kind":"monthly","title":"広報しんとく 令和8年8月号(A4)","date":"2026-08-01","year":2026,"month":8,"url":"https://www.shintoku-town.jp/output/contents/file/release/3481/36260/A4.pdf","status":"text","pages":30,"chars":27775,"blankPages":[]},
 {"key":"2026-09","kind":"monthly","title":"広報しんとく 令和8年9月号(A4)","date":"2026-09-01","year":2026,"month":9,"url":"https://www.shintoku-town.jp/output/contents/file/release/3481/36513/A4.pdf","status":"text","pages":26,"chars":22670,"blankPages":[]},
 {"key":"2026-10","kind":"monthly","title":"広報しんとく 令和8年10月(A4)","date":"2026-10-01","year":2026,"month":10,"url":"https://www.shintoku-town.jp/output/contents/file/release/3481/36859/A4.pdf","status":"text","pages":28,"chars":27960,"blankPages":[]},
-{"key":"2026-11","kind":"monthly","title":"広報しんとく 令和8年11月号（A4）","date":"2026-11-01","year":2026,"month":11,"url":"https://www.shintoku-town.jp/output/contents/file/release/3481/37036/A4.pdf","status":"pending","pages":null,"chars":null,"blankPages":[]}
+{"key":"2026-11","kind":"monthly","title":"広報しんとく 令和8年11月号（A4）","date":"2026-11-01","year":2026,"month":11,"url":"https://www.shintoku-town.jp/output/contents/file/release/3481/37036/A4.pdf","status":"text","pages":28,"chars":25648,"blankPages":[]}
 ]
