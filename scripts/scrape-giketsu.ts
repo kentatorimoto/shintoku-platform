@@ -3,8 +3,7 @@ import axios from "axios"
 import fs from "fs"
 import path from "path"
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const { PDFParse } = require("pdf-parse")
+import { readGiketsuPdf, type TableRow } from "./lib/giketsu-pdf"
 
 const BASE = "https://www.shintoku-town.jp"
 const INDEX_URL = `${BASE}/gyousei/gikai/giketsu/`
@@ -33,6 +32,7 @@ interface GiketsuSession {
   sessionName: string   // "令和7年定例第1回"
   sessionRange: string  // "3月3日～3月19日" (あれば)
   items: GiketsuItem[]
+  sessionId?: string    // 手で紐付けたセッションID。再生成でも引き継ぐ
 }
 
 interface PdfEntry {
@@ -59,191 +59,39 @@ function eraToYear(type: "令和" | "平成", n: number): number {
 
 // ─────────────────────────── PDF parsing ──────────────────────────
 
-async function getPdfText(buf: Uint8Array): Promise<string> {
-  const parser = new PDFParse(buf, { verbosity: 0 })
-  try {
-    const result = await parser.getText()
-    const pages: Array<{ text: string }> = result.pages ?? []
-    return pages.map((p) => p.text).join("\n")
-  } finally {
-    parser.destroy()
-  }
-}
-
-const RESULT_KEYWORDS = [
-  "原案可決", "修正可決", "否決", "撤回",
-  "継続審査", "委員会付託", "不採択", "採択", "廃案", "取り下げ",
-]
-
-/** 議決結果行かどうかを判定 */
-function isResultLine(line: string): boolean {
-  return (
-    /(議案|意見案)\s*第\s*(\d+)\s*号/.test(line) &&
-    /(\d{1,2})\s*月\s*(\d{1,2})\s*日/.test(line) &&
-    RESULT_KEYWORDS.some((kw) => line.includes(kw))
-  )
-}
-
-/**
- * 件名候補行でない（構造ヘッダ・文書番号など）かを判定
- *
- * PDFには「議案番号 議決月日 議決結果」「件 名」「令和 7 年 ３月19日」など
- * 構造的な行が件名ブロックの前後に現れるため除外する。
- */
-function isTitleCandidate(line: string): boolean {
-  // 「件 名」単独ヘッダ
-  if (/^件\s*名$/.test(line)) return false
-  // 列ヘッダ「議案番号 議決月日 議決結果...」
-  if (/^議案番号[\s]/.test(line)) return false
-  // 会議サマリー行「定例第1回 3月3日 3月19日 ...」
-  if (/^(定例|臨時)第\d+回\s+\d+月\d+日/.test(line)) return false
-  // 文書番号「新 議 号」
-  if (/^新\s+議\s+号/.test(line)) return false
-  // スペース入り日付「令和 7 年 3 月...」（報告書ヘッダ）
-  if (/^令和\s+\d+\s+年/.test(line)) return false
-  // 宛先・差出人
-  if (/^新\s+得\s+町\s+長/.test(line)) return false
-  if (/^新得町議会議長\s/.test(line)) return false
-  // 文書タイトル
-  if (/新得町議会議決結果報告/.test(line)) return false
-  // 休会期間「3月4日 ～ 3月12日」
-  if (/^\d+月\d+日\s*[～~]/.test(line)) return false
-  // 期間ヘッダ
-  if (/^(招集月日|開会月日|閉会月日|会議日数|休会月日)/.test(line)) return false
-  return true
-}
-
-/**
- * 件名テキスト行列から完全な件名を再構成する。
- *
- * PDFのページ幅で行が途中切断されるため、日本語の典型的な文末パターンで
- * 区切りを判断し複数行を1件名に結合する。
- */
-const TITLE_END_RE =
-  /について$|予算$|件$|）$|\)$|意見書$|こと$|ため$|同意$|よる$|など$|承認$|承諾$/
-
-function reconstructTitles(lines: string[]): string[] {
-  const titles: string[] = []
-  let current = ""
-
-  for (const line of lines) {
-    current = current ? current + line : line
-
-    if (TITLE_END_RE.test(current) || current.length > 120) {
-      titles.push(current.trim())
-      current = ""
-    }
-  }
-
-  if (current) titles.push(current.trim())
-  return titles
-}
-
-/**
- * PDF全文テキストから議案データを抽出する。
- *
- * PDFは以下のブロック構成を繰り返す:
- *   [結果ブロック] 議案第n号 n月n日 原案可決  ← case# + date + result
- *   [件名ブロック] （議案番号なし）件名テキスト  ← 結果と同順で並ぶ
- *
- * 結果ブロックと件名ブロックを位置順にマッピングし1件ずつ対応付ける。
- */
-function parsePdfText(rawText: string): {
-  sessionRange: string
-  items: GiketsuItem[]
-} {
-  const hw = toHalfWidth(rawText)
-  const lines = hw
-    .split(/\r?\n/)
-    .map((l) => l.replace(/\s+/g, " ").trim())
-    .filter(Boolean)
-
-  // ── 会期の抽出 ──────────────────────────────────────────────────
-  // 「定例第1回 3月3日 3月19日 ...」形式の行から開会～閉会を取得
-  let sessionRange = ""
-  for (const line of lines) {
-    const m = line.match(/(定例|臨時)第\d+回\s+(\d+月\d+日)\s+(\d+月\d+日)/)
-    if (m) {
-      sessionRange = `${m[2]}～${m[3]}`
-      break
-    }
-  }
-  // フォールバック: 「会期 ...」形式
-  if (!sessionRange) {
-    const m = hw.match(/会\s*期\s+([^\n]+)/)
-    if (m) sessionRange = m[1].trim()
-  }
-
-  // ── ステートマシン: (結果ブロック, 件名行) ペアを収集 ──────────────
-  type ResultEntry = {
-    caseType: string
-    caseNum: number
-    decisionDate: string
-    result: string
-  }
-  const segments: Array<{ results: ResultEntry[]; titleLines: string[] }> = []
-  let currentResults: ResultEntry[] = []
-  let currentTitleLines: string[] = []
-  let state: "INIT" | "RESULTS" | "TITLES" = "INIT"
-
-  for (const line of lines) {
-    if (isResultLine(line)) {
-      if (state === "TITLES") {
-        // 前セグメントを確定して新セグメント開始
-        segments.push({ results: currentResults, titleLines: currentTitleLines })
-        currentResults = []
-        currentTitleLines = []
-      }
-      state = "RESULTS"
-
-      const cm = line.match(/(議案|意見案)\s*第\s*(\d+)\s*号/)!
-      const dm = line.match(/(\d{1,2})\s*月\s*(\d{1,2})\s*日/)!
-      const rw = RESULT_KEYWORDS.find((kw) => line.includes(kw))!
-
-      currentResults.push({
-        caseType: cm[1],
-        caseNum: parseInt(cm[2], 10),
-        decisionDate: `${dm[1]}月${dm[2]}日`,
-        result: rw,
-      })
-    } else {
-      if (state === "RESULTS") state = "TITLES"
-      if (state === "TITLES" && isTitleCandidate(line)) {
-        currentTitleLines.push(line)
-      }
-    }
-  }
-
-  // 最終セグメントを保存
-  if (currentResults.length > 0 || currentTitleLines.length > 0) {
-    segments.push({ results: currentResults, titleLines: currentTitleLines })
-  }
-
-  // ── 結果と件名を位置順でマッピング ───────────────────────────────
+/** 表の行のうち、議案と意見案を索引の項目にする（報告・認定・選挙などは載せない） */
+function toItems(rows: TableRow[]): GiketsuItem[] {
   const items: GiketsuItem[] = []
-
-  for (const seg of segments) {
-    const titles = reconstructTitles(seg.titleLines)
-
-    seg.results.forEach((res, i) => {
-      items.push({
-        caseNumber: `${res.caseType}第${res.caseNum}号`,
-        caseType: res.caseType,
-        num: res.caseNum,
-        title: titles[i] ?? "",
-        decisionDate: res.decisionDate,
-        result: res.result,
-      })
+  for (const row of rows) {
+    if (row.label !== "議案" && row.label !== "意見案") continue
+    items.push({
+      caseNumber: `${row.label}第${row.num}号`,
+      caseType: row.label,
+      num: row.num,
+      title: row.title,
+      decisionDate: row.date,
+      result: row.result === "原案否決" ? "否決" : row.result,
     })
   }
 
   // 議案 → 意見案、番号昇順でソート
-  items.sort((a, b) => {
+  return items.sort((a, b) => {
     if (a.caseType !== b.caseType) return a.caseType === "議案" ? -1 : 1
     return a.num - b.num
   })
+}
 
-  return { sessionRange, items }
+/**
+ * 「定例第2回 6月2日 6月2日 6月20日 ～ 6月21日 6月22日 3日」の行から会期を取り出す。
+ * 列は 招集・開会・休会・閉会 の順。開会の欄は PDF によって閉会日が読めてしまうので、
+ * 招集日（開会と同じ日）から、休会（「～」でつながる2つ）を除いた最後の日までとする
+ */
+function parseSessionRange(rawText: string): string {
+  const hw = toHalfWidth(rawText)
+  const line = hw.split(/\r?\n/).find((l) => /^\s*(定例|臨時)\s*第\s*\d+\s*回\s+\d+\s*月/.test(l))
+  if (!line) return ""
+  const dates = (line.replace(/\d+月\d+日\s*[～~]\s*\d+月\d+日/g, "").match(/\d+月\d+日/g) ?? [])
+  return dates.length >= 2 ? `${dates[0]}～${dates[dates.length - 1]}` : ""
 }
 
 // ─────────────────────────── Crawling ─────────────────────────────
@@ -319,6 +167,11 @@ async function main() {
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
   const outPath = path.join(outDir, "giketsu_index.json")
 
+  const previous: GiketsuSession[] = fs.existsSync(outPath)
+    ? JSON.parse(fs.readFileSync(outPath, "utf-8"))
+    : []
+  const sessionIds = new Map(previous.map((s) => [s.pdfUrl, s.sessionId]))
+
   // A: 年度ページ一覧を取得
   const yearUrls = await fetchYearPageUrls()
   console.log(`Found ${yearUrls.length} year pages`)
@@ -349,8 +202,15 @@ async function main() {
       })
 
       const buf = new Uint8Array(resp.data)
-      const rawText = await getPdfText(buf)
-      const { sessionRange, items } = parsePdfText(rawText)
+      const { rows, layoutText } = readGiketsuPdf(buf)
+      const sessionRange = parseSessionRange(layoutText)
+      const items = toItems(rows)
+      for (const item of items) {
+        if (!item.title || !item.decisionDate || !item.result) {
+          console.warn(`  -> 読み取りが不完全: ${item.caseNumber} ${JSON.stringify(item)}`)
+        }
+      }
+      const sessionId = sessionIds.get(entry.url)
 
       sessions.push({
         pdfUrl: entry.url,
@@ -360,6 +220,7 @@ async function main() {
         sessionName: label,
         sessionRange,
         items,
+        ...(sessionId ? { sessionId } : {}),
       })
 
       successCount++

@@ -167,7 +167,7 @@ npm run auto-ingest -- [--dry-run] [--issue 17]  # Issue -> 字幕 -> MD -> PR�
 npm run sync             # Run all scrapers (announcements -> newsletters -> index)
 npm run scrape:announcements
 npm run scrape:newsletters
-npm run scrape:giketsu
+npm run scrape:giketsu   # 議決結果PDF -> giketsu_index.json（requires poppler）
 npm run index:newsletters  # Build full-text search index for newsletters
 
 # Gikai tools
