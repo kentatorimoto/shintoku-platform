@@ -77,6 +77,12 @@ export default function DesktopTimeline() {
   const years = Array.from({ length: X_END - X_START + 1 }, (_, i) => X_START + i)
   const reasons = view.points.filter(p => p.reason)
   const H = BOTTOM + 58
+  // 番号は重ならないよう、右から順に左へ詰めて並べる
+  const reasonLabelX = reasons.map(p => xOf(yearOf(p.date)))
+  for (let i = reasons.length - 1; i >= 0; i--) {
+    const limit = i === reasons.length - 1 ? W - RIGHT - 10 : reasonLabelX[i + 1] - REASON_GAP
+    reasonLabelX[i] = Math.min(reasonLabelX[i], limit)
+  }
 
   return (
     <div>
@@ -142,8 +148,7 @@ export default function DesktopTimeline() {
           const x = xOf(yearOf(p.date))
           const y = p.whole ? BOTTOM : Math.max(...p.objects.map(laneY))
           const n = reasonNumber(p)
-          // 番号は重ならないよう、右端から詰めて並べる
-          const labelX = Math.min(x, W - RIGHT - 10 - (reasons.length - 1 - i) * REASON_GAP)
+          const labelX = reasonLabelX[i]
           return (
             <g key={p.id}>
               <path d={`M ${x} ${y} L ${x} ${BOTTOM + 22} L ${labelX} ${BOTTOM + 36}`} fill="none" stroke="var(--color-accent)" strokeWidth={1} />

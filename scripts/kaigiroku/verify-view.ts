@@ -4,6 +4,7 @@
 
 import fs from "fs"
 import path from "path"
+import { loadKohoIssues } from "./koho-source"
 
 const ROOT = process.cwd()
 const squash = (s: string) => s.replace(/\s+/g, "")
@@ -26,8 +27,7 @@ function main() {
   walk(view)
 
   const failures: string[] = []
-  const issues = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "newsletters_index.json"), "utf-8")) as
-    { date: string; url: string; pages: { page: number; text: string }[] }[]
+  const issues = loadKohoIssues()
   for (const c of citations) {
     if (c.kind === "koho") {
       const at = `広報 ${c.date} p.${c.page}`

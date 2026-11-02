@@ -4,6 +4,7 @@
 
 import fs from "fs"
 import path from "path"
+import { loadKohoIssues } from "./koho-source"
 import type { Excerpt } from "./excerpt"
 import { ACTIONS, ACTION_PHRASES, CHAIR_ROLE, KOHO_ACTOR, LAYERS, MEMBER_ROLE, OBJECTS, type TraceEvent } from "./event-schema"
 
@@ -20,8 +21,7 @@ function main() {
   const fail = (e: TraceEvent, rule: string) => failures.push(`[${rule}] ${e.id} ${e.date} ${e.actor.name} ${e.actor.role} layer=${e.layer}`)
   const known = new Map(ACTION_PHRASES.flatMap(a => a.phrases.map(p => [p, a.action] as const)))
 
-  const issues = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "newsletters_index.json"), "utf-8")) as
-    { date: string; url: string; pages: { page: number; text: string }[] }[]
+  const issues = loadKohoIssues()
 
   for (const e of events) {
     if (e.source_type !== "kaigiroku" && e.source_type !== "koho") { fail(e, "source_typeが無い"); continue }

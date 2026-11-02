@@ -8,6 +8,7 @@
 import fs from "fs"
 import path from "path"
 import type { Excerpt } from "./excerpt"
+import { loadKohoIssues } from "./koho-source"
 import type { Speech } from "./extract"
 import type { SourceRef, TraceResponse } from "./trace-schema"
 import {
@@ -157,17 +158,19 @@ const KOHO_ACT = /起工|安全祈願|地鎮祭|竣工|完成|オープン|開�
 const KOHO_VIEW = /賑わい|にぎわい|交流人口|コンセプト|目的|を目指/
 /** 町の説明でないもの（投稿・編集後記・質問）と、別の話題 */
 const KOHO_NOT_TOWN = /[▼●]|編集後記|ちなみに|モニター|ご意見|質問|どうにか|でしょうか|ですか/
-const KOHO_OTHER = /文化会館|屋台村|そば祭り|植栽|商品券|出店費用|ジオラマ|観光協会事務所|生活応援|感謝祭|記念祭|場所[：:]|日時|役場庁舎|新庁舎|診療情報|思います|[・…]P\d|火夫の像|駅ピアノ|夏休み/
+const KOHO_OTHER = /文化会館|屋台村|そば祭り|植栽|商品券|出店費用|ジオラマ|観光協会事務所|生活応援|感謝祭|記念祭|場所[：:]|日時|役場庁舎|新庁舎|診療情報|思います|[・…]P\d|火夫の像|駅ピアノ|夏休み|年末年始|幼稚園|レイク・イン|廃屋|施設見学会/
 /** 回数券の案内は、開業予定の時期が書かれた文だけ使う */
 const KOHO_TICKET_ONLY = /回数券(?!.*開業予定)/
 /** 文の形になっていない予定（スケジュール表など）。語の並びを直接拾う */
 const KOHO_PLAN_PATTERNS: { re: RegExp; action: string; phrase: string }[] = [
-  { re: /令和\d+年度工事着工・令和\d+年度開業/, action: "開所", phrase: "開業" },
-  { re: /令和[０-９\d]+年[０-９\d]+月(?:令和[０-９\d]+年[０-９\d]+月)?新・駅前広場(?:新・駅前広場)?供用（利用）(?:供用（利用）)?開始予定(?:開始予定)?/, action: "開所", phrase: "供用" },
-  { re: /令和[０-９\d]+年[０-９\d]+月(?:令和[０-９\d]+年[０-９\d]+月)?複合施設(?:複合施設)?開業(?:開業)?予定(?:予定)?/, action: "開所", phrase: "開業" },
-  { re: /令和５年５月中旬から令和７年３月頃までの工事期間中/, action: "着工", phrase: "工事" },
-  { re: /複合施設➡︎令和６年(?:複合施設➡︎令和６年)?温浴宿泊施設➡︎令和７年(?:温浴宿泊施設➡︎令和７年)?/, action: "着工", phrase: "令和" },
-  { re: /令和８年度に解体後[^。]*令和９年度に金融機関の営業を開始する予定です/, action: "計画", phrase: "予定" },
+  { re: /駅前周辺再整備スケジュール（現時点での予定）/g, action: "開所", phrase: "予定" },
+  { re: /令和\d+年度開業/g, action: "開所", phrase: "開業" },
+  { re: /令和[８8]年10月温浴宿泊施設/g, action: "開所", phrase: "温浴" },
+  { re: /令和[７7]年[４4]月新・駅前広場(?:新・駅前広場)?(?:供用（利用）(?:供用（利用）)?開始予定)?|供用（利用）開始予定/g, action: "開所", phrase: "駅前広場" },
+  { re: /令和[７7]年[６6]月複合施設(?:複合施設)?|複合施設(?:金融機関建設工事)?開業予定/g, action: "開所", phrase: "複合施設" },
+  { re: /令和５年５月中旬から令和７年３月頃までの工事期間中/g, action: "着工", phrase: "工事" },
+  { re: /複合施設➡︎令和６年(?:複合施設➡︎令和６年)?温浴宿泊施設➡︎令和７年(?:温浴宿泊施設➡︎令和７年)?/g, action: "着工", phrase: "令和" },
+  { re: /令和８年度に解体後[^。]*令和９年度に金融機関の営業を開始する/g, action: "計画", phrase: "予定" },
 ]
 const QUOTE_RADIUS = 45
 const QUOTE_MIN_SENTENCE = 12
@@ -182,19 +185,18 @@ function kohoStatedDate(text: string, issueDate: string): string | null {
 
 /** 索引の本文を文に切り、規則に当たる文だけ event にする。引用は索引の本文から空白を除いた抜き出し */
 function kohoEvents(): TraceEvent[] {
-  const issues = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "data", "newsletters_index.json"), "utf-8")) as
-    { title: string; date: string; url: string; pages: { page: number; text: string }[] }[]
+  const issues = loadKohoIssues()
   const seen = new Set<string>()
   const out: TraceEvent[] = []
 
-  for (const issue of [...issues].sort((a, b) => (a.date < b.date ? -1 : 1))) {
+  for (const issue of issues) {
     for (const p of issue.pages) {
       if (!KOHO_SUBJECT.test(p.text)) continue
-      const issueLabel = /令和\S+?[号月]/.exec(issue.title)?.[0] ?? issue.title
+      const issueLabel = issue.label
       const body = squash(p.text)
       for (const plan of KOHO_PLAN_PATTERNS) {
-        const m = plan.re.exec(body)
-        if (!m || seen.has(`${issue.date}#${m[0]}`)) continue
+        for (const m of body.matchAll(plan.re)) {
+        if (seen.has(`${issue.date}#${m[0]}`)) continue
         seen.add(`${issue.date}#${m[0]}`)
         const objects = OBJECTS.filter(o => OBJECT_WORDS[o].test(m[0]))
         out.push({
@@ -203,11 +205,12 @@ function kohoEvents(): TraceEvent[] {
           date: issue.date, stated_date: kohoStatedDate(m[0], issue.date),
           amounts: [], causes: [],
           source: {
-            excerpt_id: null, session_key: null, speech_index: null, issue: `広報しんとく ${issueLabel}`, page: p.page,
+            excerpt_id: null, session_key: null, speech_index: null, issue: issueLabel, page: p.page,
             url: `${issue.url}#page=${p.page}`, agenda: "", quote: m[0], sentence: m[0],
           },
           bill: null, result: null, groups: [], derived_from: [{ section: "koho", title: issueLabel }],
         })
+        }
       }
       for (const raw of p.text.split(/(?<=。)/)) {
         const sentence = squash(raw)
@@ -225,7 +228,7 @@ function kohoEvents(): TraceEvent[] {
         const textObjects = OBJECTS.filter(o => OBJECT_WORDS[o].test(quote))
         const objects = textObjects.length > 0 ? textObjects : OBJECTS.filter(o => OBJECT_WORDS[o].test(sentence))
         const { action, phrase } = layer === "fact" ? actionOf(quote, sentence, layer) : { action: FALLBACK_ACTION.interpretation, phrase: null }
-        const label = /令和\S+?[号月]/.exec(issue.title)?.[0] ?? issue.title
+        const label = issue.label
         out.push({
           id: "", source_type: "koho", layer, action, action_phrase: phrase, tense: tenseOf(sentence),
           actor: KOHO_ACTOR, objects, object_source: objects.length > 0 ? "text" : null,
@@ -234,7 +237,7 @@ function kohoEvents(): TraceEvent[] {
           // 広報の本文は別の記事とつながることがあるので、理由と読むのは語の確かなものだけ
           causes: causesOf(sentence, KOHO_ACTOR.name, false).filter(c => /の影響|ことから/.test(c.marker)),
           source: {
-            excerpt_id: null, session_key: null, speech_index: null, issue: `広報しんとく ${label}`, page: p.page,
+            excerpt_id: null, session_key: null, speech_index: null, issue: label, page: p.page,
             url: `${issue.url}#page=${p.page}`, agenda: "", quote, sentence,
           },
           bill: null, result: null, groups: [], derived_from: [{ section: "koho", title: label }],
