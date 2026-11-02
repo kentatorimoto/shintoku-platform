@@ -194,3 +194,7 @@ export const ANCHORS = {
   honkaigi: "giketsu",
   qna:      "qna",
 } as const
+
+/** 検索で、まだ読んでいない年の広報を読むボタン */
+export const SEARCH_KOHO_MORE_TEXT = (newest: number, oldest: number) =>
+  `広報しんとくをさらに検索する（未読: ${oldest}〜${newest}年）`

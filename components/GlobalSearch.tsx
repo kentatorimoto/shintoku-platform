@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useRef, useCallback, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
 import { X, Search } from "lucide-react"
-import { SEARCH_CATEGORIES, SEARCH_SCOPE_TEXT, type SearchCategory } from "@/lib/labels"
+import { SEARCH_CATEGORIES, SEARCH_SCOPE_TEXT, SEARCH_KOHO_MORE_TEXT, type SearchCategory } from "@/lib/labels"
 import type { ShisekiData, ShisekiItem } from "@/scripts/lib/schema"
 
 // ── 型定義 ─────────────────────────────────────────────────────────────────
@@ -39,6 +39,9 @@ interface GiketsuSession {
     result: string
   }[]
 }
+
+/** 広報の索引を一度に読む年数。新しい年ほど探される */
+const KOHO_YEARS_PER_LOAD = 2
 
 interface NewsletterPage {
   page: number
@@ -259,10 +262,13 @@ export default function GlobalSearch({ open, onClose }: Props) {
   const [announcements, setAnnouncements] = useState<Announcement[]>([])
   const [loading, setLoading] = useState(false)
 
-  // 広報しんとくの全文は約3MBある。開いただけで取りに行かず、実際に検索したときだけ読む。
+  // 広報の全文は年ごとに分けてある。検索したときに新しい年から KOHO_YEARS_PER_LOAD 年分だけ読み、古い年は頼まれてから読む
   const [newsletters, setNewsletters] = useState<NewsletterEntry[]>([])
   const [newslettersFailed, setNewslettersFailed] = useState(false)
   const newslettersRequested = useRef(false)
+  const [kohoYears, setKohoYears] = useState<number[]>([])
+  const [kohoLoadedYears, setKohoLoadedYears] = useState(0)
+  const [kohoLoading, setKohoLoading] = useState(false)
 
   // モーダルが開いたらデータをフェッチ
   useEffect(() => {
@@ -326,24 +332,49 @@ export default function GlobalSearch({ open, onClose }: Props) {
 
   const tokens = useMemo(() => parseTokens(debouncedQuery), [debouncedQuery])
 
-  // 最初に検索語が入った時点で広報を取りに行く。以後はブラウザのキャッシュに任せる。
+  /** 指定の年を読み足す。号は新しい順に並べる（結果の上限で古い号が先に残らないように） */
+  const loadKohoYears = useCallback((years: number[]) => {
+    setKohoLoading(true)
+    return Promise.all(years.map((y) =>
+      fetch(`/data/koho/index-${y}.json`).then((r) => {
+        // 404 のときも「読み込み中」のまま止まらないよう、失敗として扱う
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json() as Promise<NewsletterEntry[]>
+      }),
+    ))
+      .then((files) => {
+        setNewsletters((prev) => [...prev, ...files.flat()].sort((a, b) => b.date.localeCompare(a.date)))
+        setKohoLoadedYears((n) => n + years.length)
+      })
+      .catch((err) => {
+        console.error("Failed to load newsletters:", err)
+        setNewslettersFailed(true)
+      })
+      .finally(() => setKohoLoading(false))
+  }, [])
+
+  // 最初に検索語が入った時点で、新しい年の広報を取りに行く。以後はブラウザのキャッシュに任せる。
   useEffect(() => {
     if (tokens.length === 0 || newslettersRequested.current) return
     // 読み込み中フラグは持たない（effect 内の同期 setState は cascading render を招く）。
     // 「まだ届いていない」は newsletters が空かどうかで分かる。
     newslettersRequested.current = true
-    fetch("/data/newsletters_index.json")
+    fetch("/data/koho/years.json")
       .then((r) => {
-        // 404 のときも「読み込み中」のまま止まらないよう、失敗として扱う
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
-        return r.json()
+        return r.json() as Promise<number[]>
       })
-      .then((data) => setNewsletters(data as NewsletterEntry[]))
+      .then((years) => {
+        setKohoYears(years)
+        return loadKohoYears(years.slice(0, KOHO_YEARS_PER_LOAD))
+      })
       .catch((err) => {
         console.error("Failed to load newsletters:", err)
         setNewslettersFailed(true)
       })
-  }, [tokens])
+  }, [tokens, loadKohoYears])
+
+  const kohoRemainingYears = kohoYears.slice(kohoLoadedYears)
 
   /** 広報が届くまでの間だけ真になる。届けば newsletters が埋まり、失敗すればフラグで止まる。 */
   const newslettersPending =
@@ -429,6 +460,19 @@ export default function GlobalSearch({ open, onClose }: Props) {
               <div className="px-5 py-3 text-center text-textMuted text-xs border-b border-line">
                 {SEARCH_CATEGORIES.newsletter}の全文を読み込み中…
               </div>
+            )}
+
+            {!loading && tokens.length > 0 && !newslettersPending && !newslettersFailed && kohoRemainingYears.length > 0 && (
+              <button
+                type="button"
+                disabled={kohoLoading}
+                onClick={() => loadKohoYears(kohoRemainingYears.slice(0, KOHO_YEARS_PER_LOAD))}
+                className="w-full px-5 py-3 text-center text-xs text-textMuted border-b border-line hover:text-textMain transition-colors"
+              >
+                {kohoLoading
+                  ? `${SEARCH_CATEGORIES.newsletter}の全文を読み込み中…`
+                  : SEARCH_KOHO_MORE_TEXT(kohoRemainingYears[0], kohoRemainingYears[kohoRemainingYears.length - 1])}
+              </button>
             )}
 
             {!loading && results.length > 0 && (
