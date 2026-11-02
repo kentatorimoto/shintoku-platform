@@ -23,6 +23,7 @@
     "sync": "npx tsx scripts/sync-all.ts",
     "scrape:announcements": "npx tsx scripts/scrape-announcements.ts",
     "scrape:newsletters": "npx tsx scripts/scrape-newsletters.ts",
+    "koho:check": "tsx scripts/check-koho.ts",
     "index:newsletters": "npx tsx scripts/index-newsletters.ts",
     "scrape:giketsu": "npx tsx scripts/scrape-giketsu.ts",
     "slides:generate": "node scripts/convertSlides.mjs",
