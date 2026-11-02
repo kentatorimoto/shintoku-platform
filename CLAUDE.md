@@ -203,8 +203,10 @@ weekly-sync はデプロイキー `CORPUS_DEPLOY_KEY` で corpus を読み書き
 git clone git@github.com:kentatorimoto/shintoku-corpus.git .corpus
 ```
 
-広報の検索索引（`public/data/koho`）からは、学校・学年と児童生徒の名前が並ぶ文を外す（全文には残す。
-外したページは `data/koho/minor-name-pages.json`）。
+広報の検索索引（`public/data/koho`）からは、児童生徒の名前を含む文を外す（全文には残す。
+外したページは `data/koho/minor-name-pages.json`）。規則は `scripts/lib/koho-personal.ts`：
+学校・学年と名前の並び／子ども議会の児童生徒の名簿にある氏名（名簿は corpus の `names/child-assembly.txt`。
+公開側には置かない）／「〇〇くん」「〇〇ちゃん」の形。
 
 `public/data/gikai_sessions.json`・`public/data/qna/*.json`・`public/data/cards/*.json` は
 `npm run build:data` の生成物。**直接編集禁止** — 修正は `content/` のMD / cards.yaml に対して行う。
