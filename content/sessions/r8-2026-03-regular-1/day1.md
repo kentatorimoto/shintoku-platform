@@ -63,7 +63,7 @@ A: 黒田産業課長：「本通北6丁目6番地3」が正しいと訂正
 ## 議案第7号 — 新得町行政組織設置条例の一部改正
 
 tags: 組織改編
-proposer: 長谷川総務課長
+proposer: 東川恭一 総務課長
 result: 可決
 result_detail: 挙手全員
 referred_to_committee: false
