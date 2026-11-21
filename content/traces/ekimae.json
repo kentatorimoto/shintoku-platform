@@ -1,0 +1,2468 @@
+{
+  "title": "新得駅前の再整備：駅前広場の構想から地域交流センター「とくとく」、温浴宿泊施設・町営浴場・金融機関併設まで（2010〜2026年の会議録抜粋より）",
+  "reviewed": false,
+  "extractedBy": "claude-opus-5-5",
+  "firstMention": {
+    "date": "2010-06-17",
+    "text": "抜粋の範囲（公開されている会議録は平成22年から）で、駅前の整備が議題として最初に出たのは、平成22年6月の定例会一般質問です。議員・齊藤美代子が駅前周辺の有効活用を取り上げ、駐車場の整理と、特産品を売る建物（上階は住宅、地下は駐車場、1階は地場産品売場など）の構想を問いました。町長・浜田正利は、関係する人たちから声が盛り上がることへの期待を答えました。なお、議員・長野章は平成23年9月に「平成９年ごろの議会でも」再整備の一般質問があったと述べていますが、その会議録は抜粋に含まれていません。",
+    "citations": [
+      {
+        "meeting": "平成22年 定例第2回",
+        "sessionKey": "h22-2010-06-regular-2",
+        "date": "2010-06-17",
+        "speaker": "齊藤美代子",
+        "role": "議員",
+        "page": 57,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220608_H22teirei_2.pdf#page=57",
+        "quote": "私は駅前周辺の有効活用について、１項目２点について質問いたします。"
+      },
+      {
+        "meeting": "平成22年 定例第2回",
+        "sessionKey": "h22-2010-06-regular-2",
+        "date": "2010-06-17",
+        "speaker": "齊藤美代子",
+        "role": "議員",
+        "page": 57,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220608_H22teirei_2.pdf#page=57",
+        "quote": "上階は住宅、地下は駐車場、１階はテナントとして地場産品売場"
+      },
+      {
+        "meeting": "平成22年 定例第2回",
+        "sessionKey": "h22-2010-06-regular-2",
+        "date": "2010-06-17",
+        "speaker": "浜田正利",
+        "role": "町長",
+        "page": 59,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220608_H22teirei_2.pdf#page=59",
+        "quote": "関係をするかたがたから１つの声としてですね、盛り上がっていただければ"
+      },
+      {
+        "meeting": "平成23年 定例第3回",
+        "sessionKey": "h23-2011-09-regular-3",
+        "date": "2011-09-16",
+        "speaker": "長野章",
+        "role": "議員",
+        "page": 40,
+        "url": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230905_H23_teirei_3.pdf#page=40",
+        "quote": "この間、私の記憶では平成９年ごろの議会でもですね、この再整備について"
+      }
+    ]
+  },
+  "milestones": [
+    {
+      "date": "2010-06-17",
+      "kind": "質問",
+      "branches": [
+        "whole"
+      ],
+      "title": "駅前周辺の有効活用を問う一般質問",
+      "text": "議員・齊藤美代子が、駅前の駐車スペースの整理と、地場産品売場などを備えた建物の構想を質問しました。町長・浜田正利は、関係者から声が盛り上がることへの期待を述べました。",
+      "citations": [
+        {
+          "meeting": "平成22年 定例第2回",
+          "sessionKey": "h22-2010-06-regular-2",
+          "date": "2010-06-17",
+          "speaker": "齊藤美代子",
+          "role": "議員",
+          "page": 57,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220608_H22teirei_2.pdf#page=57",
+          "quote": "上階は住宅、地下は駐車場、１階はテナントとして地場産品売場"
+        },
+        {
+          "meeting": "平成22年 定例第2回",
+          "sessionKey": "h22-2010-06-regular-2",
+          "date": "2010-06-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 59,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/220608_H22teirei_2.pdf#page=59",
+          "quote": "関係をするかたがたから１つの声としてですね、盛り上がっていただければ"
+        }
+      ]
+    },
+    {
+      "date": "2011-03-11",
+      "kind": "質問",
+      "branches": [
+        "whole"
+      ],
+      "title": "町長「構想は持ち合わせていない」",
+      "text": "議員・齊藤美代子が駅周辺の構想の有無を問い、町長・浜田正利は、現状では構想を持ち合わせていないと答えました。",
+      "citations": [
+        {
+          "meeting": "平成23年 定例第1回",
+          "sessionKey": "h23-2011-03-regular-1",
+          "date": "2011-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 92,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230302_H23teirei_1.pdf#page=92",
+          "quote": "現状では構想というものは今持ち合わせていないというのが答弁になろうかなというふうに思っています"
+        }
+      ]
+    },
+    {
+      "date": "2011-09-16",
+      "kind": "質問",
+      "branches": [
+        "whole"
+      ],
+      "title": "駅周辺再整備の計画を求める質問と「検討」の答弁",
+      "text": "議員・長野章が駅周辺の再整備と北広場の活用計画を求めました。町長・浜田正利は、住民や商工会の意見を聞きながら方向性を検討すると答えました。",
+      "citations": [
+        {
+          "meeting": "平成23年 定例第3回",
+          "sessionKey": "h23-2011-09-regular-3",
+          "date": "2011-09-16",
+          "speaker": "長野章",
+          "role": "議員",
+          "page": 39,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230905_H23_teirei_3.pdf#page=39",
+          "quote": "地域を活性化させるための方策として駅周辺の再整備等を計画してはいかがでしょうか"
+        },
+        {
+          "meeting": "平成23年 定例第3回",
+          "sessionKey": "h23-2011-09-regular-3",
+          "date": "2011-09-16",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 40,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/417/3361/230905_H23_teirei_3.pdf#page=40",
+          "quote": "商工会のかたがたとも広く意見を聞きながら、どうあるべきか方向性について検討をしていきたい"
+        }
+      ]
+    },
+    {
+      "date": "2012-12-12",
+      "kind": "構想",
+      "branches": [
+        "whole"
+      ],
+      "title": "予算編成の方針に駅前広場再整備が入る",
+      "text": "町長・浜田正利が次年度の取り組みとして、駅前広場再整備に向けた取り組みを挙げました。",
+      "citations": [
+        {
+          "meeting": "平成24年 定例第4回",
+          "sessionKey": "h24-2012-12-regular-4",
+          "date": "2012-12-12",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 26,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/416/3347/241203_h24tei4kaigi.pdf#page=26",
+          "quote": "チャレンジショップの推進と駅前広場再整備に向けた取り組みにより"
+        }
+      ]
+    },
+    {
+      "date": "2013-03-13",
+      "kind": "構想",
+      "branches": [
+        "whole"
+      ],
+      "title": "町有地の範囲で構想策定へ",
+      "text": "議員協議会で駅前再整備構想策定事業（駅前広場5,300平方メートル）が説明されました。町長・浜田正利は、議論の切り口として、まず駅前広場の町有地の範囲内で構想を考えると答えました。",
+      "citations": [
+        {
+          "meeting": "平成25年 定例第1回",
+          "sessionKey": "h25-2013-03-regular-1",
+          "date": "2013-03-13",
+          "speaker": "長野章",
+          "role": "議員",
+          "page": 57,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=57",
+          "quote": "このほどの計画では、駅前広場5,300平米（平方メートル）の計画とのことですが"
+        },
+        {
+          "meeting": "平成25年 定例第1回",
+          "sessionKey": "h25-2013-03-regular-1",
+          "date": "2013-03-13",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 58,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=58",
+          "quote": "まずは駅前広場の町有地の範囲内での構想を考えていこうというものであります"
+        }
+      ]
+    },
+    {
+      "date": "2013-03-18",
+      "kind": "予算",
+      "branches": [
+        "whole"
+      ],
+      "title": "構想策定の委託予算",
+      "text": "地域戦略室長・佐藤博行が、構想案は議論のたたき台であり、コンサルに現状把握から概算工事費の算定までを委託する予定と説明しました。",
+      "citations": [
+        {
+          "meeting": "平成25年 予算特別委員会",
+          "sessionKey": "h25-2013-03-yosan-tokubetsu",
+          "date": "2013-03-18",
+          "speaker": "佐藤博行",
+          "role": "地域戦略室長",
+          "page": 29,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25yosankaigi.pdf#page=29",
+          "quote": "構想案はあくまでも議論のたたき台としてつくりたいという思いでやるもので"
+        },
+        {
+          "meeting": "平成25年 予算特別委員会",
+          "sessionKey": "h25-2013-03-yosan-tokubetsu",
+          "date": "2013-03-18",
+          "speaker": "佐藤博行",
+          "role": "地域戦略室長",
+          "page": 29,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25yosankaigi.pdf#page=29",
+          "quote": "最終的には概算工事費の算定というところまで、今考えているところでございます"
+        }
+      ]
+    },
+    {
+      "date": "2014-03-05",
+      "kind": "計画",
+      "branches": [
+        "whole"
+      ],
+      "title": "構想案をもとに基本計画へ向けた議論",
+      "text": "町政執行方針で、作成された構想案をもとに基本計画に向けて議論するとされました。",
+      "citations": [
+        {
+          "meeting": "平成26年 定例第1回",
+          "sessionKey": "h26-2014-03-regular-1",
+          "date": "2014-03-05",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 19,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260305_h26teirei1.pdf#page=19",
+          "quote": "新年度では、作成された構想案をもとに、さまざまな意見を伺った中で、基本計画に向けて議論をしてまいります。"
+        }
+      ]
+    },
+    {
+      "date": "2014-09-10",
+      "kind": "報告",
+      "branches": [
+        "whole"
+      ],
+      "title": "平成25年度決算で策定業務278万2,500円",
+      "text": "決算審査で、駅前広場再整備基本計画策定業務の支出額278万2,500円が示されました（予算は299万3,000円と委員・湯浅亮が述べています）。",
+      "citations": [
+        {
+          "meeting": "平成26年 決算特別委員会",
+          "sessionKey": "h26-2014-09-kessan-tokubetsu",
+          "date": "2014-09-10",
+          "speaker": "齊藤美代子",
+          "role": "委員",
+          "page": 19,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260905_h26kessantokubetu.pdf#page=19",
+          "quote": "駅前広場再整備基本計画策定業務、278万2,500円で出ております"
+        },
+        {
+          "meeting": "平成26年 予算特別委員会",
+          "sessionKey": "h26-2014-03-yosan-tokubetsu",
+          "date": "2014-03-19",
+          "speaker": "湯浅亮",
+          "role": "委員",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/260305_h26yosan.pdf#page=12",
+          "quote": "昨年は299万3,000円ほど委託で出して、調査しているようであります"
+        }
+      ]
+    },
+    {
+      "date": "2015-07-22",
+      "kind": "構想",
+      "branches": [
+        "whole"
+      ],
+      "title": "法政大学大学院生へのアイデア依頼",
+      "text": "町長・浜田正利が、駅前広場再整備について法政大学デザイン工学研究科の大学院生にアイデアを依頼していると行政報告しました。",
+      "citations": [
+        {
+          "meeting": "平成27年 臨時第3回",
+          "sessionKey": "h27-2015-07-rinji-3",
+          "date": "2015-07-22",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 5,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/817/7627/H27rinji3gijiroku.pdf#page=5",
+          "quote": "法政大学デザイン工学研究科の大学院生７名が来庁されました"
+        }
+      ]
+    },
+    {
+      "date": "2015-11-27",
+      "kind": "報告",
+      "branches": [
+        "whole"
+      ],
+      "title": "「整備の形がまとまらない」との答弁",
+      "text": "子ども議会で町長・浜田正利は整備の仕方がまとまっていないと答え、産業課長・鈴木義夫は平成25年から役場内検討会議3回、関係団体との検討会5回を開いたと説明しました。",
+      "citations": [
+        {
+          "meeting": "平成27年 第4回子ども議会",
+          "sessionKey": "h27-2015-11-kodomo-4",
+          "date": "2015-11-27",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 17,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/817/8236/H27dai4kodomogikai.pdf#page=17",
+          "quote": "なかなかどういうふうに整備をしていくのかがまとまらないのが今です"
+        },
+        {
+          "meeting": "平成27年 第4回子ども議会",
+          "sessionKey": "h27-2015-11-kodomo-4",
+          "date": "2015-11-27",
+          "speaker": "鈴木義夫",
+          "role": "産業課長",
+          "page": 17,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/817/8236/H27dai4kodomogikai.pdf#page=17",
+          "quote": "役場内の検討会議を３回、そして関係団体との検討会を５回、開催しております"
+        }
+      ]
+    },
+    {
+      "date": "2016-03-16",
+      "kind": "予算",
+      "branches": [
+        "whole",
+        "yokujo",
+        "onyoku"
+      ],
+      "title": "商工会の調査研究への補助",
+      "text": "商工会のまちづくり推進事業（駅前周辺再整備の調査研究）への補助が予算化されました。調査には町営浴場や宿泊施設の設置の検討も含まれると説明されました。",
+      "citations": [
+        {
+          "meeting": "平成28年 予算特別委員会",
+          "sessionKey": "h28-2016-03-yosan-tokubetsu",
+          "date": "2016-03-16",
+          "speaker": "佐々木隼人",
+          "role": "産業課長補佐",
+          "page": 58,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/933/9782/H28yosantokubetsu.pdf#page=58",
+          "quote": "将来的な駅前周辺再整備にあたり、その調査研究費ということになります"
+        },
+        {
+          "meeting": "平成28年 予算特別委員会",
+          "sessionKey": "h28-2016-03-yosan-tokubetsu",
+          "date": "2016-03-16",
+          "speaker": "佐々木隼人",
+          "role": "産業課長補佐",
+          "page": 58,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/933/9782/H28yosantokubetsu.pdf#page=58",
+          "quote": "物産販売店、飲食店、町営浴場、宿泊施設、駐車場等の設置の検討"
+        }
+      ]
+    },
+    {
+      "date": "2016-05",
+      "kind": "構想",
+      "branches": [
+        "whole"
+      ],
+      "title": "商工会に「まちづくり事業部」新設",
+      "text": "平成29年9月の町長・浜田正利の答弁で、平成28年5月に商工会が「まちづくり事業部」を新設したと説明されました。",
+      "citations": [
+        {
+          "meeting": "平成29年 定例第3回",
+          "sessionKey": "h29-2017-09-regular-3",
+          "date": "2017-09-14",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf#page=34",
+          "quote": "平成28年５月からは、商工会が「まちづくり事業部」を新設し"
+        }
+      ]
+    },
+    {
+      "date": "2017-08-09",
+      "kind": "予算",
+      "branches": [
+        "whole"
+      ],
+      "title": "商工会の駅前再整備調査に国の補助採択",
+      "text": "商工会が行う駅前再整備調査に国の補助事業が採択され、まちづくり推進事業補助金が補正予算に計上されました。",
+      "citations": [
+        {
+          "meeting": "平成29年 臨時第3回",
+          "sessionKey": "h29-2017-08-rinji-3",
+          "date": "2017-08-09",
+          "speaker": "田中透嗣",
+          "role": "副町長",
+          "page": 10,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11522/H29rinji3gijiroku.pdf#page=10",
+          "quote": "商工会が実施する駅前再整備調査に対し国の補助事業が採択されたことから"
+        }
+      ]
+    },
+    {
+      "date": "2017-09-14",
+      "kind": "報告",
+      "branches": [
+        "whole"
+      ],
+      "title": "「構想案が固まらず基本計画に移行せず」と答弁",
+      "text": "町長・浜田正利は、構想案が固まらず基本計画への移行が進まないまま経過したと述べ、町有地を出発点としたが、エリアを広げるべきとの意見が多く商工会中心に検討していると説明しました。",
+      "citations": [
+        {
+          "meeting": "平成29年 定例第3回",
+          "sessionKey": "h29-2017-09-regular-3",
+          "date": "2017-09-14",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf#page=34",
+          "quote": "しかし、この間、構想案が固まらず、基本計画への移行が進まないまま経過してきております。"
+        },
+        {
+          "meeting": "平成29年 定例第3回",
+          "sessionKey": "h29-2017-09-regular-3",
+          "date": "2017-09-14",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 35,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf#page=35",
+          "quote": "もう少しエリアを広げるべきだというのが意見として多い中で"
+        }
+      ]
+    },
+    {
+      "date": "2018-06-15",
+      "kind": "報告",
+      "branches": [
+        "whole"
+      ],
+      "title": "商工会の調査報告書の提出",
+      "text": "経済産業省の補助による商工会のニーズ調査等の報告が平成30年5月24日にあったと、町長・浜田正利が答弁しました。",
+      "citations": [
+        {
+          "meeting": "平成30年 定例第2回",
+          "sessionKey": "h30-2018-06-regular-2",
+          "date": "2018-06-15",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 39,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13689/30tei2kekka.pdf#page=39",
+          "quote": "本年５月24日に報告があった次第であります"
+        }
+      ]
+    },
+    {
+      "date": "2018-12-18",
+      "kind": "計画",
+      "branches": [
+        "whole"
+      ],
+      "title": "専任補佐の配置と約1万4,000平方メートルの構想案",
+      "text": "地域戦略室に専任の補佐を置き、駅前南側・北側の町有地とＪＲ用地を含む約1万4,000平方メートルの範囲で基本構想案を作ると説明されました。",
+      "citations": [
+        {
+          "meeting": "平成30年 定例第4回",
+          "sessionKey": "h30-2018-12-regular-4",
+          "date": "2018-12-18",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 54,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13687/30tei4kekka.pdf#page=54",
+          "quote": "地域戦略室に専任の補佐を新たに配置してきているところであります"
+        },
+        {
+          "meeting": "平成30年 定例第4回",
+          "sessionKey": "h30-2018-12-regular-4",
+          "date": "2018-12-18",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 54,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13687/30tei4kekka.pdf#page=54",
+          "quote": "約１万4,000平米（平方メートル）の範囲内での基本構想案を作成し"
+        }
+      ]
+    },
+    {
+      "date": "2019-03-18",
+      "kind": "予算",
+      "branches": [
+        "whole"
+      ],
+      "title": "推進組織と3か年のスケジュール",
+      "text": "推進組織（議員2名、商工会・観光協会など計8名の案）を立ち上げ、平成31年度に基本構想、2020年度に基本計画、2021年度に実施計画とする予定が示されました。",
+      "citations": [
+        {
+          "meeting": "平成31年 定例第1回",
+          "sessionKey": "h31-2019-03-regular-1",
+          "date": "2019-03-04",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 18,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/14440/H31tei1gijiroku.pdf#page=18",
+          "quote": "商工会案の提案を受けたことから、推進組織を立ち上げ"
+        },
+        {
+          "meeting": "平成31年 予算特別委員会",
+          "sessionKey": "h31-2019-03-yosan-tokubetsu",
+          "date": "2019-03-18",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長補佐",
+          "page": 25,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/14441/H31yosantokubetu.pdf#page=25",
+          "quote": "31年度につきましては基本構想、それから2020年度につきましては基本計画策定"
+        }
+      ]
+    },
+    {
+      "date": "2019-09-18",
+      "kind": "構想",
+      "branches": [
+        "tokutoku"
+      ],
+      "title": "複合施設の考え方が答弁に登場",
+      "text": "駅のトイレの質問に対し町長・浜田正利が、再整備の複合施設にトイレを整備する考えがあり、複合施設の建設着手までには複数年かかる見込みと答えました。",
+      "citations": [
+        {
+          "meeting": "令和元年 定例第3回",
+          "sessionKey": "r1-2019-09-regular-3",
+          "date": "2019-09-18",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 54,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15152/R1tei3gijiroku.pdf#page=54",
+          "quote": "その際の複合施設に新たなトイレや多目的トイレを整備するといった考え方がある一方で"
+        },
+        {
+          "meeting": "令和元年 定例第3回",
+          "sessionKey": "r1-2019-09-regular-3",
+          "date": "2019-09-18",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 54,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15152/R1tei3gijiroku.pdf#page=54",
+          "quote": "複合施設につきましては、その建設着手までには複数年掛かると見込んでおり"
+        }
+      ]
+    },
+    {
+      "date": "2019-12-13",
+      "kind": "予算",
+      "branches": [
+        "whole"
+      ],
+      "title": "ＪＲ用地購入と移転補償の予算",
+      "text": "ＪＲ北海道の土地の購入費と、用地買収に伴う移転補償の債務負担行為が補正予算に計上されました。",
+      "citations": [
+        {
+          "meeting": "令和元年 定例第4回",
+          "sessionKey": "r1-2019-12-regular-4",
+          "date": "2019-12-13",
+          "speaker": "金田將",
+          "role": "副町長",
+          "page": 28,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15362/R1tei4gijiroku.pdf#page=28",
+          "quote": "駅前周辺再整備に伴いＪＲ北海道の土地を購入する必要があることから"
+        },
+        {
+          "meeting": "令和元年 定例第4回",
+          "sessionKey": "r1-2019-12-regular-4",
+          "date": "2019-12-13",
+          "speaker": "金田將",
+          "role": "副町長",
+          "page": 28,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/15362/R1tei4gijiroku.pdf#page=28",
+          "quote": "駅前周辺再整備用地買収に伴う移転補償について計上してございます"
+        }
+      ]
+    },
+    {
+      "date": "2020-03-02",
+      "kind": "計画",
+      "branches": [
+        "whole",
+        "tokutoku"
+      ],
+      "title": "基本構想の策定と基本計画へ",
+      "text": "町政執行方針で、前年に基本構想を作成し、推進組織で基本計画を策定すると述べられました。予算特別委員会では、集客施設は複合商業施設が中心となり温浴施設なども活用すると説明されました。",
+      "citations": [
+        {
+          "meeting": "令和2年 定例第1回",
+          "sessionKey": "r2-2020-03-regular-1",
+          "date": "2020-03-02",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 14,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei1gijiroku.pdf#page=14",
+          "quote": "昨年作成いたしました基本構想のコンセプトに基づき"
+        },
+        {
+          "meeting": "令和2年 予算特別委員会",
+          "sessionKey": "r2-2020-03-yosan-tokubetsu",
+          "date": "2020-03-17",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長補佐",
+          "page": 41,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2yosantokubetu.pdf#page=41",
+          "quote": "集客する施設としましては、複合商業施設がメインとなるとは思いますけれども"
+        }
+      ]
+    },
+    {
+      "date": "2020-06-18",
+      "kind": "報告",
+      "branches": [
+        "whole"
+      ],
+      "title": "道の駅は駅前周辺を適地でないと判断",
+      "text": "町長・浜田正利は、基本構想の策定の中で、駐車スペース不足などにより駅前周辺は道の駅の適地でないと判断したと説明しました。",
+      "citations": [
+        {
+          "meeting": "令和2年 定例第2回",
+          "sessionKey": "r2-2020-06-regular-2",
+          "date": "2020-06-18",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 54,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei2gijiroku.pdf#page=54",
+          "quote": "駐車スペースが不足することなどにより適地でないと判断し"
+        }
+      ]
+    },
+    {
+      "date": "2020-09-02",
+      "kind": "予算",
+      "branches": [
+        "whole"
+      ],
+      "title": "旧パチンコ店跡地などの購入",
+      "text": "休業中のパチンコ店の土地について売却の打診があり、駅前再整備に活用が見込まれるとして土地購入費と補償費4,026万1,000円が計上されました。",
+      "citations": [
+        {
+          "meeting": "令和2年 定例第3回",
+          "sessionKey": "r2-2020-09-regular-3",
+          "date": "2020-09-02",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長補佐",
+          "page": 20,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei3gijiroku.pdf#page=20",
+          "quote": "パチンコ１・３・５（ヒミコ）が休業中に土地の売り払いの打診がありまして"
+        },
+        {
+          "meeting": "令和2年 定例第3回",
+          "sessionKey": "r2-2020-09-regular-3",
+          "date": "2020-09-02",
+          "speaker": "青柳茂行",
+          "role": "議員",
+          "page": 19,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei3gijiroku.pdf#page=19",
+          "quote": "4,026万1,000円を計上されているわけでありますけれども"
+        }
+      ]
+    },
+    {
+      "date": "2020-12-16",
+      "kind": "質問",
+      "branches": [
+        "tokutoku"
+      ],
+      "title": "施設配置案と消防法の問題",
+      "text": "議員・湯浅真希が、議員に示された施設配置案について、消防法の問題がこの時期に出てきた理由を質問しました。同議員は計画では令和4年度着工予定と述べています。",
+      "citations": [
+        {
+          "meeting": "令和2年 定例第4回",
+          "sessionKey": "r2-2020-12-regular-4",
+          "date": "2020-12-16",
+          "speaker": "湯浅真希",
+          "role": "議員",
+          "page": 41,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei4gijiroku.pdf#page=41",
+          "quote": "なぜ今になって消防法が出てきたのか"
+        },
+        {
+          "meeting": "令和2年 定例第4回",
+          "sessionKey": "r2-2020-12-regular-4",
+          "date": "2020-12-16",
+          "speaker": "湯浅真希",
+          "role": "議員",
+          "page": 41,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei4gijiroku.pdf#page=41",
+          "quote": "計画では令和４年度には着工予定でございます"
+        }
+      ]
+    },
+    {
+      "date": "2021-03-16",
+      "kind": "予算",
+      "branches": [
+        "whole",
+        "tokutoku"
+      ],
+      "title": "概略設計の委託予算",
+      "text": "駅前周辺再整備等の概略設計委託料5,354万8,000円が計上されました。旧玉川商店の土地寄付に伴う建物撤去の補償費も計上されました。",
+      "citations": [
+        {
+          "meeting": "令和3年 予算特別委員会",
+          "sessionKey": "r3-2021-03-yosan-tokubetsu",
+          "date": "2021-03-16",
+          "speaker": "青柳茂行",
+          "role": "委員",
+          "page": 43,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3yosantokubetu.pdf#page=43",
+          "quote": "駅前周辺再整備事業の委託の関係なんですけれども5,354万8,000円、計上されております"
+        },
+        {
+          "meeting": "令和3年 予算特別委員会",
+          "sessionKey": "r3-2021-03-yosan-tokubetsu",
+          "date": "2021-03-16",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長補佐",
+          "page": 37,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3yosantokubetu.pdf#page=37",
+          "quote": "11月４日、玉川商店から土地の寄付がありまして"
+        }
+      ]
+    },
+    {
+      "date": "2021-12-15",
+      "kind": "計画",
+      "branches": [
+        "whole"
+      ],
+      "title": "令和5年度以降の着工予定",
+      "text": "町長・浜田正利は、令和4年度に役場庁舎改築、令和5年度以降に駅前周辺再整備などの着工を予定していると答えました。",
+      "citations": [
+        {
+          "meeting": "令和3年 定例第4回",
+          "sessionKey": "r3-2021-12-regular-4",
+          "date": "2021-12-15",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 37,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei4gijiroku.pdf#page=37",
+          "quote": "令和５年度以降において、駅前周辺再整備等、事業実施の環境が整ったものの着工を予定しております"
+        }
+      ]
+    },
+    {
+      "date": "2022-03-11",
+      "kind": "計画",
+      "branches": [
+        "onyoku",
+        "yokujo",
+        "shitei"
+      ],
+      "title": "ホテル併設と指定管理の方針",
+      "text": "町長・浜田正利は、商工会の提案（駅前温泉を移転しホテルを併設）を受けた宿泊施設整備であること、施設全体を商工会主体のまちづくり会社に指定管理で任せる想定であること、温浴施設は町営浴場の建て替えであることを説明しました。",
+      "citations": [
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 63,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+          "quote": "駅前温泉を移転しホテルを併設することにより集客性が上がり"
+        },
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 63,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+          "quote": "指定管理者制度によって商工会が主体のまちづくり会社に運営を任せることを想定し"
+        },
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 73,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=73",
+          "quote": "温浴施設につきましては老朽化する町営浴場の建て替えであり"
+        }
+      ]
+    },
+    {
+      "date": "2022-03-16",
+      "kind": "予算",
+      "branches": [
+        "whole",
+        "tokutoku",
+        "onyoku",
+        "kinyu"
+      ],
+      "title": "概算事業費約32億円の内訳",
+      "text": "地域戦略室長補佐・小林健利が、駅前広場4億1,700万円、複合施設8億2,800万円、宿泊温浴施設17億800万円などで全体約32億円と説明しました。複合施設のうち金融機関などの収益部分は補助対象外とされました。",
+      "citations": [
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "複合施設が８億2,800万円、宿泊温浴施設が17億800万円"
+        },
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "全体で32億円程度を見込んでおります"
+        },
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "金融機関だとか、観光協会の事務所と、物販カフェスペースということで"
+        }
+      ]
+    },
+    {
+      "date": "2022-12-20",
+      "kind": "予算",
+      "branches": [
+        "whole"
+      ],
+      "title": "令和5年度から本格着工の方針",
+      "text": "町長・浜田正利は、役場庁舎や駅前周辺再整備事業などが本格着工するとして、令和5年度予算規模を80億円前後とする考えを示しました。",
+      "citations": [
+        {
+          "meeting": "令和4年 定例第4回",
+          "sessionKey": "r4-2022-12-regular-4",
+          "date": "2022-12-20",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 30,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/26959/R4tei4gijiroku.pdf#page=30",
+          "quote": "役場庁舎建設、中継施設建設、駅前周辺再整備事業などが本格的に着工することから"
+        }
+      ]
+    },
+    {
+      "date": "2023-03-02",
+      "kind": "着工",
+      "branches": [
+        "whole",
+        "tokutoku"
+      ],
+      "title": "駅前広場の工事着手を表明",
+      "text": "町政執行方針で、ロータリー部分の駅前広場の工事に着手し、複合施設の実施設計を進めると述べられました。",
+      "citations": [
+        {
+          "meeting": "令和5年 定例第1回",
+          "sessionKey": "r5-2023-03-regular-1",
+          "date": "2023-03-02",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 17,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/27816/R5tei1gijiroku.pdf#page=17",
+          "quote": "バス等のロータリー部分である駅前広場の工事に着手するとともに、複合施設の実施設計を進めてまいります"
+        }
+      ]
+    },
+    {
+      "date": "2023-06-02",
+      "kind": "契約",
+      "branches": [
+        "whole"
+      ],
+      "title": "駅前広場再整備工事の契約",
+      "text": "街路事業工事（駅前広場再整備）の工事請負契約が提案されました。同年12月には1億780万円から1億1,447万7,000円への変更が提案されました。",
+      "citations": [
+        {
+          "meeting": "令和5年 定例第2回",
+          "sessionKey": "r5-2023-06-regular-2",
+          "date": "2023-06-02",
+          "speaker": "東川恭一",
+          "role": "総務課長",
+          "page": 16,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/28256/R5tei2gijiroku.pdf#page=16",
+          "quote": "契約の目的でありますが、街路事業工事（駅前広場再整備）でございます"
+        },
+        {
+          "meeting": "令和5年 定例第4回",
+          "sessionKey": "r5-2023-12-regular-4",
+          "date": "2023-12-05",
+          "speaker": "東川恭一",
+          "role": "総務課長",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/30041/R5tei4gijiroku.pdf#page=12",
+          "quote": "変更前、１億780万円。変更後、１億1,447万7,000円となり"
+        }
+      ]
+    },
+    {
+      "date": "2024-03-04",
+      "kind": "予算",
+      "branches": [
+        "tokutoku"
+      ],
+      "title": "大型事業が重なる年度の予算",
+      "text": "駅前複合施設建設などが重なり、一般会計予算は116億5,100万円とされました。",
+      "citations": [
+        {
+          "meeting": "令和6年 定例第1回",
+          "sessionKey": "r6-2024-03-regular-1",
+          "date": "2024-03-04",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 16,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/30497/R6tei1gijiroku.pdf#page=16",
+          "quote": "前年度対比42.5パーセント増の116億5,100万円を計上しております"
+        }
+      ]
+    },
+    {
+      "date": "2024-06-04",
+      "kind": "契約",
+      "branches": [
+        "tokutoku"
+      ],
+      "title": "複合施設の建設工事契約と補助金の減額",
+      "text": "駅前周辺再整備複合施設建設工事（建築主体・電気・機械）の契約が提案されました。同じ日の補正予算で、都市構造再編集中支援事業補助金の内示額減額に伴い過疎債へ振り替えると説明されました。",
+      "citations": [
+        {
+          "meeting": "令和6年 定例第2回",
+          "sessionKey": "r6-2024-06-regular-2",
+          "date": "2024-06-04",
+          "speaker": "東川恭一",
+          "role": "総務課長",
+          "page": 16,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/31067/R6tei2gijiroku.pdf#page=16",
+          "quote": "駅前周辺再整備複合施設建設工事、建築主体でございます"
+        },
+        {
+          "meeting": "令和6年 定例第2回",
+          "sessionKey": "r6-2024-06-regular-2",
+          "date": "2024-06-04",
+          "speaker": "佐藤博行",
+          "role": "副町長",
+          "page": 35,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/31067/R6tei2gijiroku.pdf#page=35",
+          "quote": "都市構造再編集中支援事業補助金の交付内示額が減額されたため、予算を減額しております"
+        }
+      ]
+    },
+    {
+      "date": "2024-12-17",
+      "kind": "報告",
+      "branches": [
+        "whole",
+        "onyoku",
+        "yokujo",
+        "kinyu"
+      ],
+      "title": "今後の工程と事業費約7億円増",
+      "text": "町長・浜田正利が、温浴宿泊施設を令和8年度中に完成後、町営浴場の解体、令和9年度に金融機関部分の増築という工程と、全体事業費が当初計画比で約7億円（2割）増えていることを説明しました。",
+      "citations": [
+        {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "新年度から温浴宿泊施設の建設工事に着手をし、令和８年度中に完成をした後"
+        },
+        {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "令和９年度に複合施設金融機関部分の増築と外構工事を計画しております"
+        },
+        {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "現時点で全体事業費は約７億円、率にして２割の増となっており"
+        }
+      ]
+    },
+    {
+      "date": "2025-03-17",
+      "kind": "条例",
+      "branches": [
+        "tokutoku",
+        "shitei"
+      ],
+      "title": "地域交流センター条例と指定管理者の指定",
+      "text": "新得駅前地域交流センターの設置条例が提案され、指定管理者を新得タウンマネージメント株式会社、期間を5年間とする議案が出されました。同じ時期に駅前の駐車場とロータリーの供用が始まったと議員・湯浅真希が述べています。",
+      "citations": [
+        {
+          "meeting": "令和7年 予算特別委員会",
+          "sessionKey": "r7-2025-03-yosan-tokubetsu",
+          "date": "2025-03-17",
+          "speaker": "桂田聡",
+          "role": "産業課長",
+          "page": 55,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=55",
+          "quote": "新得駅前地域交流センターを開設することに伴い"
+        },
+        {
+          "meeting": "令和7年 予算特別委員会",
+          "sessionKey": "r7-2025-03-yosan-tokubetsu",
+          "date": "2025-03-17",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長",
+          "page": 57,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=57",
+          "quote": "名称、新得タウンマネージメント株式会社"
+        },
+        {
+          "meeting": "令和7年 予算特別委員会",
+          "sessionKey": "r7-2025-03-yosan-tokubetsu",
+          "date": "2025-03-17",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長",
+          "page": 57,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=57",
+          "quote": "令和７年４月１日から令和12年３月31日までの５年間としております"
+        },
+        {
+          "meeting": "令和7年 予算特別委員会",
+          "sessionKey": "r7-2025-03-yosan-tokubetsu",
+          "date": "2025-03-17",
+          "speaker": "湯浅真希",
+          "role": "委員",
+          "page": 14,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=14",
+          "quote": "駅前の駐車場とロータリーの供用が始まりました"
+        }
+      ]
+    },
+    {
+      "date": "2025-06-15",
+      "kind": "開所",
+      "branches": [
+        "tokutoku"
+      ],
+      "title": "地域交流センター「とくとく」オープン",
+      "text": "6月2日の行政報告で町長・浜田正利が6月15日のオープンを報告し、12月の一般質問では議員・中村雄太がオープンから半年が経過したと述べました。",
+      "citations": [
+        {
+          "meeting": "令和7年 定例第2回",
+          "sessionKey": "r7-2025-06-regular-2",
+          "date": "2025-06-02",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 13,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=13",
+          "quote": "６月15日オープンをいたします地域交流センター「とくとく」の中に"
+        },
+        {
+          "meeting": "令和7年 定例第4回",
+          "sessionKey": "r7-2025-12-regular-4",
+          "date": "2025-12-16",
+          "speaker": "中村雄太",
+          "role": "議員",
+          "page": 30,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/35084/tei4kaigiroku.pdf#page=30",
+          "quote": "駅前の地域交流センター「とくとく」がオープンしてちょうど半年が経過し"
+        }
+      ]
+    },
+    {
+      "date": "2025-06-20",
+      "kind": "契約",
+      "branches": [
+        "onyoku"
+      ],
+      "title": "温浴宿泊施設の建設工事契約",
+      "text": "駅前周辺再整備温浴宿泊施設建設工事（建築主体・電気・機械）の契約が提案されました。",
+      "citations": [
+        {
+          "meeting": "令和7年 定例第2回",
+          "sessionKey": "r7-2025-06-regular-2",
+          "date": "2025-06-20",
+          "speaker": "東川恭一",
+          "role": "総務課長",
+          "page": 60,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=60",
+          "quote": "駅前周辺再整備温浴宿泊施設建設工事、建築主体でございます"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-16",
+      "kind": "報告",
+      "branches": [
+        "tokutoku",
+        "onyoku",
+        "yokujo",
+        "shitei"
+      ],
+      "title": "利用者数、開業予定、町営浴場閉館の予算、決算資料の開示条件",
+      "text": "「とくとく」の利用者は8か月で13万3,000人を超えたと説明されました。温浴宿泊施設は9月完成・12月開業予定とされ、町営浴場は11月閉館を前提とした予算でした。産業課長・桂田聡は、指定管理者から決算資料の開示を閲覧のみとする条件が示されたと説明しました。",
+      "citations": [
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-16",
+          "speaker": "加賀谷敬",
+          "role": "地域戦略室長補佐",
+          "page": 48,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=48",
+          "quote": "８カ月を経過した時点で利用者数が13万3,000人を超えているということで"
+        },
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-16",
+          "speaker": "加賀谷敬",
+          "role": "地域戦略室長補佐",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=12",
+          "quote": "今のところ完成予定が９月で、12月の開業を予定しております"
+        },
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-16",
+          "speaker": "中村雄太",
+          "role": "委員",
+          "page": 41,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=41",
+          "quote": "11月をもちまして町営浴場閉館ということなんですけれども"
+        },
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-16",
+          "speaker": "桂田聡",
+          "role": "産業課長",
+          "page": 51,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=51",
+          "quote": "開示の方法は役場内の職員に限り閲覧によるものとします"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-17",
+      "kind": "報告",
+      "branches": [
+        "shitei"
+      ],
+      "title": "指定管理者との再協議の方針",
+      "text": "町長・湯浅真希が、指定管理者と再協議し、決算の公開の範囲と方法を見直す考えを示しました。",
+      "citations": [
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-17",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 80,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=80",
+          "quote": "今後、指定管理者と再協議というものを行わせていただいて"
+        },
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-17",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 80,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=80",
+          "quote": "公開の範囲と方法というものを根本的に見直していきたい"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-03",
+      "kind": "延期",
+      "branches": [
+        "onyoku",
+        "yokujo"
+      ],
+      "title": "温浴宿泊施設の開業が来年4月以降に",
+      "text": "町長・湯浅真希は、中東情勢悪化の影響で建設が遅れ、開業は来年4月以降になる見込みと報告しました。町営浴場の営業を延長するとしました。",
+      "citations": [
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "開業は来年４月以降にずれ込む見込みであります"
+        },
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=12",
+          "quote": "既存の町営浴場の営業を延長し、切れ目のないように"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-03",
+      "kind": "白紙",
+      "branches": [
+        "kinyu"
+      ],
+      "title": "金融機関の増設をいったん白紙に",
+      "text": "町長・湯浅真希は、「とくとく」横に増設予定だった帯広信金新得支店について、コスト増や利便性を考慮し、いったん白紙とすることで先方の了承を得ていると報告しました。",
+      "citations": [
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "いったん白紙とすることでご了承いただいているところであります"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-06",
+      "kind": "契約",
+      "branches": [
+        "onyoku"
+      ],
+      "title": "温浴宿泊施設工事の契約金額変更",
+      "text": "6月の補正予算でインフレスライドの適用による工事費増額が計上され、7月の臨時会で建築主体工事の契約金額を10億4,390万円から11億7,053万9,150円に変更する議案が出されました。",
+      "citations": [
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-19",
+          "speaker": "畑中栄和",
+          "role": "副町長",
+          "page": 65,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=65",
+          "quote": "インフレスライドを適用することから、駅前周辺再整備温浴宿泊施設建設工事費を増額しております"
+        },
+        {
+          "meeting": "令和8年 臨時第3回",
+          "sessionKey": "r8-2026-07-rinji-03",
+          "date": "2026-07-06",
+          "speaker": "福原浩之",
+          "role": "総務課長",
+          "page": 7,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36551/r8rin3kaigiroku.pdf#page=7",
+          "quote": "変更前、10億4,390万円、変更後、11億7,053万9,150円となり"
+        }
+      ]
+    }
+  ],
+  "branches": [
+    {
+      "id": "whole",
+      "name": "駅前全体の再整備（駅前広場・構想）",
+      "text": "平成23年の一般質問を受け、平成25年度に町有地（駅前広場）の範囲で構想策定が始まりました。法政大学の提案、商工会のまちづくり事業部による調査を経て、平成30年に約1万4,000平方メートル（町有地とＪＲ用地）の範囲で基本構想を作る方針となり、令和元年に基本構想、その後基本計画・概略設計へ進みました。駅前広場（ロータリー）は令和5年に工事に着手し、令和7年に供用されました。",
+      "citations": [
+        {
+          "meeting": "平成25年 定例第1回",
+          "sessionKey": "h25-2013-03-regular-1",
+          "date": "2013-03-13",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 58,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=58",
+          "quote": "まずは駅前広場の町有地の範囲内での構想を考えていこうというものであります"
+        },
+        {
+          "meeting": "平成30年 定例第4回",
+          "sessionKey": "h30-2018-12-regular-4",
+          "date": "2018-12-18",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 54,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13687/30tei4kekka.pdf#page=54",
+          "quote": "約１万4,000平米（平方メートル）の範囲内での基本構想案を作成し"
+        },
+        {
+          "meeting": "令和7年 予算特別委員会",
+          "sessionKey": "r7-2025-03-yosan-tokubetsu",
+          "date": "2025-03-17",
+          "speaker": "湯浅真希",
+          "role": "委員",
+          "page": 14,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=14",
+          "quote": "駅前の駐車場とロータリーの供用が始まりました"
+        }
+      ]
+    },
+    {
+      "id": "tokutoku",
+      "name": "複合施設「とくとく」本体",
+      "text": "令和元年の答弁で「複合施設」が登場し、令和4年の概算では8億2,800万円とされました。令和6年に建設工事の契約が結ばれ、令和7年に「新得駅前地域交流センター『とくとく』」として6月15日にオープンしました。当初計画にあった商工会館の活用やＳＬの移設は、消防法やアスベストを理由にできないと説明されています。",
+      "citations": [
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "複合施設が８億2,800万円、宿泊温浴施設が17億800万円"
+        },
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "湯浅真希",
+          "role": "議員",
+          "page": 72,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=72",
+          "quote": "駅とつながり利便性の高い建物でありますが、消防法により計画どおりには使用できないとのことでした"
+        },
+        {
+          "meeting": "令和7年 定例第2回",
+          "sessionKey": "r7-2025-06-regular-2",
+          "date": "2025-06-02",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 13,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33984/r7tei2kaigiroku.pdf#page=13",
+          "quote": "６月15日オープンをいたします地域交流センター「とくとく」の中に"
+        }
+      ]
+    },
+    {
+      "id": "onyoku",
+      "name": "温浴宿泊施設",
+      "text": "平成30年の商工会の提案（駅前温泉を移転しホテルを併設）に由来すると説明されました。宿泊部分は民間で建てる状況にないとして町が建設し、指定管理とする方針です。令和7年6月に工事契約、令和8年12月開業予定とされていましたが、令和8年6月に開業は来年4月以降になる見込みと報告されました。",
+      "citations": [
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 63,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+          "quote": "駅前温泉を移転しホテルを併設することにより集客性が上がり"
+        },
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 73,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=73",
+          "quote": "宿泊施設部門につきましては、民間で建てて運営することが選択できればよいのですが"
+        },
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "開業は来年４月以降にずれ込む見込みであります"
+        }
+      ]
+    },
+    {
+      "id": "yokujo",
+      "name": "町営浴場",
+      "text": "町営浴場は昭和61年設置で、トムラウシ温泉の湯を運んで使っています。平成28年に駅前再整備のエリアに含めて考えていると説明され、令和4年には新しい温浴施設は町営浴場の建て替えと位置づけられました。温浴宿泊施設の完成後に解体する計画でしたが、開業延期に伴い営業を延長するとされました。",
+      "citations": [
+        {
+          "meeting": "平成22年 臨時第3回",
+          "sessionKey": "h22-2010-11-rinji-3",
+          "date": "2010-11-08",
+          "speaker": "冨山幸朗",
+          "role": "町民課長",
+          "page": 8,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/418/3368/221108_H22rinji_3.pdf#page=8",
+          "quote": "この町営浴場は昭和61年に設置されまして"
+        },
+        {
+          "meeting": "平成28年 予算特別委員会",
+          "sessionKey": "h28-2016-03-yosan-tokubetsu",
+          "date": "2016-03-16",
+          "speaker": "鈴木義夫",
+          "role": "産業課長",
+          "page": 43,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/933/9782/H28yosantokubetsu.pdf#page=43",
+          "quote": "そこの浴場も１つのエリアとして考えております"
+        },
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 73,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=73",
+          "quote": "温浴施設につきましては老朽化する町営浴場の建て替えであり"
+        },
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 12,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=12",
+          "quote": "既存の町営浴場の営業を延長し、切れ目のないように"
+        }
+      ]
+    },
+    {
+      "id": "kinyu",
+      "name": "金融機関の併設",
+      "text": "令和4年の説明で、複合施設のうち金融機関などは補助対象外とされました。令和6年12月には令和9年度に複合施設の金融機関部分を増築する計画と説明されましたが、令和8年6月に帯広信金新得支店の増設はいったん白紙とされました。",
+      "citations": [
+        {
+          "meeting": "令和4年 予算特別委員会",
+          "sessionKey": "r4-2022-03-yosan-tokubetsu",
+          "date": "2022-03-16",
+          "speaker": "小林健利",
+          "role": "地域戦略室長補佐",
+          "page": 32,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+          "quote": "金融機関だとか、観光協会の事務所と、物販カフェスペースということで"
+        },
+        {
+          "meeting": "令和6年 定例第4回",
+          "sessionKey": "r6-2024-12-regular-4",
+          "date": "2024-12-17",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 34,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+          "quote": "令和９年度に複合施設金融機関部分の増築と外構工事を計画しております"
+        },
+        {
+          "meeting": "令和8年 定例第2回",
+          "sessionKey": "r8-2026-06-regular-2",
+          "date": "2026-06-03",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 11,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+          "quote": "いったん白紙とすることでご了承いただいているところであります"
+        }
+      ]
+    },
+    {
+      "id": "shitei",
+      "name": "指定管理",
+      "text": "令和4年に、施設全体を商工会主体のまちづくり会社に指定管理で任せる想定が示されました。令和7年に新得タウンマネージメント株式会社を公募によらず指定する議案が出されました。令和8年3月には決算資料の開示条件が問題となり、町長・湯浅真希が再協議の方針を示しました。",
+      "citations": [
+        {
+          "meeting": "令和4年 定例第1回",
+          "sessionKey": "r4-2022-03-regular-1",
+          "date": "2022-03-11",
+          "speaker": "浜田正利",
+          "role": "町長",
+          "page": 63,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+          "quote": "指定管理者制度によって商工会が主体のまちづくり会社に運営を任せることを想定し"
+        },
+        {
+          "meeting": "令和7年 予算特別委員会",
+          "sessionKey": "r7-2025-03-yosan-tokubetsu",
+          "date": "2025-03-17",
+          "speaker": "福原浩之",
+          "role": "地域戦略室長",
+          "page": 57,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=57",
+          "quote": "名称、新得タウンマネージメント株式会社"
+        },
+        {
+          "meeting": "令和8年 予算特別委員会",
+          "sessionKey": "r8-2026-03-yosan-tokubetsu",
+          "date": "2026-03-17",
+          "speaker": "湯浅真希",
+          "role": "町長",
+          "page": 80,
+          "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=80",
+          "quote": "今後、指定管理者と再協議というものを行わせていただいて"
+        }
+      ]
+    }
+  ],
+  "recurringQuestions": [
+    {
+      "question": "再整備の範囲を町有地に限るのか、民有地を含めた市街地全体に広げるのか",
+      "occurrences": [
+        {
+          "date": "2013-03-13",
+          "text": "議員・長野章が、5,300平方メートルの計画では足りないとして、構想を広げるよう求めました。",
+          "citations": [
+            {
+              "meeting": "平成25年 定例第1回",
+              "sessionKey": "h25-2013-03-regular-1",
+              "date": "2013-03-13",
+              "speaker": "長野章",
+              "role": "議員",
+              "page": 57,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=57",
+              "quote": "構想だけでももう少し広げた考えを持っていただけないかお伺いしたいと思います"
+            }
+          ]
+        },
+        {
+          "date": "2013-09-13",
+          "text": "議員・長野章が、5,300平方メートルの整備計画の考えに変わりがないかを質問しました。",
+          "citations": [
+            {
+              "meeting": "平成25年 定例第3回",
+              "sessionKey": "h25-2013-09-regular-3",
+              "date": "2013-09-13",
+              "speaker": "長野章",
+              "role": "議員",
+              "page": 29,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250904_h25tei3kaigiroku.pdf#page=29",
+              "quote": "駅前5,300平米（平方メートル）の整備を計画しているという考えでありましたので"
+            }
+          ]
+        },
+        {
+          "date": "2020-03-17",
+          "text": "委員・菊地康雄が、町有地の範囲で進めることは理解するとしつつ、実施設計までに見直しが必要ではないかと述べました。",
+          "citations": [
+            {
+              "meeting": "令和2年 予算特別委員会",
+              "sessionKey": "r2-2020-03-yosan-tokubetsu",
+              "date": "2020-03-17",
+              "speaker": "菊地康雄",
+              "role": "委員",
+              "page": 39,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2yosantokubetu.pdf#page=39",
+              "quote": "民地にまだ手を付けないということで、町有地の範囲の中でやるということは取りあえず理解はできる"
+            }
+          ]
+        },
+        {
+          "date": "2020-12-16",
+          "text": "議員・湯浅真希が、町有地から出た整備はしないとの説明の後に民有地を購入した点について、活用方法を質問しました。",
+          "citations": [
+            {
+              "meeting": "令和2年 定例第4回",
+              "sessionKey": "r2-2020-12-regular-4",
+              "date": "2020-12-16",
+              "speaker": "湯浅真希",
+              "role": "議員",
+              "page": 40,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei4gijiroku.pdf#page=40",
+              "quote": "町有地から出ての整備はしないと説明を受けてまいりましたが"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "再整備がなぜ進まないのか、いつ実現するのか",
+      "occurrences": [
+        {
+          "date": "2017-09-14",
+          "text": "議員・湯浅佳春が、提案を受けながら構想案が固まらなかった理由を質問しました。",
+          "citations": [
+            {
+              "meeting": "平成29年 定例第3回",
+              "sessionKey": "h29-2017-09-regular-3",
+              "date": "2017-09-14",
+              "speaker": "湯浅佳春",
+              "role": "議員",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf#page=34",
+              "quote": "構想案が固まらず、基本計画の移行も進まなかったのはなぜだったのでしょうか"
+            }
+          ]
+        },
+        {
+          "date": "2018-06-15",
+          "text": "議員・貴戸愛三が、検討開始から5年経過していると指摘し、準備委員会の設立を求めました。",
+          "citations": [
+            {
+              "meeting": "平成30年 定例第2回",
+              "sessionKey": "h30-2018-06-regular-2",
+              "date": "2018-06-15",
+              "speaker": "貴戸愛三",
+              "role": "議員",
+              "page": 39,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13689/30tei2kekka.pdf#page=39",
+              "quote": "行政と商工会でこれから問題点を洗い出してうんぬんとなっていますけど、もう５年たっているんです"
+            }
+          ]
+        },
+        {
+          "date": "2018-09-14",
+          "text": "議員・長野章が、公約に向けた進み方についての認識を質問しました。",
+          "citations": [
+            {
+              "meeting": "平成30年 定例第3回",
+              "sessionKey": "h30-2018-09-regular-3",
+              "date": "2018-09-14",
+              "speaker": "長野章",
+              "role": "議員",
+              "page": 27,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13688/30tei3kekka.pdf#page=27",
+              "quote": "スピード感がある公約というか、そっちに向かってるとはとても思えないんです"
+            }
+          ]
+        },
+        {
+          "date": "2019-03-18",
+          "text": "委員・髙橋浩一が、4年以上検討しても前に進んでいないと述べました。",
+          "citations": [
+            {
+              "meeting": "平成31年 予算特別委員会",
+              "sessionKey": "h31-2019-03-yosan-tokubetsu",
+              "date": "2019-03-18",
+              "speaker": "髙橋浩一",
+              "role": "委員",
+              "page": 25,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/14441/H31yosantokubetu.pdf#page=25",
+              "quote": "結局今の段階でも前には全く進んでいないという状況であります"
+            }
+          ]
+        },
+        {
+          "date": "2021-12-15",
+          "text": "議員・長野章が、大型事業の予算計上がこれまでなかったと述べ、予算編成の考え方を質問しました。",
+          "citations": [
+            {
+              "meeting": "令和3年 定例第4回",
+              "sessionKey": "r3-2021-12-regular-4",
+              "date": "2021-12-15",
+              "speaker": "長野章",
+              "role": "議員",
+              "page": 36,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei4gijiroku.pdf#page=36",
+              "quote": "一向に予算計上されたものがありませんでした"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "老朽化した町営浴場を今後どうするのか",
+      "occurrences": [
+        {
+          "date": "2016-03-16",
+          "text": "委員・髙橋浩一が、町営浴場の改修予定を質問しました。",
+          "citations": [
+            {
+              "meeting": "平成28年 予算特別委員会",
+              "sessionKey": "h28-2016-03-yosan-tokubetsu",
+              "date": "2016-03-16",
+              "speaker": "髙橋浩一",
+              "role": "委員",
+              "page": 42,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/933/9782/H28yosantokubetsu.pdf#page=42",
+              "quote": "近い将来、改修する予定はあるのかどうか、お伺いしたいと思います"
+            }
+          ]
+        },
+        {
+          "date": "2018-03-19",
+          "text": "委員・長野章が、サウナ改修だけで今後やっていけるのかを質問しました。",
+          "citations": [
+            {
+              "meeting": "平成30年 予算特別委員会",
+              "sessionKey": "h30-2018-03-yosan-tokubetsu",
+              "date": "2018-03-19",
+              "speaker": "長野章",
+              "role": "委員",
+              "page": 119,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/12546/H30yosantokubetu.pdf#page=119",
+              "quote": "町営浴場の今後というか、サウナを直すくらいでやっていけるのかどうなのか"
+            }
+          ]
+        },
+        {
+          "date": "2019-03-18",
+          "text": "委員・柴田信昭が、利用状況と費用から、このまま浴場を続けてよいか検討が必要ではないかと質問しました。",
+          "citations": [
+            {
+              "meeting": "平成31年 予算特別委員会",
+              "sessionKey": "h31-2019-03-yosan-tokubetsu",
+              "date": "2019-03-18",
+              "speaker": "柴田信昭",
+              "role": "委員",
+              "page": 46,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/14441/H31yosantokubetu.pdf#page=46",
+              "quote": "このままの状況で、今後浴場を進めていっていいのかどうか"
+            }
+          ]
+        },
+        {
+          "date": "2020-09-14",
+          "text": "委員・吉川幸一が、利用者が何人になったらやめるのか、建て替えの考えを質問しました。",
+          "citations": [
+            {
+              "meeting": "令和2年 決算特別委員会",
+              "sessionKey": "r2-2020-09-kessan-tokubetsu",
+              "date": "2020-09-14",
+              "speaker": "吉川幸一",
+              "role": "委員",
+              "page": 33,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2kessantokubetu.pdf#page=33",
+              "quote": "今、人数が、新得町は何人になったらやめるつもりなのか"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "事業費はいくらで、町の財政は大丈夫か",
+      "occurrences": [
+        {
+          "date": "2019-03-18",
+          "text": "委員・吉川幸一が、行政が使う金額を先に示すべきと述べました。",
+          "citations": [
+            {
+              "meeting": "平成31年 予算特別委員会",
+              "sessionKey": "h31-2019-03-yosan-tokubetsu",
+              "date": "2019-03-18",
+              "speaker": "吉川幸一",
+              "role": "委員",
+              "page": 29,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/14441/H31yosantokubetu.pdf#page=29",
+              "quote": "最初から行政がだいたいこの再整備に何億円使うかと"
+            }
+          ]
+        },
+        {
+          "date": "2021-03-16",
+          "text": "委員・柴田信昭が事業費の見込みを質問し、地域戦略室長補佐・福原浩之は概略設計をしないと数字が出ないと答えました。",
+          "citations": [
+            {
+              "meeting": "令和3年 予算特別委員会",
+              "sessionKey": "r3-2021-03-yosan-tokubetsu",
+              "date": "2021-03-16",
+              "speaker": "柴田信昭",
+              "role": "委員",
+              "page": 47,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3yosantokubetu.pdf#page=47",
+              "quote": "今、検討されている内容で、事業費がどれくらい掛かると見ていますか"
+            },
+            {
+              "meeting": "令和3年 予算特別委員会",
+              "sessionKey": "r3-2021-03-yosan-tokubetsu",
+              "date": "2021-03-16",
+              "speaker": "福原浩之",
+              "role": "地域戦略室長補佐",
+              "page": 48,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3yosantokubetu.pdf#page=48",
+              "quote": "概略設計をやってみないことには、具体的な数字がまだ出ないということですので"
+            }
+          ]
+        },
+        {
+          "date": "2022-03-16",
+          "text": "委員・菊地康雄が、32億円の部門別の内訳と補助・町負担の割り振りを質問しました。",
+          "citations": [
+            {
+              "meeting": "令和4年 予算特別委員会",
+              "sessionKey": "r4-2022-03-yosan-tokubetsu",
+              "date": "2022-03-16",
+              "speaker": "菊地康雄",
+              "role": "委員",
+              "page": 31,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=31",
+              "quote": "どのように振り分けられて、それぞれどのくらい補助の予定があって"
+            }
+          ]
+        },
+        {
+          "date": "2023-03-20",
+          "text": "委員・青柳茂行が大型事業による財政への影響を質問し、総務課長・東川恭一は約75億円のうち35億円程度を起債と補助金、40億円弱を基金で対応すると答えました。",
+          "citations": [
+            {
+              "meeting": "令和5年 予算特別委員会",
+              "sessionKey": "r5-2023-03-yosan-tokubetsu",
+              "date": "2023-03-20",
+              "speaker": "青柳茂行",
+              "role": "委員",
+              "page": 10,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/28040/R5yosantokubetu.pdf#page=10",
+              "quote": "実際にこの事業を行うことによって、新得町の財政危機に陥るような心配はないのか"
+            },
+            {
+              "meeting": "令和5年 予算特別委員会",
+              "sessionKey": "r5-2023-03-yosan-tokubetsu",
+              "date": "2023-03-20",
+              "speaker": "東川恭一",
+              "role": "総務課長",
+              "page": 12,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2828/28040/R5yosantokubetu.pdf#page=12",
+              "quote": "そのうちの35億円くらいを起債と補助金、残りの40億円弱を基金の取り崩しで対応したいと考えております"
+            }
+          ]
+        },
+        {
+          "date": "2024-12-17",
+          "text": "議員・湯浅真希が、今後の事業と費用の見通しを質問しました。",
+          "citations": [
+            {
+              "meeting": "令和6年 定例第4回",
+              "sessionKey": "r6-2024-12-regular-4",
+              "date": "2024-12-17",
+              "speaker": "湯浅真希",
+              "role": "議員",
+              "page": 33,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=33",
+              "quote": "今後予定されている駅前再整備に係る事業、費用の見通しをお伺いいたします"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "駅前にホテル（宿泊施設）がなぜ必要か",
+      "occurrences": [
+        {
+          "date": "2021-09-13",
+          "text": "委員・菊地康雄がスポーツ合宿との関係を質問し、地域戦略室長・福原浩之はビジネス客を主な対象と答えました。",
+          "citations": [
+            {
+              "meeting": "令和3年 決算特別委員会",
+              "sessionKey": "r3-2021-09-kessan-tokubetsu",
+              "date": "2021-09-13",
+              "speaker": "福原浩之",
+              "role": "地域戦略室長",
+              "page": 16,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3kessantokubetu.pdf#page=16",
+              "quote": "基本的にはビジネスを対象とする人をメインとして宿泊施設を検討しております"
+            }
+          ]
+        },
+        {
+          "date": "2022-03-11",
+          "text": "議員・森本洋子が、ホテルの必要性を質問しました。",
+          "citations": [
+            {
+              "meeting": "令和4年 定例第1回",
+              "sessionKey": "r4-2022-03-regular-1",
+              "date": "2022-03-11",
+              "speaker": "森本洋子",
+              "role": "議員",
+              "page": 63,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+              "quote": "ホテルがこの再整備の中でなぜ必要なのかも理解しがたいところであります"
+            }
+          ]
+        },
+        {
+          "date": "2024-12-17",
+          "text": "議員・湯浅真希が、公共施設としてビジネスホテルを建てる意義を質問し、町長・浜田正利は人を呼び込み消費を生むことが意義だと答えました。",
+          "citations": [
+            {
+              "meeting": "令和6年 定例第4回",
+              "sessionKey": "r6-2024-12-regular-4",
+              "date": "2024-12-17",
+              "speaker": "湯浅真希",
+              "role": "議員",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+              "quote": "公共施設としてビジネスホテルを建設する意義をあらためてお伺いいたします"
+            },
+            {
+              "meeting": "令和6年 定例第4回",
+              "sessionKey": "r6-2024-12-regular-4",
+              "date": "2024-12-17",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+              "quote": "ビジネスホテルという選択肢が増えることで、人を呼び込み、新たな消費を創出し"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "ロータリーの逆走と駐車場の使いにくさ",
+      "occurrences": [
+        {
+          "date": "2022-03-11",
+          "text": "議員・森本洋子が、計画で逆走が防げるか、交互通行にできない理由を質問しました。町長・浜田正利は基準により応えられなかったと答えました。",
+          "citations": [
+            {
+              "meeting": "令和4年 定例第1回",
+              "sessionKey": "r4-2022-03-regular-1",
+              "date": "2022-03-11",
+              "speaker": "森本洋子",
+              "role": "議員",
+              "page": 63,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+              "quote": "ロータリーでの逆走車防止の解決になるのかが疑問であり"
+            },
+            {
+              "meeting": "令和4年 定例第1回",
+              "sessionKey": "r4-2022-03-regular-1",
+              "date": "2022-03-11",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 63,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=63",
+              "quote": "ご質問にあるロータリー全体を交互通行にという要望には応えることができなかったものであります"
+            }
+          ]
+        },
+        {
+          "date": "2025-03-17",
+          "text": "委員・湯浅真希が、供用後も逆走が見られると述べました。",
+          "citations": [
+            {
+              "meeting": "令和7年 予算特別委員会",
+              "sessionKey": "r7-2025-03-yosan-tokubetsu",
+              "date": "2025-03-17",
+              "speaker": "湯浅真希",
+              "role": "委員",
+              "page": 17,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=17",
+              "quote": "私、近くに住んでいますので毎日歩くのですが、必ず逆走する方を見ます"
+            }
+          ]
+        },
+        {
+          "date": "2025-09-17",
+          "text": "議員・森本洋子が駐車場不足と入り方の分かりにくさを質問し、町長・湯浅真希は駐車場不足を認識していると答えました。",
+          "citations": [
+            {
+              "meeting": "令和7年 定例第3回",
+              "sessionKey": "r7-2025-09-regular-3",
+              "date": "2025-09-17",
+              "speaker": "森本洋子",
+              "role": "議員",
+              "page": 55,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/34363/r7tei3kaigiroku.pdf#page=55",
+              "quote": "駐車場が満車で止められなかった、駐車場の入り方がよく分からなかった"
+            },
+            {
+              "meeting": "令和7年 定例第3回",
+              "sessionKey": "r7-2025-09-regular-3",
+              "date": "2025-09-17",
+              "speaker": "湯浅真希",
+              "role": "町長",
+              "page": 55,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/34363/r7tei3kaigiroku.pdf#page=55",
+              "quote": "駐車場が不足していることは十分認識をしております"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question": "指定管理者の選び方と運営の透明性",
+      "occurrences": [
+        {
+          "date": "2024-12-17",
+          "text": "議員・湯浅真希が、公募をせずに特定の会社が運営予定となっている理由を質問しました。",
+          "citations": [
+            {
+              "meeting": "令和6年 定例第4回",
+              "sessionKey": "r6-2024-12-regular-4",
+              "date": "2024-12-17",
+              "speaker": "湯浅真希",
+              "role": "議員",
+              "page": 35,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=35",
+              "quote": "広く公募をかけることなく、なぜこの会社が運営される予定なのか"
+            }
+          ]
+        },
+        {
+          "date": "2025-03-17",
+          "text": "委員・湯浅真希が、公募によらない選定理由と会社の方針を質問しました。",
+          "citations": [
+            {
+              "meeting": "令和7年 予算特別委員会",
+              "sessionKey": "r7-2025-03-yosan-tokubetsu",
+              "date": "2025-03-17",
+              "speaker": "湯浅真希",
+              "role": "委員",
+              "page": 57,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/33236/r7yosantokubetukaigiroku.pdf#page=57",
+              "quote": "公募によらず候補者を選定した理由なんですけれども"
+            }
+          ]
+        },
+        {
+          "date": "2026-03-16",
+          "text": "委員・櫻田郷史が、指定管理者で問題なかったかを質問しました。翌日には決算書を閲覧できる状態にすることを求めました。",
+          "citations": [
+            {
+              "meeting": "令和8年 予算特別委員会",
+              "sessionKey": "r8-2026-03-yosan-tokubetsu",
+              "date": "2026-03-16",
+              "speaker": "櫻田郷史",
+              "role": "委員",
+              "page": 46,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=46",
+              "quote": "ここに来て指定管理、タウンマネージメントで大丈夫だったのかどうなのか"
+            },
+            {
+              "meeting": "令和8年 予算特別委員会",
+              "sessionKey": "r8-2026-03-yosan-tokubetsu",
+              "date": "2026-03-17",
+              "speaker": "櫻田郷史",
+              "role": "委員",
+              "page": 79,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=79",
+              "quote": "必ず決算書や報告書というのは、いつでも閲覧できるような状態にしておかなければならない"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "answerChanges": [
+    {
+      "topic": "再整備の範囲",
+      "occurrences": [
+        {
+          "date": "2013-03-13",
+          "text": "町長・浜田正利：まず駅前広場の町有地の範囲内で構想を考える。",
+          "citations": [
+            {
+              "meeting": "平成25年 定例第1回",
+              "sessionKey": "h25-2013-03-regular-1",
+              "date": "2013-03-13",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 58,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/415/3334/250305_h25tei1kaigi.pdf#page=58",
+              "quote": "まずは駅前広場の町有地の範囲内での構想を考えていこうというものであります"
+            }
+          ]
+        },
+        {
+          "date": "2014-12-12",
+          "text": "町長・浜田正利：今の段階では駅周辺をまず選択している。",
+          "citations": [
+            {
+              "meeting": "平成26年 定例第4回",
+              "sessionKey": "h26-2014-12-regular-4",
+              "date": "2014-12-12",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/414/3328/H26tei4gijiroku.pdf#page=34",
+              "quote": "われわれが選択をしているのは、駅周辺を取りあえずというのが、今の段階であります"
+            }
+          ]
+        },
+        {
+          "date": "2017-09-14",
+          "text": "町長・浜田正利：町有地が出発点だったが、エリアを広げるべきとの意見が多く、商工会中心に駅周辺で考えている。",
+          "citations": [
+            {
+              "meeting": "平成29年 定例第3回",
+              "sessionKey": "h29-2017-09-regular-3",
+              "date": "2017-09-14",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 35,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf#page=35",
+              "quote": "われわれ行政サイドは駅前の町有地を念頭に置いて再整備を考えた、これがスタートラインであります"
+            },
+            {
+              "meeting": "平成29年 定例第3回",
+              "sessionKey": "h29-2017-09-regular-3",
+              "date": "2017-09-14",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 35,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1129/11678/H29tei3gijiroku.pdf#page=35",
+              "quote": "もう少しエリアを広げるべきだというのが意見として多い中で"
+            }
+          ]
+        },
+        {
+          "date": "2018-12-18",
+          "text": "町長・浜田正利：町有地とＪＲ用地を含む約1万4,000平方メートルの範囲で基本構想案を作る。",
+          "citations": [
+            {
+              "meeting": "平成30年 定例第4回",
+              "sessionKey": "h30-2018-12-regular-4",
+              "date": "2018-12-18",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 54,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13687/30tei4kekka.pdf#page=54",
+              "quote": "約１万4,000平米（平方メートル）の範囲内での基本構想案を作成し"
+            }
+          ]
+        },
+        {
+          "date": "2020-03-17",
+          "text": "地域戦略室長補佐・福原浩之：今の段階で民地を買収して施設を入れることは考えていない。",
+          "citations": [
+            {
+              "meeting": "令和2年 予算特別委員会",
+              "sessionKey": "r2-2020-03-yosan-tokubetsu",
+              "date": "2020-03-17",
+              "speaker": "福原浩之",
+              "role": "地域戦略室長補佐",
+              "page": 40,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2yosantokubetu.pdf#page=40",
+              "quote": "今の段階では、民地のところについて買収をして、どこかそこに施設を入れるとか"
+            }
+          ]
+        },
+        {
+          "date": "2020-09-02",
+          "text": "地域戦略室長補佐・福原浩之：打診のあった隣接地を購入するが、計画は町有地とＪＲ用地を対象に進めている。",
+          "citations": [
+            {
+              "meeting": "令和2年 定例第3回",
+              "sessionKey": "r2-2020-09-regular-3",
+              "date": "2020-09-02",
+              "speaker": "福原浩之",
+              "role": "地域戦略室長補佐",
+              "page": 20,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei3gijiroku.pdf#page=20",
+              "quote": "まずは基本構想でお示ししました町有地とＪＲ用地を対象範囲として今、計画を進めております"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "町営浴場の扱い",
+      "occurrences": [
+        {
+          "date": "2016-03-16",
+          "text": "町民課長・渡辺裕之：その都度修理して使っている。",
+          "citations": [
+            {
+              "meeting": "平成28年 予算特別委員会",
+              "sessionKey": "h28-2016-03-yosan-tokubetsu",
+              "date": "2016-03-16",
+              "speaker": "渡辺裕之",
+              "role": "町民課長",
+              "page": 43,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/933/9782/H28yosantokubetsu.pdf#page=43",
+              "quote": "その都度、随時修理という形をさせていただいております"
+            }
+          ]
+        },
+        {
+          "date": "2018-03-19",
+          "text": "町民課長・鈴木貞行：施設的には今のところ問題なく使える。",
+          "citations": [
+            {
+              "meeting": "平成30年 予算特別委員会",
+              "sessionKey": "h30-2018-03-yosan-tokubetsu",
+              "date": "2018-03-19",
+              "speaker": "鈴木貞行",
+              "role": "町民課長",
+              "page": 120,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/12546/H30yosantokubetu.pdf#page=120",
+              "quote": "施設的には問題なく今のところ使えるのではないかと考えております"
+            }
+          ]
+        },
+        {
+          "date": "2020-09-14",
+          "text": "町長・浜田正利：廃止を前提にした議論はなく、老朽化したら建て替える方向が現実的。",
+          "citations": [
+            {
+              "meeting": "令和2年 決算特別委員会",
+              "sessionKey": "r2-2020-09-kessan-tokubetsu",
+              "date": "2020-09-14",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2kessantokubetu.pdf#page=34",
+              "quote": "老朽化したら建て替えをしていくという方向で調整していくのが現実的かなというふうには思っています"
+            }
+          ]
+        },
+        {
+          "date": "2022-03-11",
+          "text": "町長・浜田正利：駅前の温浴施設は町営浴場の建て替え。",
+          "citations": [
+            {
+              "meeting": "令和4年 定例第1回",
+              "sessionKey": "r4-2022-03-regular-1",
+              "date": "2022-03-11",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 73,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25475/R4tei1gijiroku.pdf#page=73",
+              "quote": "温浴施設につきましては老朽化する町営浴場の建て替えであり"
+            }
+          ]
+        },
+        {
+          "date": "2024-03-18",
+          "text": "委員・湯浅真希が、令和2年策定の公共施設個別施設計画には町営浴場を廃止・解体・撤去する方向と書かれていたと紹介しました（質問者の紹介）。",
+          "citations": [
+            {
+              "meeting": "令和6年 予算特別委員会",
+              "sessionKey": "r6-2024-03-yosan-tokubetsu",
+              "date": "2024-03-18",
+              "speaker": "湯浅真希",
+              "role": "委員",
+              "page": 14,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/30752/R6yosantokubetu.pdf#page=14",
+              "quote": "町営浴場は必要性が低くなったため、施設を廃止、解体、撤去する方向で検討します"
+            }
+          ]
+        },
+        {
+          "date": "2026-06-03",
+          "text": "町長・湯浅真希：温浴宿泊施設の開業延期に伴い、町営浴場の営業を延長する。",
+          "citations": [
+            {
+              "meeting": "令和8年 定例第2回",
+              "sessionKey": "r8-2026-06-regular-2",
+              "date": "2026-06-03",
+              "speaker": "湯浅真希",
+              "role": "町長",
+              "page": 12,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=12",
+              "quote": "既存の町営浴場の営業を延長し、切れ目のないように"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "金融機関の併設",
+      "occurrences": [
+        {
+          "date": "2022-03-16",
+          "text": "地域戦略室長補佐・小林健利：複合施設のうち金融機関などは補助対象外。",
+          "citations": [
+            {
+              "meeting": "令和4年 予算特別委員会",
+              "sessionKey": "r4-2022-03-yosan-tokubetsu",
+              "date": "2022-03-16",
+              "speaker": "小林健利",
+              "role": "地域戦略室長補佐",
+              "page": 32,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2524/25476/R4yosantokubetu.pdf#page=32",
+              "quote": "金融機関だとか、観光協会の事務所と、物販カフェスペースということで"
+            }
+          ]
+        },
+        {
+          "date": "2024-12-17",
+          "text": "町長・浜田正利：令和9年度に複合施設の金融機関部分を増築する計画。",
+          "citations": [
+            {
+              "meeting": "令和6年 定例第4回",
+              "sessionKey": "r6-2024-12-regular-4",
+              "date": "2024-12-17",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+              "quote": "令和９年度に複合施設金融機関部分の増築と外構工事を計画しております"
+            }
+          ]
+        },
+        {
+          "date": "2026-06-03",
+          "text": "町長・湯浅真希：帯広信金新得支店の増設はいったん白紙。",
+          "citations": [
+            {
+              "meeting": "令和8年 定例第2回",
+              "sessionKey": "r8-2026-06-regular-2",
+              "date": "2026-06-03",
+              "speaker": "湯浅真希",
+              "role": "町長",
+              "page": 11,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+              "quote": "いったん白紙とすることでご了承いただいているところであります"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "事業スケジュール",
+      "occurrences": [
+        {
+          "date": "2019-03-18",
+          "text": "地域戦略室長補佐・福原浩之：平成31年度基本構想、2020年度基本計画、2021年度実施計画。",
+          "citations": [
+            {
+              "meeting": "平成31年 予算特別委員会",
+              "sessionKey": "h31-2019-03-yosan-tokubetsu",
+              "date": "2019-03-18",
+              "speaker": "福原浩之",
+              "role": "地域戦略室長補佐",
+              "page": 25,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1591/14441/H31yosantokubetu.pdf#page=25",
+              "quote": "31年度につきましては基本構想、それから2020年度につきましては基本計画策定"
+            }
+          ]
+        },
+        {
+          "date": "2021-12-15",
+          "text": "町長・浜田正利：令和5年度以降に着工予定。",
+          "citations": [
+            {
+              "meeting": "令和3年 定例第4回",
+              "sessionKey": "r3-2021-12-regular-4",
+              "date": "2021-12-15",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 37,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/2064/18861/R3tei4gijiroku.pdf#page=37",
+              "quote": "令和５年度以降において、駅前周辺再整備等、事業実施の環境が整ったものの着工を予定しております"
+            }
+          ]
+        },
+        {
+          "date": "2024-12-17",
+          "text": "町長・浜田正利：温浴宿泊施設は令和8年度中に完成。",
+          "citations": [
+            {
+              "meeting": "令和6年 定例第4回",
+              "sessionKey": "r6-2024-12-regular-4",
+              "date": "2024-12-17",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 34,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3018/32272/R6tei4gijiroku.pdf#page=34",
+              "quote": "新年度から温浴宿泊施設の建設工事に着手をし、令和８年度中に完成をした後"
+            }
+          ]
+        },
+        {
+          "date": "2025-12-16",
+          "text": "町長・湯浅真希：令和10年に全体の完成を目指す。",
+          "citations": [
+            {
+              "meeting": "令和7年 定例第4回",
+              "sessionKey": "r7-2025-12-regular-4",
+              "date": "2025-12-16",
+              "speaker": "湯浅真希",
+              "role": "町長",
+              "page": 31,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3199/35084/tei4kaigiroku.pdf#page=31",
+              "quote": "令和10年に全体の完成を目指しているところであります"
+            }
+          ]
+        },
+        {
+          "date": "2026-03-16",
+          "text": "地域戦略室長補佐・加賀谷敬：温浴宿泊施設は9月完成、12月開業予定。",
+          "citations": [
+            {
+              "meeting": "令和8年 予算特別委員会",
+              "sessionKey": "r8-2026-03-yosan-tokubetsu",
+              "date": "2026-03-16",
+              "speaker": "加賀谷敬",
+              "role": "地域戦略室長補佐",
+              "page": 12,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36287/r8yosantokubetu.pdf#page=12",
+              "quote": "今のところ完成予定が９月で、12月の開業を予定しております"
+            }
+          ]
+        },
+        {
+          "date": "2026-06-03",
+          "text": "町長・湯浅真希：開業は来年4月以降の見込み。",
+          "citations": [
+            {
+              "meeting": "令和8年 定例第2回",
+              "sessionKey": "r8-2026-06-regular-2",
+              "date": "2026-06-03",
+              "speaker": "湯浅真希",
+              "role": "町長",
+              "page": 11,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/3487/36550/r8tei2kaigiroku.pdf#page=11",
+              "quote": "開業は来年４月以降にずれ込む見込みであります"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "道の駅と駅前再整備の関係",
+      "occurrences": [
+        {
+          "date": "2016-03-14",
+          "text": "町長・浜田正利：駅前広場の再整備や追加インターチェンジの行方を見ながら研究する。",
+          "citations": [
+            {
+              "meeting": "平成28年 定例第1回",
+              "sessionKey": "h28-2016-03-regular-1",
+              "date": "2016-03-14",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 44,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/933/8795/H28tei1gijiroku.pdf#page=44",
+              "quote": "駅前広場の再整備や追加インターチェンジの整備の行方を見ながら、設置に向けた研究を進めていきたい"
+            }
+          ]
+        },
+        {
+          "date": "2018-09-14",
+          "text": "町長・浜田正利：駅前周辺の再整備の状況を見ながら、市街地や国道沿いでの設置を調査研究する。",
+          "citations": [
+            {
+              "meeting": "平成30年 定例第3回",
+              "sessionKey": "h30-2018-09-regular-3",
+              "date": "2018-09-14",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 26,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1331/13688/30tei3kekka.pdf#page=26",
+              "quote": "駅前周辺の再整備の状況を見ながら市街地や国道沿いでの設置について"
+            }
+          ]
+        },
+        {
+          "date": "2020-06-18",
+          "text": "町長・浜田正利：基本構想の策定の中で、駅前周辺は適地でないと判断した。",
+          "citations": [
+            {
+              "meeting": "令和2年 定例第2回",
+              "sessionKey": "r2-2020-06-regular-2",
+              "date": "2020-06-18",
+              "speaker": "浜田正利",
+              "role": "町長",
+              "page": 54,
+              "url": "https://www.shintoku-town.jp/output/contents/file/release/1808/16280/R2tei2gijiroku.pdf#page=54",
+              "quote": "駐車スペースが不足することなどにより適地でないと判断し"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unknowns": [
+    "平成22年より前の議会（議員・長野章が述べた平成9年ごろの一般質問など）でどのような答弁があったかは、抜粋に含まれていません。",
+    "平成25年度の構想策定業務でまとめられた構想案の具体的な中身は、抜粋からは読み取れません。",
+    "法政大学の提案と商工会の報告書のどの部分が基本構想に採用されたのかは、抜粋からは確かめられません。",
+    "令和2年に購入した北1丁目の土地の最終的な使い道は、抜粋の範囲では決まっていません（令和7年3月時点で当面は駐車場として貸していると説明）。",
+    "宿泊温浴施設の宿泊部分に過疎債が適用されたかどうかは、令和4年の「民間施設と競合すると認められる場合は対象とならない」との説明以降、町側の答弁として確認できません。",
+    "温浴宿泊施設の指定管理者の指定が議決されたかどうかは、抜粋に含まれていません。",
+    "令和8年3月に示された指定管理者との再協議の結果は、抜粋に含まれていません。",
+    "帯広信金新得支店の新たな場所がどうなったかは、抜粋に含まれていません。",
+    "増額や延期を経た後の駅前再整備全体の最終的な総事業費は、抜粋からは読み取れません。",
+    "町営浴場の解体の時期が延期後にどうなったかは、抜粋に含まれていません。"
+  ]
+}
